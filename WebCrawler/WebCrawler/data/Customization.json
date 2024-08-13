@@ -1,0 +1,344 @@
+{
+	"features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "green island"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [121.460480, 22.681290],[121.513008,22.681290],[121.460480, 22.629488],[121.513008, 22.629488]
+            ]
+          ]
+        ]
+      }
+    },
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "orchid island"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [121.493174, 22.093643],[121.617315, 22.093643],[121.493174, 21.940015],[121.617315, 21.940015]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Penghu"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [119.449069 ,23.786905 ],[119.719351,23.467461],[119.449069 ,23.467461 ],[119.719351,23.786905]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Wang An"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [119.477245 ,23.402697  ],[119.546129 , 23.341266 ],[119.477245 ,23.402697  ],[119.546129 , 23.341266 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "seven beauty"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [119.405325 , 23.274826 ],[119.691303,23.178005],[119.405325 , 23.274826 ],[119.691303,23.178005]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Lieyu"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [118.213943,24.474205 ],[118.272693,24.399943 ],[118.213943,24.474205 ],[118.272693,24.399943 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "uqiu"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [119.440643,25.001415 ],[119.479906, 24.975509  ],[119.440643,25.001415 ],[119.479906, 24.975509  ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "East and West"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [119.920627,25.982374 ],[119.997341,25.931297 ],[119.920627,25.982374 ],[119.997341,25.931297 ]
+			]
+		  ]
+		]
+	  }
+	}
+,
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Matsu"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [119.902268, 26.288140 ],[120.025593,26.129577  ],[119.902268, 26.288140 ],[120.025593,26.129577  ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Dongyin"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [120.207648,26.386873  ],[120.515085,26.327607 ],[120.207648,26.386873  ],[120.515085,26.327607 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "china1"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [119.432801,25.724617  ],[119.432801,25.328114 ],[ 119.892565,25.724617   ],[ 119.892565,25.328114 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Dongyin"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [122.934807,24.477623  ],[122.934807,24.428797 ],[ 123.047272,24.477623  ],[123.047272,24.428797 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Dongyin"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [123.656320,24.631762  ],[123.656320,24.024571 ],[ 124.347421,24.631762 ],[124.347421,24.024571 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Dongyin"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [124.647833,24.932800  ],[124.647833,24.633904 ],[ 125.487338,24.932800 ],[125.487338,24.633904 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Dongyin"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [126.521546,28.568898  ],[126.521546,25.955325 ],[ 130.111831,28.568898 ],[130.111831,25.955325 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Dongyin"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [130.131298,30.858716  ],[130.131298,30.199401 ],[ 131.069569,30.858716 ],[131.069569,30.199401 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Maldives"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [11.858995, 72.012910 ],[11.858995, 73.778996 ],[ -0.884490, 73.778996 ],[-0.884490, 72.012910 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "palau"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [7.778459, 134.084117 ],[7.778459, 134.691111 ],[ 6.860414, 134.691111 ],[6.860414, 134.084117 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Guam"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [15.384666, 144.360728 ],[15.384666, 145.947294 ],[ 13.078028, 145.947294 ],[15.384666, 145.947294 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Hawaii"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [22.457544, -160.434271 ],[22.457544, -154.763261 ],[ 18.764565, -154.763261 ],[18.764565, -160.434271 ]
+			]
+		  ]
+		]
+	  }
+	},
+	{
+	  "type": "Feature",
+	  "properties": {
+		"name": "Fiji"
+	  },
+	  "geometry": {
+		"type": "MultiPolygon",
+		"coordinates": [
+		  [
+			[
+			  [-12.123797, 176.537349 ],[-12.123797, -169.312261 ],[ -21.880497, 176.537349 ],[-21.880497, -169.312261 ]
+			]
+		  ]
+		]
+	  }
+	}
+
+
+	]
+
+}

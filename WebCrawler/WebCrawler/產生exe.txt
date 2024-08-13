@@ -1,0 +1,41 @@
+#生成spec
+pyi-makespec -w D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.py
+
+pyi-makespec -w --console D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.py
+
+pyi-makespec -w --console D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\CheckTR.py
+
+pyi-makespec -w --console D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbitByDB.py
+
+
+#修改spec
+binaries 加上資料夾
+#多項打包
+pyinstaller D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.spec
+
+
+
+pyinstaller D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.spec --noconfirm
+
+
+pyinstaller D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\CheckTR.spec --noconfirm
+
+
+pyinstaller D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbitByDB.spec --noconfirm
+
+
+
+D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\env6\Scripts\pyinstaller.exe D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.py --onefile
+
+
+D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\env6\Scripts\pyinstaller.exe D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbitByCheckUrl.py --onefile
+
+
+D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\env6\Scripts\pyinstaller.exe D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit-Single.py --onefile
+
+
+pip install -r D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\requirements.txt
+
+chcp 65001
+
+numpy==1.20.3

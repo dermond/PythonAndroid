@@ -1,0 +1,1676 @@
+2024-01-08 11:27:15,125 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 11:27:15,149 - __main__ - INFO - Afghanistan
+2024-01-08 11:27:15,150 - __main__ - INFO - Angola
+2024-01-08 11:27:15,150 - __main__ - INFO - Albania
+2024-01-08 11:27:15,151 - __main__ - INFO - United Arab Emirates
+2024-01-08 11:27:15,151 - __main__ - INFO - Argentina
+2024-01-08 11:27:15,152 - __main__ - INFO - Armenia
+2024-01-08 11:27:15,152 - __main__ - INFO - None
+2024-01-08 11:27:15,153 - __main__ - INFO - Australia
+2024-01-08 11:27:15,153 - __main__ - INFO - Austria
+2024-01-08 11:27:15,154 - __main__ - INFO - Azerbaijan
+2024-01-08 11:27:15,154 - __main__ - INFO - Burundi
+2024-01-08 11:27:15,154 - __main__ - INFO - Belgium
+2024-01-08 11:27:15,155 - __main__ - INFO - Benin
+2024-01-08 11:27:15,157 - __main__ - INFO - Burkina Faso
+2024-01-08 11:27:15,158 - __main__ - INFO - Bangladesh
+2024-01-08 11:27:15,158 - __main__ - INFO - Bulgaria
+2024-01-08 11:27:15,159 - __main__ - INFO - Bahamas, The
+2024-01-08 11:28:24,652 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 11:28:24,654 - __main__ - INFO - Afghanistan
+2024-01-08 11:28:24,654 - __main__ - INFO - Angola
+2024-01-08 11:28:24,654 - __main__ - INFO - Albania
+2024-01-08 11:28:24,655 - __main__ - INFO - United Arab Emirates
+2024-01-08 11:28:24,655 - __main__ - INFO - Argentina
+2024-01-08 11:28:24,656 - __main__ - INFO - Armenia
+2024-01-08 11:28:24,656 - __main__ - INFO - None
+2024-01-08 11:28:24,656 - __main__ - INFO - Australia
+2024-01-08 11:28:24,657 - __main__ - INFO - Austria
+2024-01-08 11:28:24,657 - __main__ - INFO - Azerbaijan
+2024-01-08 11:28:24,658 - __main__ - INFO - Burundi
+2024-01-08 11:28:24,658 - __main__ - INFO - Belgium
+2024-01-08 11:28:24,659 - __main__ - INFO - Benin
+2024-01-08 11:28:24,659 - __main__ - INFO - Burkina Faso
+2024-01-08 11:28:24,660 - __main__ - INFO - Bangladesh
+2024-01-08 11:28:24,660 - __main__ - INFO - Bulgaria
+2024-01-08 11:28:24,660 - __main__ - INFO - Bahamas, The
+2024-01-08 11:28:27,976 - __main__ - INFO - featuresIndex:17
+2024-01-08 11:28:28,384 - __main__ - INFO - Bosnia and Herzegovina
+2024-01-08 11:28:32,028 - __main__ - INFO - featuresIndex:18
+2024-01-08 11:28:32,132 - __main__ - INFO - lat lng:42.6140271,15.7500261
+2024-01-08 11:28:41,593 - __main__ - INFO - TourMeAway featuresIndex1:18 2024-01-08 11:28:41.593667
+2024-01-08 11:28:42,902 - __main__ - INFO - 碧潭風景區 featuresIndex1:18 2024-01-08 11:28:42.901203
+2024-01-08 11:28:43,173 - __main__ - INFO - 彩虹眷村 featuresIndex1:18 2024-01-08 11:28:43.173846
+2024-01-08 11:28:43,445 - __main__ - INFO - 大安森林公園(防災公園) featuresIndex1:18 2024-01-08 11:28:43.445606
+2024-01-08 11:28:43,701 - __main__ - INFO - 花之隧道 featuresIndex1:18 2024-01-08 11:28:43.701107
+2024-01-08 11:28:43,961 - __main__ - INFO - 合谷瀑布 featuresIndex1:18 2024-01-08 11:28:43.961938
+2024-01-08 11:28:44,267 - __main__ - INFO - 淡水老街廣場 featuresIndex1:18 2024-01-08 11:28:44.267641
+2024-01-08 11:28:59,159 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:29:07,884 - __main__ - INFO - lat lng:42.6140271,15.7744665
+2024-01-08 11:29:28,668 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:29:37,485 - __main__ - INFO - lat lng:42.6140271,15.8233472
+2024-01-08 11:30:02,128 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:30:10,741 - __main__ - INFO - lat lng:42.6140271,15.8966683
+2024-01-08 11:30:35,603 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:30:44,297 - __main__ - INFO - lat lng:42.6140271,15.9944298
+2024-01-08 11:31:10,721 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:31:19,331 - __main__ - INFO - lat lng:42.6140271,16.1166316
+2024-01-08 11:31:43,959 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:31:52,601 - __main__ - INFO - lat lng:42.6140271,16.2632738
+2024-01-08 11:32:06,773 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:32:15,367 - __main__ - INFO - lat lng:42.6140271,16.4343564
+2024-01-08 11:32:29,200 - __main__ - INFO - Malo Lago Bay featuresIndex1:18 2024-01-08 11:32:29.200579
+2024-01-08 11:32:29,524 - __main__ - INFO - Skrivena Luka Cove featuresIndex1:18 2024-01-08 11:32:29.524377
+2024-01-08 11:32:29,763 - __main__ - INFO - cave featuresIndex1:18 2024-01-08 11:32:29.763962
+2024-01-08 11:32:30,008 - __main__ - INFO - Lastovo military featuresIndex1:18 2024-01-08 11:32:30.008336
+2024-01-08 11:32:30,267 - __main__ - INFO - Dragovoda bay featuresIndex1:18 2024-01-08 11:32:30.267478
+2024-01-08 11:32:34,713 - __main__ - INFO - Konoba Velo Lago featuresIndex1:18 2024-01-08 11:32:34.713660
+2024-01-08 11:32:34,995 - __main__ - INFO - Caffe bar Kokolo featuresIndex1:18 2024-01-08 11:32:34.994730
+2024-01-08 11:32:35,234 - __main__ - INFO - Triton Restaurant featuresIndex1:18 2024-01-08 11:32:35.234092
+2024-01-08 11:32:35,512 - __main__ - INFO - Konoba Mrčara featuresIndex1:18 2024-01-08 11:32:35.512511
+2024-01-08 11:32:39,620 - __main__ - INFO - Nice Cream義式手工冰淇淋店 featuresIndex1:18 2024-01-08 11:32:39.620955
+2024-01-08 11:32:39,905 - __main__ - INFO - Silk Sweet絹絲谷｜乳酪蛋糕&巧克力 featuresIndex1:18 2024-01-08 11:32:39.905119
+2024-01-08 11:32:40,186 - __main__ - INFO - Yu''s ALMOND DESSERT featuresIndex1:18 2024-01-08 11:32:40.186769
+2024-01-08 11:32:40,432 - __main__ - INFO - Nice Cream 大安森林公園店 featuresIndex1:18 2024-01-08 11:32:40.432781
+2024-01-08 11:32:40,690 - __main__ - INFO - 雪王冰淇淋 featuresIndex1:18 2024-01-08 11:32:40.689886
+2024-01-08 11:32:44,910 - __main__ - INFO - 四獸山風景區 featuresIndex1:18 2024-01-08 11:32:44.910073
+2024-01-08 11:32:45,170 - __main__ - INFO - 象山六巨石 featuresIndex1:18 2024-01-08 11:32:45.170007
+2024-01-08 11:32:45,418 - __main__ - INFO - 金山風景區 featuresIndex1:18 2024-01-08 11:32:45.418047
+2024-01-08 11:32:45,670 - __main__ - INFO - 豹山溪 featuresIndex1:18 2024-01-08 11:32:45.670102
+2024-01-08 11:32:45,909 - __main__ - INFO - 虎山峰 featuresIndex1:18 2024-01-08 11:32:45.909489
+2024-01-08 11:32:58,873 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:33:07,505 - __main__ - INFO - lat lng:42.6140271,16.4587968
+2024-01-08 11:33:32,271 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:33:40,900 - __main__ - INFO - lat lng:42.6140271,16.5076775
+2024-01-08 11:34:05,692 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:34:14,351 - __main__ - INFO - lat lng:42.6140271,16.5809986
+2024-01-08 11:34:29,353 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:34:37,987 - __main__ - INFO - lat lng:42.6140271,16.6787601
+2024-01-08 11:34:51,844 - __main__ - INFO - Mala međedina špilja featuresIndex1:18 2024-01-08 11:34:51.844648
+2024-01-08 11:34:53,045 - __main__ - INFO - Park prirode featuresIndex1:18 2024-01-08 11:34:53.045017
+2024-01-08 11:34:57,896 - __main__ - INFO - Konoba Porto Rosso featuresIndex1:18 2024-01-08 11:34:57.896522
+2024-01-08 11:34:58,131 - __main__ - INFO - St.Vicenca outdoor restaurant in vinyard featuresIndex1:18 2024-01-08 11:34:58.131085
+2024-01-08 11:35:08,090 - __main__ - INFO - 坪頂古圳 featuresIndex1:18 2024-01-08 11:35:08.090538
+2024-01-08 11:35:21,879 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:35:30,614 - __main__ - INFO - lat lng:42.6140271,16.7032005
+2024-01-08 11:35:55,987 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:36:04,690 - __main__ - INFO - lat lng:42.6140271,16.7520812
+2024-01-08 11:36:32,202 - __main__ - INFO - DAILY deli & café featuresIndex1:18 2024-01-08 11:36:32.201706
+2024-01-08 11:36:32,493 - __main__ - INFO - J-Deli A13信義店 featuresIndex1:18 2024-01-08 11:36:32.493699
+2024-01-08 11:36:37,768 - __main__ - INFO - RAW featuresIndex1:18 2024-01-08 11:36:37.768739
+2024-01-08 11:36:38,025 - __main__ - INFO - 君品酒店 - 頤宮中餐廳 Le Palais featuresIndex1:18 2024-01-08 11:36:38.025078
+2024-01-08 11:36:38,331 - __main__ - INFO - MUME featuresIndex1:18 2024-01-08 11:36:38.331577
+2024-01-08 11:36:38,589 - __main__ - INFO - Toh-A 桌藏餐廳 featuresIndex1:18 2024-01-08 11:36:38.589496
+2024-01-08 11:36:38,854 - __main__ - INFO - Impromptu by Paul Lee featuresIndex1:18 2024-01-08 11:36:38.854785
+2024-01-08 11:36:44,404 - __main__ - INFO - MyTaiwanTour 飛亞旅行社 featuresIndex1:18 2024-01-08 11:36:44.404482
+2024-01-08 11:36:44,668 - __main__ - INFO - 上順旅行社 featuresIndex1:18 2024-01-08 11:36:44.668803
+2024-01-08 11:36:44,919 - __main__ - INFO - 飛美家旅行社 JustFly Travel featuresIndex1:18 2024-01-08 11:36:44.919109
+2024-01-08 11:36:45,184 - __main__ - INFO - 夢想國際旅行社Dream International Travel Agency featuresIndex1:18 2024-01-08 11:36:45.184402
+2024-01-08 11:36:45,439 - __main__ - INFO - 喜鴻假期 台北總公司 featuresIndex1:18 2024-01-08 11:36:45.439321
+2024-01-08 11:36:50,101 - __main__ - INFO - 宏祥旅行社 Edison Tours featuresIndex1:18 2024-01-08 11:36:50.101458
+2024-01-08 11:36:50,359 - __main__ - INFO - 新進旅行社 featuresIndex1:18 2024-01-08 11:36:50.359532
+2024-01-08 11:36:50,830 - __main__ - INFO - 行健旅遊 UNOTOUR featuresIndex1:18 2024-01-08 11:36:50.830842
+2024-01-08 11:37:03,643 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:37:12,306 - __main__ - INFO - lat lng:42.6140271,16.7765216
+2024-01-08 11:37:36,756 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:37:45,395 - __main__ - INFO - lat lng:42.6140271,16.8254023
+2024-01-08 11:38:04,144 - __main__ - INFO - 旮GaDessertStudio featuresIndex1:18 2024-01-08 11:38:04.144044
+2024-01-08 11:38:23,632 - __main__ - INFO - 台湾超人包车旅游团队 featuresIndex1:18 2024-01-08 11:38:23.632657
+2024-01-08 11:38:41,379 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:38:50,053 - __main__ - INFO - lat lng:42.6140271,16.8498427
+2024-01-08 11:39:04,700 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:39:13,316 - __main__ - INFO - lat lng:42.6140271,16.8987234
+2024-01-08 11:40:14,753 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:40:23,694 - __main__ - INFO - lat lng:42.6140271,16.9720445
+2024-01-08 11:40:33,668 - __main__ - INFO - Glavat Lighthouse featuresIndex1:18 2024-01-08 11:40:33.668637
+2024-01-08 11:40:39,065 - __main__ - INFO - Konoba Nautica, Apartmani Anthony featuresIndex1:18 2024-01-08 11:40:39.065763
+2024-01-08 11:40:39,466 - __main__ - INFO - OPG Podanje featuresIndex1:18 2024-01-08 11:40:39.466910
+2024-01-08 11:41:01,667 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:41:10,362 - __main__ - INFO - lat lng:42.6140271,16.9964849
+2024-01-08 11:41:34,960 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:41:43,752 - __main__ - INFO - lat lng:42.6140271,17.0453656
+2024-01-08 11:42:08,621 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:42:17,324 - __main__ - INFO - lat lng:42.6140271,17.1186867
+2024-01-08 11:42:27,495 - __main__ - INFO - Barje featuresIndex1:18 2024-01-08 11:42:27.495917
+2024-01-08 11:42:34,415 - __main__ - INFO - Restaurant Melita featuresIndex1:18 2024-01-08 11:42:34.415369
+2024-01-08 11:42:34,684 - __main__ - INFO - Restaurant Pomena featuresIndex1:18 2024-01-08 11:42:34.684328
+2024-01-08 11:42:35,097 - __main__ - INFO - Ogigija Restaurant featuresIndex1:18 2024-01-08 11:42:35.097099
+2024-01-08 11:42:58,771 - __main__ - INFO - Travel Agency Orebic Tours d.o.o. featuresIndex1:18 2024-01-08 11:42:58.771227
+2024-01-08 11:42:59,027 - __main__ - INFO - Taxi Mljet featuresIndex1:18 2024-01-08 11:42:59.027393
+2024-01-08 11:42:59,287 - __main__ - INFO - Tourist Office Lastovo featuresIndex1:18 2024-01-08 11:42:59.287217
+2024-01-08 11:42:59,540 - __main__ - INFO - Denor Travel - Tourist Agency featuresIndex1:18 2024-01-08 11:42:59.540315
+2024-01-08 11:42:59,797 - __main__ - INFO - Radulj Tours featuresIndex1:18 2024-01-08 11:42:59.797047
+2024-01-08 11:43:00,055 - __main__ - INFO - Vaja Tours d.o.o Travel Agency featuresIndex1:18 2024-01-08 11:43:00.055966
+2024-01-08 11:43:00,322 - __main__ - INFO - Fort Opus Travel Agency DMC featuresIndex1:18 2024-01-08 11:43:00.322952
+2024-01-08 11:43:04,647 - __main__ - INFO - "Dalmatino Tours" Tourist agency featuresIndex1:18 2024-01-08 11:43:04.647441
+2024-01-08 11:43:05,400 - __main__ - INFO - Boat Mljet featuresIndex1:18 2024-01-08 11:43:05.400420
+2024-01-08 11:43:09,807 - __main__ - INFO - Skriveni rent featuresIndex1:18 2024-01-08 11:43:09.807240
+2024-01-08 11:43:10,092 - __main__ - INFO - Indigo renta car Lastovo featuresIndex1:18 2024-01-08 11:43:10.092383
+2024-01-08 11:43:10,345 - __main__ - INFO - Radulj Tours - rent a bike featuresIndex1:18 2024-01-08 11:43:10.345402
+2024-01-08 11:43:10,670 - __main__ - INFO - Avax rent a car Korcula featuresIndex1:18 2024-01-08 11:43:10.670348
+2024-01-08 11:43:10,962 - __main__ - INFO - Rental and travel agency Kaleta Korcula featuresIndex1:18 2024-01-08 11:43:10.962828
+2024-01-08 11:43:11,283 - __main__ - INFO - Rent a Car & Scooter Pomena featuresIndex1:18 2024-01-08 11:43:11.283938
+2024-01-08 11:43:13,429 - __main__ - INFO - seleniumCount:56.10467076301575
+2024-01-08 11:43:22,175 - __main__ - INFO - latlng:64.81549215316772
+2024-01-08 11:43:22,176 - __main__ - INFO - lat lng:42.6140271,17.1431271
+2024-01-08 11:43:46,864 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:43:55,561 - __main__ - INFO - lat lng:42.6140271,17.1920078
+2024-01-08 11:44:06,770 - __main__ - INFO - 碧潭吊橋 featuresIndex1:18 2024-01-08 11:44:06.770386
+2024-01-08 11:44:21,657 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:44:30,362 - __main__ - INFO - lat lng:42.6140271,17.2653289
+2024-01-08 11:44:40,892 - __main__ - INFO - viewpoint featuresIndex1:18 2024-01-08 11:44:40.891316
+2024-01-08 11:44:41,161 - __main__ - INFO - Grabova Glava viewpoint featuresIndex1:18 2024-01-08 11:44:41.161240
+2024-01-08 11:45:11,975 - __main__ - INFO - Mljet4you featuresIndex1:18 2024-01-08 11:45:11.975319
+2024-01-08 11:45:18,912 - __main__ - INFO - 華友旅行 featuresIndex1:18 2024-01-08 11:45:18.912823
+2024-01-08 11:45:24,346 - __main__ - INFO - Mini Brum featuresIndex1:18 2024-01-08 11:45:24.346191
+2024-01-08 11:45:26,597 - __main__ - INFO - latlng:56.218299865722656
+2024-01-08 11:45:26,598 - __main__ - INFO - lat lng:42.6140271,17.2897693
+2024-01-08 11:45:46,812 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:45:55,717 - __main__ - INFO - lat lng:42.6140271,17.33865
+2024-01-08 11:46:37,025 - __main__ - INFO - Odysseus cave boat tour - Boat - Car - Scooter - Kayak - Sup rental #activemljet featuresIndex1:18 2024-01-08 11:46:37.025285
+2024-01-08 11:46:37,522 - __main__ - INFO - Villa Klacina featuresIndex1:18 2024-01-08 11:46:37.522808
+2024-01-08 11:46:50,294 - __main__ - INFO - latlng:54.55834341049194
+2024-01-08 11:46:50,295 - __main__ - INFO - lat lng:42.6140271,17.3630904
+2024-01-08 11:47:10,680 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:47:19,459 - __main__ - INFO - lat lng:42.6140271,17.4119711
+2024-01-08 11:47:33,661 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:47:42,412 - __main__ - INFO - lat lng:42.6140271,17.4852922
+2024-01-08 11:47:56,270 - __main__ - INFO - Nice walk featuresIndex1:18 2024-01-08 11:47:56.270543
+2024-01-08 11:47:56,616 - __main__ - INFO - Odysseus Cave featuresIndex1:18 2024-01-08 11:47:56.616517
+2024-01-08 11:47:56,886 - __main__ - INFO - Veliki Grad featuresIndex1:18 2024-01-08 11:47:56.886459
+2024-01-08 11:48:02,325 - __main__ - INFO - Restoran Maestral featuresIndex1:18 2024-01-08 11:48:02.325202
+2024-01-08 11:48:02,582 - __main__ - INFO - Tavern Barba featuresIndex1:18 2024-01-08 11:48:02.582060
+2024-01-08 11:48:02,883 - __main__ - INFO - Konoba Maran featuresIndex1:18 2024-01-08 11:48:02.883465
+2024-01-08 11:48:03,162 - __main__ - INFO - Konoba Baro featuresIndex1:18 2024-01-08 11:48:03.162287
+2024-01-08 11:48:03,449 - __main__ - INFO - Konoba Lanterna featuresIndex1:18 2024-01-08 11:48:03.449474
+2024-01-08 11:48:27,799 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:48:36,488 - __main__ - INFO - lat lng:42.6140271,17.5097326
+2024-01-08 11:49:15,752 - __main__ - INFO - Tourist Information Office featuresIndex1:18 2024-01-08 11:49:15.752429
+2024-01-08 11:49:27,658 - __main__ - INFO - latlng:51.15217185020447
+2024-01-08 11:49:27,659 - __main__ - INFO - lat lng:42.6140271,17.5586133
+2024-01-08 11:49:33,309 - __main__ - INFO - Preč featuresIndex1:18 2024-01-08 11:49:33.309483
+2024-01-08 11:49:46,556 - __main__ - ERROR - featuresIndex2:18
+2024-01-08 11:49:55,327 - __main__ - INFO - lat lng:42.6140271,17.6319344
+2024-01-08 11:50:06,235 - __main__ - INFO - Nostromo transfer,day trips and tours from Dubrovnik featuresIndex1:18 2024-01-08 11:50:06.235295
+2024-01-08 11:50:06,687 - __main__ - INFO - Vidikovac Stražište featuresIndex1:18 2024-01-08 11:50:06.687868
+2024-01-08 11:50:12,632 - __main__ - INFO - Franka - Traditional dalamtian food featuresIndex1:18 2024-01-08 11:50:12.631826
+2024-01-08 11:50:12,886 - __main__ - INFO - Konoba Stermasi featuresIndex1:18 2024-01-08 11:50:12.886231
+2024-01-08 11:50:13,134 - __main__ - INFO - Mirosa featuresIndex1:18 2024-01-08 11:50:13.134994
+2024-01-08 11:50:13,430 - __main__ - INFO - Kod Ante featuresIndex1:18 2024-01-08 11:50:13.430572
+2024-01-08 11:50:57,256 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 11:50:57,257 - __main__ - INFO - Afghanistan
+2024-01-08 11:50:57,258 - __main__ - INFO - Angola
+2024-01-08 11:50:57,258 - __main__ - INFO - Albania
+2024-01-08 11:50:57,258 - __main__ - INFO - United Arab Emirates
+2024-01-08 11:50:57,259 - __main__ - INFO - Argentina
+2024-01-08 11:50:57,259 - __main__ - INFO - Armenia
+2024-01-08 11:50:57,260 - __main__ - INFO - None
+2024-01-08 11:50:57,260 - __main__ - INFO - Australia
+2024-01-08 11:50:57,261 - __main__ - INFO - Austria
+2024-01-08 11:50:57,261 - __main__ - INFO - Azerbaijan
+2024-01-08 11:50:57,262 - __main__ - INFO - Burundi
+2024-01-08 11:50:57,262 - __main__ - INFO - Belgium
+2024-01-08 11:50:57,263 - __main__ - INFO - Benin
+2024-01-08 11:50:57,263 - __main__ - INFO - Burkina Faso
+2024-01-08 11:50:57,264 - __main__ - INFO - Bangladesh
+2024-01-08 11:50:57,264 - __main__ - INFO - Bulgaria
+2024-01-08 11:50:57,265 - __main__ - INFO - Bahamas, The
+2024-01-08 11:50:57,265 - __main__ - INFO - Bosnia and Herzegovina
+2024-01-08 11:50:57,266 - __main__ - INFO - Belarus
+2024-01-08 11:50:57,266 - __main__ - INFO - Belize
+2024-01-08 11:50:57,266 - __main__ - INFO - Bolivia
+2024-01-08 11:50:57,267 - __main__ - INFO - Brazil
+2024-01-08 11:50:57,268 - __main__ - INFO - Brunei
+2024-01-08 11:50:57,268 - __main__ - INFO - Bhutan
+2024-01-08 11:50:57,269 - __main__ - INFO - Botswana
+2024-01-08 11:50:57,269 - __main__ - INFO - Central African Republic
+2024-01-08 11:50:57,270 - __main__ - INFO - Canada
+2024-01-08 11:50:57,270 - __main__ - INFO - Switzerland
+2024-01-08 11:50:57,271 - __main__ - INFO - Chile
+2024-01-08 11:50:57,271 - __main__ - INFO - China
+2024-01-08 11:50:57,272 - __main__ - INFO - Cote D'ivoire
+2024-01-08 11:50:57,272 - __main__ - INFO - Cameroon
+2024-01-08 11:50:57,273 - __main__ - INFO - Congo, Democratic Republic of the
+2024-01-08 11:50:57,273 - __main__ - INFO - Congo, Republic of the
+2024-01-08 11:50:57,274 - __main__ - INFO - Colombia
+2024-01-08 11:50:57,274 - __main__ - INFO - Costa Rica
+2024-01-08 11:50:57,275 - __main__ - INFO - Cuba
+2024-01-08 11:50:57,276 - __main__ - INFO - None
+2024-01-08 11:50:57,276 - __main__ - INFO - Cyprus
+2024-01-08 11:50:57,277 - __main__ - INFO - Czechia
+2024-01-08 11:50:57,277 - __main__ - INFO - Germany
+2024-01-08 11:50:57,278 - __main__ - INFO - Djibouti
+2024-01-08 11:50:57,278 - __main__ - INFO - Denmark
+2024-01-08 11:50:57,279 - __main__ - INFO - Dominican Republic
+2024-01-08 11:50:57,279 - __main__ - INFO - Algeria
+2024-01-08 11:50:57,280 - __main__ - INFO - Ecuador
+2024-01-08 11:50:57,280 - __main__ - INFO - Egypt
+2024-01-08 11:50:57,281 - __main__ - INFO - Eritrea
+2024-01-08 11:50:57,281 - __main__ - INFO - Spain
+2024-01-08 11:50:57,282 - __main__ - INFO - Estonia
+2024-01-08 11:50:57,282 - __main__ - INFO - Ethiopia
+2024-01-08 11:50:57,283 - __main__ - INFO - Finland
+2024-01-08 11:50:57,283 - __main__ - INFO - Fiji
+2024-01-08 11:50:57,284 - __main__ - INFO - Falkland Islands (Islas Malvinas)
+2024-01-08 11:50:57,284 - __main__ - INFO - France
+2024-01-08 11:50:57,285 - __main__ - INFO - Gabon
+2024-01-08 11:50:57,286 - __main__ - INFO - United Kingdom
+2024-01-08 11:50:57,286 - __main__ - INFO - Georgia
+2024-01-08 11:50:57,287 - __main__ - INFO - Ghana
+2024-01-08 11:50:57,288 - __main__ - INFO - Guinea
+2024-01-08 11:50:57,288 - __main__ - INFO - Gambia, The
+2024-01-08 11:50:57,289 - __main__ - INFO - Guinea-Bissau
+2024-01-08 11:50:57,289 - __main__ - INFO - Equatorial Guinea
+2024-01-08 11:50:57,290 - __main__ - INFO - Greece
+2024-01-08 11:50:57,290 - __main__ - INFO - Greenland
+2024-01-08 11:50:57,291 - __main__ - INFO - Guatemala
+2024-01-08 11:50:57,291 - __main__ - INFO - Guyana
+2024-01-08 11:50:57,291 - __main__ - INFO - Honduras
+2024-01-08 11:50:57,292 - __main__ - INFO - Croatia
+2024-01-08 11:50:57,293 - __main__ - INFO - Haiti
+2024-01-08 11:50:57,293 - __main__ - INFO - Hungary
+2024-01-08 11:50:57,294 - __main__ - INFO - Indonesia
+2024-01-08 11:50:57,294 - __main__ - INFO - India
+2024-01-08 11:50:57,295 - __main__ - INFO - Ireland
+2024-01-08 11:50:57,295 - __main__ - INFO - Iran
+2024-01-08 11:50:57,296 - __main__ - INFO - Iraq
+2024-01-08 11:50:57,296 - __main__ - INFO - Iceland
+2024-01-08 11:50:57,297 - __main__ - INFO - Israel
+2024-01-08 11:50:57,297 - __main__ - INFO - Italy
+2024-01-08 11:50:57,298 - __main__ - INFO - Jamaica
+2024-01-08 11:50:57,298 - __main__ - INFO - Jordan
+2024-01-08 11:50:57,299 - __main__ - INFO - Japan
+2024-01-08 11:50:57,300 - __main__ - INFO - Kazakhstan
+2024-01-08 11:50:57,300 - __main__ - INFO - Kenya
+2024-01-08 11:50:57,301 - __main__ - INFO - Kyrgyzstan
+2024-01-08 11:50:57,301 - __main__ - INFO - Cambodia
+2024-01-08 11:50:57,303 - __main__ - INFO - Korea, South
+2024-01-08 11:50:57,304 - __main__ - INFO - Kosovo
+2024-01-08 11:50:57,304 - __main__ - INFO - Kuwait
+2024-01-08 11:50:57,305 - __main__ - INFO - Laos
+2024-01-08 11:50:57,305 - __main__ - INFO - Lebanon
+2024-01-08 11:50:57,306 - __main__ - INFO - Liberia
+2024-01-08 11:50:57,307 - __main__ - INFO - Libya
+2024-01-08 11:50:57,307 - __main__ - INFO - Sri Lanka
+2024-01-08 11:50:57,308 - __main__ - INFO - Lesotho
+2024-01-08 11:50:57,308 - __main__ - INFO - Lithuania
+2024-01-08 11:50:57,309 - __main__ - INFO - Luxembourg
+2024-01-08 11:50:57,309 - __main__ - INFO - Latvia
+2024-01-08 11:50:57,310 - __main__ - INFO - Morocco
+2024-01-08 11:50:57,310 - __main__ - INFO - Moldova
+2024-01-08 11:50:57,311 - __main__ - INFO - Madagascar
+2024-01-08 11:50:57,312 - __main__ - INFO - Mexico
+2024-01-08 11:50:57,312 - __main__ - INFO - Macedonia
+2024-01-08 11:50:57,313 - __main__ - INFO - Mali
+2024-01-08 11:50:57,314 - __main__ - INFO - Burma
+2024-01-08 11:50:57,314 - __main__ - INFO - Montenegro
+2024-01-08 11:50:57,315 - __main__ - INFO - Mongolia
+2024-01-08 11:50:57,315 - __main__ - INFO - Mozambique
+2024-01-08 11:50:57,316 - __main__ - INFO - Mauritania
+2024-01-08 11:50:57,317 - __main__ - INFO - Malawi
+2024-01-08 11:50:58,986 - __main__ - INFO - featuresIndex:110
+2024-01-08 11:51:00,346 - __main__ - INFO - Malaysia
+2024-01-08 11:51:03,910 - __main__ - INFO - featuresIndex:111
+2024-01-08 11:51:03,969 - __main__ - INFO - lat lng:0.7371586,109.6632601
+2024-01-08 11:51:07,636 - __main__ - INFO - 碧潭風景區 featuresIndex1:111 2024-01-08 11:51:07.636491
+2024-01-08 11:51:08,369 - __main__ - INFO - 大安森林公園(防災公園) featuresIndex1:111 2024-01-08 11:51:08.369587
+2024-01-08 11:51:09,139 - __main__ - INFO - 花之隧道 featuresIndex1:111 2024-01-08 11:51:09.138802
+2024-01-08 11:51:09,496 - __main__ - INFO - 合谷瀑布 featuresIndex1:111 2024-01-08 11:51:09.496215
+2024-01-08 11:51:09,862 - __main__ - INFO - 淡水老街廣場 featuresIndex1:111 2024-01-08 11:51:09.862483
+2024-01-08 11:51:10,233 - __main__ - INFO - 碧潭吊橋 featuresIndex1:111 2024-01-08 11:51:10.233742
+2024-01-08 11:51:10,538 - __main__ - INFO - 象山六巨石 featuresIndex1:111 2024-01-08 11:51:10.538430
+2024-01-08 11:51:26,533 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:51:35,144 - __main__ - INFO - lat lng:0.7371586,109.681248
+2024-01-08 11:51:39,248 - __main__ - INFO - The fluffy shadow featuresIndex1:111 2024-01-08 11:51:39.248356
+2024-01-08 11:51:39,677 - __main__ - INFO - 西本願寺鐘樓 featuresIndex1:111 2024-01-08 11:51:39.677392
+2024-01-08 11:51:54,100 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:52:02,731 - __main__ - INFO - lat lng:0.7371586,109.6992359
+2024-01-08 11:52:25,698 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:52:34,404 - __main__ - INFO - lat lng:0.7371586,109.7352117
+2024-01-08 11:52:47,555 - __main__ - INFO - Rumah Makan Mak Jaka featuresIndex1:111 2024-01-08 11:52:47.555304
+2024-01-08 11:52:47,846 - __main__ - INFO - Warung featuresIndex1:111 2024-01-08 11:52:47.846304
+2024-01-08 11:53:00,464 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:53:09,108 - __main__ - INFO - lat lng:0.7371586,109.7531996
+2024-01-08 11:53:32,058 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:53:40,755 - __main__ - INFO - lat lng:0.7371586,109.7891754
+2024-01-08 11:53:58,221 - __main__ - INFO - 哈根達斯 敦南旗艦店 featuresIndex1:111 2024-01-08 11:53:58.221807
+2024-01-08 11:53:58,491 - __main__ - INFO - BAC Cake&Sweets 台北忠孝SOGO巧克力體驗店 featuresIndex1:111 2024-01-08 11:53:58.491274
+2024-01-08 11:53:58,769 - __main__ - INFO - 西門町芒菓冰 featuresIndex1:111 2024-01-08 11:53:58.769867
+2024-01-08 11:53:59,017 - __main__ - INFO - 大吉先生 Bakesmith 綿豆漿古早味蛋糕 featuresIndex1:111 2024-01-08 11:53:59.017384
+2024-01-08 11:53:59,281 - __main__ - INFO - Nice Cream義式手工冰淇淋店 featuresIndex1:111 2024-01-08 11:53:59.281322
+2024-01-08 11:53:59,542 - __main__ - INFO - Silk Sweet絹絲谷｜乳酪蛋糕&巧克力 featuresIndex1:111 2024-01-08 11:53:59.542779
+2024-01-08 11:53:59,812 - __main__ - INFO - Yu''s ALMOND DESSERT featuresIndex1:111 2024-01-08 11:53:59.812255
+2024-01-08 11:54:04,130 - __main__ - INFO - 四獸山風景區 featuresIndex1:111 2024-01-08 11:54:04.130070
+2024-01-08 11:54:04,539 - __main__ - INFO - 坪頂古圳 featuresIndex1:111 2024-01-08 11:54:04.539030
+2024-01-08 11:54:04,775 - __main__ - INFO - 金山風景區 featuresIndex1:111 2024-01-08 11:54:04.774026
+2024-01-08 11:54:05,022 - __main__ - INFO - 豹山溪 featuresIndex1:111 2024-01-08 11:54:05.022777
+2024-01-08 11:54:05,028 - __main__ - INFO - seleniumCount:24.272294998168945
+2024-01-08 11:54:13,735 - __main__ - INFO - latlng:32.96427321434021
+2024-01-08 11:54:13,735 - __main__ - INFO - lat lng:0.7371586,109.8071633
+2024-01-08 11:54:34,167 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:54:42,818 - __main__ - INFO - lat lng:0.7371586,109.8431391
+2024-01-08 11:55:04,979 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:55:13,616 - __main__ - INFO - lat lng:0.7371586,109.8971029
+2024-01-08 11:55:26,024 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:55:34,632 - __main__ - INFO - lat lng:0.7371586,109.9690546
+2024-01-08 11:55:45,754 - __main__ - INFO - AIR TERJUN BANANGGAR featuresIndex1:111 2024-01-08 11:55:45.754310
+2024-01-08 11:55:46,278 - __main__ - INFO - KLB GARDEN featuresIndex1:111 2024-01-08 11:55:46.278620
+2024-01-08 11:55:51,005 - __main__ - INFO - Yudee''s Bakso featuresIndex1:111 2024-01-08 11:55:51.005524
+2024-01-08 11:55:51,257 - __main__ - INFO - Kedai Pak Amir featuresIndex1:111 2024-01-08 11:55:51.257263
+2024-01-08 11:56:04,020 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:56:12,690 - __main__ - INFO - lat lng:0.7371586,109.9870425
+2024-01-08 11:57:00,646 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 11:57:09,282 - __main__ - INFO - lat lng:0.7371586,110.0230183
+2024-01-08 11:58:26,059 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 11:58:26,061 - __main__ - INFO - Afghanistan
+2024-01-08 11:58:26,061 - __main__ - INFO - Angola
+2024-01-08 11:58:26,061 - __main__ - INFO - Albania
+2024-01-08 11:58:26,062 - __main__ - INFO - United Arab Emirates
+2024-01-08 11:58:26,062 - __main__ - INFO - Argentina
+2024-01-08 11:58:26,063 - __main__ - INFO - Armenia
+2024-01-08 11:58:26,063 - __main__ - INFO - None
+2024-01-08 11:58:26,063 - __main__ - INFO - Australia
+2024-01-08 11:58:26,064 - __main__ - INFO - Austria
+2024-01-08 11:58:26,064 - __main__ - INFO - Azerbaijan
+2024-01-08 11:58:26,065 - __main__ - INFO - Burundi
+2024-01-08 11:58:26,065 - __main__ - INFO - Belgium
+2024-01-08 11:58:26,066 - __main__ - INFO - Benin
+2024-01-08 11:58:26,066 - __main__ - INFO - Burkina Faso
+2024-01-08 11:58:26,066 - __main__ - INFO - Bangladesh
+2024-01-08 11:58:26,067 - __main__ - INFO - Bulgaria
+2024-01-08 11:58:26,067 - __main__ - INFO - Bahamas, The
+2024-01-08 11:58:26,068 - __main__ - INFO - Bosnia and Herzegovina
+2024-01-08 11:58:26,068 - __main__ - INFO - Belarus
+2024-01-08 11:58:26,068 - __main__ - INFO - Belize
+2024-01-08 11:58:26,069 - __main__ - INFO - Bolivia
+2024-01-08 11:58:26,069 - __main__ - INFO - Brazil
+2024-01-08 11:58:26,070 - __main__ - INFO - Brunei
+2024-01-08 11:58:26,070 - __main__ - INFO - Bhutan
+2024-01-08 11:58:26,070 - __main__ - INFO - Botswana
+2024-01-08 11:58:26,071 - __main__ - INFO - Central African Republic
+2024-01-08 11:58:26,071 - __main__ - INFO - Canada
+2024-01-08 11:58:26,072 - __main__ - INFO - Switzerland
+2024-01-08 11:58:26,072 - __main__ - INFO - Chile
+2024-01-08 11:58:26,072 - __main__ - INFO - China
+2024-01-08 11:58:26,073 - __main__ - INFO - Cote D'ivoire
+2024-01-08 11:58:26,073 - __main__ - INFO - Cameroon
+2024-01-08 11:58:26,074 - __main__ - INFO - Congo, Democratic Republic of the
+2024-01-08 11:58:26,074 - __main__ - INFO - Congo, Republic of the
+2024-01-08 11:58:26,074 - __main__ - INFO - Colombia
+2024-01-08 11:58:26,075 - __main__ - INFO - Costa Rica
+2024-01-08 11:58:26,075 - __main__ - INFO - Cuba
+2024-01-08 11:58:26,076 - __main__ - INFO - None
+2024-01-08 11:58:26,076 - __main__ - INFO - Cyprus
+2024-01-08 11:58:26,077 - __main__ - INFO - Czechia
+2024-01-08 11:58:26,077 - __main__ - INFO - Germany
+2024-01-08 11:58:26,077 - __main__ - INFO - Djibouti
+2024-01-08 11:58:26,078 - __main__ - INFO - Denmark
+2024-01-08 11:58:26,078 - __main__ - INFO - Dominican Republic
+2024-01-08 11:58:26,079 - __main__ - INFO - Algeria
+2024-01-08 11:58:26,079 - __main__ - INFO - Ecuador
+2024-01-08 11:58:26,080 - __main__ - INFO - Egypt
+2024-01-08 11:58:26,080 - __main__ - INFO - Eritrea
+2024-01-08 11:58:26,081 - __main__ - INFO - Spain
+2024-01-08 11:58:26,081 - __main__ - INFO - Estonia
+2024-01-08 11:58:26,081 - __main__ - INFO - Ethiopia
+2024-01-08 11:58:26,082 - __main__ - INFO - Finland
+2024-01-08 11:58:26,082 - __main__ - INFO - Fiji
+2024-01-08 11:58:26,083 - __main__ - INFO - Falkland Islands (Islas Malvinas)
+2024-01-08 11:58:26,083 - __main__ - INFO - France
+2024-01-08 11:58:26,084 - __main__ - INFO - Gabon
+2024-01-08 11:58:26,084 - __main__ - INFO - United Kingdom
+2024-01-08 11:58:26,085 - __main__ - INFO - Georgia
+2024-01-08 11:58:26,085 - __main__ - INFO - Ghana
+2024-01-08 11:58:26,085 - __main__ - INFO - Guinea
+2024-01-08 11:58:26,087 - __main__ - INFO - Gambia, The
+2024-01-08 11:58:26,087 - __main__ - INFO - Guinea-Bissau
+2024-01-08 11:58:26,088 - __main__ - INFO - Equatorial Guinea
+2024-01-08 11:58:26,088 - __main__ - INFO - Greece
+2024-01-08 11:58:26,088 - __main__ - INFO - Greenland
+2024-01-08 11:58:26,089 - __main__ - INFO - Guatemala
+2024-01-08 11:58:26,089 - __main__ - INFO - Guyana
+2024-01-08 11:58:26,090 - __main__ - INFO - Honduras
+2024-01-08 11:58:26,090 - __main__ - INFO - Croatia
+2024-01-08 11:58:26,091 - __main__ - INFO - Haiti
+2024-01-08 11:58:26,091 - __main__ - INFO - Hungary
+2024-01-08 11:58:26,091 - __main__ - INFO - Indonesia
+2024-01-08 11:58:26,092 - __main__ - INFO - India
+2024-01-08 11:58:26,092 - __main__ - INFO - Ireland
+2024-01-08 11:58:26,093 - __main__ - INFO - Iran
+2024-01-08 11:58:26,093 - __main__ - INFO - Iraq
+2024-01-08 11:58:26,094 - __main__ - INFO - Iceland
+2024-01-08 11:58:26,095 - __main__ - INFO - Israel
+2024-01-08 11:58:26,095 - __main__ - INFO - Italy
+2024-01-08 11:58:26,096 - __main__ - INFO - Jamaica
+2024-01-08 11:58:26,096 - __main__ - INFO - Jordan
+2024-01-08 11:58:26,097 - __main__ - INFO - Japan
+2024-01-08 11:58:26,097 - __main__ - INFO - Kazakhstan
+2024-01-08 11:58:26,098 - __main__ - INFO - Kenya
+2024-01-08 11:58:26,098 - __main__ - INFO - Kyrgyzstan
+2024-01-08 11:58:26,099 - __main__ - INFO - Cambodia
+2024-01-08 11:58:26,099 - __main__ - INFO - Korea, South
+2024-01-08 11:58:26,100 - __main__ - INFO - Kosovo
+2024-01-08 11:58:26,100 - __main__ - INFO - Kuwait
+2024-01-08 11:58:26,100 - __main__ - INFO - Laos
+2024-01-08 11:58:26,101 - __main__ - INFO - Lebanon
+2024-01-08 11:58:26,101 - __main__ - INFO - Liberia
+2024-01-08 11:58:26,102 - __main__ - INFO - Libya
+2024-01-08 11:58:26,102 - __main__ - INFO - Sri Lanka
+2024-01-08 11:58:26,103 - __main__ - INFO - Lesotho
+2024-01-08 11:58:26,103 - __main__ - INFO - Lithuania
+2024-01-08 11:58:26,104 - __main__ - INFO - Luxembourg
+2024-01-08 11:58:26,104 - __main__ - INFO - Latvia
+2024-01-08 11:58:26,104 - __main__ - INFO - Morocco
+2024-01-08 11:58:26,105 - __main__ - INFO - Moldova
+2024-01-08 11:58:26,105 - __main__ - INFO - Madagascar
+2024-01-08 11:58:26,106 - __main__ - INFO - Mexico
+2024-01-08 11:58:26,106 - __main__ - INFO - Macedonia
+2024-01-08 11:58:26,107 - __main__ - INFO - Mali
+2024-01-08 11:58:26,107 - __main__ - INFO - Burma
+2024-01-08 11:58:26,107 - __main__ - INFO - Montenegro
+2024-01-08 11:58:26,108 - __main__ - INFO - Mongolia
+2024-01-08 11:58:26,108 - __main__ - INFO - Mozambique
+2024-01-08 11:58:26,109 - __main__ - INFO - Mauritania
+2024-01-08 11:58:26,109 - __main__ - INFO - Malawi
+2024-01-08 11:58:27,851 - __main__ - INFO - featuresIndex:110
+2024-01-08 11:58:30,892 - __main__ - INFO - Malaysia
+2024-01-08 11:58:34,763 - __main__ - INFO - featuresIndex:111
+2024-01-08 11:58:34,832 - __main__ - INFO - lat lng:0.7371586,109.6632601
+2024-01-08 11:58:40,324 - __main__ - INFO - 碧潭風景區 featuresIndex1:111 2024-01-08 11:58:40.324827
+2024-01-08 11:58:40,746 - __main__ - INFO - 大安森林公園(防災公園) featuresIndex1:111 2024-01-08 11:58:40.746120
+2024-01-08 11:58:41,055 - __main__ - INFO - 花之隧道 featuresIndex1:111 2024-01-08 11:58:41.055254
+2024-01-08 11:58:41,383 - __main__ - INFO - 合谷瀑布 featuresIndex1:111 2024-01-08 11:58:41.383446
+2024-01-08 11:58:41,694 - __main__ - INFO - 淡水老街廣場 featuresIndex1:111 2024-01-08 11:58:41.694535
+2024-01-08 11:58:41,985 - __main__ - INFO - 碧潭吊橋 featuresIndex1:111 2024-01-08 11:58:41.985449
+2024-01-08 11:58:42,291 - __main__ - INFO - 象山六巨石 featuresIndex1:111 2024-01-08 11:58:42.291881
+2024-01-08 11:58:42,589 - __main__ - INFO - 西本願寺鐘樓 featuresIndex1:111 2024-01-08 11:58:42.589420
+2024-01-08 11:58:42,901 - __main__ - INFO - 深坑老街 featuresIndex1:111 2024-01-08 11:58:42.901315
+2024-01-08 11:58:43,209 - __main__ - INFO - Rainbow Ximending featuresIndex1:111 2024-01-08 11:58:43.209628
+2024-01-08 11:58:43,513 - __main__ - INFO - Purple Butterfly Valley featuresIndex1:111 2024-01-08 11:58:43.513404
+2024-01-08 11:59:01,335 - __main__ - INFO - the Diner 樂子信義旗艦店 featuresIndex1:111 2024-01-08 11:59:01.335656
+2024-01-08 11:59:21,047 - __main__ - INFO - 四獸山風景區 featuresIndex1:111 2024-01-08 11:59:21.047027
+2024-01-08 11:59:21,528 - __main__ - INFO - 坪頂古圳 featuresIndex1:111 2024-01-08 11:59:21.528140
+2024-01-08 11:59:21,823 - __main__ - INFO - 金山風景區 featuresIndex1:111 2024-01-08 11:59:21.823336
+2024-01-08 11:59:22,099 - __main__ - INFO - 豹山溪 featuresIndex1:111 2024-01-08 11:59:22.099442
+2024-01-08 11:59:22,383 - __main__ - INFO - Jiufen Scenery Lookout featuresIndex1:111 2024-01-08 11:59:22.383504
+2024-01-08 11:59:22,683 - __main__ - INFO - 虎山峰 featuresIndex1:111 2024-01-08 11:59:22.683501
+2024-01-08 11:59:22,690 - __main__ - INFO - seleniumCount:47.85732984542847
+2024-01-08 11:59:31,618 - __main__ - INFO - latlng:56.755632400512695
+2024-01-08 11:59:31,619 - __main__ - INFO - lat lng:0.7371586,109.681248
+2024-01-08 12:05:13,861 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 12:05:29,090 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 12:05:29,091 - __main__ - INFO - Afghanistan
+2024-01-08 12:05:29,091 - __main__ - INFO - Angola
+2024-01-08 12:05:29,091 - __main__ - INFO - Albania
+2024-01-08 12:05:29,092 - __main__ - INFO - United Arab Emirates
+2024-01-08 12:05:29,092 - __main__ - INFO - Argentina
+2024-01-08 12:05:29,093 - __main__ - INFO - Armenia
+2024-01-08 12:05:29,093 - __main__ - INFO - None
+2024-01-08 12:05:29,093 - __main__ - INFO - Australia
+2024-01-08 12:05:29,094 - __main__ - INFO - Austria
+2024-01-08 12:05:29,094 - __main__ - INFO - Azerbaijan
+2024-01-08 12:05:29,095 - __main__ - INFO - Burundi
+2024-01-08 12:05:29,095 - __main__ - INFO - Belgium
+2024-01-08 12:05:29,096 - __main__ - INFO - Benin
+2024-01-08 12:05:29,096 - __main__ - INFO - Burkina Faso
+2024-01-08 12:05:29,097 - __main__ - INFO - Bangladesh
+2024-01-08 12:05:29,097 - __main__ - INFO - Bulgaria
+2024-01-08 12:05:29,098 - __main__ - INFO - Bahamas, The
+2024-01-08 12:05:29,098 - __main__ - INFO - Bosnia and Herzegovina
+2024-01-08 12:05:29,098 - __main__ - INFO - Belarus
+2024-01-08 12:05:29,099 - __main__ - INFO - Belize
+2024-01-08 12:05:29,099 - __main__ - INFO - Bolivia
+2024-01-08 12:05:29,100 - __main__ - INFO - Brazil
+2024-01-08 12:05:29,100 - __main__ - INFO - Brunei
+2024-01-08 12:05:29,101 - __main__ - INFO - Bhutan
+2024-01-08 12:05:29,101 - __main__ - INFO - Botswana
+2024-01-08 12:05:29,102 - __main__ - INFO - Central African Republic
+2024-01-08 12:05:29,103 - __main__ - INFO - Canada
+2024-01-08 12:05:29,103 - __main__ - INFO - Switzerland
+2024-01-08 12:05:29,104 - __main__ - INFO - Chile
+2024-01-08 12:05:29,104 - __main__ - INFO - China
+2024-01-08 12:05:29,105 - __main__ - INFO - Cote D'ivoire
+2024-01-08 12:05:29,105 - __main__ - INFO - Cameroon
+2024-01-08 12:05:29,106 - __main__ - INFO - Congo, Democratic Republic of the
+2024-01-08 12:05:29,106 - __main__ - INFO - Congo, Republic of the
+2024-01-08 12:05:29,106 - __main__ - INFO - Colombia
+2024-01-08 12:05:29,107 - __main__ - INFO - Costa Rica
+2024-01-08 12:05:29,107 - __main__ - INFO - Cuba
+2024-01-08 12:05:29,107 - __main__ - INFO - None
+2024-01-08 12:05:29,108 - __main__ - INFO - Cyprus
+2024-01-08 12:05:29,108 - __main__ - INFO - Czechia
+2024-01-08 12:05:29,108 - __main__ - INFO - Germany
+2024-01-08 12:05:29,109 - __main__ - INFO - Djibouti
+2024-01-08 12:05:29,109 - __main__ - INFO - Denmark
+2024-01-08 12:05:29,110 - __main__ - INFO - Dominican Republic
+2024-01-08 12:05:29,110 - __main__ - INFO - Algeria
+2024-01-08 12:05:29,111 - __main__ - INFO - Ecuador
+2024-01-08 12:05:29,111 - __main__ - INFO - Egypt
+2024-01-08 12:05:29,111 - __main__ - INFO - Eritrea
+2024-01-08 12:05:29,112 - __main__ - INFO - Spain
+2024-01-08 12:05:29,112 - __main__ - INFO - Estonia
+2024-01-08 12:05:29,113 - __main__ - INFO - Ethiopia
+2024-01-08 12:05:29,113 - __main__ - INFO - Finland
+2024-01-08 12:05:29,113 - __main__ - INFO - Fiji
+2024-01-08 12:05:29,114 - __main__ - INFO - Falkland Islands (Islas Malvinas)
+2024-01-08 12:05:29,114 - __main__ - INFO - France
+2024-01-08 12:05:29,114 - __main__ - INFO - Gabon
+2024-01-08 12:05:29,115 - __main__ - INFO - United Kingdom
+2024-01-08 12:05:29,115 - __main__ - INFO - Georgia
+2024-01-08 12:05:29,116 - __main__ - INFO - Ghana
+2024-01-08 12:05:29,116 - __main__ - INFO - Guinea
+2024-01-08 12:05:29,116 - __main__ - INFO - Gambia, The
+2024-01-08 12:05:29,117 - __main__ - INFO - Guinea-Bissau
+2024-01-08 12:05:29,118 - __main__ - INFO - Equatorial Guinea
+2024-01-08 12:05:29,118 - __main__ - INFO - Greece
+2024-01-08 12:05:29,118 - __main__ - INFO - Greenland
+2024-01-08 12:05:29,119 - __main__ - INFO - Guatemala
+2024-01-08 12:05:29,119 - __main__ - INFO - Guyana
+2024-01-08 12:05:29,119 - __main__ - INFO - Honduras
+2024-01-08 12:05:29,120 - __main__ - INFO - Croatia
+2024-01-08 12:05:29,120 - __main__ - INFO - Haiti
+2024-01-08 12:05:29,120 - __main__ - INFO - Hungary
+2024-01-08 12:05:29,121 - __main__ - INFO - Indonesia
+2024-01-08 12:05:29,121 - __main__ - INFO - India
+2024-01-08 12:05:29,122 - __main__ - INFO - Ireland
+2024-01-08 12:05:29,122 - __main__ - INFO - Iran
+2024-01-08 12:05:29,123 - __main__ - INFO - Iraq
+2024-01-08 12:05:29,123 - __main__ - INFO - Iceland
+2024-01-08 12:05:29,124 - __main__ - INFO - Israel
+2024-01-08 12:05:29,124 - __main__ - INFO - Italy
+2024-01-08 12:05:29,124 - __main__ - INFO - Jamaica
+2024-01-08 12:05:29,125 - __main__ - INFO - Jordan
+2024-01-08 12:05:29,125 - __main__ - INFO - Japan
+2024-01-08 12:05:29,126 - __main__ - INFO - Kazakhstan
+2024-01-08 12:05:29,126 - __main__ - INFO - Kenya
+2024-01-08 12:05:29,127 - __main__ - INFO - Kyrgyzstan
+2024-01-08 12:05:29,127 - __main__ - INFO - Cambodia
+2024-01-08 12:05:29,127 - __main__ - INFO - Korea, South
+2024-01-08 12:05:29,128 - __main__ - INFO - Kosovo
+2024-01-08 12:05:29,128 - __main__ - INFO - Kuwait
+2024-01-08 12:05:29,129 - __main__ - INFO - Laos
+2024-01-08 12:05:29,129 - __main__ - INFO - Lebanon
+2024-01-08 12:05:29,130 - __main__ - INFO - Liberia
+2024-01-08 12:05:29,130 - __main__ - INFO - Libya
+2024-01-08 12:05:29,130 - __main__ - INFO - Sri Lanka
+2024-01-08 12:05:29,131 - __main__ - INFO - Lesotho
+2024-01-08 12:05:29,131 - __main__ - INFO - Lithuania
+2024-01-08 12:05:29,132 - __main__ - INFO - Luxembourg
+2024-01-08 12:05:29,132 - __main__ - INFO - Latvia
+2024-01-08 12:05:29,132 - __main__ - INFO - Morocco
+2024-01-08 12:05:29,133 - __main__ - INFO - Moldova
+2024-01-08 12:05:29,134 - __main__ - INFO - Madagascar
+2024-01-08 12:05:29,135 - __main__ - INFO - Mexico
+2024-01-08 12:05:29,135 - __main__ - INFO - Macedonia
+2024-01-08 12:05:29,136 - __main__ - INFO - Mali
+2024-01-08 12:05:29,137 - __main__ - INFO - Burma
+2024-01-08 12:05:29,137 - __main__ - INFO - Montenegro
+2024-01-08 12:05:29,138 - __main__ - INFO - Mongolia
+2024-01-08 12:05:29,138 - __main__ - INFO - Mozambique
+2024-01-08 12:05:29,139 - __main__ - INFO - Mauritania
+2024-01-08 12:05:29,139 - __main__ - INFO - Malawi
+2024-01-08 12:05:31,051 - __main__ - INFO - featuresIndex:110
+2024-01-08 12:05:34,558 - __main__ - INFO - Malaysia
+2024-01-08 12:05:38,366 - __main__ - INFO - featuresIndex:111
+2024-01-08 12:05:38,432 - __main__ - INFO - lat lng:0.7371586,109.6632601
+2024-01-08 12:05:43,128 - __main__ - INFO - 碧潭風景區 featuresIndex1:111 2024-01-08 12:05:43.128804
+2024-01-08 12:05:43,678 - __main__ - INFO - 大安森林公園(防災公園) featuresIndex1:111 2024-01-08 12:05:43.678546
+2024-01-08 12:05:43,946 - __main__ - INFO - 花之隧道 featuresIndex1:111 2024-01-08 12:05:43.946629
+2024-01-08 12:05:44,310 - __main__ - INFO - 合谷瀑布 featuresIndex1:111 2024-01-08 12:05:44.310298
+2024-01-08 12:05:44,617 - __main__ - INFO - 淡水老街廣場 featuresIndex1:111 2024-01-08 12:05:44.617830
+2024-01-08 12:05:44,896 - __main__ - INFO - 碧潭吊橋 featuresIndex1:111 2024-01-08 12:05:44.896910
+2024-01-08 12:05:45,169 - __main__ - INFO - 象山六巨石 featuresIndex1:111 2024-01-08 12:05:45.169069
+2024-01-08 12:05:45,451 - __main__ - INFO - 西本願寺鐘樓 featuresIndex1:111 2024-01-08 12:05:45.451477
+2024-01-08 12:05:45,750 - __main__ - INFO - 深坑老街 featuresIndex1:111 2024-01-08 12:05:45.750696
+2024-01-08 12:05:46,030 - __main__ - INFO - Rainbow Ximending featuresIndex1:111 2024-01-08 12:05:46.030440
+2024-01-08 12:05:46,309 - __main__ - INFO - Purple Butterfly Valley featuresIndex1:111 2024-01-08 12:05:46.309430
+2024-01-08 12:08:14,748 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:08:23,783 - __main__ - INFO - lat lng:0.7371586,109.681248
+2024-01-08 12:09:17,073 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:09:25,972 - __main__ - INFO - lat lng:0.7371586,109.7172238
+2024-01-08 12:09:42,802 - __main__ - INFO - Rumah Makan Mak Jaka featuresIndex1:111 2024-01-08 12:09:42.802397
+2024-01-08 12:09:43,109 - __main__ - INFO - Warung featuresIndex1:111 2024-01-08 12:09:43.109611
+2024-01-08 12:10:01,282 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:10:10,163 - __main__ - INFO - lat lng:0.7371586,109.7352117
+2024-01-08 12:10:40,697 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:10:49,561 - __main__ - INFO - lat lng:0.7371586,109.7711875
+2024-01-08 12:11:11,221 - __main__ - INFO - Silk Sweet絹絲谷｜乳酪蛋糕&巧克力 featuresIndex1:111 2024-01-08 12:11:11.220785
+2024-01-08 12:11:11,723 - __main__ - INFO - Mr.BROWNIE黑熊先生巧克力布朗尼 featuresIndex1:111 2024-01-08 12:11:11.723683
+2024-01-08 12:11:12,031 - __main__ - INFO - 哈根達斯 敦南旗艦店 featuresIndex1:111 2024-01-08 12:11:12.031720
+2024-01-08 12:11:12,302 - __main__ - INFO - Heritage BV featuresIndex1:111 2024-01-08 12:11:12.302873
+2024-01-08 12:11:12,606 - __main__ - INFO - 法國的秘密甜點 大安店 featuresIndex1:111 2024-01-08 12:11:12.606892
+2024-01-08 12:11:13,004 - __main__ - INFO - 哈根達斯 南西三越店 featuresIndex1:111 2024-01-08 12:11:13.004786
+2024-01-08 12:11:13,308 - __main__ - INFO - BAC Cake&Sweets 台北忠孝SOGO巧克力體驗店 featuresIndex1:111 2024-01-08 12:11:13.308971
+2024-01-08 12:11:19,581 - __main__ - INFO - 四獸山風景區 featuresIndex1:111 2024-01-08 12:11:19.581716
+2024-01-08 12:11:20,030 - __main__ - INFO - 坪頂古圳 featuresIndex1:111 2024-01-08 12:11:20.030743
+2024-01-08 12:11:20,290 - __main__ - INFO - 金山風景區 featuresIndex1:111 2024-01-08 12:11:20.290839
+2024-01-08 12:11:20,576 - __main__ - INFO - 豹山溪 featuresIndex1:111 2024-01-08 12:11:20.576036
+2024-01-08 12:11:20,847 - __main__ - INFO - Jiufen Scenery Lookout featuresIndex1:111 2024-01-08 12:11:20.847634
+2024-01-08 12:11:21,105 - __main__ - INFO - 虎山峰 featuresIndex1:111 2024-01-08 12:11:21.105740
+2024-01-08 12:11:21,110 - __main__ - INFO - seleniumCount:31.548139810562134
+2024-01-08 12:11:30,318 - __main__ - INFO - latlng:40.71564316749573
+2024-01-08 12:11:30,322 - __main__ - INFO - lat lng:0.7371586,109.7891754
+2024-01-08 12:12:00,842 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:12:09,796 - __main__ - INFO - lat lng:0.7371586,109.8251512
+2024-01-08 12:12:33,553 - __main__ - INFO - 甜盒子 S. Pâtisserie 精品咖啡 手沖咖啡 馬卡龍 可麗露 千層蛋糕 慕斯 閃電泡芙 生日蛋糕 約會下午茶 伴手禮 featuresIndex1:111 2024-01-08 12:12:33.553536
+2024-01-08 12:12:40,843 - __main__ - INFO - latlng:31.031256675720215
+2024-01-08 12:12:40,844 - __main__ - INFO - lat lng:0.7371586,109.879115
+2024-01-08 12:12:58,813 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:13:07,731 - __main__ - INFO - lat lng:0.7371586,109.9510667
+2024-01-08 12:13:16,208 - __main__ - INFO - AIR TERJUN BANANGGAR featuresIndex1:111 2024-01-08 12:13:16.208202
+2024-01-08 12:13:16,498 - __main__ - INFO - KLB GARDEN featuresIndex1:111 2024-01-08 12:13:16.498463
+2024-01-08 12:13:22,541 - __main__ - INFO - Yudee''s Bakso featuresIndex1:111 2024-01-08 12:13:22.541867
+2024-01-08 12:13:22,851 - __main__ - INFO - Kedai Pak Amir featuresIndex1:111 2024-01-08 12:13:22.851199
+2024-01-08 12:13:23,328 - __main__ - INFO - Kedai Makanan&Minuman Siska (Halal) featuresIndex1:111 2024-01-08 12:13:23.328415
+2024-01-08 12:16:03,775 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:16:11,615 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 12:16:11,616 - __main__ - INFO - Afghanistan
+2024-01-08 12:16:11,617 - __main__ - INFO - Angola
+2024-01-08 12:16:11,617 - __main__ - INFO - Albania
+2024-01-08 12:16:11,618 - __main__ - INFO - United Arab Emirates
+2024-01-08 12:16:11,618 - __main__ - INFO - Argentina
+2024-01-08 12:16:11,618 - __main__ - INFO - Armenia
+2024-01-08 12:16:11,618 - __main__ - INFO - None
+2024-01-08 12:16:11,618 - __main__ - INFO - Australia
+2024-01-08 12:16:11,619 - __main__ - INFO - Austria
+2024-01-08 12:16:11,619 - __main__ - INFO - Azerbaijan
+2024-01-08 12:16:11,619 - __main__ - INFO - Burundi
+2024-01-08 12:16:11,619 - __main__ - INFO - Belgium
+2024-01-08 12:16:11,619 - __main__ - INFO - Benin
+2024-01-08 12:16:11,620 - __main__ - INFO - Burkina Faso
+2024-01-08 12:16:11,620 - __main__ - INFO - Bangladesh
+2024-01-08 12:16:11,620 - __main__ - INFO - Bulgaria
+2024-01-08 12:16:11,620 - __main__ - INFO - Bahamas, The
+2024-01-08 12:16:11,621 - __main__ - INFO - Bosnia and Herzegovina
+2024-01-08 12:16:11,621 - __main__ - INFO - Belarus
+2024-01-08 12:16:11,621 - __main__ - INFO - Belize
+2024-01-08 12:16:11,621 - __main__ - INFO - Bolivia
+2024-01-08 12:16:11,621 - __main__ - INFO - Brazil
+2024-01-08 12:16:11,622 - __main__ - INFO - Brunei
+2024-01-08 12:16:11,622 - __main__ - INFO - Bhutan
+2024-01-08 12:16:11,622 - __main__ - INFO - Botswana
+2024-01-08 12:16:11,622 - __main__ - INFO - Central African Republic
+2024-01-08 12:16:11,623 - __main__ - INFO - Canada
+2024-01-08 12:16:11,623 - __main__ - INFO - Switzerland
+2024-01-08 12:16:11,623 - __main__ - INFO - Chile
+2024-01-08 12:16:11,624 - __main__ - INFO - China
+2024-01-08 12:16:11,624 - __main__ - INFO - Cote D'ivoire
+2024-01-08 12:16:11,624 - __main__ - INFO - Cameroon
+2024-01-08 12:16:11,625 - __main__ - INFO - Congo, Democratic Republic of the
+2024-01-08 12:16:11,625 - __main__ - INFO - Congo, Republic of the
+2024-01-08 12:16:11,626 - __main__ - INFO - Colombia
+2024-01-08 12:16:11,626 - __main__ - INFO - Costa Rica
+2024-01-08 12:16:11,626 - __main__ - INFO - Cuba
+2024-01-08 12:16:11,627 - __main__ - INFO - None
+2024-01-08 12:16:11,627 - __main__ - INFO - Cyprus
+2024-01-08 12:16:11,628 - __main__ - INFO - Czechia
+2024-01-08 12:16:11,628 - __main__ - INFO - Germany
+2024-01-08 12:16:11,629 - __main__ - INFO - Djibouti
+2024-01-08 12:16:11,629 - __main__ - INFO - Denmark
+2024-01-08 12:16:11,629 - __main__ - INFO - Dominican Republic
+2024-01-08 12:16:11,630 - __main__ - INFO - Algeria
+2024-01-08 12:16:11,630 - __main__ - INFO - Ecuador
+2024-01-08 12:16:11,631 - __main__ - INFO - Egypt
+2024-01-08 12:16:11,631 - __main__ - INFO - Eritrea
+2024-01-08 12:16:11,632 - __main__ - INFO - Spain
+2024-01-08 12:16:11,632 - __main__ - INFO - Estonia
+2024-01-08 12:16:11,632 - __main__ - INFO - Ethiopia
+2024-01-08 12:16:11,633 - __main__ - INFO - Finland
+2024-01-08 12:16:11,633 - __main__ - INFO - Fiji
+2024-01-08 12:16:11,634 - __main__ - INFO - Falkland Islands (Islas Malvinas)
+2024-01-08 12:16:11,635 - __main__ - INFO - France
+2024-01-08 12:16:11,636 - __main__ - INFO - Gabon
+2024-01-08 12:16:11,636 - __main__ - INFO - United Kingdom
+2024-01-08 12:16:11,637 - __main__ - INFO - Georgia
+2024-01-08 12:16:11,638 - __main__ - INFO - Ghana
+2024-01-08 12:16:11,638 - __main__ - INFO - Guinea
+2024-01-08 12:16:11,638 - __main__ - INFO - Gambia, The
+2024-01-08 12:16:11,639 - __main__ - INFO - Guinea-Bissau
+2024-01-08 12:16:11,639 - __main__ - INFO - Equatorial Guinea
+2024-01-08 12:16:11,640 - __main__ - INFO - Greece
+2024-01-08 12:16:11,640 - __main__ - INFO - Greenland
+2024-01-08 12:16:11,640 - __main__ - INFO - Guatemala
+2024-01-08 12:16:11,641 - __main__ - INFO - Guyana
+2024-01-08 12:16:11,641 - __main__ - INFO - Honduras
+2024-01-08 12:16:11,642 - __main__ - INFO - Croatia
+2024-01-08 12:16:11,642 - __main__ - INFO - Haiti
+2024-01-08 12:16:11,642 - __main__ - INFO - Hungary
+2024-01-08 12:16:11,643 - __main__ - INFO - Indonesia
+2024-01-08 12:16:11,643 - __main__ - INFO - India
+2024-01-08 12:16:11,644 - __main__ - INFO - Ireland
+2024-01-08 12:16:11,644 - __main__ - INFO - Iran
+2024-01-08 12:16:11,644 - __main__ - INFO - Iraq
+2024-01-08 12:16:11,645 - __main__ - INFO - Iceland
+2024-01-08 12:16:11,645 - __main__ - INFO - Israel
+2024-01-08 12:16:11,646 - __main__ - INFO - Italy
+2024-01-08 12:16:11,646 - __main__ - INFO - Jamaica
+2024-01-08 12:16:11,646 - __main__ - INFO - Jordan
+2024-01-08 12:16:11,647 - __main__ - INFO - Japan
+2024-01-08 12:16:11,647 - __main__ - INFO - Kazakhstan
+2024-01-08 12:16:11,647 - __main__ - INFO - Kenya
+2024-01-08 12:16:11,648 - __main__ - INFO - Kyrgyzstan
+2024-01-08 12:16:11,648 - __main__ - INFO - Cambodia
+2024-01-08 12:16:11,649 - __main__ - INFO - Korea, South
+2024-01-08 12:16:11,649 - __main__ - INFO - Kosovo
+2024-01-08 12:16:11,650 - __main__ - INFO - Kuwait
+2024-01-08 12:16:11,651 - __main__ - INFO - Laos
+2024-01-08 12:16:11,651 - __main__ - INFO - Lebanon
+2024-01-08 12:16:11,652 - __main__ - INFO - Liberia
+2024-01-08 12:16:11,652 - __main__ - INFO - Libya
+2024-01-08 12:16:11,652 - __main__ - INFO - Sri Lanka
+2024-01-08 12:16:11,653 - __main__ - INFO - Lesotho
+2024-01-08 12:16:11,653 - __main__ - INFO - Lithuania
+2024-01-08 12:16:11,654 - __main__ - INFO - Luxembourg
+2024-01-08 12:16:11,654 - __main__ - INFO - Latvia
+2024-01-08 12:16:11,654 - __main__ - INFO - Morocco
+2024-01-08 12:16:11,655 - __main__ - INFO - Moldova
+2024-01-08 12:16:11,655 - __main__ - INFO - Madagascar
+2024-01-08 12:16:11,656 - __main__ - INFO - Mexico
+2024-01-08 12:16:11,656 - __main__ - INFO - Macedonia
+2024-01-08 12:16:11,656 - __main__ - INFO - Mali
+2024-01-08 12:16:11,657 - __main__ - INFO - Burma
+2024-01-08 12:16:11,657 - __main__ - INFO - Montenegro
+2024-01-08 12:16:11,657 - __main__ - INFO - Mongolia
+2024-01-08 12:16:11,658 - __main__ - INFO - Mozambique
+2024-01-08 12:16:11,658 - __main__ - INFO - Mauritania
+2024-01-08 12:16:11,658 - __main__ - INFO - Malawi
+2024-01-08 12:16:13,538 - __main__ - INFO - featuresIndex:110
+2024-01-08 12:16:17,358 - __main__ - INFO - Malaysia
+2024-01-08 12:16:21,131 - __main__ - INFO - featuresIndex:111
+2024-01-08 12:16:21,205 - __main__ - INFO - lat lng:0.7371586,109.6632601
+2024-01-08 12:16:25,794 - __main__ - INFO - 碧潭風景區 featuresIndex1:111 2024-01-08 12:16:25.794907
+2024-01-08 12:16:26,615 - __main__ - INFO - 大安森林公園(防災公園) featuresIndex1:111 2024-01-08 12:16:26.615493
+2024-01-08 12:16:26,897 - __main__ - INFO - 花之隧道 featuresIndex1:111 2024-01-08 12:16:26.897294
+2024-01-08 12:16:27,212 - __main__ - INFO - 合谷瀑布 featuresIndex1:111 2024-01-08 12:16:27.212133
+2024-01-08 12:16:27,476 - __main__ - INFO - 淡水老街廣場 featuresIndex1:111 2024-01-08 12:16:27.476781
+2024-01-08 12:16:27,764 - __main__ - INFO - 碧潭吊橋 featuresIndex1:111 2024-01-08 12:16:27.764208
+2024-01-08 12:16:28,030 - __main__ - INFO - 象山六巨石 featuresIndex1:111 2024-01-08 12:16:28.030217
+2024-01-08 12:16:28,291 - __main__ - INFO - 西本願寺鐘樓 featuresIndex1:111 2024-01-08 12:16:28.291278
+2024-01-08 12:16:28,570 - __main__ - INFO - 深坑老街 featuresIndex1:111 2024-01-08 12:16:28.570896
+2024-01-08 12:16:28,847 - __main__ - INFO - Rainbow Ximending featuresIndex1:111 2024-01-08 12:16:28.847437
+2024-01-08 12:16:29,113 - __main__ - INFO - Purple Butterfly Valley featuresIndex1:111 2024-01-08 12:16:29.113440
+2024-01-08 12:17:28,574 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 12:17:37,577 - __main__ - INFO - lat lng:0.7371586,109.681248
+2024-01-08 12:17:58,484 - __main__ - ERROR - featuresIndex2:111
+2024-01-08 12:18:43,939 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 12:18:43,940 - __main__ - INFO - Afghanistan
+2024-01-08 12:18:43,940 - __main__ - INFO - Angola
+2024-01-08 12:18:43,941 - __main__ - INFO - Albania
+2024-01-08 12:18:43,941 - __main__ - INFO - United Arab Emirates
+2024-01-08 12:18:43,942 - __main__ - INFO - Argentina
+2024-01-08 12:18:43,942 - __main__ - INFO - Armenia
+2024-01-08 12:18:43,943 - __main__ - INFO - None
+2024-01-08 12:18:43,943 - __main__ - INFO - Australia
+2024-01-08 12:18:43,943 - __main__ - INFO - Austria
+2024-01-08 12:18:43,944 - __main__ - INFO - Azerbaijan
+2024-01-08 12:18:43,944 - __main__ - INFO - Burundi
+2024-01-08 12:18:43,944 - __main__ - INFO - Belgium
+2024-01-08 12:18:43,945 - __main__ - INFO - Benin
+2024-01-08 12:18:43,945 - __main__ - INFO - Burkina Faso
+2024-01-08 12:18:43,946 - __main__ - INFO - Bangladesh
+2024-01-08 12:18:43,946 - __main__ - INFO - Bulgaria
+2024-01-08 12:18:43,946 - __main__ - INFO - Bahamas, The
+2024-01-08 12:18:43,947 - __main__ - INFO - Bosnia and Herzegovina
+2024-01-08 12:18:43,947 - __main__ - INFO - Belarus
+2024-01-08 12:18:43,947 - __main__ - INFO - Belize
+2024-01-08 12:18:43,948 - __main__ - INFO - Bolivia
+2024-01-08 12:18:43,948 - __main__ - INFO - Brazil
+2024-01-08 12:18:43,949 - __main__ - INFO - Brunei
+2024-01-08 12:18:43,949 - __main__ - INFO - Bhutan
+2024-01-08 12:18:43,950 - __main__ - INFO - Botswana
+2024-01-08 12:18:43,950 - __main__ - INFO - Central African Republic
+2024-01-08 12:18:43,950 - __main__ - INFO - Canada
+2024-01-08 12:18:43,951 - __main__ - INFO - Switzerland
+2024-01-08 12:18:43,951 - __main__ - INFO - Chile
+2024-01-08 12:18:43,952 - __main__ - INFO - China
+2024-01-08 12:18:43,952 - __main__ - INFO - Cote D'ivoire
+2024-01-08 12:18:43,953 - __main__ - INFO - Cameroon
+2024-01-08 12:18:43,953 - __main__ - INFO - Congo, Democratic Republic of the
+2024-01-08 12:18:43,954 - __main__ - INFO - Congo, Republic of the
+2024-01-08 12:18:43,954 - __main__ - INFO - Colombia
+2024-01-08 12:18:43,954 - __main__ - INFO - Costa Rica
+2024-01-08 12:18:43,955 - __main__ - INFO - Cuba
+2024-01-08 12:18:43,955 - __main__ - INFO - None
+2024-01-08 12:18:43,956 - __main__ - INFO - Cyprus
+2024-01-08 12:18:43,956 - __main__ - INFO - Czechia
+2024-01-08 12:18:43,956 - __main__ - INFO - Germany
+2024-01-08 12:18:43,957 - __main__ - INFO - Djibouti
+2024-01-08 12:18:43,957 - __main__ - INFO - Denmark
+2024-01-08 12:18:43,958 - __main__ - INFO - Dominican Republic
+2024-01-08 12:18:43,958 - __main__ - INFO - Algeria
+2024-01-08 12:18:43,959 - __main__ - INFO - Ecuador
+2024-01-08 12:18:43,959 - __main__ - INFO - Egypt
+2024-01-08 12:18:43,959 - __main__ - INFO - Eritrea
+2024-01-08 12:18:43,960 - __main__ - INFO - Spain
+2024-01-08 12:18:43,960 - __main__ - INFO - Estonia
+2024-01-08 12:18:43,961 - __main__ - INFO - Ethiopia
+2024-01-08 12:18:43,961 - __main__ - INFO - Finland
+2024-01-08 12:18:43,962 - __main__ - INFO - Fiji
+2024-01-08 12:18:43,962 - __main__ - INFO - Falkland Islands (Islas Malvinas)
+2024-01-08 12:18:43,962 - __main__ - INFO - France
+2024-01-08 12:18:43,962 - __main__ - INFO - Gabon
+2024-01-08 12:18:43,963 - __main__ - INFO - United Kingdom
+2024-01-08 12:18:43,963 - __main__ - INFO - Georgia
+2024-01-08 12:18:43,963 - __main__ - INFO - Ghana
+2024-01-08 12:18:43,964 - __main__ - INFO - Guinea
+2024-01-08 12:18:43,964 - __main__ - INFO - Gambia, The
+2024-01-08 12:18:43,964 - __main__ - INFO - Guinea-Bissau
+2024-01-08 12:18:43,965 - __main__ - INFO - Equatorial Guinea
+2024-01-08 12:18:43,965 - __main__ - INFO - Greece
+2024-01-08 12:18:43,966 - __main__ - INFO - Greenland
+2024-01-08 12:18:43,967 - __main__ - INFO - Guatemala
+2024-01-08 12:18:43,967 - __main__ - INFO - Guyana
+2024-01-08 12:18:43,967 - __main__ - INFO - Honduras
+2024-01-08 12:18:43,968 - __main__ - INFO - Croatia
+2024-01-08 12:18:43,968 - __main__ - INFO - Haiti
+2024-01-08 12:18:43,969 - __main__ - INFO - Hungary
+2024-01-08 12:18:43,969 - __main__ - INFO - Indonesia
+2024-01-08 12:18:43,969 - __main__ - INFO - India
+2024-01-08 12:18:43,970 - __main__ - INFO - Ireland
+2024-01-08 12:18:43,970 - __main__ - INFO - Iran
+2024-01-08 12:18:43,971 - __main__ - INFO - Iraq
+2024-01-08 12:18:43,971 - __main__ - INFO - Iceland
+2024-01-08 12:18:43,972 - __main__ - INFO - Israel
+2024-01-08 12:18:43,972 - __main__ - INFO - Italy
+2024-01-08 12:18:43,973 - __main__ - INFO - Jamaica
+2024-01-08 12:18:43,973 - __main__ - INFO - Jordan
+2024-01-08 12:18:43,973 - __main__ - INFO - Japan
+2024-01-08 12:18:43,974 - __main__ - INFO - Kazakhstan
+2024-01-08 12:18:43,974 - __main__ - INFO - Kenya
+2024-01-08 12:18:43,974 - __main__ - INFO - Kyrgyzstan
+2024-01-08 12:18:43,975 - __main__ - INFO - Cambodia
+2024-01-08 12:18:43,975 - __main__ - INFO - Korea, South
+2024-01-08 12:18:43,976 - __main__ - INFO - Kosovo
+2024-01-08 12:18:43,976 - __main__ - INFO - Kuwait
+2024-01-08 12:18:43,977 - __main__ - INFO - Laos
+2024-01-08 12:18:43,977 - __main__ - INFO - Lebanon
+2024-01-08 12:18:43,977 - __main__ - INFO - Liberia
+2024-01-08 12:18:43,978 - __main__ - INFO - Libya
+2024-01-08 12:18:43,978 - __main__ - INFO - Sri Lanka
+2024-01-08 12:18:43,978 - __main__ - INFO - Lesotho
+2024-01-08 12:18:43,979 - __main__ - INFO - Lithuania
+2024-01-08 12:18:43,979 - __main__ - INFO - Luxembourg
+2024-01-08 12:18:43,979 - __main__ - INFO - Latvia
+2024-01-08 12:18:43,980 - __main__ - INFO - Morocco
+2024-01-08 12:18:43,980 - __main__ - INFO - Moldova
+2024-01-08 12:18:43,981 - __main__ - INFO - Madagascar
+2024-01-08 12:18:43,981 - __main__ - INFO - Mexico
+2024-01-08 12:18:43,982 - __main__ - INFO - Macedonia
+2024-01-08 12:18:43,982 - __main__ - INFO - Mali
+2024-01-08 12:18:43,983 - __main__ - INFO - Burma
+2024-01-08 12:18:43,983 - __main__ - INFO - Montenegro
+2024-01-08 12:18:43,984 - __main__ - INFO - Mongolia
+2024-01-08 12:18:43,984 - __main__ - INFO - Mozambique
+2024-01-08 12:18:43,984 - __main__ - INFO - Mauritania
+2024-01-08 12:18:43,985 - __main__ - INFO - Malawi
+2024-01-08 12:18:45,659 - __main__ - INFO - featuresIndex:110
+2024-01-08 12:18:48,944 - __main__ - INFO - Malaysia
+2024-01-08 12:18:52,703 - __main__ - INFO - featuresIndex:111
+2024-01-08 12:18:52,763 - __main__ - INFO - lat lng:0.7371586,109.6632601
+2024-01-08 12:18:57,166 - __main__ - INFO - 碧潭風景區 featuresIndex1:111 2024-01-08 12:18:57.166362
+2024-01-08 12:18:57,532 - __main__ - INFO - 大安森林公園(防災公園) featuresIndex1:111 2024-01-08 12:18:57.532877
+2024-01-08 12:18:57,817 - __main__ - INFO - 花之隧道 featuresIndex1:111 2024-01-08 12:18:57.816417
+2024-01-08 12:18:58,088 - __main__ - INFO - 合谷瀑布 featuresIndex1:111 2024-01-08 12:18:58.088057
+2024-01-08 12:18:58,390 - __main__ - INFO - 淡水老街廣場 featuresIndex1:111 2024-01-08 12:18:58.390575
+2024-01-08 12:18:58,681 - __main__ - INFO - 碧潭吊橋 featuresIndex1:111 2024-01-08 12:18:58.681515
+2024-01-08 12:18:58,968 - __main__ - INFO - 象山六巨石 featuresIndex1:111 2024-01-08 12:18:58.968175
+2024-01-08 12:18:59,246 - __main__ - INFO - 西本願寺鐘樓 featuresIndex1:111 2024-01-08 12:18:59.246734
+2024-01-08 12:18:59,531 - __main__ - INFO - 深坑老街 featuresIndex1:111 2024-01-08 12:18:59.531584
+2024-01-08 12:18:59,803 - __main__ - INFO - Rainbow Ximending featuresIndex1:111 2024-01-08 12:18:59.803674
+2024-01-08 12:19:00,075 - __main__ - INFO - Purple Butterfly Valley featuresIndex1:111 2024-01-08 12:19:00.075437
+2024-01-08 12:19:37,428 - __main__ - ERROR - featuresIndex1:111
+2024-01-08 12:19:54,627 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 12:19:54,628 - __main__ - INFO - Afghanistan
+2024-01-08 12:19:54,629 - __main__ - INFO - Angola
+2024-01-08 12:19:54,629 - __main__ - INFO - Albania
+2024-01-08 12:19:54,630 - __main__ - INFO - United Arab Emirates
+2024-01-08 12:19:54,630 - __main__ - INFO - Argentina
+2024-01-08 12:19:54,631 - __main__ - INFO - Armenia
+2024-01-08 12:19:54,631 - __main__ - INFO - None
+2024-01-08 12:19:54,632 - __main__ - INFO - Australia
+2024-01-08 12:19:54,632 - __main__ - INFO - Austria
+2024-01-08 12:19:54,632 - __main__ - INFO - Azerbaijan
+2024-01-08 12:19:54,632 - __main__ - INFO - Burundi
+2024-01-08 12:19:54,633 - __main__ - INFO - Belgium
+2024-01-08 12:19:54,633 - __main__ - INFO - Benin
+2024-01-08 12:19:54,633 - __main__ - INFO - Burkina Faso
+2024-01-08 12:19:54,634 - __main__ - INFO - Bangladesh
+2024-01-08 12:19:54,634 - __main__ - INFO - Bulgaria
+2024-01-08 12:19:54,635 - __main__ - INFO - Bahamas, The
+2024-01-08 12:19:54,635 - __main__ - INFO - Bosnia and Herzegovina
+2024-01-08 12:19:54,635 - __main__ - INFO - Belarus
+2024-01-08 12:19:54,636 - __main__ - INFO - Belize
+2024-01-08 12:19:54,636 - __main__ - INFO - Bolivia
+2024-01-08 12:19:54,637 - __main__ - INFO - Brazil
+2024-01-08 12:19:54,637 - __main__ - INFO - Brunei
+2024-01-08 12:19:54,638 - __main__ - INFO - Bhutan
+2024-01-08 12:19:54,638 - __main__ - INFO - Botswana
+2024-01-08 12:19:54,639 - __main__ - INFO - Central African Republic
+2024-01-08 12:19:54,639 - __main__ - INFO - Canada
+2024-01-08 12:19:54,639 - __main__ - INFO - Switzerland
+2024-01-08 12:19:54,640 - __main__ - INFO - Chile
+2024-01-08 12:19:54,640 - __main__ - INFO - China
+2024-01-08 12:19:54,641 - __main__ - INFO - Cote D'ivoire
+2024-01-08 12:19:54,641 - __main__ - INFO - Cameroon
+2024-01-08 12:19:54,642 - __main__ - INFO - Congo, Democratic Republic of the
+2024-01-08 12:19:54,643 - __main__ - INFO - Congo, Republic of the
+2024-01-08 12:19:54,643 - __main__ - INFO - Colombia
+2024-01-08 12:19:54,643 - __main__ - INFO - Costa Rica
+2024-01-08 12:19:54,644 - __main__ - INFO - Cuba
+2024-01-08 12:19:54,644 - __main__ - INFO - None
+2024-01-08 12:19:54,645 - __main__ - INFO - Cyprus
+2024-01-08 12:19:54,645 - __main__ - INFO - Czechia
+2024-01-08 12:19:54,646 - __main__ - INFO - Germany
+2024-01-08 12:19:54,646 - __main__ - INFO - Djibouti
+2024-01-08 12:19:54,647 - __main__ - INFO - Denmark
+2024-01-08 12:19:54,647 - __main__ - INFO - Dominican Republic
+2024-01-08 12:19:54,648 - __main__ - INFO - Algeria
+2024-01-08 12:19:54,648 - __main__ - INFO - Ecuador
+2024-01-08 12:19:54,649 - __main__ - INFO - Egypt
+2024-01-08 12:19:54,649 - __main__ - INFO - Eritrea
+2024-01-08 12:19:54,649 - __main__ - INFO - Spain
+2024-01-08 12:19:54,650 - __main__ - INFO - Estonia
+2024-01-08 12:19:54,650 - __main__ - INFO - Ethiopia
+2024-01-08 12:19:54,650 - __main__ - INFO - Finland
+2024-01-08 12:19:54,651 - __main__ - INFO - Fiji
+2024-01-08 12:19:54,651 - __main__ - INFO - Falkland Islands (Islas Malvinas)
+2024-01-08 12:19:54,652 - __main__ - INFO - France
+2024-01-08 12:19:54,652 - __main__ - INFO - Gabon
+2024-01-08 12:19:54,653 - __main__ - INFO - United Kingdom
+2024-01-08 12:19:54,653 - __main__ - INFO - Georgia
+2024-01-08 12:19:54,654 - __main__ - INFO - Ghana
+2024-01-08 12:19:54,654 - __main__ - INFO - Guinea
+2024-01-08 12:19:54,655 - __main__ - INFO - Gambia, The
+2024-01-08 12:19:54,655 - __main__ - INFO - Guinea-Bissau
+2024-01-08 12:19:54,656 - __main__ - INFO - Equatorial Guinea
+2024-01-08 12:19:54,656 - __main__ - INFO - Greece
+2024-01-08 12:19:54,656 - __main__ - INFO - Greenland
+2024-01-08 12:19:54,657 - __main__ - INFO - Guatemala
+2024-01-08 12:19:54,657 - __main__ - INFO - Guyana
+2024-01-08 12:19:54,657 - __main__ - INFO - Honduras
+2024-01-08 12:19:54,658 - __main__ - INFO - Croatia
+2024-01-08 12:19:54,659 - __main__ - INFO - Haiti
+2024-01-08 12:19:54,660 - __main__ - INFO - Hungary
+2024-01-08 12:19:54,660 - __main__ - INFO - Indonesia
+2024-01-08 12:19:54,661 - __main__ - INFO - India
+2024-01-08 12:19:54,661 - __main__ - INFO - Ireland
+2024-01-08 12:19:54,662 - __main__ - INFO - Iran
+2024-01-08 12:19:54,662 - __main__ - INFO - Iraq
+2024-01-08 12:19:54,663 - __main__ - INFO - Iceland
+2024-01-08 12:19:54,663 - __main__ - INFO - Israel
+2024-01-08 12:19:54,664 - __main__ - INFO - Italy
+2024-01-08 12:19:54,664 - __main__ - INFO - Jamaica
+2024-01-08 12:19:54,664 - __main__ - INFO - Jordan
+2024-01-08 12:19:54,665 - __main__ - INFO - Japan
+2024-01-08 12:19:54,665 - __main__ - INFO - Kazakhstan
+2024-01-08 12:19:54,666 - __main__ - INFO - Kenya
+2024-01-08 12:19:54,666 - __main__ - INFO - Kyrgyzstan
+2024-01-08 12:19:54,667 - __main__ - INFO - Cambodia
+2024-01-08 12:19:54,667 - __main__ - INFO - Korea, South
+2024-01-08 12:19:54,668 - __main__ - INFO - Kosovo
+2024-01-08 12:19:54,668 - __main__ - INFO - Kuwait
+2024-01-08 12:19:54,669 - __main__ - INFO - Laos
+2024-01-08 12:19:54,669 - __main__ - INFO - Lebanon
+2024-01-08 12:19:54,669 - __main__ - INFO - Liberia
+2024-01-08 12:19:54,670 - __main__ - INFO - Libya
+2024-01-08 12:19:54,670 - __main__ - INFO - Sri Lanka
+2024-01-08 12:19:54,671 - __main__ - INFO - Lesotho
+2024-01-08 12:19:54,672 - __main__ - INFO - Lithuania
+2024-01-08 12:19:54,672 - __main__ - INFO - Luxembourg
+2024-01-08 12:19:54,673 - __main__ - INFO - Latvia
+2024-01-08 12:19:54,673 - __main__ - INFO - Morocco
+2024-01-08 12:19:54,674 - __main__ - INFO - Moldova
+2024-01-08 12:19:54,674 - __main__ - INFO - Madagascar
+2024-01-08 12:19:54,674 - __main__ - INFO - Mexico
+2024-01-08 12:19:54,675 - __main__ - INFO - Macedonia
+2024-01-08 12:19:54,676 - __main__ - INFO - Mali
+2024-01-08 12:19:54,676 - __main__ - INFO - Burma
+2024-01-08 12:19:54,677 - __main__ - INFO - Montenegro
+2024-01-08 12:19:54,677 - __main__ - INFO - Mongolia
+2024-01-08 12:19:54,678 - __main__ - INFO - Mozambique
+2024-01-08 12:19:54,678 - __main__ - INFO - Mauritania
+2024-01-08 12:19:54,678 - __main__ - INFO - Malawi
+2024-01-08 12:19:56,539 - __main__ - INFO - featuresIndex:110
+2024-01-08 12:19:59,833 - __main__ - INFO - Malaysia
+2024-01-08 12:20:03,687 - __main__ - INFO - featuresIndex:111
+2024-01-08 12:20:03,768 - __main__ - INFO - lat lng:0.7371586,109.6632601
+2024-01-08 12:20:08,436 - __main__ - INFO - 碧潭風景區 featuresIndex1:111 2024-01-08 12:20:08.436130
+2024-01-08 12:20:08,808 - __main__ - INFO - 大安森林公園(防災公園) featuresIndex1:111 2024-01-08 12:20:08.808960
+2024-01-08 12:20:09,094 - __main__ - INFO - 花之隧道 featuresIndex1:111 2024-01-08 12:20:09.094658
+2024-01-08 12:20:09,514 - __main__ - INFO - 合谷瀑布 featuresIndex1:111 2024-01-08 12:20:09.514862
+2024-01-08 12:20:09,801 - __main__ - INFO - 淡水老街廣場 featuresIndex1:111 2024-01-08 12:20:09.801373
+2024-01-08 12:20:10,071 - __main__ - INFO - 碧潭吊橋 featuresIndex1:111 2024-01-08 12:20:10.071275
+2024-01-08 12:20:10,333 - __main__ - INFO - 象山六巨石 featuresIndex1:111 2024-01-08 12:20:10.333573
+2024-01-08 12:20:10,642 - __main__ - INFO - 西本願寺鐘樓 featuresIndex1:111 2024-01-08 12:20:10.642456
+2024-01-08 12:20:11,008 - __main__ - INFO - 深坑老街 featuresIndex1:111 2024-01-08 12:20:11.008477
+2024-01-08 12:20:11,291 - __main__ - INFO - Rainbow Ximending featuresIndex1:111 2024-01-08 12:20:11.291456
+2024-01-08 12:20:11,570 - __main__ - INFO - Purple Butterfly Valley featuresIndex1:111 2024-01-08 12:20:11.570063
+2024-01-08 12:20:23,183 - __main__ - INFO - the Diner 樂子信義旗艦店 featuresIndex1:111 2024-01-08 12:20:23.183959
+2024-01-08 12:20:36,219 - __main__ - INFO - 四獸山風景區 featuresIndex1:111 2024-01-08 12:20:36.219630
+2024-01-08 12:20:36,685 - __main__ - INFO - 坪頂古圳 featuresIndex1:111 2024-01-08 12:20:36.685088
+2024-01-08 12:20:36,967 - __main__ - INFO - 金山風景區 featuresIndex1:111 2024-01-08 12:20:36.967402
+2024-01-08 12:20:37,286 - __main__ - INFO - 豹山溪 featuresIndex1:111 2024-01-08 12:20:37.286248
+2024-01-08 12:20:37,563 - __main__ - INFO - Jiufen Scenery Lookout featuresIndex1:111 2024-01-08 12:20:37.563485
+2024-01-08 12:20:37,835 - __main__ - INFO - 虎山峰 featuresIndex1:111 2024-01-08 12:20:37.835632
+2024-01-08 12:20:37,842 - __main__ - INFO - seleniumCount:34.07453441619873
+2024-01-08 12:20:46,889 - __main__ - INFO - latlng:43.087008476257324
+2024-01-08 12:20:46,890 - __main__ - INFO - lat lng:0.7371586,109.681248
+2024-01-08 12:21:16,952 - __main__ - INFO - latlng:30.045186758041382
+2024-01-08 12:21:16,953 - __main__ - INFO - lat lng:0.7371586,109.7172238
+2024-01-08 12:21:29,136 - __main__ - INFO - Rumah Makan Mak Jaka featuresIndex1:111 2024-01-08 12:21:29.136513
+2024-01-08 12:21:29,410 - __main__ - INFO - Warung featuresIndex1:111 2024-01-08 12:21:29.410153
+2024-01-08 12:21:42,811 - __main__ - INFO - latlng:25.84001922607422
+2024-01-08 12:21:42,811 - __main__ - INFO - lat lng:0.7371586,109.7352117
+2024-01-08 12:22:03,636 - __main__ - INFO - Silk Sweet絹絲谷｜乳酪蛋糕&巧克力 featuresIndex1:111 2024-01-08 12:22:03.636470
+2024-01-08 12:22:03,940 - __main__ - INFO - Mr.BROWNIE黑熊先生巧克力布朗尼 featuresIndex1:111 2024-01-08 12:22:03.940623
+2024-01-08 12:22:04,265 - __main__ - INFO - 哈根達斯 敦南旗艦店 featuresIndex1:111 2024-01-08 12:22:04.265029
+2024-01-08 12:22:04,545 - __main__ - INFO - Heritage BV featuresIndex1:111 2024-01-08 12:22:04.545242
+2024-01-08 12:22:04,845 - __main__ - INFO - 法國的秘密甜點 大安店 featuresIndex1:111 2024-01-08 12:22:04.845360
+2024-01-08 12:22:05,132 - __main__ - INFO - 哈根達斯 南西三越店 featuresIndex1:111 2024-01-08 12:22:05.132477
+2024-01-08 12:22:05,426 - __main__ - INFO - BAC Cake&Sweets 台北忠孝SOGO巧克力體驗店 featuresIndex1:111 2024-01-08 12:22:05.426234
+2024-01-08 12:22:12,773 - __main__ - INFO - latlng:29.935877323150635
+2024-01-08 12:22:12,773 - __main__ - INFO - lat lng:0.7371586,109.7531996
+2024-01-08 12:22:43,019 - __main__ - INFO - latlng:30.22523593902588
+2024-01-08 12:22:43,020 - __main__ - INFO - lat lng:0.7371586,109.7891754
+2024-01-08 12:23:08,511 - __main__ - INFO - latlng:25.47416377067566
+2024-01-08 12:23:08,511 - __main__ - INFO - lat lng:0.7371586,109.8431392
+2024-01-08 12:23:21,055 - __main__ - INFO - Kedai Pak Amir featuresIndex1:111 2024-01-08 12:23:21.054598
+2024-01-08 12:23:29,361 - __main__ - INFO - WK TOMI featuresIndex1:111 2024-01-08 12:23:29.361878
+2024-01-08 12:23:35,138 - __main__ - INFO - latlng:26.602646589279175
+2024-01-08 12:23:35,139 - __main__ - INFO - lat lng:0.7371586,109.8611271
+2024-01-08 12:24:07,429 - __main__ - INFO - latlng:32.27183485031128
+2024-01-08 12:24:07,429 - __main__ - INFO - lat lng:0.7371586,109.8971029
+2024-01-08 12:24:29,320 - __main__ - INFO - 甜盒子 S. Pâtisserie 精品咖啡 手沖咖啡 馬卡龍 可麗露 千層蛋糕 慕斯 閃電泡芙 生日蛋糕 約會下午茶 伴手禮 featuresIndex1:111 2024-01-08 12:24:29.320897
+2024-01-08 12:24:38,289 - __main__ - INFO - latlng:30.840901374816895
+2024-01-08 12:24:38,290 - __main__ - INFO - lat lng:0.7371586,109.9510667
+2024-01-08 12:24:45,282 - __main__ - INFO - AIR TERJUN BANANGGAR featuresIndex1:111 2024-01-08 12:24:45.281420
+2024-01-08 12:24:45,568 - __main__ - INFO - KLB GARDEN featuresIndex1:111 2024-01-08 12:24:45.568653
+2024-01-08 12:24:51,169 - __main__ - INFO - Yudee''s Bakso featuresIndex1:111 2024-01-08 12:24:51.169013
+2024-01-08 12:24:51,766 - __main__ - INFO - Kedai Makanan&Minuman Siska (Halal) featuresIndex1:111 2024-01-08 12:24:51.766412
+2024-01-08 12:25:06,609 - __main__ - INFO - latlng:28.301477193832397
+2024-01-08 12:25:06,610 - __main__ - INFO - lat lng:0.7371586,109.9690546
+2024-01-08 12:25:38,256 - __main__ - INFO - latlng:31.628647804260254
+2024-01-08 12:25:38,256 - __main__ - INFO - lat lng:0.7371586,110.0050304
+2024-01-08 12:26:03,893 - __main__ - INFO - latlng:25.620460033416748
+2024-01-08 12:26:03,894 - __main__ - INFO - lat lng:0.7371586,110.0589942
+2024-01-08 12:26:09,584 - __main__ - INFO - Air Terjun Riam Dait featuresIndex1:111 2024-01-08 12:26:09.584625
+2024-01-08 12:26:19,844 - __main__ - INFO - 港鑫-港式茶餐廳 featuresIndex1:111 2024-01-08 12:26:19.844477
+2024-01-08 12:26:33,517 - __main__ - INFO - 三峽鳶山風景區 featuresIndex1:111 2024-01-08 12:26:33.517643
+2024-01-08 12:26:33,539 - __main__ - INFO - latlng:29.62821626663208
+2024-01-08 12:26:33,540 - __main__ - INFO - lat lng:0.7371586,110.0769821
+2024-01-08 12:27:07,092 - __main__ - INFO - latlng:33.53490114212036
+2024-01-08 12:27:07,093 - __main__ - INFO - lat lng:0.7371586,110.1129579
+2024-01-08 12:27:18,600 - __main__ - INFO - Warung Mak Kembar featuresIndex1:111 2024-01-08 12:27:18.600599
+2024-01-08 12:27:18,900 - __main__ - INFO - Rumah Kekeh featuresIndex1:111 2024-01-08 12:27:18.900020
+2024-01-08 12:27:19,206 - __main__ - INFO - Bakso Ibu Lili featuresIndex1:111 2024-01-08 12:27:19.206194
+2024-01-08 12:27:32,448 - __main__ - INFO - latlng:25.33971858024597
+2024-01-08 12:27:32,448 - __main__ - INFO - lat lng:0.7371586,110.1309458
+2024-01-08 12:27:59,557 - __main__ - INFO - latlng:27.093193531036377
+2024-01-08 12:27:59,557 - __main__ - INFO - lat lng:0.7371586,110.1669216
+2024-01-08 12:28:25,912 - __main__ - INFO - latlng:26.334859371185303
+2024-01-08 12:28:25,912 - __main__ - INFO - lat lng:0.7371586,110.2208854
+2024-01-08 12:28:38,594 - __main__ - INFO - Rm. Ranah Minang featuresIndex1:111 2024-01-08 12:28:38.594348
+2024-01-08 12:28:44,741 - __main__ - INFO - Jual voucher axis dan kue ulang tahun featuresIndex1:111 2024-01-08 12:28:44.741508
+2024-01-08 12:28:45,005 - __main__ - INFO - Hulla Dessert featuresIndex1:111 2024-01-08 12:28:45.005892
+2024-01-08 12:28:45,285 - __main__ - INFO - Yuli''s Bakery featuresIndex1:111 2024-01-08 12:28:45.285484
+2024-01-08 12:28:52,219 - __main__ - INFO - latlng:26.291463136672974
+2024-01-08 12:28:52,220 - __main__ - INFO - lat lng:0.7371586,110.2388733
+2024-01-08 12:29:22,000 - __main__ - INFO - latlng:29.76207208633423
+2024-01-08 12:29:22,000 - __main__ - INFO - lat lng:0.7371586,110.2748491
+2024-01-08 12:29:53,081 - __main__ - INFO - latlng:31.065458059310913
+2024-01-08 12:29:53,081 - __main__ - INFO - lat lng:0.7371586,110.3288129
+2024-01-08 12:30:01,335 - __main__ - INFO - Kampung Mongkos featuresIndex1:111 2024-01-08 12:30:01.335567
+2024-01-08 12:30:01,635 - __main__ - INFO - entangant umbuh featuresIndex1:111 2024-01-08 12:30:01.634649
+2024-01-08 12:30:02,068 - __main__ - INFO - kampung daha kisau featuresIndex1:111 2024-01-08 12:30:02.068658
+2024-01-08 12:30:08,318 - __main__ - INFO - Rumah Makan Selera Sekayam (Chinese Food) featuresIndex1:111 2024-01-08 12:30:08.318563
+2024-01-08 12:30:08,612 - __main__ - INFO - King''s Seafood featuresIndex1:111 2024-01-08 12:30:08.612576
+2024-01-08 12:30:08,882 - __main__ - INFO - CHAP CHAI MASAKAN TOTO SINGKAWANG featuresIndex1:111 2024-01-08 12:30:08.882352
+2024-01-08 12:30:09,153 - __main__ - INFO - Rm Rendang Padang Ayam Kampung featuresIndex1:111 2024-01-08 12:30:09.153263
+2024-01-08 12:30:09,454 - __main__ - INFO - Kedai Coffee WAWA featuresIndex1:111 2024-01-08 12:30:09.454102
+2024-01-08 12:30:09,773 - __main__ - INFO - Cahaya Minang Rumah Makan featuresIndex1:111 2024-01-08 12:30:09.773180
+2024-01-08 12:30:15,755 - __main__ - INFO - Manna Bakery TC featuresIndex1:111 2024-01-08 12:30:15.755074
+2024-01-08 12:30:23,503 - __main__ - INFO - latlng:30.40211820602417
+2024-01-08 12:30:23,503 - __main__ - INFO - lat lng:0.7371586,110.3468008
+2024-01-08 12:30:35,995 - __main__ - INFO - Rumah Makan Sido Mampir featuresIndex1:111 2024-01-08 12:30:35.995157
+2024-01-08 12:30:42,270 - __main__ - INFO - That Dessert 那個甜品 featuresIndex1:111 2024-01-08 12:30:42.270676
+2024-01-08 12:30:49,291 - __main__ - INFO - latlng:25.77192759513855
+2024-01-08 12:30:49,291 - __main__ - INFO - lat lng:0.7371586,110.3647887
+2024-01-08 12:31:03,274 - __main__ - INFO - Warung Makan Lastri featuresIndex1:111 2024-01-08 12:31:03.274523
+2024-01-08 12:31:18,869 - __main__ - INFO - latlng:29.55793261528015
+2024-01-08 12:31:18,870 - __main__ - INFO - lat lng:0.7371586,110.4007645
+2024-01-08 12:31:40,985 - __main__ - INFO - es Kelapa Champions featuresIndex1:111 2024-01-08 12:31:40.985618
+2024-01-08 12:31:47,173 - __main__ - INFO - latlng:28.28556728363037
+2024-01-08 12:31:47,174 - __main__ - INFO - lat lng:0.7371586,110.4547283
+2024-01-08 12:31:52,661 - __main__ - INFO - Entangant sesah featuresIndex1:111 2024-01-08 12:31:52.661265
+2024-01-08 12:31:53,112 - __main__ - INFO - batu kapal featuresIndex1:111 2024-01-08 12:31:53.112742
+2024-01-08 12:32:13,489 - __main__ - INFO - latlng:26.298728942871094
+2024-01-08 12:32:13,489 - __main__ - INFO - lat lng:0.7371586,110.4727162
+2024-01-08 12:32:42,098 - __main__ - INFO - latlng:28.590611934661865
+2024-01-08 12:32:42,098 - __main__ - INFO - lat lng:0.7371586,110.508692
+2024-01-08 12:32:56,865 - __main__ - INFO - Bakso Mang Asep Noyan featuresIndex1:111 2024-01-08 12:32:56.865359
+2024-01-08 12:32:57,162 - __main__ - INFO - Warung Bakso & Mieyam MM noyan featuresIndex1:111 2024-01-08 12:32:57.162842
+2024-01-08 12:32:57,517 - __main__ - INFO - SS Fried Chicken Balai Karangan featuresIndex1:111 2024-01-08 12:32:57.517180
+2024-01-08 12:33:10,552 - __main__ - INFO - seleniumCount:28.45481562614441
+2024-01-08 12:33:21,040 - __main__ - INFO - latlng:38.91984510421753
+2024-01-08 12:33:21,041 - __main__ - INFO - lat lng:0.7371586,110.5266799
+2024-01-08 12:33:54,571 - __main__ - INFO - latlng:33.5132896900177
+2024-01-08 12:33:54,571 - __main__ - INFO - lat lng:0.7371586,110.5626557
+2024-01-08 12:34:01,969 - __main__ - INFO - The fluffy shadow featuresIndex1:111 2024-01-08 12:34:01.969152
+2024-01-08 12:34:03,492 - __main__ - INFO - TourMeAway featuresIndex1:111 2024-01-08 12:34:03.491648
+2024-01-08 12:34:15,595 - __main__ - INFO - Eat enjoy 意享美式廚房新店店 過年聚餐 外帶美食 外送美食 新店美食 千層蛋糕 美式餐廳 寵物友善 featuresIndex1:111 2024-01-08 12:34:15.595509
+2024-01-08 12:34:30,506 - __main__ - INFO - latlng:35.91886329650879
+2024-01-08 12:34:30,507 - __main__ - INFO - lat lng:0.7371586,110.5806436
+2024-01-08 12:35:01,598 - __main__ - INFO - latlng:31.07161021232605
+2024-01-08 12:35:01,599 - __main__ - INFO - lat lng:0.7371586,110.6166194
+2024-01-08 12:35:37,421 - __main__ - INFO - 五峰旗風景區 featuresIndex1:111 2024-01-08 12:35:37.421886
+2024-01-08 12:35:37,486 - __main__ - INFO - latlng:35.86621594429016
+2024-01-08 12:35:37,487 - __main__ - INFO - lat lng:0.7371586,110.6705832
+2024-01-08 12:36:12,408 - __main__ - INFO - latlng:34.899747371673584
+2024-01-08 12:36:12,409 - __main__ - INFO - lat lng:0.7371586,110.7425349
+2024-01-08 12:36:25,198 - __main__ - INFO - Kedai KSS featuresIndex1:111 2024-01-08 12:36:25.198163
+2024-01-08 12:36:25,455 - __main__ - INFO - RUMAH MAKAN PADANG featuresIndex1:111 2024-01-08 12:36:25.455424
+2024-01-08 12:36:25,917 - __main__ - INFO - Rumah Makan Malenggang featuresIndex1:111 2024-01-08 12:36:25.917460
+2024-01-08 12:36:26,193 - __main__ - INFO - RM OMBAK KATAPING MASAKAN PADANG featuresIndex1:111 2024-01-08 12:36:26.192546
+2024-01-08 12:36:26,541 - __main__ - INFO - Lesehan Mas Galih featuresIndex1:111 2024-01-08 12:36:26.541672
+2024-01-08 12:36:26,800 - __main__ - INFO - Warung MAULANA Bakso &Mie ayam featuresIndex1:111 2024-01-08 12:36:26.800582
+2024-01-08 12:36:40,809 - __main__ - INFO - latlng:28.384582996368408
+2024-01-08 12:36:40,810 - __main__ - INFO - lat lng:0.7371586,110.7605228
+2024-01-08 12:36:58,554 - __main__ - INFO - Snail 蝸牛義大利餐廳 敦南店 featuresIndex1:111 2024-01-08 12:36:58.554942
+2024-01-08 12:37:13,252 - __main__ - INFO - latlng:32.424909591674805
+2024-01-08 12:37:13,253 - __main__ - INFO - lat lng:0.7371586,110.7964986
+2024-01-08 12:37:30,563 - __main__ - INFO - Warkop/Rumah Makan Asia featuresIndex1:111 2024-01-08 12:37:30.563112
+2024-01-08 12:37:44,024 - __main__ - INFO - latlng:30.755396366119385
+2024-01-08 12:37:44,025 - __main__ - INFO - lat lng:0.7371586,110.8504624
+2024-01-08 12:38:12,525 - __main__ - INFO - latlng:28.48191809654236
+2024-01-08 12:38:12,526 - __main__ - INFO - lat lng:0.7371586,110.9224141
+2024-01-08 12:38:42,119 - __main__ - INFO - latlng:29.578123569488525
+2024-01-08 12:38:42,119 - __main__ - INFO - lat lng:0.7371586,111.0123537
+2024-01-08 12:44:00,693 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:44:10,633 - __main__ - INFO - lat lng:0.7371586,111.1202812
+2024-01-08 12:44:19,246 - __main__ - INFO - Kampung Ensebang Plaie Longhouse featuresIndex1:111 2024-01-08 12:44:19.246416
+2024-01-08 12:44:58,874 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:45:08,000 - __main__ - INFO - lat lng:0.7371586,111.2461966
+2024-01-08 12:45:18,119 - __main__ - INFO - Wong Pupo featuresIndex1:111 2024-01-08 12:45:18.119414
+2024-01-08 12:45:50,305 - __main__ - INFO - latlng:42.2822687625885
+2024-01-08 12:45:50,306 - __main__ - INFO - lat lng:0.7371586,111.3901
+2024-01-08 12:46:06,465 - __main__ - INFO - Rumah Makan Padang Simpang Tigo Bulan featuresIndex1:111 2024-01-08 12:46:06.465434
+2024-01-08 12:46:06,790 - __main__ - INFO - Kantin Rami Lemetak featuresIndex1:111 2024-01-08 12:46:06.790939
+2024-01-08 12:46:07,160 - __main__ - INFO - Warung Makan ALEXA featuresIndex1:111 2024-01-08 12:46:07.160801
+2024-01-08 12:46:25,546 - __main__ - INFO - latlng:35.224547386169434
+2024-01-08 12:46:25,547 - __main__ - INFO - lat lng:0.7371586,111.4080879
+2024-01-08 12:51:27,765 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:51:39,361 - __main__ - INFO - lat lng:0.7371586,111.4440637
+2024-01-08 12:52:12,949 - __main__ - INFO - latlng:33.56836795806885
+2024-01-08 12:52:12,949 - __main__ - INFO - lat lng:0.7371586,111.4980275
+2024-01-08 12:52:36,385 - __main__ - INFO - latlng:23.417996883392334
+2024-01-08 12:52:36,386 - __main__ - INFO - lat lng:0.7371586,111.5699792
+2024-01-08 12:53:04,873 - __main__ - INFO - latlng:28.471862316131592
+2024-01-08 12:53:04,873 - __main__ - INFO - lat lng:0.7371586,111.6599188
+2024-01-08 12:53:38,817 - __main__ - INFO - latlng:33.904746770858765
+2024-01-08 12:53:38,817 - __main__ - INFO - lat lng:0.7371586,111.7678463
+2024-01-08 12:54:34,655 - __main__ - ERROR - TimeoutException:111
+2024-01-08 12:54:44,163 - __main__ - INFO - lat lng:0.7371586,111.8937617
+2024-01-08 12:55:00,482 - __main__ - INFO - Warung RELAX featuresIndex1:111 2024-01-08 12:55:00.482934
+2024-01-08 12:55:01,255 - __main__ - INFO - Umai & Ama featuresIndex1:111 2024-01-08 12:55:01.255239
+2024-01-08 12:55:01,525 - __main__ - INFO - RM Jawa Timur featuresIndex1:111 2024-01-08 12:55:01.525050
+2024-01-08 12:55:01,792 - __main__ - INFO - RM SENDY featuresIndex1:111 2024-01-08 12:55:01.792996
+2024-01-08 12:55:02,070 - __main__ - INFO - Rumah Makan Nusantara featuresIndex1:111 2024-01-08 12:55:02.070665
+2024-01-08 12:55:08,461 - __main__ - INFO - Reen bakery enterprise featuresIndex1:111 2024-01-08 12:55:08.460472
+2024-01-08 12:55:17,397 - __main__ - INFO - latlng:33.218348264694214
+2024-01-08 12:55:17,398 - __main__ - INFO - lat lng:0.7371586,111.9117496
+2024-01-08 12:55:57,506 - __main__ - INFO - latlng:40.09110379219055
+2024-01-08 12:55:57,506 - __main__ - INFO - lat lng:0.7371586,111.9477254
+2024-01-08 12:56:29,312 - __main__ - INFO - latlng:31.786032915115356
+2024-01-08 12:56:29,313 - __main__ - INFO - lat lng:0.7371586,112.0016892
+2024-01-08 12:56:35,932 - __main__ - INFO - 森塔倫湖國家公園 featuresIndex1:111 2024-01-08 12:56:35.932436
+2024-01-08 12:56:43,870 - __main__ - INFO - RM.Salat Tiga featuresIndex1:111 2024-01-08 12:56:43.870305
+2024-01-08 12:56:44,110 - __main__ - INFO - Gado Gado featuresIndex1:111 2024-01-08 12:56:44.110775
+2024-01-08 12:56:44,371 - __main__ - INFO - Warung Ayah Reno featuresIndex1:111 2024-01-08 12:56:44.371264
+2024-01-08 12:56:58,179 - __main__ - INFO - latlng:28.845462560653687
+2024-01-08 12:56:58,179 - __main__ - INFO - lat lng:0.7371586,112.0196771
+2024-01-08 12:57:28,297 - __main__ - INFO - latlng:30.10199236869812
+2024-01-08 12:57:28,298 - __main__ - INFO - lat lng:0.7371586,112.0556529
+2024-01-08 12:57:38,519 - __main__ - INFO - Bukit Tekenang Resort featuresIndex1:111 2024-01-08 12:57:38.519274
+2024-01-08 12:57:39,818 - __main__ - INFO - Resort Sepandan Taman Nasional Danau Sentarum featuresIndex1:111 2024-01-08 12:57:39.818933
+2024-01-08 12:57:41,136 - __main__ - INFO - Wisata Kampung Semangit featuresIndex1:111 2024-01-08 12:57:41.136966
+2024-01-08 12:57:42,394 - __main__ - INFO - Pulau Melayu featuresIndex1:111 2024-01-08 12:57:42.394220
+2024-01-08 12:58:07,983 - __main__ - INFO - latlng:39.67112851142883
+2024-01-08 12:58:07,984 - __main__ - INFO - lat lng:0.7371586,112.0736408
+2024-01-08 12:58:43,235 - __main__ - INFO - latlng:35.2358500957489
+2024-01-08 12:58:43,236 - __main__ - INFO - lat lng:0.7371586,112.1096166
+2024-01-08 12:59:18,568 - __main__ - INFO - seleniumCount:35.33261823654175
+2024-01-08 12:59:27,904 - __main__ - INFO - latlng:44.65202069282532
+2024-01-08 12:59:27,905 - __main__ - INFO - lat lng:0.7371586,112.1635804
+2024-01-08 12:59:54,886 - __main__ - INFO - latlng:26.966737985610962
+2024-01-08 12:59:54,887 - __main__ - INFO - lat lng:0.7371586,112.2355321
+2024-01-08 13:00:08,686 - __main__ - INFO - warung aushil alhifzhi featuresIndex1:111 2024-01-08 13:00:08.686803
+2024-01-08 13:00:14,466 - __main__ - INFO - Nice Cream義式手工冰淇淋店 featuresIndex1:111 2024-01-08 13:00:14.465530
+2024-01-08 13:00:14,938 - __main__ - INFO - Yu''s ALMOND DESSERT featuresIndex1:111 2024-01-08 13:00:14.938363
+2024-01-08 13:00:15,221 - __main__ - INFO - 雪王冰淇淋 featuresIndex1:111 2024-01-08 13:00:15.221584
+2024-01-08 13:00:22,954 - __main__ - INFO - latlng:28.046337604522705
+2024-01-08 13:00:22,955 - __main__ - INFO - lat lng:0.7371586,112.25352
+2024-01-08 13:00:59,874 - __main__ - INFO - latlng:36.90440654754639
+2024-01-08 13:00:59,875 - __main__ - INFO - lat lng:0.7371586,112.2894958
+2024-01-08 13:01:29,169 - __main__ - INFO - latlng:29.279587030410767
+2024-01-08 13:01:29,169 - __main__ - INFO - lat lng:0.7371586,112.3434596
+2024-01-08 13:01:55,318 - __main__ - INFO - latlng:26.133941888809204
+2024-01-08 13:01:55,318 - __main__ - INFO - lat lng:0.7371586,112.4154113
+2024-01-08 13:02:21,797 - __main__ - INFO - latlng:26.46394371986389
+2024-01-08 13:02:21,799 - __main__ - INFO - lat lng:0.7371586,112.5053509
+2024-01-08 13:02:37,625 - __main__ - INFO - Kedai " Mantap Jiwa " featuresIndex1:111 2024-01-08 13:02:37.625154
+2024-01-08 13:02:51,250 - __main__ - INFO - latlng:29.43716835975647
+2024-01-08 13:02:51,251 - __main__ - INFO - lat lng:0.7371586,112.6132784
+2024-01-08 13:03:05,024 - __main__ - INFO - Bakso Sapi 126 & HOYABEN featuresIndex1:111 2024-01-08 13:03:05.024902
+2024-01-08 13:03:05,389 - __main__ - INFO - RM Lapo Polado BATAK featuresIndex1:111 2024-01-08 13:03:05.389927
+2024-01-08 13:03:05,719 - __main__ - INFO - Kantin Suroboyo featuresIndex1:111 2024-01-08 13:03:05.719858
+2024-01-08 13:03:12,655 - __main__ - INFO - Cocondonut&Nom-nom featuresIndex1:111 2024-01-08 13:03:12.655635
+2024-01-08 13:03:12,951 - __main__ - INFO - Deka Pie - Jual kue pie di Putussibau featuresIndex1:111 2024-01-08 13:03:12.951361
+2024-01-08 13:03:13,236 - __main__ - INFO - TATA CAKE featuresIndex1:111 2024-01-08 13:03:13.236607
+2024-01-08 13:03:13,526 - __main__ - INFO - Browkin (Brownis Kian) featuresIndex1:111 2024-01-08 13:03:13.526965
+2024-01-08 13:03:13,887 - __main__ - INFO - TOKO SARI CAKE featuresIndex1:111 2024-01-08 13:03:13.887513
+2024-01-08 13:03:14,243 - __main__ - INFO - Brownies''z featuresIndex1:111 2024-01-08 13:03:14.243771
+2024-01-08 13:03:14,541 - __main__ - INFO - AMANDA CAKE featuresIndex1:111 2024-01-08 13:03:14.541444
+2024-01-08 13:03:24,600 - __main__ - INFO - latlng:33.32675647735596
+2024-01-08 13:03:24,600 - __main__ - INFO - lat lng:0.7371586,112.6312663
+2024-01-08 13:03:59,843 - __main__ - INFO - latlng:35.22652053833008
+2024-01-08 13:03:59,843 - __main__ - INFO - lat lng:0.7371586,112.6672421
+2024-01-08 13:04:29,546 - __main__ - INFO - latlng:29.6881160736084
+2024-01-08 13:04:29,547 - __main__ - INFO - lat lng:0.7371586,112.7212059
+2024-01-08 13:04:45,176 - __main__ - INFO - Dapur Oma featuresIndex1:111 2024-01-08 13:04:45.176590
+2024-01-08 13:04:45,608 - __main__ - INFO - Roof Top Mbak Ijah featuresIndex1:111 2024-01-08 13:04:45.608700
+2024-01-08 13:04:45,877 - __main__ - INFO - Ichiraku ramen Putussibau featuresIndex1:111 2024-01-08 13:04:45.877492
+2024-01-08 13:04:53,356 - __main__ - INFO - Happy Cake & cafe featuresIndex1:111 2024-01-08 13:04:53.356392
+2024-01-08 13:04:53,693 - __main__ - INFO - Donat aay featuresIndex1:111 2024-01-08 13:04:53.693255
+2024-01-08 13:04:53,975 - __main__ - INFO - Sari Cake Putussibau featuresIndex1:111 2024-01-08 13:04:53.975953
+2024-01-08 13:05:00,389 - __main__ - INFO - latlng:30.825169801712036
+2024-01-08 13:05:00,390 - __main__ - INFO - lat lng:0.7371586,112.7391938
+2024-01-08 13:05:30,075 - __main__ - INFO - latlng:29.669806480407715
+2024-01-08 13:05:30,075 - __main__ - INFO - lat lng:0.7371586,112.7751696
+2024-01-08 13:06:02,006 - __main__ - INFO - latlng:31.915040254592896
+2024-01-08 13:06:02,006 - __main__ - INFO - lat lng:0.7371586,112.8291334
+2024-01-08 13:06:18,488 - __main__ - INFO - Rumah Makan Selera Nuan featuresIndex1:111 2024-01-08 13:06:18.488142
+2024-01-08 13:06:18,814 - __main__ - INFO - Rumah Makan Ajun featuresIndex1:111 2024-01-08 13:06:18.814242
+2024-01-08 13:06:19,117 - __main__ - INFO - Kedai Amora featuresIndex1:111 2024-01-08 13:06:19.117554
+2024-01-08 13:06:19,550 - __main__ - INFO - Warung Karin karina featuresIndex1:111 2024-01-08 13:06:19.550853
+2024-01-08 13:06:19,826 - __main__ - INFO - Pondok Seafood 88 featuresIndex1:111 2024-01-08 13:06:19.826501
+2024-01-08 13:06:25,756 - __main__ - INFO - Seteguk Rindu featuresIndex1:111 2024-01-08 13:06:25.756157
+2024-01-08 13:06:33,079 - __main__ - INFO - latlng:31.056231021881104
+2024-01-08 13:06:33,079 - __main__ - INFO - lat lng:0.7371586,112.8471213
+2024-01-08 13:07:06,823 - __main__ - INFO - latlng:33.72710871696472
+2024-01-08 13:07:06,824 - __main__ - INFO - lat lng:0.7371586,112.8830971
+2024-01-08 13:07:21,859 - __main__ - INFO - Bakso (Pakde Jakiman) featuresIndex1:111 2024-01-08 13:07:21.859686
+2024-01-08 13:07:22,155 - __main__ - INFO - BU AYANG featuresIndex1:111 2024-01-08 13:07:22.155106
+2024-01-08 13:07:22,438 - __main__ - INFO - Warung putra tunggal featuresIndex1:111 2024-01-08 13:07:22.437510
+2024-01-08 13:07:22,715 - __main__ - INFO - Piww Bite featuresIndex1:111 2024-01-08 13:07:22.715310
+2024-01-08 13:07:38,820 - __main__ - INFO - latlng:31.981670379638672
+2024-01-08 13:07:38,821 - __main__ - INFO - lat lng:0.7371586,112.901085
+2024-01-08 13:08:11,762 - __main__ - INFO - latlng:32.92646861076355
+2024-01-08 13:08:11,762 - __main__ - INFO - lat lng:0.7371586,112.9370608
+2024-01-08 13:08:42,052 - __main__ - INFO - latlng:30.273256540298462
+2024-01-08 13:08:42,052 - __main__ - INFO - lat lng:0.7371586,112.9910246
+2024-01-08 13:09:13,871 - __main__ - INFO - latlng:31.800715923309326
+2024-01-08 13:09:13,872 - __main__ - INFO - lat lng:0.7371586,113.0629763
+2024-01-08 13:09:45,166 - __main__ - INFO - latlng:31.278769493103027
+2024-01-08 13:09:45,167 - __main__ - INFO - lat lng:0.7371586,113.1529159
+2024-01-08 13:10:02,861 - __main__ - INFO - Rumah Makan Orange featuresIndex1:111 2024-01-08 13:10:02.861304
+2024-01-08 13:10:19,901 - __main__ - INFO - latlng:34.71842312812805
+2024-01-08 13:10:19,901 - __main__ - INFO - lat lng:0.7371586,113.2608434
+2024-01-08 13:10:35,441 - __main__ - INFO - Rumah Makan Ping Tie featuresIndex1:111 2024-01-08 13:10:35.441800
+2024-01-08 13:10:43,538 - __main__ - INFO - MARTABAK MANIS PALAPA featuresIndex1:111 2024-01-08 13:10:43.538583
+2024-01-08 13:10:51,250 - __main__ - INFO - latlng:31.334152221679688
+2024-01-08 13:10:51,250 - __main__ - INFO - lat lng:0.7371586,113.2788313
+2024-01-08 13:11:24,854 - __main__ - INFO - latlng:33.58778619766235
+2024-01-08 13:11:24,854 - __main__ - INFO - lat lng:0.7371586,113.3148071
+2024-01-08 13:12:02,008 - __main__ - INFO - latlng:37.138097047805786
+2024-01-08 13:12:02,008 - __main__ - INFO - lat lng:0.7371586,113.3687709
+2024-01-08 13:12:41,392 - __main__ - INFO - latlng:39.365554332733154
+2024-01-08 13:12:41,393 - __main__ - INFO - lat lng:0.7371586,113.4407226
+2024-01-08 13:13:17,186 - __main__ - INFO - seleniumCount:35.79393720626831
+2024-01-08 13:13:26,577 - __main__ - INFO - latlng:45.149877309799194
+2024-01-08 13:13:26,578 - __main__ - INFO - lat lng:0.7371586,113.5306622
+2024-01-08 13:13:47,809 - __main__ - INFO - 紫艷中餐廳 featuresIndex1:111 2024-01-08 13:13:47.809108
+2024-01-08 13:14:01,723 - __main__ - INFO - latlng:35.129443883895874
+2024-01-08 13:14:01,724 - __main__ - INFO - lat lng:0.7371586,113.6385897
+2024-01-08 13:14:29,958 - __main__ - INFO - latlng:28.212934494018555
+2024-01-08 13:14:29,958 - __main__ - INFO - lat lng:0.7371586,113.7645051
+2024-01-08 13:14:59,951 - __main__ - INFO - latlng:29.978848934173584
+2024-01-08 13:14:59,952 - __main__ - INFO - lat lng:0.7371586,113.9084085
+2024-01-08 13:15:13,080 - __main__ - INFO - YASAKA Fried Chicken Tiong Bu''u featuresIndex1:111 2024-01-08 13:15:13.080850
+2024-01-08 13:15:26,956 - __main__ - INFO - latlng:26.97168207168579
+2024-01-08 13:15:26,957 - __main__ - INFO - lat lng:0.7371586,114.0702998
+2024-01-08 13:15:40,071 - __main__ - INFO - Kedai ORLANDO featuresIndex1:111 2024-01-08 13:15:40.071726
+2024-01-08 13:15:56,023 - __main__ - INFO - latlng:29.049357414245605
+2024-01-08 13:15:56,024 - __main__ - INFO - lat lng:0.7371586,114.250179
+2024-01-08 13:16:23,843 - __main__ - INFO - latlng:27.800071716308594
+2024-01-08 13:16:23,843 - __main__ - INFO - lat lng:0.7371586,114.4480461
+2024-01-08 13:16:50,028 - __main__ - INFO - latlng:26.16897439956665
+2024-01-08 13:16:50,029 - __main__ - INFO - lat lng:0.7371586,114.6639012
+2024-01-08 13:17:02,883 - __main__ - INFO - Warung Makan Tiga Saudara featuresIndex1:111 2024-01-08 13:17:02.883370
+2024-01-08 13:17:16,178 - __main__ - INFO - latlng:26.129920959472656
+2024-01-08 13:17:16,179 - __main__ - INFO - lat lng:0.7371586,114.8977442
+2024-01-08 13:17:29,218 - __main__ - INFO - RM UNI Dan Bofet UNI.masakan Padang featuresIndex1:111 2024-01-08 13:17:29.218658
+2024-01-08 13:17:29,556 - __main__ - INFO - Warung Bude penyet featuresIndex1:111 2024-01-08 13:17:29.556275
+2024-01-08 13:17:29,806 - __main__ - INFO - Kedai Takaq Pejiq (KTP) featuresIndex1:111 2024-01-08 13:17:29.806685
+2024-01-08 13:17:30,195 - __main__ - INFO - Warung makan PHP featuresIndex1:111 2024-01-08 13:17:30.195028
+2024-01-08 13:17:35,555 - __main__ - INFO - Lalica cake mahakam ulu featuresIndex1:111 2024-01-08 13:17:35.555347
+2024-01-08 13:17:43,168 - __main__ - INFO - latlng:26.97321128845215
+2024-01-08 13:17:43,168 - __main__ - INFO - lat lng:0.7371586,114.9157321
+2024-01-08 13:18:20,861 - __main__ - INFO - latlng:37.67308950424194
+2024-01-08 13:18:20,862 - __main__ - INFO - lat lng:0.7371586,114.9517079
+2024-01-08 13:18:55,072 - __main__ - INFO - latlng:34.186856269836426
+2024-01-08 13:18:55,073 - __main__ - INFO - lat lng:0.7371586,115.0056717
+2024-01-08 13:19:29,632 - __main__ - INFO - latlng:34.54289197921753
+2024-01-08 13:19:29,633 - __main__ - INFO - lat lng:0.7371586,115.0776234
+2024-01-08 13:20:03,749 - __main__ - INFO - latlng:34.10065293312073
+2024-01-08 13:20:03,750 - __main__ - INFO - lat lng:0.7371586,115.167563
+2024-01-08 13:20:40,561 - __main__ - INFO - latlng:36.79253005981445
+2024-01-08 13:20:40,562 - __main__ - INFO - lat lng:0.7371586,115.2754905
+2024-01-08 13:20:56,428 - __main__ - INFO - Warung Prima Rasa Blitar featuresIndex1:111 2024-01-08 13:20:56.428464
+2024-01-08 13:21:11,035 - __main__ - INFO - latlng:30.458210468292236
+2024-01-08 13:21:11,035 - __main__ - INFO - lat lng:0.7371586,115.4014059
+2024-01-08 13:21:43,298 - __main__ - INFO - latlng:32.240482807159424
+2024-01-08 13:21:43,298 - __main__ - INFO - lat lng:0.7371586,115.5453093
+2024-01-08 13:22:14,039 - __main__ - INFO - latlng:30.72414779663086
+2024-01-08 13:22:14,040 - __main__ - INFO - lat lng:0.7371586,115.7072006
+2024-01-08 13:22:48,616 - __main__ - INFO - 港南運河公園 featuresIndex1:111 2024-01-08 13:22:48.616027
+2024-01-08 13:22:48,835 - __main__ - INFO - latlng:34.777841091156006
+2024-01-08 13:22:48,836 - __main__ - INFO - lat lng:0.7371586,115.8870798
+2024-01-08 13:23:23,909 - __main__ - INFO - latlng:35.05105781555176
+2024-01-08 13:23:23,909 - __main__ - INFO - lat lng:0.7371586,116.0849469
+2024-01-08 13:23:41,071 - __main__ - INFO - Warung Makan Sunda featuresIndex1:111 2024-01-08 13:23:41.071479
+2024-01-08 13:23:41,341 - __main__ - INFO - Warung Makan Alan Putra featuresIndex1:111 2024-01-08 13:23:41.341753
+2024-01-08 13:23:41,699 - __main__ - INFO - Bakso Rawa Sikut featuresIndex1:111 2024-01-08 13:23:41.699070
+2024-01-08 13:23:42,001 - __main__ - INFO - Pawon Budhe featuresIndex1:111 2024-01-08 13:23:42.001077
+2024-01-08 13:23:42,284 - __main__ - INFO - Warung Makan Soala Gogo (Morgan Harefa) featuresIndex1:111 2024-01-08 13:23:42.284111
+2024-01-08 13:23:42,555 - __main__ - INFO - Warung Ika wangi featuresIndex1:111 2024-01-08 13:23:42.555209
+2024-01-08 13:23:58,982 - __main__ - INFO - latlng:35.056862592697144
+2024-01-08 13:23:58,983 - __main__ - INFO - lat lng:0.7371586,116.1029348
+2024-01-08 13:24:36,669 - __main__ - INFO - latlng:37.6641948223114
+2024-01-08 13:24:36,670 - __main__ - INFO - lat lng:0.7371586,116.1389106
+2024-01-08 13:24:43,960 - __main__ - INFO - 十分瀑布 featuresIndex1:111 2024-01-08 13:24:43.960370
+2024-01-08 13:24:44,275 - __main__ - INFO - 和平島地質公園 Heping Island GeoPark featuresIndex1:111 2024-01-08 13:24:44.274653
+2024-01-08 13:24:45,305 - __main__ - INFO - 自由廣場牌樓 featuresIndex1:111 2024-01-08 13:24:45.305986
+2024-01-08 13:24:45,597 - __main__ - INFO - 石碇老街 featuresIndex1:111 2024-01-08 13:24:45.597764
+2024-01-08 13:25:11,312 - __main__ - INFO - latlng:34.62055945396423
+2024-01-08 13:25:11,313 - __main__ - INFO - lat lng:0.7371586,116.1568985
+2024-01-08 13:25:51,880 - __main__ - INFO - latlng:40.55002760887146
+2024-01-08 13:25:51,880 - __main__ - INFO - lat lng:0.7371586,116.1928743
+2024-01-08 13:26:31,769 - __main__ - INFO - latlng:39.85917925834656
+2024-01-08 13:26:31,769 - __main__ - INFO - lat lng:0.7371586,116.2468381
+2024-01-08 13:27:10,409 - __main__ - INFO - latlng:38.62353873252869
+2024-01-08 13:27:10,410 - __main__ - INFO - lat lng:0.7371586,116.3187898
+2024-01-08 13:27:44,856 - __main__ - INFO - seleniumCount:34.44633388519287
+2024-01-08 13:27:54,654 - __main__ - INFO - latlng:44.224740743637085
+2024-01-08 13:27:54,655 - __main__ - INFO - lat lng:0.7371586,116.4087294
+2024-01-08 13:28:07,722 - __main__ - INFO - Kedai Barokah featuresIndex1:111 2024-01-08 13:28:07.722096
+2024-01-08 13:28:08,234 - __main__ - INFO - Lesehan pak lek featuresIndex1:111 2024-01-08 13:28:08.234615
+2024-01-08 13:28:08,516 - __main__ - INFO - Warung & Penginapan Pak Warto featuresIndex1:111 2024-01-08 13:28:08.516576
+2024-01-08 13:28:08,811 - __main__ - INFO - Warung El Burney featuresIndex1:111 2024-01-08 13:28:08.810114
+2024-01-08 13:28:25,045 - __main__ - INFO - latlng:30.370046377182007
+2024-01-08 13:28:25,046 - __main__ - INFO - lat lng:0.7371586,116.4267173
+2024-01-08 13:29:00,476 - __main__ - INFO - latlng:35.41088938713074
+2024-01-08 13:29:00,476 - __main__ - INFO - lat lng:0.7371586,116.4626931
+2024-01-08 13:29:32,401 - __main__ - INFO - latlng:31.90436053276062
+2024-01-08 13:29:32,401 - __main__ - INFO - lat lng:0.7371586,116.5166569
+2024-01-08 13:29:49,293 - __main__ - INFO - Juragan Grills featuresIndex1:111 2024-01-08 13:29:49.293869
+2024-01-08 13:29:49,605 - __main__ - INFO - Rumah makan Pak bambang featuresIndex1:111 2024-01-08 13:29:49.605845
+2024-01-08 13:30:03,678 - __main__ - INFO - latlng:31.260908603668213
+2024-01-08 13:30:03,679 - __main__ - INFO - lat lng:0.7371586,116.5346448
+2024-01-08 13:30:37,169 - __main__ - INFO - latlng:33.47027015686035
+2024-01-08 13:30:37,169 - __main__ - INFO - lat lng:0.7371586,116.5706206
+2024-01-08 13:31:37,216 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 13:31:37,217 - __main__ - INFO - Afghanistan
+2024-01-08 13:31:37,217 - __main__ - INFO - Angola
+2024-01-08 13:31:37,218 - __main__ - INFO - Albania
+2024-01-08 13:31:37,218 - __main__ - INFO - United Arab Emirates
+2024-01-08 13:31:37,218 - __main__ - INFO - Argentina
+2024-01-08 13:31:37,219 - __main__ - INFO - Armenia
+2024-01-08 13:31:37,219 - __main__ - INFO - None
+2024-01-08 13:31:37,219 - __main__ - INFO - Australia
+2024-01-08 13:31:37,220 - __main__ - INFO - Austria
+2024-01-08 13:31:37,220 - __main__ - INFO - Azerbaijan
+2024-01-08 13:31:37,220 - __main__ - INFO - Burundi
+2024-01-08 13:31:37,221 - __main__ - INFO - Belgium
+2024-01-08 13:31:37,221 - __main__ - INFO - Benin
+2024-01-08 13:31:37,221 - __main__ - INFO - Burkina Faso
+2024-01-08 13:31:37,222 - __main__ - INFO - Bangladesh
+2024-01-08 13:31:37,222 - __main__ - INFO - Bulgaria
+2024-01-08 13:31:37,223 - __main__ - INFO - Bahamas, The
+2024-01-08 13:31:37,224 - __main__ - INFO - Bosnia and Herzegovina
+2024-01-08 13:31:37,225 - __main__ - INFO - Belarus
+2024-01-08 13:31:37,225 - __main__ - INFO - Belize
+2024-01-08 13:31:37,226 - __main__ - INFO - Bolivia
+2024-01-08 13:31:37,226 - __main__ - INFO - Brazil
+2024-01-08 13:31:37,227 - __main__ - INFO - Brunei
+2024-01-08 13:31:37,228 - __main__ - INFO - Bhutan
+2024-01-08 13:31:37,228 - __main__ - INFO - Botswana
+2024-01-08 13:31:37,228 - __main__ - INFO - Central African Republic
+2024-01-08 13:31:37,229 - __main__ - INFO - Canada
+2024-01-08 13:31:37,229 - __main__ - INFO - Switzerland
+2024-01-08 13:31:37,230 - __main__ - INFO - Chile
+2024-01-08 13:31:37,230 - __main__ - INFO - China
+2024-01-08 13:31:37,230 - __main__ - INFO - Cote D'ivoire
+2024-01-08 13:31:37,231 - __main__ - INFO - Cameroon
+2024-01-08 13:31:37,231 - __main__ - INFO - Congo, Democratic Republic of the
+2024-01-08 13:31:37,231 - __main__ - INFO - Congo, Republic of the
+2024-01-08 13:31:37,231 - __main__ - INFO - Colombia
+2024-01-08 13:31:37,232 - __main__ - INFO - Costa Rica
+2024-01-08 13:31:37,232 - __main__ - INFO - Cuba
+2024-01-08 13:31:37,233 - __main__ - INFO - None
+2024-01-08 13:31:37,233 - __main__ - INFO - Cyprus
+2024-01-08 13:31:37,233 - __main__ - INFO - Czechia
+2024-01-08 13:31:37,234 - __main__ - INFO - Germany
+2024-01-08 13:31:37,234 - __main__ - INFO - Djibouti
+2024-01-08 13:31:37,234 - __main__ - INFO - Denmark
+2024-01-08 13:31:37,235 - __main__ - INFO - Dominican Republic
+2024-01-08 13:31:37,235 - __main__ - INFO - Algeria
+2024-01-08 13:31:37,235 - __main__ - INFO - Ecuador
+2024-01-08 13:31:37,236 - __main__ - INFO - Egypt
+2024-01-08 13:31:37,236 - __main__ - INFO - Eritrea
+2024-01-08 13:31:37,236 - __main__ - INFO - Spain
+2024-01-08 13:31:37,237 - __main__ - INFO - Estonia
+2024-01-08 13:31:37,237 - __main__ - INFO - Ethiopia
+2024-01-08 13:31:37,238 - __main__ - INFO - Finland
+2024-01-08 13:31:37,238 - __main__ - INFO - Fiji
+2024-01-08 13:31:37,239 - __main__ - INFO - Falkland Islands (Islas Malvinas)
+2024-01-08 13:31:37,240 - __main__ - INFO - France
+2024-01-08 13:31:37,241 - __main__ - INFO - Gabon
+2024-01-08 13:31:37,242 - __main__ - INFO - United Kingdom
+2024-01-08 13:31:37,242 - __main__ - INFO - Georgia
+2024-01-08 13:31:37,243 - __main__ - INFO - Ghana
+2024-01-08 13:31:37,243 - __main__ - INFO - Guinea
+2024-01-08 13:31:37,244 - __main__ - INFO - Gambia, The
+2024-01-08 13:31:37,244 - __main__ - INFO - Guinea-Bissau
+2024-01-08 13:31:37,244 - __main__ - INFO - Equatorial Guinea
+2024-01-08 13:31:37,245 - __main__ - INFO - Greece
+2024-01-08 13:31:37,245 - __main__ - INFO - Greenland
+2024-01-08 13:31:37,246 - __main__ - INFO - Guatemala
+2024-01-08 13:31:37,246 - __main__ - INFO - Guyana
+2024-01-08 13:31:37,247 - __main__ - INFO - Honduras
+2024-01-08 13:31:37,247 - __main__ - INFO - Croatia
+2024-01-08 13:31:37,247 - __main__ - INFO - Haiti
+2024-01-08 13:31:37,248 - __main__ - INFO - Hungary
+2024-01-08 13:31:37,248 - __main__ - INFO - Indonesia
+2024-01-08 13:31:37,249 - __main__ - INFO - India
+2024-01-08 13:31:37,249 - __main__ - INFO - Ireland
+2024-01-08 13:31:37,250 - __main__ - INFO - Iran
+2024-01-08 13:31:37,250 - __main__ - INFO - Iraq
+2024-01-08 13:31:37,251 - __main__ - INFO - Iceland
+2024-01-08 13:31:37,251 - __main__ - INFO - Israel
+2024-01-08 13:31:37,251 - __main__ - INFO - Italy
+2024-01-08 13:31:37,252 - __main__ - INFO - Jamaica
+2024-01-08 13:31:37,252 - __main__ - INFO - Jordan
+2024-01-08 13:31:37,253 - __main__ - INFO - Japan
+2024-01-08 13:31:37,253 - __main__ - INFO - Kazakhstan
+2024-01-08 13:31:37,253 - __main__ - INFO - Kenya
+2024-01-08 13:31:37,253 - __main__ - INFO - Kyrgyzstan
+2024-01-08 13:31:37,254 - __main__ - INFO - Cambodia
+2024-01-08 13:31:37,254 - __main__ - INFO - Korea, South
+2024-01-08 13:31:37,254 - __main__ - INFO - Kosovo
+2024-01-08 13:31:37,255 - __main__ - INFO - Kuwait
+2024-01-08 13:31:37,255 - __main__ - INFO - Laos
+2024-01-08 13:31:37,256 - __main__ - INFO - Lebanon
+2024-01-08 13:31:37,256 - __main__ - INFO - Liberia
+2024-01-08 13:31:37,257 - __main__ - INFO - Libya
+2024-01-08 13:31:37,258 - __main__ - INFO - Sri Lanka
+2024-01-08 13:31:37,258 - __main__ - INFO - Lesotho
+2024-01-08 13:31:37,260 - __main__ - INFO - Lithuania
+2024-01-08 13:31:37,261 - __main__ - INFO - Luxembourg
+2024-01-08 13:31:37,261 - __main__ - INFO - Latvia
+2024-01-08 13:31:37,262 - __main__ - INFO - Morocco
+2024-01-08 13:31:37,262 - __main__ - INFO - Moldova
+2024-01-08 13:31:37,263 - __main__ - INFO - Madagascar
+2024-01-08 13:31:37,263 - __main__ - INFO - Mexico
+2024-01-08 13:31:37,263 - __main__ - INFO - Macedonia
+2024-01-08 13:31:37,264 - __main__ - INFO - Mali
+2024-01-08 13:31:37,264 - __main__ - INFO - Burma
+2024-01-08 13:31:37,264 - __main__ - INFO - Montenegro
+2024-01-08 13:31:37,264 - __main__ - INFO - Mongolia
+2024-01-08 13:31:37,265 - __main__ - INFO - Mozambique
+2024-01-08 13:31:37,265 - __main__ - INFO - Mauritania
+2024-01-08 13:31:37,265 - __main__ - INFO - Malawi
+2024-01-08 13:31:39,564 - __main__ - INFO - featuresIndex:110
+2024-01-08 13:31:43,170 - __main__ - INFO - Malaysia
+2024-01-08 13:31:46,785 - __main__ - INFO - featuresIndex:111
+2024-01-08 13:31:46,844 - __main__ - INFO - lat lng:0.7371586,109.6632601
+2024-01-08 13:31:52,902 - __main__ - INFO - 碧潭風景區 featuresIndex1:111 2024-01-08 13:31:52.902175
+2024-01-08 13:31:53,303 - __main__ - INFO - 大安森林公園(防災公園) featuresIndex1:111 2024-01-08 13:31:53.303877
+2024-01-08 13:31:53,576 - __main__ - INFO - 花之隧道 featuresIndex1:111 2024-01-08 13:31:53.576881
+2024-01-08 13:31:53,822 - __main__ - INFO - 合谷瀑布 featuresIndex1:111 2024-01-08 13:31:53.822868
+2024-01-08 13:31:54,130 - __main__ - INFO - 淡水老街廣場 featuresIndex1:111 2024-01-08 13:31:54.130561
+2024-01-08 13:31:54,400 - __main__ - INFO - 碧潭吊橋 featuresIndex1:111 2024-01-08 13:31:54.400791
+2024-01-08 13:31:54,652 - __main__ - INFO - 象山六巨石 featuresIndex1:111 2024-01-08 13:31:54.652146
+2024-01-08 13:33:28,737 - __main__ - ERROR - TimeoutException:111
+2024-01-08 13:33:38,566 - __main__ - INFO - lat lng:0.7371586,109.681248
+2024-01-08 13:34:36,800 - __main__ - ERROR - TimeoutException:111
+2024-01-08 13:34:45,553 - __main__ - INFO - lat lng:0.7371586,109.7172238
+2024-01-08 13:34:55,551 - __main__ - INFO - Rumah Makan Mak Jaka featuresIndex1:111 2024-01-08 13:34:55.551257
+2024-01-08 13:34:56,171 - __main__ - INFO - Warung featuresIndex1:111 2024-01-08 13:34:56.171240
+2024-01-08 13:35:34,556 - __main__ - ERROR - TimeoutException:111
+2024-01-08 13:35:43,357 - __main__ - INFO - lat lng:0.7371586,109.7352117
+2024-01-08 13:39:28,428 - __main__ - INFO - 總共有幾筆資料:176
+2024-01-08 13:39:28,429 - __main__ - INFO - Afghanistan
+2024-01-08 13:39:28,429 - __main__ - INFO - Angola
+2024-01-08 13:39:28,430 - __main__ - INFO - Albania
+2024-01-08 13:39:28,431 - __main__ - INFO - United Arab Emirates
+2024-01-08 13:39:28,431 - __main__ - INFO - Argentina
+2024-01-08 13:39:28,432 - __main__ - INFO - Armenia
+2024-01-08 13:39:28,432 - __main__ - INFO - None
+2024-01-08 13:39:28,432 - __main__ - INFO - Australia
+2024-01-08 13:39:28,433 - __main__ - INFO - Austria
+2024-01-08 13:39:28,433 - __main__ - INFO - Azerbaijan
+2024-01-08 13:39:28,434 - __main__ - INFO - Burundi
+2024-01-08 13:39:28,434 - __main__ - INFO - Belgium
+2024-01-08 13:39:28,434 - __main__ - INFO - Benin
+2024-01-08 13:39:28,435 - __main__ - INFO - Burkina Faso
+2024-01-08 13:39:28,435 - __main__ - INFO - Bangladesh
+2024-01-08 13:39:28,436 - __main__ - INFO - Bulgaria
+2024-01-08 13:39:28,436 - __main__ - INFO - Bahamas, The
+2024-01-08 13:39:28,436 - __main__ - INFO - Bosnia and Herzegovina
+2024-01-08 13:39:28,437 - __main__ - INFO - Belarus
+2024-01-08 13:39:28,437 - __main__ - INFO - Belize
+2024-01-08 13:39:28,438 - __main__ - INFO - Bolivia
+2024-01-08 13:39:28,438 - __main__ - INFO - Brazil
+2024-01-08 13:39:28,439 - __main__ - INFO - Brunei
+2024-01-08 13:39:28,439 - __main__ - INFO - Bhutan
+2024-01-08 13:39:28,439 - __main__ - INFO - Botswana
+2024-01-08 13:39:28,440 - __main__ - INFO - Central African Republic
+2024-01-08 13:39:28,440 - __main__ - INFO - Canada
+2024-01-08 13:39:28,441 - __main__ - INFO - Switzerland
+2024-01-08 13:39:28,441 - __main__ - INFO - Chile
+2024-01-08 13:39:28,441 - __main__ - INFO - China
+2024-01-08 13:39:28,442 - __main__ - INFO - Cote D'ivoire
+2024-01-08 13:39:28,442 - __main__ - INFO - Cameroon
+2024-01-08 13:39:28,442 - __main__ - INFO - Congo, Democratic Republic of the
+2024-01-08 13:39:28,443 - __main__ - INFO - Congo, Republic of the
+2024-01-08 13:39:28,443 - __main__ - INFO - Colombia
+2024-01-08 13:39:28,444 - __main__ - INFO - Costa Rica
+2024-01-08 13:39:28,444 - __main__ - INFO - Cuba
+2024-01-08 13:39:28,444 - __main__ - INFO - None
+2024-01-08 13:39:28,445 - __main__ - INFO - Cyprus
+2024-01-08 13:39:28,445 - __main__ - INFO - Czechia
+2024-01-08 13:39:28,446 - __main__ - INFO - Germany
+2024-01-08 13:39:28,446 - __main__ - INFO - Djibouti
+2024-01-08 13:39:28,447 - __main__ - INFO - Denmark
+2024-01-08 13:39:28,447 - __main__ - INFO - Dominican Republic
+2024-01-08 13:39:28,448 - __main__ - INFO - Algeria
+2024-01-08 13:39:28,448 - __main__ - INFO - Ecuador
+2024-01-08 13:39:28,449 - __main__ - INFO - Egypt
+2024-01-08 13:39:28,449 - __main__ - INFO - Eritrea
+2024-01-08 13:39:28,450 - __main__ - INFO - Spain
+2024-01-08 13:39:28,450 - __main__ - INFO - Estonia
+2024-01-08 13:39:28,450 - __main__ - INFO - Ethiopia
+2024-01-08 13:39:28,451 - __main__ - INFO - Finland
+2024-01-08 13:39:28,451 - __main__ - INFO - Fiji
+2024-01-08 13:39:28,452 - __main__ - INFO - Falkland Islands (Islas Malvinas)
+2024-01-08 13:39:28,452 - __main__ - INFO - France
+2024-01-08 13:39:28,452 - __main__ - INFO - Gabon
+2024-01-08 13:39:28,453 - __main__ - INFO - United Kingdom
+2024-01-08 13:39:28,453 - __main__ - INFO - Georgia
+2024-01-08 13:39:28,454 - __main__ - INFO - Ghana
+2024-01-08 13:39:28,454 - __main__ - INFO - Guinea
+2024-01-08 13:39:28,455 - __main__ - INFO - Gambia, The
+2024-01-08 13:39:28,455 - __main__ - INFO - Guinea-Bissau
+2024-01-08 13:39:28,455 - __main__ - INFO - Equatorial Guinea
+2024-01-08 13:39:28,456 - __main__ - INFO - Greece
+2024-01-08 13:39:28,456 - __main__ - INFO - Greenland
+2024-01-08 13:39:28,457 - __main__ - INFO - Guatemala
+2024-01-08 13:39:28,457 - __main__ - INFO - Guyana
+2024-01-08 13:39:28,458 - __main__ - INFO - Honduras
+2024-01-08 13:39:28,458 - __main__ - INFO - Croatia
+2024-01-08 13:39:28,459 - __main__ - INFO - Haiti
+2024-01-08 13:39:28,459 - __main__ - INFO - Hungary
+2024-01-08 13:39:28,460 - __main__ - INFO - Indonesia
+2024-01-08 13:39:28,461 - __main__ - INFO - India
+2024-01-08 13:39:28,462 - __main__ - INFO - Ireland
+2024-01-08 13:39:28,463 - __main__ - INFO - Iran
+2024-01-08 13:39:28,463 - __main__ - INFO - Iraq
+2024-01-08 13:39:28,464 - __main__ - INFO - Iceland
+2024-01-08 13:39:28,464 - __main__ - INFO - Israel
+2024-01-08 13:39:28,465 - __main__ - INFO - Italy
+2024-01-08 13:39:28,465 - __main__ - INFO - Jamaica
+2024-01-08 13:39:28,466 - __main__ - INFO - Jordan
+2024-01-08 13:39:28,466 - __main__ - INFO - Japan
+2024-01-08 13:39:28,467 - __main__ - INFO - Kazakhstan
+2024-01-08 13:39:28,467 - __main__ - INFO - Kenya
+2024-01-08 13:39:28,468 - __main__ - INFO - Kyrgyzstan
+2024-01-08 13:39:28,468 - __main__ - INFO - Cambodia
+2024-01-08 13:39:28,469 - __main__ - INFO - Korea, South
+2024-01-08 13:39:28,469 - __main__ - INFO - Kosovo
+2024-01-08 13:39:28,470 - __main__ - INFO - Kuwait
+2024-01-08 13:39:28,470 - __main__ - INFO - Laos
+2024-01-08 13:39:28,471 - __main__ - INFO - Lebanon
+2024-01-08 13:39:28,471 - __main__ - INFO - Liberia
+2024-01-08 13:39:28,472 - __main__ - INFO - Libya
+2024-01-08 13:39:28,472 - __main__ - INFO - Sri Lanka
+2024-01-08 13:39:28,472 - __main__ - INFO - Lesotho
+2024-01-08 13:39:28,473 - __main__ - INFO - Lithuania
+2024-01-08 13:39:28,473 - __main__ - INFO - Luxembourg
+2024-01-08 13:39:28,473 - __main__ - INFO - Latvia
+2024-01-08 13:39:28,474 - __main__ - INFO - Morocco
+2024-01-08 13:39:28,474 - __main__ - INFO - Moldova
+2024-01-08 13:39:28,475 - __main__ - INFO - Madagascar
+2024-01-08 13:39:28,475 - __main__ - INFO - Mexico
+2024-01-08 13:39:28,476 - __main__ - INFO - Macedonia
+2024-01-08 13:39:28,476 - __main__ - INFO - Mali
+2024-01-08 13:39:28,477 - __main__ - INFO - Burma
+2024-01-08 13:39:28,477 - __main__ - INFO - Montenegro
+2024-01-08 13:39:28,477 - __main__ - INFO - Mongolia
+2024-01-08 13:39:28,478 - __main__ - INFO - Mozambique
+2024-01-08 13:39:28,478 - __main__ - INFO - Mauritania
+2024-01-08 13:39:28,479 - __main__ - INFO - Malawi
+2024-01-08 13:39:30,359 - __main__ - INFO - featuresIndex:110
+2024-01-08 13:39:33,585 - __main__ - INFO - Malaysia
+2024-01-08 13:39:37,332 - __main__ - INFO - featuresIndex:111
+2024-01-08 13:39:37,390 - __main__ - INFO - lat lng:0.7371586,109.6632601
+2024-01-08 13:39:42,002 - __main__ - INFO - 碧潭風景區 featuresIndex1:111 2024-01-08 13:39:42.002416
+2024-01-08 13:39:42,550 - __main__ - INFO - 大安森林公園(防災公園) featuresIndex1:111 2024-01-08 13:39:42.550145
+2024-01-08 13:39:42,820 - __main__ - INFO - 花之隧道 featuresIndex1:111 2024-01-08 13:39:42.820321
+2024-01-08 13:39:43,085 - __main__ - INFO - 合谷瀑布 featuresIndex1:111 2024-01-08 13:39:43.085784
+2024-01-08 13:39:43,345 - __main__ - INFO - 淡水老街廣場 featuresIndex1:111 2024-01-08 13:39:43.345641
+2024-01-08 13:39:43,635 - __main__ - INFO - 碧潭吊橋 featuresIndex1:111 2024-01-08 13:39:43.635169
+2024-01-08 13:39:43,887 - __main__ - INFO - 象山六巨石 featuresIndex1:111 2024-01-08 13:39:43.887787
+2024-01-08 13:39:44,156 - __main__ - INFO - 西本願寺鐘樓 featuresIndex1:111 2024-01-08 13:39:44.156966
+2024-01-08 13:39:44,443 - __main__ - INFO - 深坑老街 featuresIndex1:111 2024-01-08 13:39:44.442945
+2024-01-08 13:39:44,702 - __main__ - INFO - Rainbow Ximending featuresIndex1:111 2024-01-08 13:39:44.702767
+2024-01-08 13:39:44,957 - __main__ - INFO - Purple Butterfly Valley featuresIndex1:111 2024-01-08 13:39:44.957832

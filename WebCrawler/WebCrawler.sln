@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "WebCrawler", "WebCrawler\WebCrawler.pyproj", "{CE00EBA1-83F3-48EF-9D32-F2F408089742}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE00EBA1-83F3-48EF-9D32-F2F408089742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE00EBA1-83F3-48EF-9D32-F2F408089742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12147B78-65A6-4EDC-986B-4C73AF70C0B3}
+	EndGlobalSection
+EndGlobal

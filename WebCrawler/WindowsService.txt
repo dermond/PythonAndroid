@@ -1,0 +1,107 @@
+1.先用pyinstall 將Webapi.py打包
+pyinstaller -F --hidden-import="sklearn.utils._cython_blas" --hidden-import="sklearn.neighbors.typedefs" --hidden-import="sklearn.neighbors.quad_tree" --hidden-import="sklearn.tree._utils" D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\Webapi.py
+
+2.利用nssm建立Windows Service
+D:\git\Jepun.AI\Jepun.AI.SignJudgment\nssm-2.24\win64\nssm.exe install
+	Path: D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\Webapi.exe
+	ServiceName SignJudgment
+
+3.進入服務 將服務啟動
+
+
+
+
+
+
+
+
+
+
+
+
+刪除Windows Service
+sc delete "TESTService"
+
+建立
+sc create TestService binPath="D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\Webapi.bat"
+
+sc delete "TESTService"
+sc delete "FlaskApp"
+sc delete "FlaskService"
+sc delete "WinService"
+
+服务安装
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py install
+让服务自动启动
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py --startup auto install
+启动服务
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py start
+重启服务
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py restart
+停止服务
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py stop
+删除/卸载服务
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py remove
+
+
+
+pyinstaller --onefile --hidden-import win32timezone D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py
+
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.exe install
+
+
+
+D:\nssm-2.24\win32\nssm.exe install WinService
+
+
+pyinstaller -F D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py
+pyinstaller -F D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\Webapi.py
+
+sc create TestService binPath="D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.exe"
+sc create TestService binPath="D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\Webapi.exe"
+
+
+
+pyinstaller --onefile --hidden-import win32timezone D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py
+
+1.先將py 轉成exe
+pyinstaller -F --hidden-import="sklearn.utils._cython_blas" --hidden-import="sklearn.neighbors.typedefs" --hidden-import="sklearn.neighbors.quad_tree" --hidden-import="sklearn.tree._utils" D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py
+
+pyinstaller -F --hidden-import="sklearn.utils._cython_blas" --hidden-import="sklearn.neighbors.typedefs" --hidden-import="sklearn.neighbors.quad_tree" --hidden-import="sklearn.tree._utils" D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\Webapi.py
+
+C:\Windows\System32\dist\WindowsService.exe
+D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\Webapi.exe
+
+
+建立
+D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.exe install
+D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.exe start
+D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.exe debug
+D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\Webapi.exe debug
+
+
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py install
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py remove
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py debug
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py start
+
+python D:\git\Jepun.AI\Jepun.AI.SignJudgment\Jepun.AI.SignJudgment\WindowsService.py  --startup auto install
+
+C:\Users\DrewLi\AppData\Local\Continuum\anaconda3
+
+
+C:\Users\DrewLi\AppData\Local\Continuum\anaconda3\Lib\site-packages\pywin32_system32\
+
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\Lib\site-packages\pywin32_system32\
+
+C:\Users\DrewLi\AppData\Local\Continuum\anaconda3\Lib\site-packages\win32\
+
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\Lib\site-packages\win32\
+
+C:\Users\DrewLi\AppData\Local\Continuum\anaconda3\Scripts\
+
+C:\Users\DrewLi\AppData\Local\Continuum\anaconda3\
+
+
+D:\nssm-2.24\win64\nssm.exe install
+

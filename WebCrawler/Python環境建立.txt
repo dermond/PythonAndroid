@@ -1,0 +1,6 @@
+查看當前包
+python -m pip list
+備份環境
+python -m pip freeze > D:\git\Jepun.AI\PythonApplication1\myrequirements.txt
+安裝環境
+pip install -r D:\git\Jepun.AI\PythonApplication1\myrequirements.txt
