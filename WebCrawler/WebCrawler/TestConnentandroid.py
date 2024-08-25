@@ -120,7 +120,7 @@ if __name__ == '__main__':
   for _ in range(5):
       
       #轉帳
-      tap(device, "676 1647")
+      tap(device, "676 1281")
       time.sleep(1.0)
   
       #手機轉帳
@@ -134,9 +134,9 @@ if __name__ == '__main__':
       time.sleep(1.0)
 
       dropdown_position = '474 1200'  # 下拉清單的位置
-      text_to_input = '008'  # 輸入的文字 #華南銀行
+      #text_to_input = '008'  # 輸入的文字 #華南銀行
       #text_to_input = '700'  # 輸入的文字 #郵局
-      #text_to_input = '007'  # 輸入的文字 #第一銀行
+      text_to_input = '007'  # 輸入的文字 #第一銀行
       option_position = '454 1030'    # 選擇的選項的位置
 
       # 從下拉清單中選擇
@@ -202,9 +202,9 @@ if __name__ == '__main__':
           time.sleep(1.0)
   
 
-          #圖片驗證
+          #錯誤視窗判斷
           start_point = (103, 940)  # 起始坐標 (x, y)
-          end_point = (715, 1200)    # 結束坐標 (x, y)
+          end_point = (715, 1400)    # 結束坐標 (x, y)
 
           img = capture_screenshot(device)
           cropped_img = crop_image(img, start_point, end_point)
@@ -216,15 +216,30 @@ if __name__ == '__main__':
             #確認
             tap(device, "855 1355")
             time.sleep(1.0)
+          
           else:
             print(f"Error code {error_code} not found in the image.")
             time.sleep(3.0)
             break
 
 
+
       tap(device, "515 2160")
       time.sleep(3.0)
   
+      error_code = '9999'
+      if check_error_code(resulttext, error_code):
+        print(f"Error code {error_code} found in the image!")
+        #確認
+        tap(device, "855 1355")
+        time.sleep(1.0)
+          
+      # else:
+      #   print(f"Error code {error_code} not found in the image.")
+      #   time.sleep(3.0)
+      
+      
+
       tap(device, "847 1380")
       time.sleep(3.0)
   
