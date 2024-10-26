@@ -120,7 +120,8 @@ if __name__ == '__main__':
   for _ in range(5):
       
       #轉帳
-      tap(device, "676 1281")
+      #tap(device, "676 1281")
+      tap(device, "676 1603")
       time.sleep(1.0)
   
       #手機轉帳
