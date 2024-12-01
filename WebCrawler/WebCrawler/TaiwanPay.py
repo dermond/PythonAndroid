@@ -121,7 +121,7 @@ if __name__ == '__main__':
       
       #轉帳
       #tap(device, "676 1281")
-      tap(device, "676 1603")
+      tap(device, "644 1610")
       time.sleep(1.0)
   
       #手機轉帳
@@ -156,7 +156,7 @@ if __name__ == '__main__':
   
       #金額
       tap(device, "262 690")
-      input_characters(device, "888")
+      input_characters(device, "666")
       time.sleep(1.0)
 
       #滑動
@@ -232,7 +232,8 @@ if __name__ == '__main__':
       if check_error_code(resulttext, error_code):
         print(f"Error code {error_code} found in the image!")
         #確認
-        tap(device, "855 1355")
+        tap(device, "845 1276")
+        #tap(device, "855 1355")
         time.sleep(1.0)
           
       # else:

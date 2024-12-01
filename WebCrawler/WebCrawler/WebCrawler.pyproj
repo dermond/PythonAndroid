@@ -5,7 +5,7 @@
     <ProjectGuid>ce00eba1-83f3-48ef-9d32-f2f408089742</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>TestConnentandroid.py</StartupFile>
+    <StartupFile>shopee.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -13,7 +13,7 @@
     <Name>WebCrawler</Name>
     <RootNamespace>PythonApplication1</RootNamespace>
     <TestFramework>Pytest</TestFramework>
-    <InterpreterId>MSBuild|env6|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
     <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -29,8 +29,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CheckTR.py" />
+    <Compile Include="shopee.py" />
     <Compile Include="Testpytesseract.py" />
-    <Compile Include="TestConnentandroid.py" />
+    <Compile Include="TaiwanPay.py" />
     <Compile Include="TravelRabbitByCheckUrl.py" />
     <Compile Include="TravelRabbitByOnlyOne.py" />
     <Compile Include="TravelRabbitByDB.py" />
@@ -81,15 +82,6 @@
     <Content Include="setting.ini" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="env6\">
-      <Id>env6</Id>
-      <Version>3.7</Version>
-      <Description>env6 (Python 3.7 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
     <Interpreter Include="env\">
       <Id>env</Id>
       <Version>3.7</Version>
