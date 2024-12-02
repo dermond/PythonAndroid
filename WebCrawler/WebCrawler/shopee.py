@@ -13,6 +13,7 @@ import os
 import ddddocr
 import re
 import subprocess
+from PIL import Image, ImageEnhance, ImageFilter
 
 ocr = ddddocr.DdddOcr()
 
@@ -109,6 +110,20 @@ def pytesseract_image(img):
     result = pytesseract.image_to_string(img)
     return result
 
+def pytesseract_image_Chitra(img):
+    image = Image.open(os.path.join(os.getcwd(), 'cropped_image.png'))
+    
+    # 轉灰階
+    gray_image = image.convert('L')
+    # 增強對比度
+    enhancer = ImageEnhance.Contrast(gray_image)
+    enhanced_image = enhancer.enhance(2.0)
+    # 去噪
+    filtered_image = enhanced_image.filter(ImageFilter.MedianFilter())
+    
+    result = pytesseract.image_to_string(filtered_image, lang='chi_tra')
+    return result
+
 def check_error_code(text, error_code):
     # 检查文本中是否包含指定的错误码
     if error_code in text:
@@ -166,9 +181,13 @@ if __name__ == '__main__':
             # 執行 OCR
             #resulttext = pytesseract_image(cropped_img)
             resulttext2 = ddddocr_image(cropped_img)
+
             resulttext2 = resulttext2.replace("o","0")
             filtered_text = re.sub(r'\D', '', resulttext2)
             # 確保有至少 4 位數字
+            if resulttext2.find("已错束") > -1:
+                jump = 400
+                raise ValueError("已結束")
             if len(filtered_text) < 4:
                 raise ValueError("輸入字串長度不足 4 位數")
         
