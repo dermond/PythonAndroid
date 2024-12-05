@@ -11,6 +11,7 @@ from PIL import Image
 import io
 import os
 import ddddocr
+import subprocess
 
 ocr = ddddocr.DdddOcr()
 
@@ -87,6 +88,11 @@ def capture_screenshot(device):
     img = Image.open(io.BytesIO(result))
      # 保存到当前工作目录
     img.save(os.path.join(os.getcwd(), 'full_screen.png'))
+
+    
+    subprocess.run(["adb", "exec-out", "screencap", "-p", ">", "screen.png"], shell=True)
+
+
     return img
 
 def crop_image(img, start_point, end_point):
@@ -113,11 +119,41 @@ def check_error_code(text, error_code):
         return True
     return False
 
+def get_current_ime():
+    try:
+        result = subprocess.run(
+            ["adb", "shell", "ime", "list", "-s"],
+            stdout=subprocess.PIPE,
+            text=True,
+            check=True
+        )
+        return result.stdout.strip()
+    except subprocess.CalledProcessError:
+        return None
+
+def switch_to_english():
+    target_ime = "com.google.android.inputmethod.latin/.LatinIME"
+    current_ime = get_current_ime()
+
+    if current_ime == target_ime:
+        print("Input method is already set to English (US).")
+    else:
+        try:
+            subprocess.run(["adb", "shell", "ime", "set", target_ime], check=True)
+            print(f"Successfully switched to {target_ime}")
+        except subprocess.CalledProcessError:
+            print("Failed to switch input method.")
+
+
+
 if __name__ == '__main__':
 
   device, client = connect()
 
-  for _ in range(5):
+  #目前按鈕特性 是給 google pixel 8a用
+  # 
+
+  for _ in range(1):
       
       #轉帳
       #tap(device, "676 1281")
@@ -140,6 +176,8 @@ if __name__ == '__main__':
       text_to_input = '007'  # 輸入的文字 #第一銀行
       option_position = '454 1030'    # 選擇的選項的位置
 
+    
+
       # 從下拉清單中選擇
       select_from_dropdown(device, dropdown_position,text_to_input, option_position)
       time.sleep(1.0)
@@ -155,7 +193,7 @@ if __name__ == '__main__':
       time.sleep(2.0)
   
       #金額
-      tap(device, "262 690")
+      tap(device, "262 545")
       input_characters(device, "666")
       time.sleep(1.0)
 
@@ -166,29 +204,29 @@ if __name__ == '__main__':
       time.sleep(1.0)
 
       #選擇卡片
-      tap(device, "558 1058")
+      tap(device, "558 1194")
       time.sleep(1.0)
-      #tap(device, "582 1382") #第一銀行(1)
-      #tap(device, "582 1882") #第一銀行(2)
-      #tap(device, "582 1636") #華南
-      tap(device, "582 2125") #郵局
+      #tap(device, "582 1937") #第一銀行(1)
+      #tap(device, "582 1736") #第一銀行(2)
+      #tap(device, "582 2162") #華南
+      tap(device, "582 1523") #郵局
       time.sleep(1.0)
   
   
       #輸入密碼
-      tap(device, "387 1338")
+      tap(device, "387 1462")
       input_characters(device, "9393695")
   
       #取消輸入框
       tap(device, "798 2198")
       time.sleep(1.0)
-      tap(device, "824 2341")
+      tap(device, "248 2341")
       time.sleep(1.0)
 
       while True:
           #圖片驗證
-          start_point = (117, 1524)  # 起始坐標 (x, y)
-          end_point = (496, 1695)    # 結束坐標 (x, y)
+          start_point = (117, 1630)  # 起始坐標 (x, y)
+          end_point = (510, 1762)    # 結束坐標 (x, y)
 
           img = capture_screenshot(device)
           cropped_img = crop_image(img, start_point, end_point)

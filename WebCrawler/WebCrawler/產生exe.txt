@@ -1,41 +1,29 @@
 #生成spec
-pyi-makespec -w D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.py
 
-pyi-makespec -w --console D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.py
 
-pyi-makespec -w --console D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\CheckTR.py
-
-pyi-makespec -w --console D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbitByDB.py
+pyi-makespec -w --console D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py
 
 
 #修改spec
 binaries 加上資料夾
 #多項打包
-pyinstaller D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.spec
+
+pyinstaller D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.spec --noconfirm
 
 
 
-pyinstaller D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.spec --noconfirm
-
-
-pyinstaller D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\CheckTR.spec --noconfirm
-
-
-pyinstaller D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbitByDB.spec --noconfirm
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --onefile
 
 
 
-D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\env6\Scripts\pyinstaller.exe D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit.py --onefile
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --onefile --debug=all --hidden-import=cv2 --collect-binaries=cv2
 
 
-D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\env6\Scripts\pyinstaller.exe D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbitByCheckUrl.py --onefile
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --debug=all --hidden-import=cv2 --collect-submodules=cv2
 
 
-D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\env6\Scripts\pyinstaller.exe D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\TravelRabbit-Single.py --onefile
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --debug=all --hidden-import=cv2 --additional-hooks-dir=hooks
 
 
-pip install -r D:\GitHub\Nearbysearch\WebCrawler\WebCrawler\requirements.txt
 
-chcp 65001
-
-numpy==1.20.3
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py 

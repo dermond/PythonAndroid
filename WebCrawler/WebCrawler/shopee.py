@@ -4,7 +4,7 @@ Created on Sat Mar 27 12:23:27 2021
 
 @author: dermo
 """
-from ppadb.client import Client as AdbClient
+
 import time
 import pytesseract
 from PIL import Image
@@ -14,6 +14,7 @@ import ddddocr
 import re
 import subprocess
 from PIL import Image, ImageEnhance, ImageFilter
+from ppadb.client import Client as AdbClient
 
 ocr = ddddocr.DdddOcr()
 
@@ -102,7 +103,8 @@ def crop_image(img, start_point, end_point):
 
 def ddddocr_image(img):
     image = Image.open(os.path.join(os.getcwd(), 'cropped_image.png'))
-    result = ocr.classification(image)
+    result = ocr.classification(image, png_fix=True)
+
     return result
 
 def pytesseract_image(img):
@@ -171,7 +173,7 @@ if __name__ == '__main__':
       turn_on_screen()
       while True:
         try:
-            start_point = (900, 300+jump)  # 起始坐標 (x, y)
+            start_point = (800, 300+jump)  # 起始坐標 (x, y)
             end_point = (1050, 350+jump)    # 結束坐標 (x, y)
       
             # 截圖並裁剪
@@ -183,11 +185,17 @@ if __name__ == '__main__':
             resulttext2 = ddddocr_image(cropped_img)
 
             resulttext2 = resulttext2.replace("o","0")
+            # 使用正則表達式替換
+            resulttext2 = re.sub(r"[a-zA-Z]", "", resulttext2)
+
             filtered_text = re.sub(r'\D', '', resulttext2)
             # 確保有至少 4 位數字
             if resulttext2.find("已错束") > -1:
                 jump = 400
                 raise ValueError("已結束")
+
+            if len(filtered_text) == 3:
+                filtered_text = "0" + filtered_text
             if len(filtered_text) < 4:
                 raise ValueError("輸入字串長度不足 4 位數")
         
@@ -228,11 +236,17 @@ if __name__ == '__main__':
       print("目前偵測圖片位置" + str(jump))
       
       turn_off_screen()
-      time.sleep(total_seconds)
+
+      caltotal_seconds = total_seconds
+      for _ in range(total_seconds):
+
+        time.sleep(1)
+        caltotal_seconds = caltotal_seconds -1
+        print("還剩下" + str(caltotal_seconds) + "秒")
       turn_on_screen()
       
       # #錯誤視窗判斷
-      start_point = (900, 200)  # 起始坐標 (x, y)
+      start_point = (800, 200)  # 起始坐標 (x, y)
       end_point = (1050, 350)    # 結束坐標 (x, y)
 
       img = capture_screenshot(device)

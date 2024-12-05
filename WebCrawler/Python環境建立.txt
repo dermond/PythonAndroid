@@ -4,3 +4,9 @@ python -m pip list
 python -m pip freeze > D:\git\Jepun.AI\PythonApplication1\myrequirements.txt
 安裝環境
 pip install -r D:\git\Jepun.AI\PythonApplication1\myrequirements.txt
+
+
+pip install -r D:\GitHub\PythonAndroid\WebCrawler\myrequirements.txt
+
+
+pip install -r D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\requirements.txt
