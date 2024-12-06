@@ -174,6 +174,7 @@ if __name__ == '__main__':
       #text_to_input = '008'  # 輸入的文字 #華南銀行
       #text_to_input = '700'  # 輸入的文字 #郵局
       text_to_input = '007'  # 輸入的文字 #第一銀行
+      text_to_input = '004'  # 輸入的文字 #台灣銀行
       option_position = '454 1030'    # 選擇的選項的位置
 
     

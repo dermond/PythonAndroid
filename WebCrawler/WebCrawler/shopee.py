@@ -15,8 +15,10 @@ import re
 import subprocess
 from PIL import Image, ImageEnhance, ImageFilter
 from ppadb.client import Client as AdbClient
+from PyInstaller.utils.hooks import collect_all
 
 ocr = ddddocr.DdddOcr()
+datas, binaries, hiddenimports = collect_all('cv2')
 
 def connect():
 
