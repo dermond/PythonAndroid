@@ -15,10 +15,10 @@ import re
 import subprocess
 from PIL import Image, ImageEnhance, ImageFilter
 from ppadb.client import Client as AdbClient
-from PyInstaller.utils.hooks import collect_all
+
 
 ocr = ddddocr.DdddOcr()
-datas, binaries, hiddenimports = collect_all('cv2')
+
 
 def connect():
 
@@ -109,6 +109,8 @@ def ddddocr_image(img):
 
     return result
 
+
+
 def pytesseract_image(img):
     image = Image.open(os.path.join(os.getcwd(), 'cropped_image.png'))
     result = pytesseract.image_to_string(img)
@@ -185,6 +187,8 @@ if __name__ == '__main__':
             # 執行 OCR
             #resulttext = pytesseract_image(cropped_img)
             resulttext2 = ddddocr_image(cropped_img)
+           
+           
 
             resulttext2 = resulttext2.replace("o","0")
             # 使用正則表達式替換
@@ -196,8 +200,8 @@ if __name__ == '__main__':
                 jump = 400
                 raise ValueError("已結束")
 
-            if len(filtered_text) == 3:
-                filtered_text = "0" + filtered_text
+            #if len(filtered_text) == 3:
+            #    filtered_text = "0" + filtered_text
             if len(filtered_text) < 4:
                 raise ValueError("輸入字串長度不足 4 位數")
         

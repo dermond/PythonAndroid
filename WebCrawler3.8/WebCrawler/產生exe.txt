@@ -1,0 +1,29 @@
+#生成spec
+
+
+pyi-makespec -w --console D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py
+
+
+#修改spec
+binaries 加上資料夾
+#多項打包
+
+pyinstaller D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.spec --noconfirm
+
+
+
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --onefile
+
+
+
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --onefile --debug=all --hidden-import=cv2 --collect-binaries=cv2
+
+
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --debug=all --hidden-import=cv2 --collect-submodules=cv2
+
+
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --debug=all --hidden-import=cv2 --additional-hooks-dir=hooks
+
+
+
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py 
