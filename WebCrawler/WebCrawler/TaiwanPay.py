@@ -44,14 +44,7 @@ def select_from_dropdown(device, dropdown_position, text,option_position):
     # 選擇清單中的選項
     tap(device, option_position)
     
-def input_text_in_field(device, field_position, text):
-    # 點擊輸入框位置以激活
-    tap(device, field_position)
-    time.sleep(0.5)  # 等待輸入框激活
-    # 輸入文字
-    input_characters(device, text_to_input)
-    
-    
+
 def input_characters(device, characters):
     keycode_map = {
         '0': 7, '1': 8, '2': 9, '3': 10, '4': 11, '5': 12,
@@ -78,6 +71,9 @@ def input_characters(device, characters):
      
 def input_keyevent(device, keycode):
     device.shell(f'input keyevent {keycode}')
+    
+def input_text(device, text):
+    device.shell(f'input text {text}')
     
 def swipe_to_position(device, start, end, duration=500):
     device.shell(f'input swipe {start} {end} {duration}')
@@ -157,7 +153,8 @@ if __name__ == '__main__':
       
       #轉帳
       #tap(device, "676 1281")
-      tap(device, "644 1610")
+      #tap(device, "644 1610")
+      tap(device, "689 1509")
       time.sleep(1.0)
   
       #手機轉帳
@@ -173,7 +170,7 @@ if __name__ == '__main__':
       dropdown_position = '474 1200'  # 下拉清單的位置
       #text_to_input = '008'  # 輸入的文字 #華南銀行
       #text_to_input = '700'  # 輸入的文字 #郵局
-      text_to_input = '007'  # 輸入的文字 #第一銀行
+      #text_to_input = '007'  # 輸入的文字 #第一銀行
       text_to_input = '004'  # 輸入的文字 #台灣銀行
       option_position = '454 1030'    # 選擇的選項的位置
 
@@ -207,10 +204,11 @@ if __name__ == '__main__':
       #選擇卡片
       tap(device, "558 1194")
       time.sleep(1.0)
+      #tap(device, "582 1302") #台灣銀行
       #tap(device, "582 1937") #第一銀行(1)
-      #tap(device, "582 1736") #第一銀行(2)
-      #tap(device, "582 2162") #華南
-      tap(device, "582 1523") #郵局
+      #tap(device, "582 1729") #第一銀行(2)
+      tap(device, "582 2151") #華南
+      #tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
   
@@ -286,6 +284,8 @@ if __name__ == '__main__':
   
       tap(device, "321 2162")
       time.sleep(1.0)
+
+      time.sleep(10.0)
   
   
   
