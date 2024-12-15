@@ -20,6 +20,7 @@ from ppadb.client import Client as AdbClient
 
 ocr = ddddocr.DdddOcr()
 
+momoflag = 0
 
 def connect():
 
@@ -179,7 +180,7 @@ def momo():
 
     tap(device, "884 1895 ")
     time.sleep(2.0)
-    
+    momoflag = 0
     # #錯誤視窗判斷
     end = False
     for _ in range(10):
@@ -201,25 +202,30 @@ def momo():
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
 
-            tap(device, "279 2319 ")
-            time.sleep(2.0)
-    
-            tap(device, "778 916 ")
-            time.sleep(2.0)
             
+            
+            momoflag = momoflag + 1
+            
+            end = True
         else:
             end = False
             break
-        end = True
+       
         
-    if end :
+    if end and momoflag >= 10:
            
         for _ in range(10):
             swipe_start = '500 200'
             swipe_end = '500 1000'
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
-                
+    
+    #回蝦皮
+    tap(device, "279 2319 ")
+    time.sleep(2.0)
+    
+    tap(device, "778 916 ")
+    time.sleep(2.0)
 
    
           
@@ -228,7 +234,8 @@ if __name__ == '__main__':
   device, client = connect()
 
   jump = 0
-
+  momoflag = 0
+  
   for _ in range(99999999):
       
       turn_on_screen()
