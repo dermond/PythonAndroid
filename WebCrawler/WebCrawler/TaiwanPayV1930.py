@@ -152,7 +152,7 @@ if __name__ == '__main__':
   for _ in range(5):
       
       #轉帳
-      tap(device, "684 1270")
+      tap(device, "651 1288")
       #tap(device, "644 1610")
       #tap(device, "689 1509")
       time.sleep(1.0)
@@ -169,9 +169,9 @@ if __name__ == '__main__':
 
       dropdown_position = '474 1200'  # 下拉清單的位置
       #text_to_input = '008'  # 輸入的文字 #華南銀行
-      #text_to_input = '700'  # 輸入的文字 #郵局
+      text_to_input = '700'  # 輸入的文字 #郵局
       #text_to_input = '007'  # 輸入的文字 #第一銀行
-      text_to_input = '004'  # 輸入的文字 #台灣銀行
+      #text_to_input = '004'  # 輸入的文字 #台灣銀行
       option_position = '454 1030'    # 選擇的選項的位置
 
     
@@ -192,7 +192,7 @@ if __name__ == '__main__':
       time.sleep(2.0)
   
       #金額
-      tap(device, "262 545")
+      tap(device, "262 694")
       input_characters(device, "666")
       time.sleep(1.0)
 
@@ -209,24 +209,26 @@ if __name__ == '__main__':
       #tap(device, "582 1937") #第一銀行(1)
       #tap(device, "582 1729") #第一銀行(2)
       #tap(device, "582 2151") #華南
-      tap(device, "582 1485") #郵局
+      #tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
   
       #輸入密碼
-      tap(device, "387 1462")
+      tap(device, "387 1380")
       input_characters(device, "9393695")
   
       #取消輸入框
-      tap(device, "798 2198")
+      tap(device, "815 2338")
       time.sleep(1.0)
-      tap(device, "248 2341")
-      time.sleep(1.0)
+     
 
       while True:
+          tap(device, "658 1617")
+          time.sleep(1.0)
+      
           #圖片驗證
-          start_point = (117, 1630)  # 起始坐標 (x, y)
-          end_point = (510, 1762)    # 結束坐標 (x, y)
+          start_point = (117, 1511)  # 起始坐標 (x, y)
+          end_point = (510, 1636)    # 結束坐標 (x, y)
 
           img = capture_screenshot(device)
           cropped_img = crop_image(img, start_point, end_point)
@@ -237,10 +239,12 @@ if __name__ == '__main__':
           time.sleep(1.0)
   
           #確認
-          tap(device, "492 2150")
+          tap(device, "819 2326")
           time.sleep(1.0)
   
-
+          tap(device, "553 2158")
+          time.sleep(1.0)
+          
           #錯誤視窗判斷
           start_point = (103, 940)  # 起始坐標 (x, y)
           end_point = (715, 1400)    # 結束坐標 (x, y)
