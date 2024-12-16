@@ -86,7 +86,7 @@ def input_characters(device, characters):
 def input_keyevent(device, keycode):
     device.shell(f'input keyevent {keycode}')
     
-def swipe_to_position(device, start, end, duration=500):
+def swipe_to_position(device, start, end, duration=1000):
     device.shell(f'input swipe {start} {end} {duration}')
     time.sleep(1)  # 等待滑动完成
     
@@ -192,13 +192,18 @@ def momo():
         resulttext = pytesseract_image(cropped_img)
       
         resulttext2 = ddddocr_image(cropped_img)
-        if (resulttext2 == ''):
-            
-            tap(device, "891 493 ")
-            time.sleep(3.0)
+        if (re.search(r'\d', resulttext2)):
+            end = False
+            break
+        else:
+           
+            tap(device, "873 614 ")
+            time.sleep(6.0)
     
-            swipe_start = '500 1000'
-            swipe_end = '500 200'
+            tap(device, "250 1010 ")
+
+            swipe_start = '500 1000 '
+            swipe_end = '500 200 '
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
 
@@ -207,16 +212,13 @@ def momo():
             momoflag = momoflag + 1
             
             end = True
-        else:
-            end = False
-            break
        
         
     if end and momoflag >= 10:
            
         for _ in range(10):
-            swipe_start = '500 200'
-            swipe_end = '500 1000'
+            swipe_start = '500 200 '
+            swipe_end = '500 1000 '
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
     
@@ -296,8 +298,8 @@ if __name__ == '__main__':
 
 
       if jump > 300:
-          swipe_start = '500 1000'
-          swipe_end = '500 200'
+          swipe_start = '500 1000 '
+          swipe_end = '500 200 '
           swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
           time.sleep(1.0)
           jump = jump - 300
@@ -341,6 +343,8 @@ if __name__ == '__main__':
       
       resulttext2 = ddddocr_image(cropped_img)
 
+      tap(device, "250 1010 ")
+
       index = 301+jump
       tap(device, "984 " + str(index))
       time.sleep(3.0)
@@ -349,6 +353,8 @@ if __name__ == '__main__':
       tap(device, "554 "+ str(index))
       time.sleep(3.0)
       
+      tap(device, "250 1010 ")
+
       start_point = (900, 300+jump)  # 起始坐標 (x, y)
       end_point = (1050, 350+jump)    # 結束坐標 (x, y)
       
@@ -370,8 +376,8 @@ if __name__ == '__main__':
            #momo()
            #continue 
       else:
-          swipe_start = '500 1000'
-          swipe_end = '500 200'
+          swipe_start = '500 1000 '
+          swipe_end = '500 200 '
           swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
           time.sleep(1.0)
           jump = jump - 300
@@ -391,6 +397,8 @@ if __name__ == '__main__':
       
       tap(device, "545 1759 ")
       time.sleep(2.0)
+
+
 
       momo()
 
