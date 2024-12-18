@@ -312,7 +312,7 @@ if __name__ == '__main__':
       print("目前偵測圖片位置" + str(jump))
       
       #轉盤
-      index = 469+jump
+      index = 421+jump
 
       tap(device, "976 "+ str(index) + " ")
       time.sleep(2.0)
@@ -394,7 +394,7 @@ if __name__ == '__main__':
           jump = jump - 300
        
       #轉盤
-      index = 469+jump
+      index = 421+jump
 
       tap(device, "976 "+ str(index) + " ")
       time.sleep(2.0)
