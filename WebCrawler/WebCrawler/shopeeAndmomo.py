@@ -326,8 +326,8 @@ if __name__ == '__main__':
       tap(device, "545 1481 ")
       time.sleep(2.0)
       
-      tap(device, "545 1759 ")
-      time.sleep(2.0)
+      # tap(device, "545 1759 ")
+      # time.sleep(2.0)
 
       turn_off_screen()
 
@@ -339,7 +339,7 @@ if __name__ == '__main__':
         print("還剩下" + str(caltotal_seconds) + "秒")
 
 
-        tap(device, "545 1759 ")
+        tap(device, "545 930 ")
      
 
       turn_on_screen()
@@ -408,8 +408,8 @@ if __name__ == '__main__':
       tap(device, "545 1481 ")
       time.sleep(2.0)
       
-      tap(device, "545 1759 ")
-      time.sleep(2.0)
+      # tap(device, "545 1759 ")
+      # time.sleep(2.0)
 
 
 
