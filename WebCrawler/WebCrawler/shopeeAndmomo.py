@@ -202,7 +202,7 @@ def momo():
     
             tap(device, "250 1010 ")
 
-            swipe_start = '500 1000 '
+            swipe_start = '500 1500 '
             swipe_end = '500 200 '
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
@@ -218,7 +218,7 @@ def momo():
            
         for _ in range(10):
             swipe_start = '500 200 '
-            swipe_end = '500 1000 '
+            swipe_end = '500 1500 '
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
     
@@ -298,7 +298,11 @@ if __name__ == '__main__':
 
 
       if jump > 300:
-          swipe_start = '500 1000 '
+          
+          tap(device, "545 1759 ")
+          time.sleep(2.0)
+      
+          swipe_start = '500 1500 '
           swipe_end = '500 200 '
           swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
           time.sleep(1.0)
@@ -376,7 +380,7 @@ if __name__ == '__main__':
            #momo()
            #continue 
       else:
-          swipe_start = '500 1000 '
+          swipe_start = '500 1500 '
           swipe_end = '500 200 '
           swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
           time.sleep(1.0)
