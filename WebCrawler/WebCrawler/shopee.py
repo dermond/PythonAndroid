@@ -20,7 +20,7 @@ from ppadb.client import Client as AdbClient
 ocr = ddddocr.DdddOcr()
 
 
-def connect():
+def connect(index = 0):
 
   client = AdbClient(host='127.0.0.1', port=5037)
 
@@ -29,7 +29,7 @@ def connect():
     print('No devices')
     quit()
 
-  device = devices[0]
+  device = devices[index]
   print(f'Connected to {device}')
 
   return device, client

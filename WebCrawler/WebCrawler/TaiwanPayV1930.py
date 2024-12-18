@@ -15,7 +15,7 @@ import subprocess
 
 ocr = ddddocr.DdddOcr()
 
-def connect():
+def connect(index = 0):
 
   client = AdbClient(host='127.0.0.1', port=5037)
 
@@ -24,7 +24,7 @@ def connect():
     print('No devices')
     quit()
 
-  device = devices[0]
+  device = devices[index]
   print(f'Connected to {device}')
 
   return device, client
@@ -149,7 +149,7 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(5):
+  for _ in range(4):
       
       #轉帳
       tap(device, "651 1288")
@@ -168,8 +168,8 @@ if __name__ == '__main__':
       time.sleep(1.0)
 
       dropdown_position = '474 1200'  # 下拉清單的位置
-      #text_to_input = '008'  # 輸入的文字 #華南銀行
-      text_to_input = '700'  # 輸入的文字 #郵局
+      text_to_input = '008'  # 輸入的文字 #華南銀行
+      #text_to_input = '700'  # 輸入的文字 #郵局
       #text_to_input = '007'  # 輸入的文字 #第一銀行
       #text_to_input = '004'  # 輸入的文字 #台灣銀行
       option_position = '454 1030'    # 選擇的選項的位置

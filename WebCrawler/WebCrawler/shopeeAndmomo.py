@@ -22,7 +22,7 @@ ocr = ddddocr.DdddOcr()
 
 momoflag = 0
 
-def connect():
+def connect(index = 0):
 
   client = AdbClient(host='127.0.0.1', port=5037)
 
@@ -31,7 +31,7 @@ def connect():
     print('No devices')
     quit()
 
-  device = devices[0]
+  device = devices[index]
   print(f'Connected to {device}')
 
   return device, client
@@ -203,7 +203,7 @@ def momo():
             tap(device, "250 1010 ")
 
             swipe_start = '500 1500 '
-            swipe_end = '500 200 '
+            swipe_end = '500 500 '
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
 
@@ -217,7 +217,7 @@ def momo():
     if end and momoflag >= 10:
            
         for _ in range(10):
-            swipe_start = '500 200 '
+            swipe_start = '500 500 '
             swipe_end = '500 1500 '
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
@@ -312,7 +312,9 @@ if __name__ == '__main__':
       print("目前偵測圖片位置" + str(jump))
       
       #轉盤
-      tap(device, "976 704 ")
+      index = 469+jump
+
+      tap(device, "976 "+ str(index) + " ")
       time.sleep(2.0)
 
       tap(device, "542 1058 ")
@@ -335,6 +337,11 @@ if __name__ == '__main__':
         time.sleep(1)
         caltotal_seconds = caltotal_seconds -1
         print("還剩下" + str(caltotal_seconds) + "秒")
+
+
+        tap(device, "545 1759 ")
+     
+
       turn_on_screen()
       
       # #錯誤視窗判斷
@@ -387,7 +394,9 @@ if __name__ == '__main__':
           jump = jump - 300
        
       #轉盤
-      tap(device, "976 704 ")
+      index = 469+jump
+
+      tap(device, "976 "+ str(index) + " ")
       time.sleep(2.0)
 
       tap(device, "542 1058 ")

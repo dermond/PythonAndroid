@@ -5,7 +5,7 @@
     <ProjectGuid>ce00eba1-83f3-48ef-9d32-f2f408089742</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>shopeeAndmomo.py</StartupFile>
+    <StartupFile>TaiwanPay.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
