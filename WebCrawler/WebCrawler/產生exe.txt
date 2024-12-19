@@ -27,3 +27,7 @@ D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\Git
 
 
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py 
+
+
+
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopeeAndmomo.py 
