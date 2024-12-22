@@ -149,7 +149,7 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(5):
+  for _ in range(2):
       
       #轉帳
       tap(device, "684 1270")
@@ -205,7 +205,7 @@ if __name__ == '__main__':
       #選擇卡片
       tap(device, "558 1194")
       time.sleep(1.0)
-      tap(device, "582 1302") #台灣銀行
+      #tap(device, "582 1302") #台灣銀行
       #tap(device, "582 1937") #第一銀行(1)
       #tap(device, "582 1729") #第一銀行(2)
       #tap(device, "582 2151") #華南
@@ -243,7 +243,7 @@ if __name__ == '__main__':
 
           #錯誤視窗判斷
           start_point = (103, 940)  # 起始坐標 (x, y)
-          end_point = (715, 1400)    # 結束坐標 (x, y)
+          end_point = (1000, 1400)    # 結束坐標 (x, y)
 
           img = capture_screenshot(device)
           cropped_img = crop_image(img, start_point, end_point)
@@ -255,7 +255,12 @@ if __name__ == '__main__':
             #確認
             tap(device, "855 1355")
             time.sleep(1.0)
-          
+          elif check_error_code(resulttext,  '9999'):
+            print(f"Error code {error_code} found in the image!")
+            #確認
+            tap(device, "845 1276")
+            #tap(device, "855 1355")
+            time.sleep(1.0)
           else:
             print(f"Error code {error_code} not found in the image.")
             time.sleep(3.0)
