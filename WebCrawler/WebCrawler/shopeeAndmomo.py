@@ -183,7 +183,9 @@ def momo():
     momoflag = 0
     # #錯誤視窗判斷
     end = False
+    print("momo 開始往下滑")
     for _ in range(10):
+        
         start_point = (855, 396)  # 起始坐標 (x, y)
         end_point = (1016, 471)    # 結束坐標 (x, y)
 
@@ -200,10 +202,11 @@ def momo():
             tap(device, "873 614 ")
             time.sleep(6.0)
     
-            tap(device, "250 1010 ")
+            tap(device, "521 930 ")
+            time.sleep(1.0)
 
-            swipe_start = '500 1500 '
-            swipe_end = '500 500 '
+            swipe_start = ' 500 1200 '
+            swipe_end = ' 500 200 '
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
 
@@ -215,7 +218,7 @@ def momo():
        
         
     if end and momoflag >= 10:
-           
+        print("momo 開始往上滑")
         for _ in range(10):
             swipe_start = '500 500 '
             swipe_end = '500 1500 '
