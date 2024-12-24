@@ -360,8 +360,7 @@ def shopee():
          swipe_end = '500 200 '
          swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
          time.sleep(1.0)
-         jump = jump - 300
-       
+
      #轉盤
      index = 421+jump
 
