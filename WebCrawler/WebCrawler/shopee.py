@@ -263,6 +263,10 @@ if __name__ == '__main__':
 
       index = 301+jump
 
+      tap(device, "200 1010 ")
+      time.sleep(1.0)
+      tap(device, "250 1010 ")
+
       tap(device, "984 " + str(index))
       time.sleep(3.0)
       
@@ -270,6 +274,8 @@ if __name__ == '__main__':
       tap(device, "554 "+ str(index))
       time.sleep(3.0)
       
+      tap(device, "200 1010 ")
+      time.sleep(1.0)
       tap(device, "250 1010 ")
 
       start_point = (900, 300+jump)  # 起始坐標 (x, y)
