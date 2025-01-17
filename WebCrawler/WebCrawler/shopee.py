@@ -270,6 +270,8 @@ if __name__ == '__main__':
       tap(device, "554 "+ str(index))
       time.sleep(3.0)
       
+      tap(device, "250 1010 ")
+
       start_point = (900, 300+jump)  # 起始坐標 (x, y)
       end_point = (1050, 350+jump)    # 結束坐標 (x, y)
       
@@ -295,6 +297,20 @@ if __name__ == '__main__':
           time.sleep(1.0)
           jump = jump - 300
 
+      #轉盤
+      #index = 421+jump
+
+      #tap(device, "976 "+ str(index) + " ")
+      #time.sleep(2.0)
+
+      #tap(device, "542 1058 ")
+      #time.sleep(3.0)
+
+      #tap(device, "754 1300 ")
+      #time.sleep(10.0)
+
+      #tap(device, "545 1481 ")
+      #time.sleep(2.0)
 
 
       # #轉帳
