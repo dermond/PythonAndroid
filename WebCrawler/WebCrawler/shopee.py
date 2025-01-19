@@ -172,10 +172,26 @@ if __name__ == '__main__':
 
   jump = 0
 
+  # #錯誤視窗判斷
+  
+
   for _ in range(99999999):
       
-      turn_on_screen()
-      while True:
+    start_point = (370, 417)  # 起始坐標 (x, y)
+    end_point = (735, 600)    # 結束坐標 (x, y)
+
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = pytesseract_image(cropped_img)
+      
+    resulttext2 = ddddocr_image(cropped_img)
+    if resulttext2.find("直帮卫锥束") > -1:
+        tap(device, "230 1700 ")
+        time.sleep(1.0)
+        continue 
+
+    turn_on_screen()
+    while True:
         try:
             start_point = (800, 300+jump)  # 起始坐標 (x, y)
             end_point = (1050, 350+jump)    # 結束坐標 (x, y)
@@ -231,77 +247,88 @@ if __name__ == '__main__':
                 break
 
 
-      if jump > 300:
-          swipe_start = '500 1000'
-          swipe_end = '500 200'
-          swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-          time.sleep(1.0)
-          jump = jump - 300
-          continue 
+    if jump > 300:
+        swipe_start = '500 1000'
+        swipe_end = '500 200'
+        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+        time.sleep(1.0)
+        jump = jump - 300
+        continue 
       
-      print("目前偵測圖片位置" + str(jump))
+    print("目前偵測圖片位置" + str(jump))
       
-      turn_off_screen()
+    turn_off_screen()
 
-      caltotal_seconds = total_seconds
-      for _ in range(total_seconds):
+    caltotal_seconds = total_seconds
+    for _ in range(total_seconds):
 
         time.sleep(1)
         caltotal_seconds = caltotal_seconds -1
         print("還剩下" + str(caltotal_seconds) + "秒")
-      turn_on_screen()
+    turn_on_screen()
       
-      # #錯誤視窗判斷
-      start_point = (800, 200)  # 起始坐標 (x, y)
-      end_point = (1050, 350)    # 結束坐標 (x, y)
+    # #錯誤視窗判斷
+    start_point = (370, 417)  # 起始坐標 (x, y)
+    end_point = (735, 600)    # 結束坐標 (x, y)
 
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = pytesseract_image(cropped_img)
       
-      resulttext2 = ddddocr_image(cropped_img)
+    resulttext2 = ddddocr_image(cropped_img)
+    if resulttext2.find("直帮卫锥束") > -1:
+        tap(device, "230 1700 ")
+        time.sleep(1.0)
+        continue 
 
-      index = 301+jump
+    index = 301+jump
 
-      tap(device, "200 1010 ")
-      time.sleep(1.0)
-      tap(device, "250 1010 ")
+    tap(device, "265 1475 ")
+    time.sleep(1.0)
 
-      tap(device, "984 " + str(index))
-      time.sleep(3.0)
+    tap(device, "200 1010 ")
+    time.sleep(1.0)
+    #tap(device, "250 1010 ")
+
+    tap(device, "984 " + str(index))
+    time.sleep(3.0)
       
-      index = 1473
-      tap(device, "554 "+ str(index))
-      time.sleep(3.0)
+    index = 1473
+    tap(device, "554 "+ str(index))
+    time.sleep(3.0)
       
-      tap(device, "200 1010 ")
-      time.sleep(1.0)
-      tap(device, "250 1010 ")
+    tap(device, "200 1010 ")
+    time.sleep(1.0)
 
-      start_point = (900, 300+jump)  # 起始坐標 (x, y)
-      end_point = (1050, 350+jump)    # 結束坐標 (x, y)
+      #tap(device, "200 480 ")
+      #time.sleep(1.0)
+
+      #tap(device, "250 1010 ")
+
+    start_point = (900, 300+jump)  # 起始坐標 (x, y)
+    end_point = (1050, 350+jump)    # 結束坐標 (x, y)
       
       # 截圖並裁剪
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
 
       # 執行 OCR
       #resulttext = pytesseract_image(cropped_img)
-      resulttext2 = ddddocr_image(cropped_img)
-      resulttext2 = resulttext2.replace("o","0")
+    resulttext2 = ddddocr_image(cropped_img)
+    resulttext2 = resulttext2.replace("o","0")
       # 使用正則表達式移除非數字字元
-      filtered_text = re.sub(r'\D', '', resulttext2)
+    filtered_text = re.sub(r'\D', '', resulttext2)
 
       
       # 確保有至少 4 位數字
-      if len(filtered_text) == 4:
-           continue 
-      else:
-          swipe_start = '500 1000'
-          swipe_end = '500 200'
-          swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-          time.sleep(1.0)
-          jump = jump - 300
+    if len(filtered_text) == 4:
+         continue 
+    else:
+        swipe_start = '500 1000'
+        swipe_end = '500 200'
+        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+        time.sleep(1.0)
+        jump = jump - 300
 
       #轉盤
       #index = 421+jump
