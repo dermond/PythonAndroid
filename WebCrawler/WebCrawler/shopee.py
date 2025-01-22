@@ -174,7 +174,7 @@ if __name__ == '__main__':
 
   # 定義執行的時間範圍
   START_HOUR = 6
-  END_HOUR = 21
+  END_HOUR = 23
 
   # #錯誤視窗判斷
   
@@ -194,7 +194,10 @@ if __name__ == '__main__':
     else:
         print(f"[等待] 現在時間: {current_time.strftime('%Y-%m-%d %H:%M:%S')}，不在執行時間範圍內，30 分鐘後再檢查")
         # 等待 30 分鐘
+        turn_off_screen()
+
         time.sleep(30 * 60)
+
         continue
 
     start_point = (370, 417)  # 起始坐標 (x, y)
@@ -273,12 +276,13 @@ if __name__ == '__main__':
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(1.0)
         jump = jump - 300
+
+        tap(device, "310 1250 ")
+        time.sleep(1.0)
         continue 
       
     print("目前偵測圖片位置" + str(jump))
-      
-    turn_off_screen()
-
+     
     caltotal_seconds = total_seconds
     for _ in range(total_seconds):
 
