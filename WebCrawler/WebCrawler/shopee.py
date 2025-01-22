@@ -15,7 +15,7 @@ import re
 import subprocess
 from PIL import Image, ImageEnhance, ImageFilter
 from ppadb.client import Client as AdbClient
-
+from datetime import datetime
 
 ocr = ddddocr.DdddOcr()
 
@@ -172,11 +172,31 @@ if __name__ == '__main__':
 
   jump = 0
 
+  # 定義執行的時間範圍
+  START_HOUR = 6
+  END_HOUR = 21
+
   # #錯誤視窗判斷
   
 
-  for _ in range(99999999):
-      
+  for i in range(99999999):
+     
+
+    # 獲取當前時間
+    current_time = datetime.now()
+    current_hour = current_time.hour
+
+    # 判斷是否在指定時間範圍內
+    if START_HOUR <= current_hour < END_HOUR:
+        print(f"[執行] 第 {i+1} 次任務 - 現在時間: {current_time.strftime('%Y-%m-%d %H:%M:%S')}")
+        # 模擬任務執行
+        time.sleep(1)
+    else:
+        print(f"[等待] 現在時間: {current_time.strftime('%Y-%m-%d %H:%M:%S')}，不在執行時間範圍內，30 分鐘後再檢查")
+        # 等待 30 分鐘
+        time.sleep(30 * 60)
+        continue
+
     start_point = (370, 417)  # 起始坐標 (x, y)
     end_point = (735, 600)    # 結束坐標 (x, y)
 
