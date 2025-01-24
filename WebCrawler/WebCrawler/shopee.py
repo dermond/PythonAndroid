@@ -172,33 +172,32 @@ if __name__ == '__main__':
 
   jump = 0
 
-  # 定義執行的時間範圍
-  START_HOUR = 6
-  END_HOUR = 23
-
   # #錯誤視窗判斷
-  
+  # Shopee 的包名與主 Activity
+  package_name = "com.shopee.tw"
+  activity_name = "com.shopee.app.ui.home.HomeActivity_"
+
+  Shopeecount = 0
 
   for i in range(99999999):
-     
+    
+    if Shopeecount > 3:  # 如果 i 是 10 的倍數
+        print(f"第 {i} 次操作：重啟 Shopee App")
+        
+        # 關閉 Shopee
+        device.shell(f"am force-stop {package_name}")
+        print("Shopee 已停止")
+        time.sleep(2.0)
+        # 啟動 Shopee
+        start_command = f"am start -n {package_name}/{activity_name}"
+        output = device.shell(start_command)
+        print(f"Shopee 已啟動，輸出：\n{output}")
+        time.sleep(4.0)
+        tap(device, "545 2180 ")
+        time.sleep(1.0)
+        Shopeecount = 0
 
-    # 獲取當前時間
-    current_time = datetime.now()
-    current_hour = current_time.hour
-
-    # 判斷是否在指定時間範圍內
-    if START_HOUR <= current_hour < END_HOUR:
-        print(f"[執行] 第 {i+1} 次任務 - 現在時間: {current_time.strftime('%Y-%m-%d %H:%M:%S')}")
-        # 模擬任務執行
-        time.sleep(1)
-    else:
-        print(f"[等待] 現在時間: {current_time.strftime('%Y-%m-%d %H:%M:%S')}，不在執行時間範圍內，30 分鐘後再檢查")
-        # 等待 30 分鐘
-        turn_off_screen()
-
-        time.sleep(30 * 60)
-
-        continue
+    Shopeecount = Shopeecount + 1
 
     start_point = (370, 417)  # 起始坐標 (x, y)
     end_point = (735, 600)    # 結束坐標 (x, y)
@@ -287,7 +286,7 @@ if __name__ == '__main__':
         continue 
       
     print("目前偵測圖片位置" + str(jump))
-     
+    turn_off_screen()
     caltotal_seconds = total_seconds
     for _ in range(total_seconds):
 
