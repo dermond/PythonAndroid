@@ -149,7 +149,7 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(3):
+  for _ in range(5):
       
       #轉帳
       tap(device, "684 1270")
@@ -208,8 +208,8 @@ if __name__ == '__main__':
       #tap(device, "582 1302") #台灣銀行
       #tap(device, "582 1937") #第一銀行(1)
       #tap(device, "582 1729") #第一銀行(2)
-      #tap(device, "582 2151") #華南
-      tap(device, "582 1485") #郵局
+      tap(device, "582 2151") #華南
+      #tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
   
@@ -339,7 +339,7 @@ if __name__ == '__main__':
       tap(device, "321 2162")
       time.sleep(1.0)
 
-      time.sleep(10.0)
+      time.sleep(12.0)
   
   
   

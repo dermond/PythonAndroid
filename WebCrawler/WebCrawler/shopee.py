@@ -89,10 +89,13 @@ def swipe_to_position(device, start, end, duration=500):
     time.sleep(1)  # 等待滑动完成
     
 def capture_screenshot(device):
-    result = device.screencap()
-    img = Image.open(io.BytesIO(result))
-     # 保存到当前工作目录
-    img.save(os.path.join(os.getcwd(), 'full_screen.png'))
+    try:
+        result = device.screencap()
+        img = Image.open(io.BytesIO(result))
+         # 保存到当前工作目录
+        img.save(os.path.join(os.getcwd(), 'full_screen.png'))
+    except subprocess.CalledProcessError as e:
+        img = NULL
     return img
 
 def crop_image(img, start_point, end_point):
@@ -181,7 +184,7 @@ if __name__ == '__main__':
 
   for i in range(99999999):
     
-    if Shopeecount > 3:  # 如果 i 是 10 的倍數
+    if Shopeecount > 10:  # 如果 i 是 10 的倍數
         print(f"第 {i} 次操作：重啟 Shopee App")
         
         # 關閉 Shopee
