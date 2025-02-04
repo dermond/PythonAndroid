@@ -149,10 +149,10 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(4):
+  for _ in range(5):
       
       #轉帳
-      tap(device, "651 1288")
+      tap(device, "684 1270")
       #tap(device, "644 1610")
       #tap(device, "689 1509")
       time.sleep(1.0)
@@ -168,8 +168,8 @@ if __name__ == '__main__':
       time.sleep(1.0)
 
       dropdown_position = '474 1200'  # 下拉清單的位置
-      text_to_input = '008'  # 輸入的文字 #華南銀行
-      #text_to_input = '700'  # 輸入的文字 #郵局
+      #text_to_input = '008'  # 輸入的文字 #華南銀行
+      text_to_input = '700'  # 輸入的文字 #郵局
       #text_to_input = '007'  # 輸入的文字 #第一銀行
       #text_to_input = '004'  # 輸入的文字 #台灣銀行
       option_position = '454 1030'    # 選擇的選項的位置
@@ -192,7 +192,7 @@ if __name__ == '__main__':
       time.sleep(2.0)
   
       #金額
-      tap(device, "262 694")
+      tap(device, "262 545")
       input_characters(device, "666")
       time.sleep(1.0)
 
@@ -203,8 +203,8 @@ if __name__ == '__main__':
       time.sleep(1.0)
 
       #選擇卡片
-      tap(device, "558 1194")
-      time.sleep(1.0)
+      #tap(device, "558 1194")
+      #time.sleep(1.0)
       #tap(device, "582 1302") #台灣銀行
       #tap(device, "582 1937") #第一銀行(1)
       #tap(device, "582 1729") #第一銀行(2)
@@ -214,21 +214,32 @@ if __name__ == '__main__':
   
   
       #輸入密碼
-      tap(device, "387 1380")
+      tap(device, "387 1462")
       input_characters(device, "9393695")
   
-      #取消輸入框
-      tap(device, "815 2338")
+
+      start_point = (138, 1583)  # 起始坐標 (x, y)
+      end_point = (429, 1750)    # 結束坐標 (x, y)
+
+      img = capture_screenshot(device)
+      cropped_img = crop_image(img, start_point, end_point)
+      resulttext = ddddocr_image(cropped_img)
+
+      if check_error_code(resulttext, "1"):
+          #取消輸入框
+          tap(device, "270 2318")
+          time.sleep(1.0)
+
+      tap(device, "684 1698")
+      time.sleep(1.0)
+
+      tap(device, "270 2318")
       time.sleep(1.0)
      
-
       while True:
-          tap(device, "658 1617")
-          time.sleep(1.0)
-      
           #圖片驗證
-          start_point = (117, 1511)  # 起始坐標 (x, y)
-          end_point = (510, 1636)    # 結束坐標 (x, y)
+          start_point = (117, 1630)  # 起始坐標 (x, y)
+          end_point = (510, 1762)    # 結束坐標 (x, y)
 
           img = capture_screenshot(device)
           cropped_img = crop_image(img, start_point, end_point)
@@ -239,15 +250,13 @@ if __name__ == '__main__':
           time.sleep(1.0)
   
           #確認
-          tap(device, "819 2326")
+          tap(device, "492 2150")
           time.sleep(1.0)
   
-          tap(device, "553 2158")
-          time.sleep(1.0)
-          
+
           #錯誤視窗判斷
           start_point = (103, 940)  # 起始坐標 (x, y)
-          end_point = (715, 1400)    # 結束坐標 (x, y)
+          end_point = (1000, 1400)    # 結束坐標 (x, y)
 
           img = capture_screenshot(device)
           cropped_img = crop_image(img, start_point, end_point)
@@ -259,11 +268,51 @@ if __name__ == '__main__':
             #確認
             tap(device, "855 1355")
             time.sleep(1.0)
-          
+          elif check_error_code(resulttext,  '9999'):
+            print(f"Error code {error_code} found in the image!")
+            #確認
+            tap(device, "845 1276")
+            #tap(device, "855 1355")
+            time.sleep(1.0)
+          elif check_error_code(resulttext,  'NVERZARRAIEUR '):
+            print(f"網路錯誤")
+            #確認
+            tap(device, "916 1324")
+            #tap(device, "855 1355")
+            time.sleep(1.0)
+          elif check_error_code(resulttext,  'Boat ite Re'):
+            print(f"結束")
+            #確認
+            break
+          elif check_error_code(resulttext,  'an eal A'):
+            print(f"驗證碼 沒按到")
+            tap(device, " 904 1261 ")
+            time.sleep(1.0)
+
+            tap(device, "684 1698")
+            time.sleep(1.0)
+
+
+            tap(device, "387 1462")
+            input_characters(device, "9393695")
+            time.sleep(1.0)
+
+            tap(device, "270 2318")
+            time.sleep(1.0)
+
+            #確認
+            #break
+        
+       
+          elif check_error_code(resulttext,  'TERRE'):
+            print(f"結束")
+            #確認
+            break
+        
           else:
             print(f"Error code {error_code} not found in the image.")
             time.sleep(3.0)
-            break
+            #break
 
 
 
@@ -290,7 +339,7 @@ if __name__ == '__main__':
       tap(device, "321 2162")
       time.sleep(1.0)
 
-      time.sleep(10.0)
+      time.sleep(12.0)
   
   
   

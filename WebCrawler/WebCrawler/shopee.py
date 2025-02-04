@@ -210,10 +210,11 @@ if __name__ == '__main__':
     resulttext = pytesseract_image(cropped_img)
       
     resulttext2 = ddddocr_image(cropped_img)
-    if resulttext2.find("直帮卫锥束") > -1:
+    if resulttext2.find("直帮卫锥束") > -1 or resulttext2.find("直带已能束") > -1:
         tap(device, "230 1700 ")
         time.sleep(1.0)
         continue 
+
 
     if resulttext2.find("直帮已锥束") > -1:
         tap(device, "230 1700 ")
@@ -307,7 +308,7 @@ if __name__ == '__main__':
     resulttext = pytesseract_image(cropped_img)
       
     resulttext2 = ddddocr_image(cropped_img)
-    if resulttext2.find("直帮卫锥束") > -1:
+    if resulttext2.find("直帮卫锥束") > -1 or resulttext2.find("直带已能束") > -1:
         tap(device, "230 1700 ")
         time.sleep(1.0)
         continue 
