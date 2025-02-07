@@ -149,7 +149,7 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(5):
+  for _ in range(3):
       
       #轉帳
       tap(device, "684 1270")
@@ -285,6 +285,10 @@ if __name__ == '__main__':
             #確認
             break
           elif check_error_code(resulttext,  'an eal A'):
+            print(f"驗證碼 沒按到")
+            tap(device, " 904 1261 ")
+            time.sleep(1.0)
+          elif check_error_code(resulttext,  'Fz ER Aa'):
             print(f"驗證碼 沒按到")
             tap(device, " 904 1261 ")
             time.sleep(1.0)
