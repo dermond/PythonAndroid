@@ -200,7 +200,7 @@ if __name__ == '__main__':
         time.sleep(1.0)
         Shopeecount = 0
 
-    Shopeecount = Shopeecount + 1
+    
 
     start_point = (370, 417)  # 起始坐標 (x, y)
     end_point = (735, 600)    # 結束坐標 (x, y)
@@ -356,7 +356,8 @@ if __name__ == '__main__':
       # 使用正則表達式移除非數字字元
     filtered_text = re.sub(r'\D', '', resulttext2)
 
-      
+   
+    
       # 確保有至少 4 位數字
     if len(filtered_text) == 4:
          continue 
@@ -367,6 +368,7 @@ if __name__ == '__main__':
         time.sleep(1.0)
         jump = jump - 300
 
+        Shopeecount = Shopeecount + 1
       #轉盤
       #index = 421+jump
 
