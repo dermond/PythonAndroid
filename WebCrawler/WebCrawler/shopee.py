@@ -200,7 +200,7 @@ if __name__ == '__main__':
         time.sleep(1.0)
         Shopeecount = 0
 
-    
+    Shopeecount = Shopeecount + 1
 
     start_point = (370, 417)  # 起始坐標 (x, y)
     end_point = (735, 600)    # 結束坐標 (x, y)
@@ -368,7 +368,7 @@ if __name__ == '__main__':
         time.sleep(1.0)
         jump = jump - 300
 
-        Shopeecount = Shopeecount + 1
+        #Shopeecount = Shopeecount + 1
       #轉盤
       #index = 421+jump
 
