@@ -152,9 +152,9 @@ if __name__ == '__main__':
   for _ in range(1):
       
       #轉帳
-      tap(device, "684 1270")
+      #tap(device, "684 1270")
       #tap(device, "644 1610")
-      #tap(device, "689 1509")
+      tap(device, "689 1509")
       time.sleep(1.0)
   
       #手機轉帳
@@ -274,6 +274,13 @@ if __name__ == '__main__':
             tap(device, "845 1276")
             #tap(device, "855 1355")
             time.sleep(1.0)
+          elif check_error_code(resulttext,  '0601'):
+            print(f"Error code {error_code} found in the image!")
+            #確認
+            tap(device, "845 1276")
+            #tap(device, "855 1355")
+            time.sleep(1.0)
+
           elif check_error_code(resulttext,  'NVERZARRAIEUR '):
             print(f"網路錯誤")
             #確認

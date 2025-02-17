@@ -152,9 +152,9 @@ if __name__ == '__main__':
   for _ in range(5):
       
       #轉帳
-      tap(device, "684 1270")
+      #tap(device, "684 1270")
       #tap(device, "644 1610")
-      #tap(device, "689 1509")
+      tap(device, "689 1509")
       time.sleep(1.0)
   
       #手機轉帳
@@ -169,9 +169,9 @@ if __name__ == '__main__':
 
       dropdown_position = '474 1200'  # 下拉清單的位置
       #text_to_input = '008'  # 輸入的文字 #華南銀行
-      text_to_input = '700'  # 輸入的文字 #郵局
+      #text_to_input = '700'  # 輸入的文字 #郵局
       #text_to_input = '007'  # 輸入的文字 #第一銀行
-      #text_to_input = '004'  # 輸入的文字 #台灣銀行
+      text_to_input = '004'  # 輸入的文字 #台灣銀行
       option_position = '454 1030'    # 選擇的選項的位置
 
     
@@ -208,8 +208,8 @@ if __name__ == '__main__':
       #tap(device, "582 1302") #台灣銀行
       #tap(device, "582 1937") #第一銀行(1)
       #tap(device, "582 1729") #第一銀行(2)
-      tap(device, "582 2151") #華南
-      #tap(device, "582 1485") #郵局
+      #tap(device, "582 2151") #華南
+      tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
   
@@ -244,6 +244,8 @@ if __name__ == '__main__':
           img = capture_screenshot(device)
           cropped_img = crop_image(img, start_point, end_point)
           resulttext = ddddocr_image(cropped_img)
+          if check_error_code(resulttext, "生活"):
+            continue
 
           #輸入你的驗證碼
           input_characters(device, resulttext)
@@ -269,6 +271,12 @@ if __name__ == '__main__':
             tap(device, "855 1355")
             time.sleep(1.0)
           elif check_error_code(resulttext,  '9999'):
+            print(f"Error code {error_code} found in the image!")
+            #確認
+            tap(device, "845 1276")
+            #tap(device, "855 1355")
+            time.sleep(1.0)
+          elif check_error_code(resulttext,  '0601'):
             print(f"Error code {error_code} found in the image!")
             #確認
             tap(device, "845 1276")
