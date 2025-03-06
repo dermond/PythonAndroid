@@ -225,6 +225,9 @@ if __name__ == '__main__':
     turn_on_screen()
     while True:
         try:
+            tap(device, "550 1510 ")
+            
+    
             start_point = (800, 300+jump)  # 起始坐標 (x, y)
             end_point = (1050, 350+jump)    # 結束坐標 (x, y)
       
@@ -377,8 +380,6 @@ if __name__ == '__main__':
         print("還剩下" + str(caltotal_seconds) + "秒")
     turn_on_screen()
     
-    tap(device, "550 1510 ")
-    time.sleep(1.0)
 
     # #錯誤視窗判斷
     start_point = (370, 417)  # 起始坐標 (x, y)

@@ -30,6 +30,8 @@
     </Compile>
     <Compile Include="CheckTR.py" />
     <Compile Include="momoAndshopee.py" />
+    <Compile Include="BitWalk.py" />
+    <Compile Include="shopee - Copy.py" />
     <Compile Include="shopeeAndmomo.py" />
     <Compile Include="shopee.py" />
     <Compile Include="RedBag.py" />
