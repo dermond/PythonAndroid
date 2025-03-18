@@ -153,6 +153,7 @@ if __name__ == '__main__':
       
       #轉帳
       #tap(device, "684 1270")
+      
       #tap(device, "644 1610")
       tap(device, "689 1509")
       time.sleep(1.0)
@@ -167,12 +168,16 @@ if __name__ == '__main__':
       swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
       time.sleep(1.0)
 
-      dropdown_position = '474 1200'  # 下拉清單的位置
+      #dropdown_position = '474 1200'  # 下拉清單的位置
+      dropdown_position = '679 695'  # 下拉清單的位置
+      
       #text_to_input = '008'  # 輸入的文字 #華南銀行
       #text_to_input = '700'  # 輸入的文字 #郵局
-      #text_to_input = '007'  # 輸入的文字 #第一銀行
-      text_to_input = '004'  # 輸入的文字 #台灣銀行
-      option_position = '454 1030'    # 選擇的選項的位置
+      text_to_input = '007'  # 輸入的文字 #第一銀行
+      #text_to_input = '004'  # 輸入的文字 #台灣銀行
+      
+      #option_position = '454 1030'    # 選擇的選項的位置
+      option_position = '454 854'    # 選擇的選項的位置
 
     
 
@@ -186,13 +191,13 @@ if __name__ == '__main__':
       time.sleep(1.0)
   
       #滑動
-      swipe_start = '500 1300'
-      swipe_end = '500 500'
-      swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-      time.sleep(2.0)
+      #swipe_start = '500 1300'
+      #swipe_end = '500 500'
+      #swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+      #time.sleep(2.0)
   
       #金額
-      tap(device, "262 545")
+      tap(device, "548 1063")
       input_characters(device, "666")
       time.sleep(1.0)
 
@@ -205,11 +210,11 @@ if __name__ == '__main__':
       #選擇卡片
       tap(device, "558 1194")
       time.sleep(1.0)
-      #tap(device, "582 1302") #台灣銀行
+      tap(device, "582 1302") #台灣銀行
       #tap(device, "582 1937") #第一銀行(1)
       #tap(device, "582 1729") #第一銀行(2)
       #tap(device, "582 2151") #華南
-      tap(device, "582 1485") #郵局
+      #tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
   
@@ -270,6 +275,10 @@ if __name__ == '__main__':
             #確認
             tap(device, "855 1355")
             time.sleep(1.0)
+            
+            tap(device, "319 1788")
+            time.sleep(1.0)
+
           elif check_error_code(resulttext,  '9999'):
             print(f"Error code {error_code} found in the image!")
             #確認
@@ -288,7 +297,7 @@ if __name__ == '__main__':
             tap(device, "916 1324")
             #tap(device, "855 1355")
             time.sleep(1.0)
-          elif check_error_code(resulttext,  'Boat ite Re'):
+          elif check_error_code(resulttext,  'Boat ite Re') or check_error_code(resulttext,  'WATT SA 16S'):
             print(f"結束")
             #確認
             break
@@ -325,7 +334,7 @@ if __name__ == '__main__':
 
 
       tap(device, "515 2160")
-      time.sleep(3.0)
+      time.sleep(4.0)
   
       error_code = '9999'
       if check_error_code(resulttext, error_code):
@@ -333,7 +342,7 @@ if __name__ == '__main__':
         #確認
         tap(device, "845 1276")
         #tap(device, "855 1355")
-        time.sleep(1.0)
+        time.sleep(2.0)
           
       # else:
       #   print(f"Error code {error_code} not found in the image.")

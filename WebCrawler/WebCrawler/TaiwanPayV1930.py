@@ -149,7 +149,7 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(1):
+  for _ in range(5):
       
       #轉帳
       #tap(device, "684 1270")
@@ -268,6 +268,10 @@ if __name__ == '__main__':
             #確認
             tap(device, "855 1355")
             time.sleep(1.0)
+            
+            tap(device, "319 1788")
+            time.sleep(1.0)
+  
           elif check_error_code(resulttext,  '9999'):
             print(f"Error code {error_code} found in the image!")
             #確認
@@ -287,7 +291,7 @@ if __name__ == '__main__':
             tap(device, "916 1324")
             #tap(device, "855 1355")
             time.sleep(1.0)
-          elif check_error_code(resulttext,  'Boat ite Re'):
+          elif check_error_code(resulttext,  'Boat ite Re') or check_error_code(resulttext,  'WATT SA 16S'):
             print(f"結束")
             #確認
             break

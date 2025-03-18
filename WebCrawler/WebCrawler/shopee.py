@@ -183,7 +183,7 @@ if __name__ == '__main__':
   Shopeecount = 0
 
   for i in range(99999999):
-    
+
     if Shopeecount > 20:  # 如果 i 是 10 的倍數
         print(f"第 {i} 次操作：重啟 Shopee App")
         
@@ -197,6 +197,9 @@ if __name__ == '__main__':
         print(f"Shopee 已啟動，輸出：\n{output}")
         time.sleep(4.0)
         tap(device, "545 2180 ")
+        time.sleep(1.0)
+        
+        tap(device, "665 190 ")
         time.sleep(1.0)
         Shopeecount = 0
 
@@ -225,7 +228,7 @@ if __name__ == '__main__':
     turn_on_screen()
     while True:
         try:
-            tap(device, "550 1510 ")
+           
             
     
             start_point = (800, 300+jump)  # 起始坐標 (x, y)
@@ -256,7 +259,8 @@ if __name__ == '__main__':
             if len(filtered_text) < 4:
                 raise ValueError("輸入字串長度不足 4 位數")
         
-
+            tap(device, "550 1510 ")
+            
             # 嘗試提取並轉換前 4 個字元為數字
             time_str = filtered_text[:4]
             minutes = int(time_str[:2])
@@ -275,7 +279,7 @@ if __name__ == '__main__':
             print(f"錯誤：{e}，重新嘗試...")
             if jump < 100 and jump > -300:
                 jump = 110
-            elif  jump < 230 and jump > 180 :
+            elif  jump < 230 and jump > 200 :
                 jump = 240
            
                 
@@ -292,6 +296,11 @@ if __name__ == '__main__':
 
         tap(device, "310 1250 ")
         time.sleep(1.0)
+
+        tap(device, "665 190 ")
+        time.sleep(1.0)
+        
+        Shopeecount = Shopeecount + 1
         continue 
 
     #判斷 蝦幣是否大於0.15元
@@ -373,6 +382,7 @@ if __name__ == '__main__':
     print("目前偵測圖片位置" + str(jump))
     turn_off_screen()
     caltotal_seconds = total_seconds - 15
+    total_seconds = total_seconds
     for _ in range(total_seconds):
 
         time.sleep(1)
