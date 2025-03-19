@@ -94,16 +94,19 @@ def capture_screenshot(device):
         img = Image.open(io.BytesIO(result))
          # 保存到当前工作目录
         img.save(os.path.join(os.getcwd(), 'full_screen.png'))
-    except subprocess.CalledProcessError as e:
-        img = NULL
+    except:
+        img = None 
     return img
 
 def crop_image(img, start_point, end_point):
-    left, top = start_point
-    right, bottom = end_point
-    cropped_img = img.crop((left, top, right, bottom))
-     # 保存到当前工作目录
-    cropped_img.save(os.path.join(os.getcwd(), 'cropped_image.png'))
+    try:
+        left, top = start_point
+        right, bottom = end_point
+        cropped_img = img.crop((left, top, right, bottom))
+         # 保存到当前工作目录
+        cropped_img.save(os.path.join(os.getcwd(), 'cropped_image.png'))
+    except:
+        cropped_img = None
     return cropped_img
 
 def ddddocr_image(img):
@@ -151,7 +154,7 @@ def turn_off_screen():
 
 
         print("螢幕已關閉")
-    except subprocess.CalledProcessError as e:
+    except:
         print(f"錯誤：{e}")
    
 def turn_on_screen():
@@ -166,7 +169,7 @@ def turn_on_screen():
 
   
         print("螢幕已開啟")
-    except subprocess.CalledProcessError as e:
+    except:
         print(f"錯誤：{e}")
    
 if __name__ == '__main__':
