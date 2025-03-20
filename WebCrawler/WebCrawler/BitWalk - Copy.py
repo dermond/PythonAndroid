@@ -146,6 +146,25 @@ def pytesseract_image(img):
 
    return result.strip()  # 去除前後空白字元
 
+def pytesseract_image_chi(img):
+   try:
+       
+        # 進行影像預處理
+        img = img.convert("L")  # 轉為灰階，去除顏色雜訊
+
+        enhancer = ImageEnhance.Contrast(img)
+        img = enhancer.enhance(2)  # 提高對比度（數值可調整）
+
+        # 進行 OCR 辨識，僅識別 `>` 等符號
+        result = pytesseract.image_to_string(img, lang="chi_tra")
+
+   except Exception as e:
+        print(f"發生錯誤: {e}")
+        result = ""
+
+   return result.strip()  # 去除前後空白字元
+
+
 def check_error_code(text, error_code):
     # 检查文本中是否包含指定的错误码
     if error_code in text:
@@ -189,8 +208,8 @@ if __name__ == '__main__':
   for _ in range(9999):
       
       #判斷x
-      start_point = (2094, 50)  # 起始坐標 (x, y)
-      end_point = (2245, 135)    # 結束坐標 (x, y)
+      start_point = (0, 100)  # 起始坐標 (x, y)
+      end_point = (500, 500)    # 結束坐標 (x, y)
 
       img = capture_screenshot(device)
       cropped_img = crop_image(img, start_point, end_point)
@@ -203,178 +222,148 @@ if __name__ == '__main__':
             time.sleep(1.0)
             print("判斷x-1")
 
-      #判斷>|
-      start_point = (922, 145)  # 起始坐標 (x, y)
-      end_point = (1058, 245)    # 結束坐標 (x, y)
+      ##判斷>|
+      #start_point = (922, 145)  # 起始坐標 (x, y)
+      #end_point = (1058, 245)    # 結束坐標 (x, y)
 
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
+      #img = capture_screenshot(device)
+      #cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
      
-      if resulttext.find(">") > -1:
-          tap(device, "990 195")
-          time.sleep(1.0)
-          print("判斷>-1")
+      #if resulttext.find(">") > -1:
+      #    tap(device, "990 195")
+      #    time.sleep(1.0)
+      #    print("判斷>-1")
 
-      if resulttext.find("x") > -1:
-          tap(device, "1030 165")
-          time.sleep(1.0)
-          print("判斷x-1-1")
+      #resulttext2 = ddddocr_image(cropped_img)
+      #if resulttext2.find("U") > -1 :
+      #    tap(device, "990 195")
+      #    time.sleep(1.0)
+      #    print("判斷>|-1")
 
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("U") > -1 :
-          tap(device, "990 195")
-          time.sleep(1.0)
-          print("判斷>|-1")
+      ##判斷>|
+      #start_point = (929, 155)  # 起始坐標 (x, y)
+      #end_point = (1048, 245)    # 結束坐標 (x, y)
 
-      #判斷>|
-      start_point = (929, 155)  # 起始坐標 (x, y)
-      end_point = (1048, 245)    # 結束坐標 (x, y)
-
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
+      #img = capture_screenshot(device)
+      #cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
      
       
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("U") > -1 :
-          tap(device, "1010 200")
-          time.sleep(1.0)
-          print("判斷>|-2")
+      #resulttext2 = ddddocr_image(cropped_img)
+      #if resulttext2.find("U") > -1 :
+      #    tap(device, "1010 200")
+      #    time.sleep(1.0)
+      #    print("判斷>|-2")
 
-       #判斷x
-      start_point = (902, 175)  # 起始坐標 (x, y)
-      end_point = (1058, 275)    # 結束坐標 (x, y)
+      # #判斷x
+      #start_point = (902, 175)  # 起始坐標 (x, y)
+      #end_point = (1058, 275)    # 結束坐標 (x, y)
 
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
+      #img = capture_screenshot(device)
+      #cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
       
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1:
-          tap(device, "980 216")
-          time.sleep(1.0)
-          print("判斷x-2")
+      #resulttext2 = ddddocr_image(cropped_img)
+      #if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1:
+      #    tap(device, "980 216")
+      #    time.sleep(1.0)
+      #    print("判斷x-2")
 
-      start_point = (902, 125)  # 起始坐標 (x, y)
-      end_point = (1058, 275)    # 結束坐標 (x, y)
+      #start_point = (902, 125)  # 起始坐標 (x, y)
+      #end_point = (1058, 275)    # 結束坐標 (x, y)
 
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
-       #判斷>
-      if resulttext.find(">") > -1:
-          tap(device, "997 189")
-          time.sleep(1.0)
-          print("判斷>-2")
-       #判斷x
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1 or resulttext2.find("t") > -1:
-          tap(device, "1022 185")
-          time.sleep(1.0)
-          print("判斷x-3")
+      #img = capture_screenshot(device)
+      #cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
+      # #判斷>
+      #if resulttext.find(">") > -1:
+      #    tap(device, "997 189")
+      #    time.sleep(1.0)
+      #    print("判斷>-2")
+      # #判斷x
+      #resulttext2 = ddddocr_image(cropped_img)
+      #if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1:
+      #    tap(device, "1022 185")
+      #    time.sleep(1.0)
+      #    print("判斷x-3")
 
 
-      start_point = (902, 195)  # 起始坐標 (x, y)
-      end_point = (1058, 325)    # 結束坐標 (x, y)
+      #start_point = (902, 195)  # 起始坐標 (x, y)
+      #end_point = (1058, 325)    # 結束坐標 (x, y)
 
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
+      #img = capture_screenshot(device)
+      #cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
      
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1:
-          tap(device, "1022 265")
-          time.sleep(1.0)
-          print("判斷x-4")
+      #resulttext2 = ddddocr_image(cropped_img)
+      #if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1:
+      #    tap(device, "1022 265")
+      #    time.sleep(1.0)
+      #    print("判斷x-4")
 
-      start_point = (972, 45)  # 起始坐標 (x, y)
-      end_point = (1058, 145)    # 結束坐標 (x, y)
+      #start_point = (972, 45)  # 起始坐標 (x, y)
+      #end_point = (1058, 145)    # 結束坐標 (x, y)
 
-      img = capture_screenshot(device)
+      #img = capture_screenshot(device)
      
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
+      #cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
      
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("9") > -1 :
-          tap(device, "1015 95")
-          time.sleep(1.0)
-          print("判斷x-5")
+      #resulttext2 = ddddocr_image(cropped_img)
+      #if resulttext2.find("9") > -1 :
+      #    tap(device, "1015 95")
+      #    time.sleep(1.0)
+      #    print("判斷x-4")
 
-      start_point = (20, 130)  # 起始坐標 (x, y)
-      end_point = (150, 230)    # 結束坐標 (x, y)
+      ##轉帳
+      #start_point = (551, 1216)  # 起始坐標 (x, y)
+      #end_point = (644, 1297)    # 結束坐標 (x, y)
 
-      img = capture_screenshot(device)
-     
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
-      if resulttext.find("x") > -1  :
-          tap(device, "60 180")
-          time.sleep(1.0)
-          print("判斷x-6-0")
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("c") > -1 or resulttext2.find("d") > -1 or resulttext2.find("O") > -1  :
-          tap(device, "60 180")
-          time.sleep(1.0)
-          print("判斷x-6")
-
-      elif resulttext2.find("仁") > -1 :
-          tap(device, "60 180")
-          time.sleep(1.0)
-
-          tap(device, "290 2319")
-          time.sleep(1.0)
-          print("判斷<-")
-
-      #轉帳
-      start_point = (551, 1216)  # 起始坐標 (x, y)
-      end_point = (644, 1297)    # 結束坐標 (x, y)
-
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
+      #img = capture_screenshot(device)
+      #cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
       
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("50") > -1:
-          tap(device, "856 1130")
-          time.sleep(2.0)
-          print("50 按下-1")
+      #resulttext2 = ddddocr_image(cropped_img)
+      #if resulttext2.find("50") > -1:
+      #    tap(device, "856 1130")
+      #    time.sleep(2.0)
+      #    print("50 按下-1")
 
-       #轉帳
-      start_point = (551, 1146)  # 起始坐標 (x, y)
-      end_point = (644, 1227)    # 結束坐標 (x, y)
+      # #轉帳
+      #start_point = (551, 1146)  # 起始坐標 (x, y)
+      #end_point = (644, 1227)    # 結束坐標 (x, y)
 
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
+      #img = capture_screenshot(device)
+      #cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
       
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("50") > -1:
-          tap(device, "856 1060")
-          time.sleep(2.0)
-          print("50 按下-2")
+      #resulttext2 = ddddocr_image(cropped_img)
+      #if resulttext2.find("50") > -1:
+      #    tap(device, "856 1060")
+      #    time.sleep(2.0)
+      #    print("50 按下-2")
 
 
-      start_point = (340, 1600)  # 起始坐標 (x, y)
-      end_point = (800, 1700)    # 結束坐標 (x, y)
+      #start_point = (340, 1600)  # 起始坐標 (x, y)
+      #end_point = (800, 1700)    # 結束坐標 (x, y)
 
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      resulttext = pytesseract_image(cropped_img)
+      #img = capture_screenshot(device)
+      #cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
       
-      resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("Bitcoin") > -1 or resulttext2.find("Btcon") > -1 or resulttext2.find("立即") > -1:
+      #resulttext2 = ddddocr_image(cropped_img)
+      #if resulttext2.find("Bitcoin") > -1 or resulttext2.find("Btcon") > -1 or resulttext2.find("立即") > -1:
          
-          tap(device, "547 1489")
-          time.sleep(2.0)
+      #    tap(device, "547 1489")
+      #    time.sleep(2.0)
 
-          print("Bitcoin")
-          #tap(device, "547 1610")
-          #time.sleep(2.0)
+      #    print("Bitcoin")
+      #    #tap(device, "547 1610")
+      #    #time.sleep(2.0)
 
     
-      #tap(device, "644 1610")
-      #tap(device, "689 1509")
-      #time.sleep(1.0)
+      ##tap(device, "644 1610")
+      ##tap(device, "689 1509")
+      ##time.sleep(1.0)
   

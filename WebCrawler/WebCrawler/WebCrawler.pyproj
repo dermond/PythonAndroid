@@ -25,6 +25,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BitWalk - Copy.py" />
     <Compile Include="Cashzine.py" />
     <Compile Include="Build.py">
       <SubType>Code</SubType>
@@ -32,7 +33,6 @@
     <Compile Include="CheckTR.py" />
     <Compile Include="momoAndshopee.py" />
     <Compile Include="BitWalk.py" />
-    <Compile Include="shopee - Copy.py" />
     <Compile Include="shopeeAndmomo.py" />
     <Compile Include="shopee.py" />
     <Compile Include="RedBag.py" />
