@@ -211,13 +211,13 @@ if __name__ == '__main__':
       cropped_img = crop_image(img, start_point, end_point)
       resulttext = pytesseract_image(cropped_img)
      
-      if resulttext.find(">") > -1:
+      if resulttext.find(">") > -1 :
           tap(device, "990 195")
           time.sleep(1.0)
           print("判斷>-1")
 
       if resulttext.find("x") > -1:
-          tap(device, "1030 165")
+          tap(device, "990 195")
           time.sleep(1.0)
           print("判斷x-1-1")
 
@@ -226,6 +226,11 @@ if __name__ == '__main__':
           tap(device, "990 195")
           time.sleep(1.0)
           print("判斷>|-1")
+
+      if resulttext2.find("o") > -1 :
+          tap(device, "990 190")
+          time.sleep(1.0)
+          print("判斷>-3")
 
       #判斷>|
       start_point = (929, 155)  # 起始坐標 (x, y)
@@ -251,7 +256,7 @@ if __name__ == '__main__':
       resulttext = pytesseract_image(cropped_img)
       
       resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1:
+      if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1 or resulttext2.find("少") > -1:
           tap(device, "980 216")
           time.sleep(1.0)
           print("判斷x-2")
