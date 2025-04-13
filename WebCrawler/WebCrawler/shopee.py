@@ -4,7 +4,7 @@ Created on Sat Mar 27 12:23:27 2021
 
 @author: dermo
 """
-
+import psutil
 import time
 import pytesseract
 from PIL import Image
@@ -16,10 +16,20 @@ import subprocess
 from PIL import Image, ImageEnhance, ImageFilter
 from ppadb.client import Client as AdbClient
 from datetime import datetime
+import gc
+
 
 ocr = ddddocr.DdddOcr()
 
-
+def check_garbage_objects():
+    gc.collect()  # 手動觸發垃圾回收
+    uncollected = gc.garbage
+    print(f"[GC] 未回收對象數量：{len(uncollected)}")
+    
+def print_memory_usage():
+    process = psutil.Process(os.getpid())
+    mem = process.memory_info().rss / 1024 / 1024  # 單位 MB
+    print(f"[記憶體使用量]：{mem:.2f} MB")
 def connect(index = 0):
 
   client = AdbClient(host='127.0.0.1', port=5037)
@@ -119,6 +129,8 @@ def ddddocr_image(img):
 
 def pytesseract_image(img):
     image = Image.open(os.path.join(os.getcwd(), 'cropped_image.png'))
+    if img == None:
+        return ""
     result = pytesseract.image_to_string(img)
     return result
 
@@ -155,7 +167,7 @@ def turn_off_screen():
 
         print("螢幕已關閉")
     except:
-        print(f"錯誤：{e}")
+        print(f"錯誤")
    
 def turn_on_screen():
     try:
@@ -170,7 +182,7 @@ def turn_on_screen():
   
         print("螢幕已開啟")
     except:
-        print(f"錯誤：{e}")
+        print(f"錯誤")
    
 if __name__ == '__main__':
 
@@ -187,7 +199,10 @@ if __name__ == '__main__':
 
   for i in range(99999999):
 
-    if Shopeecount > 20:  # 如果 i 是 10 的倍數
+    check_garbage_objects()
+    print_memory_usage()
+    
+    if Shopeecount > 40:  # 如果 i 是 10 的倍數
         print(f"第 {i} 次操作：重啟 Shopee App")
         
         # 關閉 Shopee
