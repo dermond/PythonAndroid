@@ -97,6 +97,31 @@ def input_keyevent(device, keycode):
 def swipe_to_position(device, start, end, duration=500):
     device.shell(f'input swipe {start} {end} {duration}')
     time.sleep(1)  # 等待滑动完成
+
+# def capture_screenshot(device=None, local_filename='full_screen.png'):
+#     remote_path = "/sdcard/screen.png"
+
+#     try:
+#         # 使用 adb shell screencap 指令截圖
+#         os.system(f"adb shell screencap -p {remote_path}")
+#         time.sleep(0.5)  # 確保檔案生成完成
+
+#         # 將圖片從設備拉回本地
+#         os.system(f"adb pull {remote_path} {local_filename}")
+
+#         # 刪除設備端檔案（可選）
+#         os.system(f"adb shell rm {remote_path}")
+
+#         # 開啟並回傳圖片物件
+#         img = Image.open(local_filename)
+        
+#         img.save(os.path.join(os.getcwd(), 'full_screen.png'))
+        
+#         return img
+
+#     except Exception as e:
+#         print(f"截圖失敗：{e}")
+#         return None
     
 def capture_screenshot(device):
     try:
@@ -184,6 +209,10 @@ def turn_on_screen():
     except:
         print(f"錯誤")
    
+def log(message):
+    with open("log.txt", "a", encoding="utf-8") as f:
+        f.write(message + "\n")
+        
 if __name__ == '__main__':
 
   device, client = connect()
@@ -202,7 +231,7 @@ if __name__ == '__main__':
     check_garbage_objects()
     print_memory_usage()
     
-    if Shopeecount > 40:  # 如果 i 是 10 的倍數
+    if Shopeecount > 20:  # 如果 i 是 10 的倍數
         print(f"第 {i} 次操作：重啟 Shopee App")
         
         # 關閉 Shopee
@@ -215,13 +244,14 @@ if __name__ == '__main__':
         print(f"Shopee 已啟動，輸出：\n{output}")
         time.sleep(4.0)
         tap(device, "545 2180 ")
-        time.sleep(1.0)
+        time.sleep(2.0)
         
-        tap(device, "665 190 ")
+        tap(device, "324 190 ")
+        time.sleep(3.0)
+        
+        tap(device, "322 1263 ")
         time.sleep(1.0)
         Shopeecount = 0
-
-    
 
 
     start_point = (370, 417)  # 起始坐標 (x, y)
@@ -321,6 +351,8 @@ if __name__ == '__main__':
         Shopeecount = Shopeecount + 1
         continue 
 
+    log("jump:"+str(jump))
+
     #判斷 蝦幣是否大於0.15元
     start_point = (800, 260+jump)  # 起始坐標 (x, y)
     end_point = (1050, 310+jump)    # 結束坐標 (x, y)
@@ -340,10 +372,11 @@ if __name__ == '__main__':
     filtered_text = re.sub(r'\D', '', resulttext2)
     try:
         value = float(resulttext2)  # 將字串轉換為浮點數
-        if value > 0.15:
-            print("數值大於 0.15")
+        print("數值是" + str(value))
+        if value >= 0.2:
+            print("數值大於或等於 0.2")
         else:
-            print("數值小於或等於 0.15")
+            print("數值小於 0.2")
             swipe_start = '500 1000'
             swipe_end = '500 200'
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
@@ -360,6 +393,7 @@ if __name__ == '__main__':
         jump = jump - 300
 
         continue
+
 
     #判斷 下方位置是否有參加 可以按
     start_point = (900, 470+jump)  # 起始坐標 (x, y)
