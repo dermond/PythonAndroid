@@ -17,8 +17,9 @@ from PIL import Image, ImageEnhance, ImageFilter
 from ppadb.client import Client as AdbClient
 from datetime import datetime
 import gc
+import sys
 
-
+deviceid = 0
 ocr = ddddocr.DdddOcr()
 
 def check_garbage_objects():
@@ -128,7 +129,7 @@ def capture_screenshot(device):
         result = device.screencap()
         img = Image.open(io.BytesIO(result))
          # 保存到当前工作目录
-        img.save(os.path.join(os.getcwd(), 'full_screen.png'))
+        img.save(os.path.join(os.getcwd(), 'full_screen_'+str(deviceid)+'.png'))
     except:
         img = None 
     return img
@@ -139,13 +140,13 @@ def crop_image(img, start_point, end_point):
         right, bottom = end_point
         cropped_img = img.crop((left, top, right, bottom))
          # 保存到当前工作目录
-        cropped_img.save(os.path.join(os.getcwd(), 'cropped_image.png'))
+        cropped_img.save(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png'))
     except:
         cropped_img = None
     return cropped_img
 
 def ddddocr_image(img):
-    image = Image.open(os.path.join(os.getcwd(), 'cropped_image.png'))
+    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png'))
     result = ocr.classification(image, png_fix=True)
 
     return result
@@ -153,14 +154,14 @@ def ddddocr_image(img):
 
 
 def pytesseract_image(img):
-    image = Image.open(os.path.join(os.getcwd(), 'cropped_image.png'))
+    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png'))
     if img == None:
         return ""
     result = pytesseract.image_to_string(img)
     return result
 
 def pytesseract_image_Chitra(img):
-    image = Image.open(os.path.join(os.getcwd(), 'cropped_image.png'))
+    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png'))
     
     # 轉灰階
     gray_image = image.convert('L')
@@ -215,7 +216,16 @@ def log(message):
         
 if __name__ == '__main__':
 
-  device, client = connect()
+  if len(sys.argv) > 1:
+        print("你輸入的參數如下：")
+        for i, arg in enumerate(sys.argv[1:], start=1):
+            print(f"參數 {i}：{arg}")
+        deviceid = int(sys.argv[1])
+  else:
+    print("沒有輸入任何參數")
+
+  
+  device, client = connect(deviceid)
 
   jump = 0
 
