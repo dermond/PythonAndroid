@@ -12,8 +12,11 @@ import io
 import os
 import ddddocr
 import subprocess
+from paddleocr import PaddleOCR #paddlepaddle
 
 ocr = ddddocr.DdddOcr()
+# 建一次 OCR 物件就好，重複呼叫時不用每次都 new
+Pocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' 支援簡繁中
 
 def connect(index = 0):
 
@@ -109,6 +112,13 @@ def pytesseract_image(img):
     result = pytesseract.image_to_string(img)
     return result
 
+def paddleocr_image(img_path):
+    full_path = os.path.join(os.getcwd(), 'cropped_image.png')
+    results = Pocr.ocr(full_path, cls=True)
+    # 組合所有辨識到的文字
+    text = '\n'.join([ line[1][0] for block in results for line in block ])
+    return text
+
 def check_error_code(text, error_code):
     # 检查文本中是否包含指定的错误码
     if error_code in text:
@@ -149,7 +159,7 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(10):
+  for _ in range(20):
       
       #轉帳
       tap(device, "684 1270")
@@ -173,8 +183,8 @@ if __name__ == '__main__':
       
       #text_to_input = '008'  # 輸入的文字 #華南銀行
       #text_to_input = '700'  # 輸入的文字 #郵局
-      text_to_input = '007'  # 輸入的文字 #第一銀行
-      #text_to_input = '004'  # 輸入的文字 #台灣銀行
+      #text_to_input = '007'  # 輸入的文字 #第一銀行
+      text_to_input = '004'  # 輸入的文字 #台灣銀行
       
       #option_position = '454 1030'    # 選擇的選項的位置
       option_position = '454 854'    # 選擇的選項的位置
@@ -215,13 +225,13 @@ if __name__ == '__main__':
 
       #選擇卡片
       #tap(device, "558 1194")
-      tap(device, "764 1066")
+      tap(device, "564 1066")
       time.sleep(1.0)
       #tap(device, "582 1191") #台灣銀行
       #tap(device, "582 1937") #第一銀行(1)
-      #tap(device, "582 1729") #第一銀行(2)
+      tap(device, "582 1729") #第一銀行(2)
       #tap(device, "582 2151") #華南
-      tap(device, "582 1485") #郵局
+      #tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
   
@@ -232,7 +242,7 @@ if __name__ == '__main__':
 
       start_point = (138, 1583)  # 起始坐標 (x, y)
       end_point = (429, 1750)    # 結束坐標 (x, y)
-
+         
       img = capture_screenshot(device)
       cropped_img = crop_image(img, start_point, end_point)
       resulttext = ddddocr_image(cropped_img)
@@ -280,7 +290,7 @@ if __name__ == '__main__':
     
           #確認
           tap(device, "492 2150")
-          time.sleep(1.0)
+          time.sleep(4.0)
   
           #確認
           tap(device, "492 2150")
@@ -293,9 +303,11 @@ if __name__ == '__main__':
           img = capture_screenshot(device)
           cropped_img = crop_image(img, start_point, end_point)
           resulttext = pytesseract_image(cropped_img)
-  
+          resulttext2 = paddleocr_image(cropped_img)
+
+
           error_code = '8101'
-          if check_error_code(resulttext, error_code):
+          if check_error_code(resulttext, error_code) or check_error_code(resulttext2, error_code):
             print(f"Error code {error_code} found in the image!")
             #確認
             tap(device, "855 1355")
@@ -304,7 +316,7 @@ if __name__ == '__main__':
             tap(device, "319 1788")
             time.sleep(1.0)
 
-          elif check_error_code(resulttext,  '9999'):
+          elif check_error_code(resulttext,  '9999') or check_error_code(resulttext2, '9999'):
             print(f"Error code {error_code} found in the image!")
             #確認
             tap(device, "845 1276")
@@ -316,7 +328,7 @@ if __name__ == '__main__':
             tap(device, "845 1276")
             #tap(device, "855 1355")
             time.sleep(1.0)
-          elif check_error_code(resulttext,  'NVERZARRAIEUR '):
+          elif check_error_code(resulttext,  'NVERZARRAIEUR ') or check_error_code(resulttext,  'AB A Shh'):
             print(f"網路錯誤")
             #確認
             tap(device, "916 1324")
@@ -344,18 +356,18 @@ if __name__ == '__main__':
 
             #確認
             #break
-          elif check_error_code(resulttext,  'Hz ene AZ') or check_error_code(resulttext,  'Saiae BS'):
+          elif check_error_code(resulttext,  'Hz ene AZ') or check_error_code(resulttext2,  '請輸入圖形證碼'):
             print(f"請輸入圖形驗證碼")
             tap(device, "919 1261 ")
             time.sleep(1.0)
           
            
        
-          elif check_error_code(resulttext,  'TERRE'):
+          elif check_error_code(resulttext,  'TERRE') or check_error_code(resulttext2,  '請勿信指令操作付款'):
             print(f"結束")
             #確認
             break
-          elif check_error_code(resulttext,  'ERENT'):
+          elif check_error_code(resulttext,  'ERENT') or check_error_code(resulttext,  'BBA SSR'):
             print(f"結束")
             #確認
             break  
