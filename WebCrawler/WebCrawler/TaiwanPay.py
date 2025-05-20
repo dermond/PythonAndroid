@@ -209,7 +209,7 @@ if __name__ == '__main__':
       #金額
       #tap(device, "548 1063")
       tap(device, "232 1192")
-      input_characters(device, "520")
+      input_characters(device, "666")
       time.sleep(1.0)
 
       #滑動
