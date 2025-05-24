@@ -18,8 +18,10 @@ from ppadb.client import Client as AdbClient
 from datetime import datetime
 import gc
 import sys
+from paddleocr import PaddleOCR #paddlepaddle
 
-deviceid = 0
+device_id = ''
+deviceid = ''
 ocr = ddddocr.DdddOcr()
 
 def check_garbage_objects():
@@ -31,19 +33,25 @@ def print_memory_usage():
     process = psutil.Process(os.getpid())
     mem = process.memory_info().rss / 1024 / 1024  # 單位 MB
     print(f"[記憶體使用量]：{mem:.2f} MB")
-def connect(index = 0):
+    
+def connect(serial: str):
+    client = AdbClient(host='127.0.0.1', port=5037)
 
-  client = AdbClient(host='127.0.0.1', port=5037)
+    devices = client.devices()
+    if not devices:
+        print('No devices')
+        quit()
 
-  devices = client.devices()
-  if len(devices) == 0:
-    print('No devices')
-    quit()
+    # 嘗試找出符合 serial 的裝置
+    for device in devices:
+        if device.serial == serial:
+            print(f'Connected to {device}')
+            return device, client
 
-  device = devices[index]
-  print(f'Connected to {device}')
-
-  return device, client
+    # 找不到時回傳第一筆裝置
+    fallback_device = devices[0]
+    print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
+    return fallback_device, client
 
 def tap(device, position):
     device.shell(f'input tap {position}')
@@ -174,6 +182,13 @@ def pytesseract_image_Chitra(img):
     result = pytesseract.image_to_string(filtered_image, lang='chi_tra')
     return result
 
+def paddleocr_image(img_path):
+    full_path = os.path.join(os.getcwd(),  'cropped_image_'+str(deviceid)+'.png')
+    results = Pocr.ocr(full_path, cls=True)
+    # 組合所有辨識到的文字
+    text = '\n'.join([ line[1][0] for block in results for line in block ])
+    return text
+
 def check_error_code(text, error_code):
     # 检查文本中是否包含指定的错误码
     if error_code in text:
@@ -182,13 +197,13 @@ def check_error_code(text, error_code):
 
 def turn_off_screen():
     try:
-        subprocess.run(["adb", "root"], check=True)
+        subprocess.run(["adb", "-s", device_id, "root"], check=True)
         
         # 禁用自動亮度調整
-        subprocess.run(["adb", "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
         
         # 將亮度設置為最低，接近關閉背光
-        subprocess.run(["adb", "shell", "settings", "put", "system", "screen_brightness", "1"], check=True)
+        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "1"], check=True)
 
 
         print("螢幕已關閉")
@@ -197,13 +212,13 @@ def turn_off_screen():
    
 def turn_on_screen():
     try:
-        subprocess.run(["adb", "root"], check=True)
+        subprocess.run(["adb", "-s", device_id, "root"], check=True)
         
         # 禁用自動亮度調整
-        subprocess.run(["adb", "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
         # 將亮度設置為最低，接近關閉背光
-        subprocess.run(["adb", "shell", "settings", "put", "system", "screen_brightness", "70"], check=True)
+        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "70"], check=True)
 
   
         print("螢幕已開啟")
@@ -220,13 +235,13 @@ if __name__ == '__main__':
         print("你輸入的參數如下：")
         for i, arg in enumerate(sys.argv[1:], start=1):
             print(f"參數 {i}：{arg}")
-        deviceid = int(sys.argv[1])
+        deviceid = str(sys.argv[1])
   else:
     print("沒有輸入任何參數")
 
   
   device, client = connect(deviceid)
-
+  device_id = device.serial
   jump = 0
 
   # #錯誤視窗判斷
@@ -256,7 +271,7 @@ if __name__ == '__main__':
         tap(device, "545 2180 ")
         time.sleep(2.0)
         
-        tap(device, "324 190 ")
+        tap(device, "640 190 ")
         time.sleep(3.0)
         
         tap(device, "322 1263 ")
