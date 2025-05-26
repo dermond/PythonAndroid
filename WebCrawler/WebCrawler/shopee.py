@@ -23,7 +23,7 @@ from paddleocr import PaddleOCR #paddlepaddle
 device_id = ''
 deviceid = ''
 ocr = ddddocr.DdddOcr()
-
+#Pocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' 支援
 def check_garbage_objects():
     gc.collect()  # 手動觸發垃圾回收
     uncollected = gc.garbage
@@ -277,6 +277,14 @@ if __name__ == '__main__':
         tap(device, "322 1263 ")
         time.sleep(1.0)
         Shopeecount = 0
+    
+    start_point = (800, 300)  # 起始坐標 (x, y)
+    end_point = (1050, 1350)    # 結束坐標 (x, y)
+
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = pytesseract_image(cropped_img)
+    #resulttext2 = paddleocr_image(cropped_img)  
 
 
     start_point = (370, 417)  # 起始坐標 (x, y)
