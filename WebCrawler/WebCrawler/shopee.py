@@ -352,7 +352,7 @@ if __name__ == '__main__':
             print(f"錯誤：{e}，重新嘗試...")
             if jump < 100 and jump > -300:
                 jump = 110
-            elif  jump < 230 and jump > 200 :
+            elif  jump < 230 and jump > 210 :
                 jump = 240
            
                 
