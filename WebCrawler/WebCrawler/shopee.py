@@ -23,7 +23,8 @@ from paddleocr import PaddleOCR #paddlepaddle
 device_id = ''
 deviceid = ''
 ocr = ddddocr.DdddOcr()
-#Pocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' 支援
+Pocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' 支援
+
 def check_garbage_objects():
     gc.collect()  # 手動觸發垃圾回收
     uncollected = gc.garbage
@@ -228,7 +229,26 @@ def turn_on_screen():
 def log(message):
     with open("log.txt", "a", encoding="utf-8") as f:
         f.write(message + "\n")
-        
+       
+def validate_block(block):
+    float_value = None
+    time_value = None
+    
+    for item in block:
+        # 嘗試匹配 0~5 的浮點數（最多 5.000...，不超過5）
+        if re.fullmatch(r'0*(?:[0-4](?:\.\d+)?|5(?:\.0*)?)', item):
+            float_value = float(item)
+
+        # 嘗試匹配時間格式（mm:ss 或 hh:mm）
+        if re.fullmatch(r'\d{1,2}:\d{2}', item):
+            time_value = item
+
+    # 同時具備浮點數 + 時間 才視為有效
+    if float_value is not None and time_value is not None:
+        return True, float_value, time_value
+    else:
+        return False, None, None
+
 if __name__ == '__main__':
 
   if len(sys.argv) > 1:
@@ -278,97 +298,17 @@ if __name__ == '__main__':
         time.sleep(1.0)
         Shopeecount = 0
     
-    start_point = (800, 300)  # 起始坐標 (x, y)
+    tap(device, "550 1250 ")
+    time.sleep(1.0)
+
+    start_point = (900, 300)  # 起始坐標 (x, y)
     end_point = (1050, 1350)    # 結束坐標 (x, y)
 
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
-    resulttext = pytesseract_image(cropped_img)
-    #resulttext2 = paddleocr_image(cropped_img)  
-
-
-    start_point = (370, 417)  # 起始坐標 (x, y)
-    end_point = (735, 600)    # 結束坐標 (x, y)
-
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = pytesseract_image(cropped_img)
-      
-    resulttext2 = ddddocr_image(cropped_img)
-    if resulttext2.find("直帮卫锥束") > -1 or resulttext2.find("直带已能束") > -1:
-        tap(device, "230 1700 ")
-        time.sleep(1.0)
-        continue 
-
-
-    if resulttext2.find("直帮已锥束") > -1:
-        tap(device, "230 1700 ")
-        time.sleep(1.0)
-        continue 
-
-    turn_on_screen()
-    while True:
-        try:
-           
-            
-    
-            start_point = (800, 300+jump)  # 起始坐標 (x, y)
-            end_point = (1050, 350+jump)    # 結束坐標 (x, y)
-      
-            # 截圖並裁剪
-            img = capture_screenshot(device)
-            cropped_img = crop_image(img, start_point, end_point)
-
-            # 執行 OCR
-            #resulttext = pytesseract_image(cropped_img)
-            resulttext2 = ddddocr_image(cropped_img)
-           
-           
-
-            resulttext2 = resulttext2.replace("o","0")
-            # 使用正則表達式替換
-            resulttext2 = re.sub(r"[a-zA-Z]", "", resulttext2)
-
-            filtered_text = re.sub(r'\D', '', resulttext2)
-            # 確保有至少 4 位數字
-            if resulttext2.find("已错束") > -1 or resulttext2.find("已结束") > -1:
-                jump = 400
-                raise ValueError("已結束")
-
-            #if len(filtered_text) == 3:
-            #    filtered_text = "0" + filtered_text
-            if len(filtered_text) < 4:
-                raise ValueError("輸入字串長度不足 4 位數")
-        
-            tap(device, "550 1510 ")
-            
-            # 嘗試提取並轉換前 4 個字元為數字
-            time_str = filtered_text[:4]
-            minutes = int(time_str[:2])
-            seconds = int(time_str[2:])
-        
-            # 計算總秒數
-            total_seconds = minutes * 60 + seconds
-            if total_seconds > 600:
-                raise ValueError("判斷秒數大於600 有問題")
-            print(total_seconds)
-            break  # 成功後跳出循環
-
-           
-        except ValueError as e:
-            jump = jump + 5
-            print(f"錯誤：{e}，重新嘗試...")
-            if jump < 100 and jump > -300:
-                jump = 110
-            elif  jump < 230 and jump > 210 :
-                jump = 240
-           
-                
-            if  jump > 320:
-                break
-
-
-    if jump > 300:
+    #resulttext = pytesseract_image(cropped_img)
+    resulttext2 = paddleocr_image(cropped_img)  
+    if resulttext2.find("已結束")  > -1 or resulttext2.find("限定") > -1:
         swipe_start = '500 1000'
         swipe_end = '500 200'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
@@ -380,32 +320,15 @@ if __name__ == '__main__':
 
         tap(device, "665 190 ")
         time.sleep(1.0)
-        
         Shopeecount = Shopeecount + 1
-        continue 
+        continue
 
-    log("jump:"+str(jump))
+    spilt = resulttext2.split('\n')
+    valid, value, time2 = validate_block(spilt)
+    if valid:
+        print("數值：", value)
+        print("時間：", time2)
 
-    #判斷 蝦幣是否大於0.15元
-    start_point = (800, 260+jump)  # 起始坐標 (x, y)
-    end_point = (1050, 310+jump)    # 結束坐標 (x, y)
-      
-    # 截圖並裁剪
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-
-    # 執行 OCR
-    #resulttext = pytesseract_image(cropped_img)
-    resulttext2 = ddddocr_image(cropped_img)
-        
-    resulttext2 = resulttext2.replace("o", "0")  # 替換 'o' 為 '0.'
-    resulttext2 = resulttext2.replace("0", "0.")  # 替換 'o' 為 '0.'
-    resulttext2 = re.sub(r"[a-zA-Z]", "", resulttext2)
-
-    filtered_text = re.sub(r'\D', '', resulttext2)
-    try:
-        value = float(resulttext2)  # 將字串轉換為浮點數
-        print("數值是" + str(value))
         if value >= 0.2:
             print("數值大於或等於 0.2")
         else:
@@ -417,20 +340,214 @@ if __name__ == '__main__':
             jump = jump - 300
 
             continue
-    except ValueError:
-        print("錯誤：無法將 resulttext2 轉換為數值")
+
+        turn_on_screen()
+        while True:
+            try:
+                start_point = (800, 300+jump)  # 起始坐標 (x, y)
+                end_point = (1050, 350+jump)    # 結束坐標 (x, y)
+      
+                # 截圖並裁剪
+                img = capture_screenshot(device)
+                cropped_img = crop_image(img, start_point, end_point)
+                resulttext = paddleocr_image(cropped_img)  
+
+                if resulttext.find(str(value)) != -1:
+                    tap(device, "550 1510 ")
+            
+                    # 嘗試提取並轉換前 4 個字元為數字
+                    minutes, seconds = map(int, time2.split(':'))
+        
+                    # 計算總秒數
+                    total_seconds = minutes * 60 + seconds
+                    if total_seconds > 600:
+                        raise ValueError("判斷秒數大於600 有問題")
+                    print(total_seconds)
+                    break  # 成功後跳出循環
+                else:
+                    jump = jump + 10
+                    if jump < 100 and jump > -500:
+                        jump = 110
+
+                    if jump > 300:
+                        swipe_start = '500 1000'
+                        swipe_end = '500 200'
+                        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                        time.sleep(1.0)
+                        jump = jump - 300
+
+                        tap(device, "310 1250 ")
+                        time.sleep(1.0)
+
+                        tap(device, "665 190 ")
+                        time.sleep(1.0)
+        
+                        Shopeecount = Shopeecount + 1
+                        continue 
+
+
+            except ValueError as e:
+                jump = jump + 10
+                if jump < 100 and jump > -500:
+                    jump = 110
+    else:
+        print("不符合條件")
         swipe_start = '500 1000'
         swipe_end = '500 200'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(1.0)
         jump = jump - 300
 
-        continue
+        tap(device, "310 1250 ")
+        time.sleep(1.0)
+
+        tap(device, "665 190 ")
+        time.sleep(1.0)
+        continue 
+    #start_point = (370, 417)  # 起始坐標 (x, y)
+    #end_point = (735, 600)    # 結束坐標 (x, y)
+
+    #img = capture_screenshot(device)
+    #cropped_img = crop_image(img, start_point, end_point)
+    #resulttext = pytesseract_image(cropped_img)
+      
+    #resulttext2 = ddddocr_image(cropped_img)
+    #if resulttext2.find("直帮卫锥束") > -1 or resulttext2.find("直带已能束") > -1:
+    #    tap(device, "230 1700 ")
+    #    time.sleep(1.0)
+    #    continue 
+
+
+    #if resulttext2.find("直帮已锥束") > -1:
+    #    tap(device, "230 1700 ")
+    #    time.sleep(1.0)
+    #    continue 
+
+    #turn_on_screen()
+    #while True:
+    #    try:
+           
+            
+    
+    #        start_point = (800, 300+jump)  # 起始坐標 (x, y)
+    #        end_point = (1050, 350+jump)    # 結束坐標 (x, y)
+      
+    #        # 截圖並裁剪
+    #        img = capture_screenshot(device)
+    #        cropped_img = crop_image(img, start_point, end_point)
+
+    #        # 執行 OCR
+    #        #resulttext = pytesseract_image(cropped_img)
+    #        resulttext2 = ddddocr_image(cropped_img)
+           
+           
+
+    #        resulttext2 = resulttext2.replace("o","0")
+    #        # 使用正則表達式替換
+    #        resulttext2 = re.sub(r"[a-zA-Z]", "", resulttext2)
+
+    #        filtered_text = re.sub(r'\D', '', resulttext2)
+    #        # 確保有至少 4 位數字
+    #        if resulttext2.find("已错束") > -1 or resulttext2.find("已结束") > -1:
+    #            jump = 400
+    #            raise ValueError("已結束")
+
+    #        #if len(filtered_text) == 3:
+    #        #    filtered_text = "0" + filtered_text
+    #        if len(filtered_text) < 4:
+    #            raise ValueError("輸入字串長度不足 4 位數")
+        
+    #        tap(device, "550 1510 ")
+            
+    #        # 嘗試提取並轉換前 4 個字元為數字
+    #        time_str = filtered_text[:4]
+    #        minutes = int(time_str[:2])
+    #        seconds = int(time_str[2:])
+        
+    #        # 計算總秒數
+    #        total_seconds = minutes * 60 + seconds
+    #        if total_seconds > 600:
+    #            raise ValueError("判斷秒數大於600 有問題")
+    #        print(total_seconds)
+    #        break  # 成功後跳出循環
+
+           
+    #    except ValueError as e:
+    #        jump = jump + 5
+    #        print(f"錯誤：{e}，重新嘗試...")
+    #        if jump < 100 and jump > -300:
+    #            jump = 110
+    #        elif  jump < 230 and jump > 210 :
+    #            jump = 240
+           
+                
+    #        if  jump > 320:
+    #            break
+
+
+    #if jump > 300:
+    #    swipe_start = '500 1000'
+    #    swipe_end = '500 200'
+    #    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #    time.sleep(1.0)
+    #    jump = jump - 300
+
+    #    tap(device, "310 1250 ")
+    #    time.sleep(1.0)
+
+    #    tap(device, "665 190 ")
+    #    time.sleep(1.0)
+        
+    #    Shopeecount = Shopeecount + 1
+    #    continue 
+
+    log("jump:"+str(jump))
+
+    ##判斷 蝦幣是否大於0.15元
+    #start_point = (800, 260+jump)  # 起始坐標 (x, y)
+    #end_point = (1050, 310+jump)    # 結束坐標 (x, y)
+      
+    ## 截圖並裁剪
+    #img = capture_screenshot(device)
+    #cropped_img = crop_image(img, start_point, end_point)
+
+    ## 執行 OCR
+    ##resulttext = pytesseract_image(cropped_img)
+    #resulttext2 = ddddocr_image(cropped_img)
+        
+    #resulttext2 = resulttext2.replace("o", "0")  # 替換 'o' 為 '0.'
+    #resulttext2 = resulttext2.replace("0", "0.")  # 替換 'o' 為 '0.'
+    #resulttext2 = re.sub(r"[a-zA-Z]", "", resulttext2)
+
+    #filtered_text = re.sub(r'\D', '', resulttext2)
+    #try:
+    #    value = float(resulttext2)  # 將字串轉換為浮點數
+    #    print("數值是" + str(value))
+    #    if value >= 0.2:
+    #        print("數值大於或等於 0.2")
+    #    else:
+    #        print("數值小於 0.2")
+    #        swipe_start = '500 1000'
+    #        swipe_end = '500 200'
+    #        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #        time.sleep(1.0)
+    #        jump = jump - 300
+
+    #        continue
+    #except ValueError:
+    #    print("錯誤：無法將 resulttext2 轉換為數值")
+    #    swipe_start = '500 1000'
+    #    swipe_end = '500 200'
+    #    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #    time.sleep(1.0)
+    #    jump = jump - 300
+
+    #    continue
 
 
     #判斷 下方位置是否有參加 可以按
-    start_point = (900, 470+jump)  # 起始坐標 (x, y)
-    end_point = (1150, 530+jump)    # 結束坐標 (x, y)
+    start_point = (900, 490+jump)  # 起始坐標 (x, y)
+    end_point = (1150, 550+jump)    # 結束坐標 (x, y)
       
     # 截圖並裁剪
     img = capture_screenshot(device)
@@ -438,14 +555,13 @@ if __name__ == '__main__':
 
     # 執行 OCR
     #resulttext = pytesseract_image(cropped_img)
-    resulttext2 = ddddocr_image(cropped_img)
+    resulttext = paddleocr_image(cropped_img)  
         
-    resulttext2 = resulttext2.replace("o", "0.")  # 替換 'o' 為 '0.'
     try:
         
-        if resulttext2.find("参加") > -1 :
+        if resulttext.find("参加") > -1 :
           #轉盤
-          index = 421+jump
+          index = 521+jump
 
           tap(device, "976 "+ str(index) + " ")
           time.sleep(2.0)
@@ -459,6 +575,7 @@ if __name__ == '__main__':
           tap(device, "545 1481 ")
           time.sleep(2.0)
         
+          total_seconds = total_seconds - 19
     except ValueError:
        
         print("轉盤有錯誤")
@@ -467,8 +584,8 @@ if __name__ == '__main__':
     print("目前偵測圖片位置" + str(jump))
     turn_off_screen()
     caltotal_seconds = total_seconds - 15
-    total_seconds = total_seconds
-    for _ in range(total_seconds):
+    #total_seconds = total_seconds
+    for _ in range(caltotal_seconds):
 
         time.sleep(1)
         caltotal_seconds = caltotal_seconds -1
@@ -476,24 +593,47 @@ if __name__ == '__main__':
     turn_on_screen()
     
 
-    # #錯誤視窗判斷
-    start_point = (370, 417)  # 起始坐標 (x, y)
-    end_point = (735, 600)    # 結束坐標 (x, y)
+    start_point = (900, 300)  # 起始坐標 (x, y)
+    end_point = (1050, 1350)    # 結束坐標 (x, y)
 
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
-    resulttext = pytesseract_image(cropped_img)
-      
-    resulttext2 = ddddocr_image(cropped_img)
-    if resulttext2.find("直帮卫锥束") > -1 or resulttext2.find("直带已能束") > -1:
-        tap(device, "230 1700 ")
+    #resulttext = pytesseract_image(cropped_img)
+    resulttext2 = paddleocr_image(cropped_img)  
+    if resulttext2.find("已結束") > -1  or resulttext2.find("限定")> -1:
+        swipe_start = '500 1000'
+        swipe_end = '500 200'
+        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(1.0)
-        continue 
+        jump = jump - 300
 
-    if resulttext2.find("直帮已锥束") > -1:
-        tap(device, "230 1700 ")
+        tap(device, "310 1250 ")
         time.sleep(1.0)
-        continue 
+
+        tap(device, "665 190 ")
+        time.sleep(1.0)
+
+        continue
+
+
+    ## #錯誤視窗判斷
+    #start_point = (370, 417)  # 起始坐標 (x, y)
+    #end_point = (735, 600)    # 結束坐標 (x, y)
+
+    #img = capture_screenshot(device)
+    #cropped_img = crop_image(img, start_point, end_point)
+    #resulttext = pytesseract_image(cropped_img)
+      
+    #resulttext2 = ddddocr_image(cropped_img)
+    #if resulttext2.find("直帮卫锥束") > -1 or resulttext2.find("直带已能束") > -1:
+    #    tap(device, "230 1700 ")
+    #    time.sleep(1.0)
+    #    continue 
+
+    #if resulttext2.find("直帮已锥束") > -1:
+    #    tap(device, "230 1700 ")
+    #    time.sleep(1.0)
+    #    continue 
 
     index = 301+jump
 
@@ -514,38 +654,41 @@ if __name__ == '__main__':
     tap(device, "200 1010 ")
     time.sleep(1.0)
 
+    jump = jump - 300
+    Shopeecount = Shopeecount + 1
+
       #tap(device, "200 480 ")
       #time.sleep(1.0)
 
       #tap(device, "250 1010 ")
 
-    start_point = (900, 300+jump)  # 起始坐標 (x, y)
-    end_point = (1050, 350+jump)    # 結束坐標 (x, y)
+    #start_point = (900, 300+jump)  # 起始坐標 (x, y)
+    #end_point = (1050, 350+jump)    # 結束坐標 (x, y)
       
-      # 截圖並裁剪
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
+    #  # 截圖並裁剪
+    #img = capture_screenshot(device)
+    #cropped_img = crop_image(img, start_point, end_point)
 
-      # 執行 OCR
-      #resulttext = pytesseract_image(cropped_img)
-    resulttext2 = ddddocr_image(cropped_img)
-    resulttext2 = resulttext2.replace("o","0")
-      # 使用正則表達式移除非數字字元
-    filtered_text = re.sub(r'\D', '', resulttext2)
+    #  # 執行 OCR
+    #  #resulttext = pytesseract_image(cropped_img)
+    #resulttext2 = ddddocr_image(cropped_img)
+    #resulttext2 = resulttext2.replace("o","0")
+    #  # 使用正則表達式移除非數字字元
+    #filtered_text = re.sub(r'\D', '', resulttext2)
 
    
     
-      # 確保有至少 4 位數字
-    if len(filtered_text) == 4:
-         continue 
-    else:
-        swipe_start = '500 1000'
-        swipe_end = '500 200'
-        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(1.0)
-        jump = jump - 300
+    #  # 確保有至少 4 位數字
+    #if len(filtered_text) == 4:
+    #     continue 
+    #else:
+    #    swipe_start = '500 1000'
+    #    swipe_end = '500 200'
+    #    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #    time.sleep(1.0)
+    #    jump = jump - 300
 
-        Shopeecount = Shopeecount + 1
+    #    Shopeecount = Shopeecount + 1
       #轉盤
       #index = 421+jump
 
