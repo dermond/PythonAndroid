@@ -45,6 +45,7 @@ def connect(serial: str):
 
     # 嘗試找出符合 serial 的裝置
     for device in devices:
+        print(str(device.serial))
         if device.serial == serial:
             print(f'Connected to {device}')
             return device, client
