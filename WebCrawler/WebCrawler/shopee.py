@@ -351,7 +351,7 @@ if __name__ == '__main__':
         while True:
             try:
                 print("比對金額" + str(value))
-                tap(device, "550 1510 ")
+                tap(device, "550 1250 ")
                 start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
                 end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
       
