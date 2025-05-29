@@ -296,11 +296,11 @@ if __name__ == '__main__':
         tap(device, "545 2180 ")
         time.sleep(2.0)
         
-        tap(device, "640 190 ")
-        time.sleep(3.0)
+        # tap(device, "740 190 ")
+        # time.sleep(3.0)
         
-        tap(device, "322 1263 ")
-        time.sleep(1.0)
+        # tap(device, "322 1263 ")
+        # time.sleep(1.0)
         Shopeecount = 0
     
     tap(device, "550 1250 ")
@@ -411,6 +411,7 @@ if __name__ == '__main__':
 
         tap(device, "665 190 ")
         time.sleep(1.0)
+        Shopeecount = Shopeecount + 1
         continue 
     #start_point = (370, 417)  # 起始坐標 (x, y)
     #end_point = (735, 600)    # 結束坐標 (x, y)
