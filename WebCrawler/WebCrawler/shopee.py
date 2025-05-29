@@ -146,11 +146,11 @@ def capture_screenshot(device):
 
 def crop_image(img, start_point, end_point):
     try:
-        image = Image.open(os.path.join(os.getcwd(), 'full_screen_'+str(deviceid)+'.png'))
+        image2 = Image.open(os.path.join(os.getcwd(), 'full_screen_'+str(deviceid)+'.png')).convert("RGB")
          
         left, top = start_point
         right, bottom = end_point
-        cropped_img = image.crop((left, top, right, bottom))
+        cropped_img = image2.crop((left, top, right, bottom))
          # 保存到当前工作目录
         cropped_img.save(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png'))
     except:
@@ -158,7 +158,7 @@ def crop_image(img, start_point, end_point):
     return cropped_img
 
 def ddddocr_image(img):
-    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png'))
+    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png')).convert("RGB")
     result = ocr.classification(image, png_fix=True)
 
     return result
@@ -166,14 +166,14 @@ def ddddocr_image(img):
 
 
 def pytesseract_image(img):
-    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png'))
+    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png')).convert("RGB")
     if img == None:
         return ""
     result = pytesseract.image_to_string(img)
     return result
 
 def pytesseract_image_Chitra(img):
-    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png'))
+    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png')).convert("RGB")
     
     # 轉灰階
     gray_image = image.convert('L')
