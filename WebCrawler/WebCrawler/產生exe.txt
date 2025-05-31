@@ -25,12 +25,14 @@ D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\Git
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --debug=all --hidden-import=cv2 --additional-hooks-dir=hooks
 
 
-
+google
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py 46081JEKB10015
 
+Vivo
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py de824891
 
-D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py FA75V1802306
+HTC
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopeeHTC.py FA75V1802306
 
 
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopeeAndmomo.py 
