@@ -19,6 +19,8 @@ from datetime import datetime
 import gc
 import sys
 from paddleocr import PaddleOCR #paddlepaddle
+import subprocess
+import re
 
 device_id = ''
 deviceid = ''
@@ -51,8 +53,9 @@ def connect(serial: str):
             return device, client
 
     # 找不到時回傳第一筆裝置
-    fallback_device = devices[0]
+    #fallback_device = devices[0]
     print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
+    quit()
     return fallback_device, client
 
 def tap(device, position):
@@ -207,7 +210,7 @@ def turn_off_screen():
         subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
         
         # 將亮度設置為最低，接近關閉背光
-        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "1"], check=True)
+        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "5"], check=True)
 
 
         print("螢幕已關閉")
@@ -252,6 +255,53 @@ def validate_block(block):
     else:
         return False, None, None
 
+def run_adb_command(cmd):
+    try:
+        result = subprocess.run(['adb', 'shell'] + cmd.split(), capture_output=True, text=True)
+        return result.stdout.strip()
+    except Exception as e:
+        print(f"[錯誤] 無法執行 ADB：{e}")
+        return ""
+
+def get_screen_info_from_device(device):
+    """
+    傳入已連接的 ADB device 實體，回傳解析度與密度。
+    回傳值：
+      - resolution: (width, height)
+      - density: dpi
+      - display_info: 從 dumpsys display 中解析出的 width, height, densityDpi
+    """
+    # 取得解析度
+    wm_size_output = device.shell("wm size")
+    match_size = re.search(r'(Override|Physical) size:\s*(\d+)x(\d+)', wm_size_output)
+    resolution = (int(match_size.group(2)), int(match_size.group(3))) if match_size else None
+
+    # 取得密度
+    wm_density_output = device.shell("wm density")
+    match_density = re.search(r'(Override|Physical) density:\s*(\d+)', wm_density_output)
+    density = int(match_density.group(2)) if match_density else None
+
+    # 從 dumpsys display 擷取更多資訊
+    dumpsys_display = device.shell("dumpsys display")
+    match_display_info = re.search(
+        r'DisplayDeviceInfo\{.*?width=(\d+), height=(\d+).*?densityDpi=(\d+)',
+        dumpsys_display,
+        re.DOTALL
+    )
+    if match_display_info:
+        display_width = int(match_display_info.group(1))
+        display_height = int(match_display_info.group(2))
+        display_density_dpi = int(match_display_info.group(3))
+        display_info = {
+            "width": display_width,
+            "height": display_height,
+            "densityDpi": display_density_dpi
+        }
+    else:
+        display_info = None
+
+    return resolution, density, display_info
+
 if __name__ == '__main__':
 
   if len(sys.argv) > 1:
@@ -261,7 +311,7 @@ if __name__ == '__main__':
         deviceid = str(sys.argv[1])
   else:
     print("沒有輸入任何參數")
-  #deviceid="de824891"
+  deviceid="46081JEKB10015"
   device, client = connect(deviceid)
   device_id = device.serial
   jump = 0
@@ -269,6 +319,14 @@ if __name__ == '__main__':
   if (device_id == "FA75V1802306"):
       Leftspace = 350
 
+
+  resolution, density, display_info = get_screen_info_from_device(device)
+
+  print(f"解析度（wm size）：{resolution}")
+  print(f"螢幕密度（wm density）：{density} dpi")
+  if display_info:
+    print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
+    
   # #錯誤視窗判斷
   # Shopee 的包名與主 Activity
   package_name = "com.shopee.tw"
@@ -314,7 +372,7 @@ if __name__ == '__main__':
     #resulttext = pytesseract_image(cropped_img)
     resulttext2 = paddleocr_image(cropped_img)  
     if resulttext2.find("已結束")  > -1 or resulttext2.find("限定") > -1:
-        swipe_start = '500 1500'
+        swipe_start = '500 1400'
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(1.0)
@@ -339,7 +397,7 @@ if __name__ == '__main__':
             print("數值大於或等於 0.2")
         else:
             print("數值小於 0.2")
-            swipe_start = '500 1500'
+            swipe_start = '500 1400'
             swipe_end = '500 100'
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(1.0)
@@ -347,11 +405,13 @@ if __name__ == '__main__':
 
             continue
 
+        # 設定起始時間點
+        start_time = time.time()
         turn_on_screen()
         try:
             while True:
             
-                print("比對金額" + str(value))
+                print("比對金額" + str(value) + " " + str(jump))
                 tap(device, "550 1250 ")
                 start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
                 end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
@@ -360,7 +420,7 @@ if __name__ == '__main__':
                 img = capture_screenshot(device)
                 cropped_img = crop_image(img, start_point, end_point)
                 resulttext = paddleocr_image(cropped_img)  
-                deltime = deltime + 1
+                deltime = deltime + 3
                 if resulttext.find(str(value)) != -1:
                     tap(device, "550 1510 ")
             
@@ -379,7 +439,7 @@ if __name__ == '__main__':
                         jump = 110
 
                     if jump > 300:
-                        swipe_start = '500 1500'
+                        swipe_start = '500 1400'
                         swipe_end = '500 100'
                         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
                         time.sleep(1.0)
@@ -392,11 +452,11 @@ if __name__ == '__main__':
                         # time.sleep(1.0)
         
                         Shopeecount = Shopeecount + 1
-                        continue 
+                        raise ValueError("超出範圍")
 
 
         except ValueError as e:
-            swipe_start = '500 1500'
+            swipe_start = '500 1400'
             swipe_end = '500 100'
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(1.0)
@@ -412,7 +472,11 @@ if __name__ == '__main__':
             continue 
     else:
         print("不符合條件")
-        swipe_start = '500 1500'
+        
+        tap(device, "525 1470 ")
+        time.sleep(1.0)
+        
+        swipe_start = '500 1400'
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(1.0)
@@ -565,7 +629,7 @@ if __name__ == '__main__':
 
     #    continue
 
-
+   
     #判斷 下方位置是否有參加 可以按
     start_point = (900+ Leftspace, 490+jump)  # 起始坐標 (x, y)
     end_point = (1150+ Leftspace, 550+jump)    # 結束坐標 (x, y)
@@ -596,15 +660,16 @@ if __name__ == '__main__':
           tap(device, "545 1481 ")
           time.sleep(2.0)
         
-          total_seconds = total_seconds - 19
     except ValueError:
        
         print("轉盤有錯誤")
 
-
+    elapsed = time.time() - start_time
+    time.sleep(1.0)
+    
     print("目前偵測圖片位置" + str(jump))
     turn_off_screen()
-    caltotal_seconds = total_seconds - deltime
+    caltotal_seconds = total_seconds - int(elapsed)
     #total_seconds = total_seconds
     for _ in range(caltotal_seconds):
 
@@ -767,7 +832,7 @@ if __name__ == '__main__':
       # time.sleep(1.0)
 
       # #滑動
-      # swipe_start = '500 1500'
+      # swipe_start = '500 1400'
       # swipe_end = '500 500'
       # swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
       # time.sleep(1.0)

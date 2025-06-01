@@ -5,7 +5,7 @@
     <ProjectGuid>ce00eba1-83f3-48ef-9d32-f2f408089742</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>BitWalk.py</StartupFile>
+    <StartupFile>Newshopee.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,7 +25,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BitWalk - Copy.py" />
     <Compile Include="Cashzine.py" />
     <Compile Include="Build.py">
       <SubType>Code</SubType>
@@ -33,6 +32,10 @@
     <Compile Include="CheckTR.py" />
     <Compile Include="momoAndshopee.py" />
     <Compile Include="BitWalk.py" />
+    <Compile Include="Newshopee.py" />
+    <Compile Include="shopee2.py" />
+    <Compile Include="shopeeHTC.py" />
+    <Compile Include="shopee - Copy.py" />
     <Compile Include="shopeeAndmomo.py" />
     <Compile Include="shopee.py" />
     <Compile Include="RedBag.py" />

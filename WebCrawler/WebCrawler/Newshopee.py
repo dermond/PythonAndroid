@@ -55,7 +55,7 @@ def connect(serial: str):
     # 找不到時回傳第一筆裝置
     fallback_device = devices[0]
     print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
-    quit()
+    #quit()
     return fallback_device, client
 
 def tap(device, position):
@@ -260,7 +260,7 @@ def run_adb_command(cmd):
         result = subprocess.run(['adb', 'shell'] + cmd.split(), capture_output=True, text=True)
         return result.stdout.strip()
     except Exception as e:
-        print(f"執行 ADB 指令時出錯: {e}")
+        print(f"[錯誤] 無法執行 ADB：{e}")
         return ""
 
 def get_screen_info_from_device(device):
@@ -302,6 +302,65 @@ def get_screen_info_from_device(device):
 
     return resolution, density, display_info
 
+def judgment(jump):
+     #判斷數值
+    start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
+    end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
+      
+    # 截圖並裁剪
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = paddleocr_image(cropped_img)  
+
+    if resulttext.find("已結束")  > -1 or resulttext.find("限定") > -1:
+        
+        return "next"
+ 
+    if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
+        jump = 100
+        while True:
+            start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
+            end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
+            print("比對领取" + " " + str(jump))
+            # 截圖並裁剪
+            img = capture_screenshot(device)
+            cropped_img = crop_image(img, start_point, end_point)
+            resulttext2 = paddleocr_image(cropped_img)  
+           
+            if resulttext2.find("領取")  > -1 or resulttext2.find("领取")  > -1 :
+                index = 301+jump 
+
+                tap(device, str(984 + Leftspace) + " " + str(index))
+                time.sleep(4.0)
+      
+                index = 1473
+                tap(device, str(554 + Leftspace) + " " + str(index))
+                time.sleep(4.0)
+                return "ok"
+               
+            jump = jump + 10
+            
+            if jump > 450:
+                return "next"
+    
+    spilt = resulttext.split('\n')
+    valid, value, time2 = validate_block(spilt)
+    if valid:
+        print("數值：", value)
+        print("時間：", time2)
+        ErrorCount = 0
+        if value >= 0.2:
+            print("數值大於或等於 0.2")
+            return "wait"
+        else:
+            print("數值小於 0.2")
+
+            return "next"
+    else:
+        print("解析蝦皮和時間錯誤")
+        
+        return "next"
+    
 if __name__ == '__main__':
 
   if len(sys.argv) > 1:
@@ -311,14 +370,16 @@ if __name__ == '__main__':
         deviceid = str(sys.argv[1])
   else:
     print("沒有輸入任何參數")
-
-  deviceid = "FA75V1802306"
+ 
   device, client = connect(deviceid)
   device_id = device.serial
   jump = 0
-
+  Leftspace = 0
   if (device_id == "FA75V1802306"):
-      Leftspace = 350
+      Leftspace = 370
+
+  #解析度（wm size）：(1080, 2400)
+  #解析度（wm size）：(1440, 2560)
 
   resolution, density, display_info = get_screen_info_from_device(device)
 
@@ -333,13 +394,13 @@ if __name__ == '__main__':
   activity_name = "com.shopee.app.ui.home.HomeActivity_"
 
   Shopeecount = 0
-
+  ErrorCount = 0
   for i in range(99999999):
 
     check_garbage_objects()
     print_memory_usage()
-    
-    if Shopeecount > 20:  # 如果 i 是 10 的倍數
+    turn_off_screen()
+    if Shopeecount > 10:  # 如果 i 是 10 的倍數
         print(f"第 {i} 次操作：重啟 Shopee App")
         
         # 關閉 Shopee
@@ -351,7 +412,7 @@ if __name__ == '__main__':
         output = device.shell(start_command)
         print(f"Shopee 已啟動，輸出：\n{output}")
         time.sleep(4.0)
-        tap(device, "703 2464 ")
+        tap(device, "545 2180 ")
         time.sleep(2.0)
         
         # tap(device, "740 190 ")
@@ -360,134 +421,156 @@ if __name__ == '__main__':
         # tap(device, "322 1263 ")
         # time.sleep(1.0)
         Shopeecount = 0
-    
-    tap(device, "550 1250 ")
-    time.sleep(1.0)
-
-    start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
-    end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
-
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    #resulttext = pytesseract_image(cropped_img)
-    resulttext2 = paddleocr_image(cropped_img)  
-    if resulttext2.find("已結束")  > -1 or resulttext2.find("限定") > -1:
-        swipe_start = '500 1400'
+   
+    result = judgment(100)
+    if result == "wait":
+        
+        print("等待 不用處理")
+    elif result == "next":
+        print("下一筆")
+        swipe_start = '500 1300'
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(1.0)
-        jump = 0
-
-        tap(device, "900 1250 ")
-        time.sleep(1.0)
-
-        # tap(device, "665 190 ")
-        # time.sleep(1.0)
+        time.sleep(6.0)
+        
         Shopeecount = Shopeecount + 1
-        continue
-
-    deltime = 0;
-    spilt = resulttext2.split('\n')
-    valid, value, time2 = validate_block(spilt)
-    if valid:
-        print("數值：", value)
-        print("時間：", time2)
-
-        if value >= 0.2:
-            print("數值大於或等於 0.2")
-        else:
-            print("數值小於 0.2")
-            swipe_start = '500 1400'
-            swipe_end = '500 100'
-            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-            time.sleep(1.0)
-            jump = 0
-
-            continue
-        start_time = time.time()
+    if result == "ok":
+        Shopeecount = 0
         turn_on_screen()
-        try:
-            while True:
+        continue
+    
+    print("重複")
+
+    # tap(device, "550 1250 ")
+    # time.sleep(1.0)
+
+    # start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
+    # end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
+
+    # img = capture_screenshot(device)
+    # cropped_img = crop_image(img, start_point, end_point)
+    # #resulttext = pytesseract_image(cropped_img)
+    # resulttext2 = paddleocr_image(cropped_img)  
+    # if resulttext2.find("已結束")  > -1 or resulttext2.find("限定") > -1:
+    #     swipe_start = '500 1400'
+    #     swipe_end = '500 100'
+    #     swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #     time.sleep(1.0)
+    #     jump = 0
+
+    #     tap(device, "310 1250 ")
+    #     time.sleep(1.0)
+
+    #     # tap(device, "665 190 ")
+    #     # time.sleep(1.0)
+    #     Shopeecount = Shopeecount + 1
+    #     continue
+
+    # deltime = 0;
+    # spilt = resulttext2.split('\n')
+    # valid, value, time2 = validate_block(spilt)
+    # if valid:
+    #     print("數值：", value)
+    #     print("時間：", time2)
+
+    #     if value >= 0.2:
+    #         print("數值大於或等於 0.2")
+    #     else:
+    #         print("數值小於 0.2")
+    #         swipe_start = '500 1400'
+    #         swipe_end = '500 100'
+    #         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #         time.sleep(1.0)
+    #         jump = 0
+
+    #         continue
+
+    #     # 設定起始時間點
+    #     start_time = time.time()
+    #     turn_on_screen()
+    #     try:
+    #         while True:
             
-                print("比對金額" + str(value)+ " " + str(jump))
-                tap(device, "550 1250 ")
-                start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
-                end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
+    #             print("比對金額" + str(value) + " " + str(jump))
+    #             tap(device, "550 1250 ")
+    #             start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
+    #             end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
       
-                # 截圖並裁剪
-                img = capture_screenshot(device)
-                cropped_img = crop_image(img, start_point, end_point)
-                resulttext = paddleocr_image(cropped_img)  
-                deltime = deltime + 5
-                if resulttext.find(str(value)) != -1:
-                    tap(device, "550 1510 ")
+    #             # 截圖並裁剪
+    #             img = capture_screenshot(device)
+    #             cropped_img = crop_image(img, start_point, end_point)
+    #             resulttext = paddleocr_image(cropped_img)  
+    #             deltime = deltime + 3
+    #             if resulttext.find(str(value)) != -1:
+    #                 tap(device, "550 1510 ")
             
-                    # 嘗試提取並轉換前 4 個字元為數字
-                    minutes, seconds = map(int, time2.split(':'))
+    #                 # 嘗試提取並轉換前 4 個字元為數字
+    #                 minutes, seconds = map(int, time2.split(':'))
         
-                    # 計算總秒數
-                    total_seconds = minutes * 60 + seconds
-                    if total_seconds > 600:
-                        raise ValueError("判斷秒數大於600 有問題")
-                    print(total_seconds)
-                    break  # 成功後跳出循環
-                else:
-                    jump = jump + 10
-                    if jump < 100 and jump > -500:
-                        jump = 110
+    #                 # 計算總秒數
+    #                 total_seconds = minutes * 60 + seconds
+    #                 if total_seconds > 600:
+    #                     raise ValueError("判斷秒數大於600 有問題")
+    #                 print(total_seconds)
+    #                 break  # 成功後跳出循環
+    #             else:
+    #                 jump = jump + 10
+    #                 if jump < 100 and jump > -500:
+    #                     jump = 110
 
-                    if jump > 400:
-                        swipe_start = '500 1400'
-                        swipe_end = '500 100'
-                        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-                        time.sleep(1.0)
-                        jump = 0
+    #                 if jump > 300:
+    #                     swipe_start = '500 1400'
+    #                     swipe_end = '500 100'
+    #                     swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #                     time.sleep(1.0)
+    #                     jump = 0
 
-                        tap(device, "900 1250 ")
-                        time.sleep(1.0)
+    #                     tap(device, "310 1250 ")
+    #                     time.sleep(1.0)
 
-                        # tap(device, "665 190 ")
-                        # time.sleep(1.0)
+    #                     # tap(device, "665 190 ")
+    #                     # time.sleep(1.0)
         
-                        Shopeecount = Shopeecount + 1
-                        raise ValueError("超出範圍")
+    #                     Shopeecount = Shopeecount + 1
+    #                     raise ValueError("超出範圍")
 
 
-        except ValueError as e:
-            swipe_start = '500 1400'
-            swipe_end = '500 100'
-            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-            time.sleep(1.0)
-            jump = 0
+    #     except ValueError as e:
+    #         swipe_start = '500 1400'
+    #         swipe_end = '500 100'
+    #         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #         time.sleep(1.0)
+    #         jump = 0
 
-            tap(device, "310 1250 ")
-            time.sleep(1.0)
+    #         tap(device, "310 1250 ")
+    #         time.sleep(1.0)
 
-            # tap(device, "665 190 ")
-            # time.sleep(1.0)
+    #         # tap(device, "665 190 ")
+    #         # time.sleep(1.0)
         
-            Shopeecount = Shopeecount + 1
-            continue 
-    else:
-        print("不符合條件")
-        tap(device, "525 1470 ")
-        time.sleep(1.0)
+    #         Shopeecount = Shopeecount + 1
+    #         continue 
+    # else:
+    #     print("不符合條件")
         
-        swipe_start = '500 1400'
-        swipe_end = '500 100'
-        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(1.0)
-        jump = 0
+    #     tap(device, "525 1470 ")
+    #     time.sleep(1.0)
+        
+    #     swipe_start = '500 1400'
+    #     swipe_end = '500 100'
+    #     swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #     time.sleep(1.0)
+    #     jump = 0
 
-        tap(device, "900 1250 ")
-        time.sleep(1.0)
+    #     tap(device, "310 1250 ")
+    #     time.sleep(1.0)
 
-        # tap(device, "665 190 ")
-        # time.sleep(1.0)
-        Shopeecount = Shopeecount + 1
-        continue 
-    #start_point = (370, 417)  # 起始坐標 (x, y)
-    #end_point = (735, 600)    # 結束坐標 (x, y)
+    #     # tap(device, "665 190 ")
+    #     # time.sleep(1.0)
+    #     Shopeecount = Shopeecount + 1
+    #     continue 
+    # #start_point = (370, 417)  # 起始坐標 (x, y)
+    # #end_point = (735, 600)    # 結束坐標 (x, y)
 
     #img = capture_screenshot(device)
     #cropped_img = crop_image(img, start_point, end_point)
@@ -572,7 +655,7 @@ if __name__ == '__main__':
     #    swipe_end = '500 200'
     #    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
     #    time.sleep(1.0)
-    #    jump = jump - 300
+    #    jump = 0
 
     #    tap(device, "310 1250 ")
     #    time.sleep(1.0)
@@ -613,7 +696,7 @@ if __name__ == '__main__':
     #        swipe_end = '500 200'
     #        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
     #        time.sleep(1.0)
-    #        jump = jump - 300
+    #        jump = 0
 
     #        continue
     #except ValueError:
@@ -622,80 +705,81 @@ if __name__ == '__main__':
     #    swipe_end = '500 200'
     #    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
     #    time.sleep(1.0)
-    #    jump = jump - 300
+    #    jump = 0
 
     #    continue
 
-    #判斷 下方位置是否有參加 可以按
-    start_point = (900+ Leftspace, 490+jump)  # 起始坐標 (x, y)
-    end_point = (1150+ Leftspace, 550+jump)    # 結束坐標 (x, y)
+   
+    # #判斷 下方位置是否有參加 可以按
+    # start_point = (900+ Leftspace, 490+jump)  # 起始坐標 (x, y)
+    # end_point = (1150+ Leftspace, 550+jump)    # 結束坐標 (x, y)
       
-    # 截圖並裁剪
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
+    # # 截圖並裁剪
+    # img = capture_screenshot(device)
+    # cropped_img = crop_image(img, start_point, end_point)
 
-    # 執行 OCR
-    #resulttext = pytesseract_image(cropped_img)
-    resulttext = paddleocr_image(cropped_img)  
+    # # 執行 OCR
+    # #resulttext = pytesseract_image(cropped_img)
+    # resulttext = paddleocr_image(cropped_img)  
         
-    try:
+    # try:
         
-        if resulttext.find("参加") > -1 :
-          #轉盤
-          index = 521+jump
+    #     if resulttext.find("参加") > -1 :
+    #       #轉盤
+    #       index = 521+jump
 
-          tap(device, "976 "+ str(index) + " ")
-          time.sleep(2.0)
+    #       tap(device, "976 "+ str(index) + " ")
+    #       time.sleep(2.0)
 
-          tap(device, "542 1058 ")
-          time.sleep(3.0)
+    #       tap(device, "542 1058 ")
+    #       time.sleep(3.0)
 
-          tap(device, "754 1300 ")
-          time.sleep(12.0)
+    #       tap(device, "754 1300 ")
+    #       time.sleep(12.0)
 
-          tap(device, "545 1481 ")
-          time.sleep(2.0)
+    #       tap(device, "545 1481 ")
+    #       time.sleep(2.0)
         
-    except ValueError:
+    # except ValueError:
        
-        print("轉盤有錯誤")
+    #     print("轉盤有錯誤")
 
+    # elapsed = time.time() - start_time
+    # time.sleep(1.0)
+    
+    # print("目前偵測圖片位置" + str(jump))
+    # turn_off_screen()
+    # caltotal_seconds = total_seconds - int(elapsed)
+    # #total_seconds = total_seconds
+    # for _ in range(caltotal_seconds):
 
-    elapsed = time.time() - start_time
-    time.sleep(1.0)
-    print("目前偵測圖片位置" + str(jump))
-    turn_off_screen()
-    caltotal_seconds = total_seconds - int(elapsed)
-    #total_seconds = total_seconds
-    for _ in range(caltotal_seconds):
-
-        time.sleep(1)
-        caltotal_seconds = caltotal_seconds -1
-        print("還剩下" + str(caltotal_seconds) + "秒")
-    turn_on_screen()
+    #     time.sleep(1)
+    #     caltotal_seconds = caltotal_seconds -1
+    #     print("還剩下" + str(caltotal_seconds) + "秒")
+    # turn_on_screen()
     
 
-    start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
-    end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
+    # start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
+    # end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
 
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    #resulttext = pytesseract_image(cropped_img)
-    resulttext2 = paddleocr_image(cropped_img)  
-    if resulttext2.find("已結束") > -1  or resulttext2.find("限定")> -1:
-        swipe_start = '500 1000'
-        swipe_end = '500 200'
-        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(1.0)
-        jump = 0
+    # img = capture_screenshot(device)
+    # cropped_img = crop_image(img, start_point, end_point)
+    # #resulttext = pytesseract_image(cropped_img)
+    # resulttext2 = paddleocr_image(cropped_img)  
+    # if resulttext2.find("已結束") > -1  or resulttext2.find("限定")> -1:
+    #     swipe_start = '500 1000'
+    #     swipe_end = '500 200'
+    #     swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+    #     time.sleep(1.0)
+    #     jump = 0
 
-        tap(device, "900 1250 ")
-        time.sleep(1.0)
+    #     tap(device, "310 1250 ")
+    #     time.sleep(1.0)
 
-        # tap(device, "665 190 ")
-        # time.sleep(1.0)
+    #     # tap(device, "665 190 ")
+    #     # time.sleep(1.0)
 
-        continue
+    #     continue
 
 
     ## #錯誤視窗判斷
@@ -717,27 +801,27 @@ if __name__ == '__main__':
     #    time.sleep(1.0)
     #    continue 
 
-    index = 341+jump
+    # index = 301+jump
 
-    tap(device, "265 1475 ")
-    time.sleep(1.0)
+    # tap(device, "265 1475 ")
+    # time.sleep(1.0)
 
-    tap(device, "720 671 ")
-    time.sleep(1.0)
-    #tap(device, "250 1010 ")
+    # tap(device, "200 1010 ")
+    # time.sleep(1.0)
+    # #tap(device, "250 1010 ")
 
-    tap(device, "1323 " + str(index))
-    time.sleep(3.0)
+    # tap(device, "984 " + str(index))
+    # time.sleep(3.0)
       
-    index = 1732
-    tap(device, "780 "+ str(index))
-    time.sleep(3.0)
+    # index = 1473
+    # tap(device, "554 "+ str(index))
+    # time.sleep(3.0)
       
-    tap(device, "200 1010 ")
-    time.sleep(1.0)
+    # tap(device, "200 1010 ")
+    # time.sleep(1.0)
 
-    jump = 0
-    Shopeecount = Shopeecount + 1
+    # jump = 0
+    # Shopeecount = Shopeecount + 1
 
       #tap(device, "200 480 ")
       #time.sleep(1.0)
@@ -768,7 +852,7 @@ if __name__ == '__main__':
     #    swipe_end = '500 200'
     #    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
     #    time.sleep(1.0)
-    #    jump = jump - 300
+    #    jump = 0
 
     #    Shopeecount = Shopeecount + 1
       #轉盤

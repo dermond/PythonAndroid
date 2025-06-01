@@ -29,10 +29,20 @@ google
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py 46081JEKB10015
 
 Vivo
-D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py de824891
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee2.py de824891
 
 HTC
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopeeHTC.py FA75V1802306
 
 
-D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopeeAndmomo.py 
+New
+
+google
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py 46081JEKB10015
+
+Vivo
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py de824891
+
+HTC
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py FA75V1802306
+

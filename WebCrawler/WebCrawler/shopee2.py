@@ -260,7 +260,7 @@ def run_adb_command(cmd):
         result = subprocess.run(['adb', 'shell'] + cmd.split(), capture_output=True, text=True)
         return result.stdout.strip()
     except Exception as e:
-        print(f"執行 ADB 指令時出錯: {e}")
+        print(f"[錯誤] 無法執行 ADB：{e}")
         return ""
 
 def get_screen_info_from_device(device):
@@ -311,14 +311,14 @@ if __name__ == '__main__':
         deviceid = str(sys.argv[1])
   else:
     print("沒有輸入任何參數")
-
-  deviceid = "FA75V1802306"
+  deviceid="de824891"
   device, client = connect(deviceid)
   device_id = device.serial
   jump = 0
 
   if (device_id == "FA75V1802306"):
       Leftspace = 350
+
 
   resolution, density, display_info = get_screen_info_from_device(device)
 
@@ -351,7 +351,7 @@ if __name__ == '__main__':
         output = device.shell(start_command)
         print(f"Shopee 已啟動，輸出：\n{output}")
         time.sleep(4.0)
-        tap(device, "703 2464 ")
+        tap(device, "545 2180 ")
         time.sleep(2.0)
         
         # tap(device, "740 190 ")
@@ -378,7 +378,7 @@ if __name__ == '__main__':
         time.sleep(1.0)
         jump = 0
 
-        tap(device, "900 1250 ")
+        tap(device, "310 1250 ")
         time.sleep(1.0)
 
         # tap(device, "665 190 ")
@@ -409,7 +409,7 @@ if __name__ == '__main__':
         try:
             while True:
             
-                print("比對金額" + str(value)+ " " + str(jump))
+                print("比對金額" + str(value) + " " + str(jump))
                 tap(device, "550 1250 ")
                 start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
                 end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
@@ -418,7 +418,7 @@ if __name__ == '__main__':
                 img = capture_screenshot(device)
                 cropped_img = crop_image(img, start_point, end_point)
                 resulttext = paddleocr_image(cropped_img)  
-                deltime = deltime + 5
+                deltime = deltime + 3
                 if resulttext.find(str(value)) != -1:
                     tap(device, "550 1510 ")
             
@@ -436,14 +436,14 @@ if __name__ == '__main__':
                     if jump < 100 and jump > -500:
                         jump = 110
 
-                    if jump > 400:
+                    if jump > 300:
                         swipe_start = '500 1400'
                         swipe_end = '500 100'
                         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
                         time.sleep(1.0)
                         jump = 0
 
-                        tap(device, "900 1250 ")
+                        tap(device, "310 1250 ")
                         time.sleep(1.0)
 
                         # tap(device, "665 190 ")
@@ -479,7 +479,7 @@ if __name__ == '__main__':
         time.sleep(1.0)
         jump = 0
 
-        tap(device, "900 1250 ")
+        tap(device, "310 1250 ")
         time.sleep(1.0)
 
         # tap(device, "665 190 ")
@@ -572,7 +572,7 @@ if __name__ == '__main__':
     #    swipe_end = '500 200'
     #    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
     #    time.sleep(1.0)
-    #    jump = jump - 300
+    #    jump = 0
 
     #    tap(device, "310 1250 ")
     #    time.sleep(1.0)
@@ -613,7 +613,7 @@ if __name__ == '__main__':
     #        swipe_end = '500 200'
     #        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
     #        time.sleep(1.0)
-    #        jump = jump - 300
+    #        jump = 0
 
     #        continue
     #except ValueError:
@@ -622,7 +622,7 @@ if __name__ == '__main__':
     #    swipe_end = '500 200'
     #    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
     #    time.sleep(1.0)
-    #    jump = jump - 300
+    #    jump = 0
 
     #    continue
 
@@ -660,9 +660,9 @@ if __name__ == '__main__':
        
         print("轉盤有錯誤")
 
-
     elapsed = time.time() - start_time
     time.sleep(1.0)
+    
     print("目前偵測圖片位置" + str(jump))
     turn_off_screen()
     caltotal_seconds = total_seconds - int(elapsed)
@@ -689,7 +689,7 @@ if __name__ == '__main__':
         time.sleep(1.0)
         jump = 0
 
-        tap(device, "900 1250 ")
+        tap(device, "310 1250 ")
         time.sleep(1.0)
 
         # tap(device, "665 190 ")
@@ -717,20 +717,20 @@ if __name__ == '__main__':
     #    time.sleep(1.0)
     #    continue 
 
-    index = 341+jump
+    index = 301+jump
 
     tap(device, "265 1475 ")
     time.sleep(1.0)
 
-    tap(device, "720 671 ")
+    tap(device, "200 1010 ")
     time.sleep(1.0)
     #tap(device, "250 1010 ")
 
-    tap(device, "1323 " + str(index))
+    tap(device, "984 " + str(index))
     time.sleep(3.0)
       
-    index = 1732
-    tap(device, "780 "+ str(index))
+    index = 1473
+    tap(device, "554 "+ str(index))
     time.sleep(3.0)
       
     tap(device, "200 1010 ")
@@ -768,7 +768,7 @@ if __name__ == '__main__':
     #    swipe_end = '500 200'
     #    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
     #    time.sleep(1.0)
-    #    jump = jump - 300
+    #    jump = 0
 
     #    Shopeecount = Shopeecount + 1
       #轉盤
