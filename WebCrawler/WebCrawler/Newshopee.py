@@ -22,11 +22,14 @@ from paddleocr import PaddleOCR #paddlepaddle
 import subprocess
 import re
 
+
 device_id = ''
 deviceid = ''
 ocr = ddddocr.DdddOcr()
 Pocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' 支援
-Leftspace = 0;
+Leftspace = 0
+jump = 0
+
 def check_garbage_objects():
     gc.collect()  # 手動觸發垃圾回收
     uncollected = gc.garbage
@@ -255,6 +258,27 @@ def validate_block(block):
     else:
         return False, None, None
 
+       
+def or_validate_block(block):
+    float_value = None
+    time_value = None
+    
+    for item in block:
+        # 嘗試匹配 0~5 的浮點數（最多 5.000...，不超過5）
+        if re.fullmatch(r'0*(?:[0-4](?:\.\d+)?|5(?:\.0*)?)', item):
+            float_value = float(item)
+
+        # 嘗試匹配時間格式（mm:ss 或 hh:mm）
+        if re.fullmatch(r'\d{1,2}:\d{2}', item):
+            time_value = item
+
+    # 同時具備浮點數 + 時間 才視為有效
+    if float_value is not None or time_value is not None:
+        return True, float_value, time_value
+    else:
+        return False, None, None
+
+
 def run_adb_command(cmd):
     try:
         result = subprocess.run(['adb', 'shell'] + cmd.split(), capture_output=True, text=True)
@@ -302,7 +326,8 @@ def get_screen_info_from_device(device):
 
     return resolution, density, display_info
 
-def judgment(jump):
+def judgment(temp):
+    global jump
      #判斷數值
     start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
     end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
@@ -317,32 +342,35 @@ def judgment(jump):
         return "next"
  
     if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
-        jump = 100
-        while True:
-            start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
-            end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
-            print("比對领取" + " " + str(jump))
-            # 截圖並裁剪
-            img = capture_screenshot(device)
-            cropped_img = crop_image(img, start_point, end_point)
-            resulttext2 = paddleocr_image(cropped_img)  
+       
+        start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
+        end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
+        print("比對领取-2" + " " + str(jump))
+        # 截圖並裁剪
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext2 = paddleocr_image(cropped_img)  
            
-            if resulttext2.find("領取")  > -1 or resulttext2.find("领取")  > -1 :
-                index = 301+jump 
+        if resulttext2.find("領取")  > -1 or resulttext2.find("领取")  > -1 :
+            index = 301+jump 
 
+            if (device_id == "FA75V1802306"):
+                tap(device, "1323 " + str(index))
+                time.sleep(3.0)
+                index = 1732
+                tap(device, "780 "+ str(index))
+                time.sleep(3.0)
+            else:
                 tap(device, str(984 + Leftspace) + " " + str(index))
                 time.sleep(4.0)
       
                 index = 1473
                 tap(device, str(554 + Leftspace) + " " + str(index))
                 time.sleep(4.0)
-                return "ok"
+            return "ok"
                
-            jump = jump + 10
-            
-            if jump > 450:
-                return "next"
-    
+        
+       
     spilt = resulttext.split('\n')
     valid, value, time2 = validate_block(spilt)
     if valid:
@@ -351,6 +379,26 @@ def judgment(jump):
         ErrorCount = 0
         if value >= 0.2:
             print("數值大於或等於 0.2")
+            
+           
+            start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
+            end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
+            print("比對领取" + " " + str(jump))
+            # 截圖並裁剪
+            img = capture_screenshot(device)
+            cropped_img = crop_image(img, start_point, end_point)
+            resulttext2 = paddleocr_image(cropped_img)  
+            spilt = resulttext2.split('\n')
+            valid, value, time2 = or_validate_block(spilt)
+            if valid:
+                print("找到數值或是時間")
+            else:
+                jump = jump + 10
+                    
+                if jump > 450:
+                    return "next"
+
+
             return "wait"
         else:
             print("數值小於 0.2")
@@ -370,13 +418,13 @@ if __name__ == '__main__':
         deviceid = str(sys.argv[1])
   else:
     print("沒有輸入任何參數")
- 
+  deviceid = "46081JEKB10015"
   device, client = connect(deviceid)
   device_id = device.serial
-  jump = 0
+  jump = 100
   Leftspace = 0
   if (device_id == "FA75V1802306"):
-      Leftspace = 370
+      Leftspace = 350
 
   #解析度（wm size）：(1080, 2400)
   #解析度（wm size）：(1440, 2560)
@@ -392,7 +440,7 @@ if __name__ == '__main__':
   # Shopee 的包名與主 Activity
   package_name = "com.shopee.tw"
   activity_name = "com.shopee.app.ui.home.HomeActivity_"
-
+  
   Shopeecount = 0
   ErrorCount = 0
   for i in range(99999999):
@@ -422,7 +470,8 @@ if __name__ == '__main__':
         # time.sleep(1.0)
         Shopeecount = 0
    
-    result = judgment(100)
+
+    result = judgment(0)
     if result == "wait":
         
         print("等待 不用處理")
@@ -431,11 +480,12 @@ if __name__ == '__main__':
         swipe_start = '500 1300'
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(6.0)
-        
+        time.sleep(10.0)
+        jump = 100
         Shopeecount = Shopeecount + 1
-    if result == "ok":
+    elif result == "ok":
         Shopeecount = 0
+        jump = 100
         turn_on_screen()
         continue
     
