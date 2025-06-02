@@ -29,6 +29,8 @@ ocr = ddddocr.DdddOcr()
 Pocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' 支援
 Leftspace = 0
 jump = 0
+resolution_width = 0
+resolution_height = 0
 
 def check_garbage_objects():
     gc.collect()  # 手動觸發垃圾回收
@@ -258,27 +260,6 @@ def validate_block(block):
     else:
         return False, None, None
 
-       
-def or_validate_block(block):
-    float_value = None
-    time_value = None
-    
-    for item in block:
-        # 嘗試匹配 0~5 的浮點數（最多 5.000...，不超過5）
-        if re.fullmatch(r'0*(?:[0-4](?:\.\d+)?|5(?:\.0*)?)', item):
-            float_value = float(item)
-
-        # 嘗試匹配時間格式（mm:ss 或 hh:mm）
-        if re.fullmatch(r'\d{1,2}:\d{2}', item):
-            time_value = item
-
-    # 同時具備浮點數 + 時間 才視為有效
-    if float_value is not None or time_value is not None:
-        return True, float_value, time_value
-    else:
-        return False, None, None
-
-
 def run_adb_command(cmd):
     try:
         result = subprocess.run(['adb', 'shell'] + cmd.split(), capture_output=True, text=True)
@@ -288,18 +269,24 @@ def run_adb_command(cmd):
         return ""
 
 def get_screen_info_from_device(device):
+   
     """
+   
     傳入已連接的 ADB device 實體，回傳解析度與密度。
     回傳值：
       - resolution: (width, height)
       - density: dpi
       - display_info: 從 dumpsys display 中解析出的 width, height, densityDpi
     """
+    global resolution_width
+    global resolution_height
+
     # 取得解析度
     wm_size_output = device.shell("wm size")
     match_size = re.search(r'(Override|Physical) size:\s*(\d+)x(\d+)', wm_size_output)
     resolution = (int(match_size.group(2)), int(match_size.group(3))) if match_size else None
-
+    resolution_width = int(match_size.group(2))
+    resolution_height = int(match_size.group(3))
     # 取得密度
     wm_density_output = device.shell("wm density")
     match_density = re.search(r'(Override|Physical) density:\s*(\d+)', wm_density_output)
@@ -328,6 +315,8 @@ def get_screen_info_from_device(device):
 
 def judgment(temp):
     global jump
+    global resolution_width
+    global resolution_height
      #判斷數值
     start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
     end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
@@ -337,14 +326,12 @@ def judgment(temp):
     cropped_img = crop_image(img, start_point, end_point)
     resulttext = paddleocr_image(cropped_img)  
 
-    if resulttext.find("已結束")  > -1 or resulttext.find("限定") > -1:
-        
-        return "next"
+    
  
     if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
        
         start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
-        end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
+        end_point = (1050+ Leftspace, 400+jump)    # 結束坐標 (x, y)
         print("比對领取-2" + " " + str(jump))
         # 截圖並裁剪
         img = capture_screenshot(device)
@@ -352,21 +339,27 @@ def judgment(temp):
         resulttext2 = paddleocr_image(cropped_img)  
            
         if resulttext2.find("領取")  > -1 or resulttext2.find("领取")  > -1 :
-            index = 301+jump 
+            index = 321+jump 
+            
+            tap(device, str(resolution_width - 106) + " " + str(index))
+            time.sleep(3.0)
+            index = 1400 + (abs(2380 - resolution_height) * 2)
+            tap(device, str(resolution_width / 2) + " " + str(index))
+            time.sleep(3.0)
 
-            if (device_id == "FA75V1802306"):
-                tap(device, "1323 " + str(index))
-                time.sleep(3.0)
-                index = 1732
-                tap(device, "780 "+ str(index))
-                time.sleep(3.0)
-            else:
-                tap(device, str(984 + Leftspace) + " " + str(index))
-                time.sleep(4.0)
+            #if (device_id == "FA75V1802306"):
+            #    tap(device, str(resolution_width - 106) + " " + str(index))
+            #    time.sleep(3.0)
+            #    index = 1732
+            #    tap(device, "780 "+ str(index))
+            #    time.sleep(3.0)
+            #else:
+            #    tap(device, str(984 + Leftspace) + " " + str(index))
+            #    time.sleep(4.0)
       
-                index = 1473
-                tap(device, str(554 + Leftspace) + " " + str(index))
-                time.sleep(4.0)
+            #    index = 1473
+            #    tap(device, str(554 + Leftspace) + " " + str(index))
+            #    time.sleep(4.0)
             return "ok"
                
         
@@ -382,14 +375,14 @@ def judgment(temp):
             
            
             start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
-            end_point = (1050+ Leftspace, 350+jump)    # 結束坐標 (x, y)
+            end_point = (1050+ Leftspace, 400+jump)    # 結束坐標 (x, y)
             print("比對领取" + " " + str(jump))
             # 截圖並裁剪
             img = capture_screenshot(device)
             cropped_img = crop_image(img, start_point, end_point)
             resulttext2 = paddleocr_image(cropped_img)  
             spilt = resulttext2.split('\n')
-            valid, value, time2 = or_validate_block(spilt)
+            valid, value, time2 = validate_block(spilt)
             if valid:
                 print("找到數值或是時間")
             else:
@@ -406,10 +399,13 @@ def judgment(temp):
             return "next"
     else:
         print("解析蝦皮和時間錯誤")
-        
+
         return "next"
     
 if __name__ == '__main__':
+
+  deviceid = "FA75V1802306"
+  #deviceid = "46081JEKB10015"
 
   if len(sys.argv) > 1:
         print("你輸入的參數如下：")
@@ -418,13 +414,13 @@ if __name__ == '__main__':
         deviceid = str(sys.argv[1])
   else:
     print("沒有輸入任何參數")
-  deviceid = "46081JEKB10015"
+  
   device, client = connect(deviceid)
   device_id = device.serial
   jump = 100
   Leftspace = 0
   if (device_id == "FA75V1802306"):
-      Leftspace = 350
+      Leftspace = 340
 
   #解析度（wm size）：(1080, 2400)
   #解析度（wm size）：(1440, 2560)

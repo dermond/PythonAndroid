@@ -311,7 +311,7 @@ if __name__ == '__main__':
         deviceid = str(sys.argv[1])
   else:
     print("沒有輸入任何參數")
-  deviceid="46081JEKB10015"
+  deviceid="FA75V1802306"
   device, client = connect(deviceid)
   device_id = device.serial
   jump = 0
