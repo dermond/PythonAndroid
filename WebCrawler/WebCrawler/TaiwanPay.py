@@ -21,8 +21,8 @@ Pocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' 支援簡繁中
 def connect(index = 0):
 
   client = AdbClient(host='127.0.0.1', port=5037)
-
-  devices = client.devices()
+  deviceid = "46081JEKB10015"
+  devices = client.devices(deviceid)
   if len(devices) == 0:
     print('No devices')
     quit()
@@ -159,7 +159,7 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(20):
+  for _ in range(10):
       
       #轉帳
       tap(device, "684 1270")
@@ -181,10 +181,10 @@ if __name__ == '__main__':
       #dropdown_position = '474 1200'  # 下拉清單的位置
       dropdown_position = '679 695'  # 下拉清單的位置
       
-      #text_to_input = '008'  # 輸入的文字 #華南銀行
+      text_to_input = '008'  # 輸入的文字 #華南銀行
       #text_to_input = '700'  # 輸入的文字 #郵局
       #text_to_input = '007'  # 輸入的文字 #第一銀行
-      text_to_input = '004'  # 輸入的文字 #台灣銀行
+      #text_to_input = '004'  # 輸入的文字 #台灣銀行
       
       #option_position = '454 1030'    # 選擇的選項的位置
       option_position = '454 854'    # 選擇的選項的位置
@@ -227,9 +227,9 @@ if __name__ == '__main__':
       #tap(device, "558 1194")
       tap(device, "564 1066")
       time.sleep(1.0)
-      #tap(device, "582 1191") #台灣銀行
+      tap(device, "582 1191") #台灣銀行
       #tap(device, "582 1937") #第一銀行(1)
-      tap(device, "582 1729") #第一銀行(2)
+      #tap(device, "582 1729") #第一銀行(2)
       #tap(device, "582 2151") #華南
       #tap(device, "582 1485") #郵局
       time.sleep(1.0)

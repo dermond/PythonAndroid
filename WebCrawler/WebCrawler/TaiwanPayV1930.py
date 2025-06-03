@@ -153,8 +153,8 @@ def switch_to_english():
 
 
 if __name__ == '__main__':
-
-  device, client = connect()
+  deviceid = "46081JEKB10015"
+  device, client = connect(deviceid)
 
   #目前按鈕特性 是給 google pixel 8a用
   # 
