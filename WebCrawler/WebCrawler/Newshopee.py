@@ -4,6 +4,9 @@ Created on Sat Mar 27 12:23:27 2021
 
 @author: dermo
 """
+
+
+
 import psutil
 import time
 import pytesseract
@@ -21,6 +24,8 @@ import sys
 from paddleocr import PaddleOCR #paddlepaddle
 import subprocess
 import re
+import cv2
+
 
 
 device_id = ''
@@ -31,6 +36,7 @@ Leftspace = 0
 jump = 0
 resolution_width = 0
 resolution_height = 0
+dpi = 10
 
 def check_garbage_objects():
     gc.collect()  # 手動觸發垃圾回收
@@ -317,6 +323,17 @@ def judgment(temp):
     global jump
     global resolution_width
     global resolution_height
+    global dpi
+
+    start_point = (262, 800)  # 起始坐標 (x, y)
+    end_point = (880, 1350)    # 結束坐標 (x, y)
+      
+    # 截圖並裁剪
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = paddleocr_image(cropped_img)  
+
+
      #判斷數值
     start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
     end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
@@ -330,8 +347,8 @@ def judgment(temp):
  
     if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
        
-        start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
-        end_point = (1050+ Leftspace, 400+jump)    # 結束坐標 (x, y)
+        start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
+        end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
         print("比對领取-2" + " " + str(jump))
         # 截圖並裁剪
         img = capture_screenshot(device)
@@ -343,8 +360,14 @@ def judgment(temp):
             
             tap(device, str(resolution_width - 106) + " " + str(index))
             time.sleep(3.0)
-            index = 1400 + (abs(2380 - resolution_height) * 2)
-            tap(device, str(resolution_width / 2) + " " + str(index))
+            if (resolution_height < 2400):
+                index = 1420 
+                tap(device, str(542) + " " + str(index))
+            else:
+                index = 1400 + (abs(2380 - resolution_height) * 2)
+                tap(device, str(resolution_width / 2) + " " + str(index))
+         
+            
             time.sleep(3.0)
 
             #if (device_id == "FA75V1802306"):
@@ -373,9 +396,8 @@ def judgment(temp):
         if value >= 0.2:
             print("數值大於或等於 0.2")
             
-           
-            start_point = (800+ Leftspace, 300+jump)  # 起始坐標 (x, y)
-            end_point = (1050+ Leftspace, 400+jump)    # 結束坐標 (x, y)
+            start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
+            end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
             print("比對领取" + " " + str(jump))
             # 截圖並裁剪
             img = capture_screenshot(device)
@@ -386,7 +408,7 @@ def judgment(temp):
             if valid:
                 print("找到數值或是時間")
             else:
-                jump = jump + 10
+                jump = jump + dpi
                     
                 if jump > 450:
                     return "next"
@@ -403,9 +425,10 @@ def judgment(temp):
         return "next"
     
 if __name__ == '__main__':
+  
 
-  deviceid = "FA75V1802306"
-  #deviceid = "46081JEKB10015"
+  #deviceid = "FA75V1802306"
+  deviceid = "46081JEKB10015"
 
   if len(sys.argv) > 1:
         print("你輸入的參數如下：")
@@ -419,8 +442,7 @@ if __name__ == '__main__':
   device_id = device.serial
   jump = 100
   Leftspace = 0
-  if (device_id == "FA75V1802306"):
-      Leftspace = 340
+  dpi = 10
 
   #解析度（wm size）：(1080, 2400)
   #解析度（wm size）：(1440, 2560)
@@ -432,6 +454,11 @@ if __name__ == '__main__':
   if display_info:
     print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
     
+  if (resolution_width == 1440):
+      Leftspace = 340
+  if (density >= 640):
+      dpi = 20
+
   # #錯誤視窗判斷
   # Shopee 的包名與主 Activity
   package_name = "com.shopee.tw"

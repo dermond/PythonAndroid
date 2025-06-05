@@ -14,23 +14,31 @@ import ddddocr
 import subprocess
 from paddleocr import PaddleOCR #paddlepaddle
 
+
 ocr = ddddocr.DdddOcr()
 # 建一次 OCR 物件就好，重複呼叫時不用每次都 new
 Pocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' 支援簡繁中
 
-def connect(index = 0):
+def connect(serial: str):
+    client = AdbClient(host='127.0.0.1', port=5037)
 
-  client = AdbClient(host='127.0.0.1', port=5037)
-  deviceid = "46081JEKB10015"
-  devices = client.devices(deviceid)
-  if len(devices) == 0:
-    print('No devices')
-    quit()
+    devices = client.devices()
+    if not devices:
+        print('No devices')
+        quit()
 
-  device = devices[index]
-  print(f'Connected to {device}')
+    # 嘗試找出符合 serial 的裝置
+    for device in devices:
+        print(str(device.serial))
+        if device.serial == serial:
+            print(f'Connected to {device}')
+            return device, client
 
-  return device, client
+    # 找不到時回傳第一筆裝置
+    fallback_device = devices[0]
+    print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
+    #quit()
+    return fallback_device, client
 
 def tap(device, position):
     device.shell(f'input tap {position}')
@@ -154,7 +162,8 @@ def switch_to_english():
 
 if __name__ == '__main__':
 
-  device, client = connect()
+  deviceid = "46081JEKB10015"
+  device, client = connect(deviceid)
 
   #目前按鈕特性 是給 google pixel 8a用
   # 
@@ -181,8 +190,8 @@ if __name__ == '__main__':
       #dropdown_position = '474 1200'  # 下拉清單的位置
       dropdown_position = '679 695'  # 下拉清單的位置
       
-      text_to_input = '008'  # 輸入的文字 #華南銀行
-      #text_to_input = '700'  # 輸入的文字 #郵局
+      #text_to_input = '008'  # 輸入的文字 #華南銀行
+      text_to_input = '700'  # 輸入的文字 #郵局
       #text_to_input = '007'  # 輸入的文字 #第一銀行
       #text_to_input = '004'  # 輸入的文字 #台灣銀行
       

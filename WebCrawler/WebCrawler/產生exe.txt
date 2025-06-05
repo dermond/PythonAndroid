@@ -18,6 +18,22 @@ D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\Git
 
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --onefile --debug=all --hidden-import=cv2 --collect-binaries=cv2
 
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py --onefile --hidden-import=cv2 --collect-binaries=cv2
+
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe  D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py ^
+  --onefile ^
+  --collect-all paddleocr ^
+  --collect-all shapely ^
+  --collect-all skimage ^
+  --collect-all scikit_image ^
+  --collect-all apted ^
+  --collect-all imghdr ^
+  --collect-all ddddocr ^
+  --add-binary "D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Lib\site-packages\paddle\libs\mklml.dll;." ^
+  --add-binary "D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Lib\site-packages\paddle\libs\libiomp5md.dll;." ^
+  --add-binary "D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Lib\site-packages\cv2\cv2.cp37-win_amd64.pyd;cv2" ^
+  --add-binary "D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Lib\site-packages\cv2\opencv_videoio_ffmpeg451_64.dll;cv2" ^
+  --add-binary "D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Lib\site-packages\cv2\opencv_videoio_ffmpeg4100_64.dll;cv2"
 
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\pyinstaller.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee.py --debug=all --hidden-import=cv2 --collect-submodules=cv2
 
