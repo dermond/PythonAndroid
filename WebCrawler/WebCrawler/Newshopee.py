@@ -37,7 +37,7 @@ jump = 0
 resolution_width = 0
 resolution_height = 0
 dpi = 10
-
+ErrorCount = 0
 def check_garbage_objects():
     gc.collect()  # 手動觸發垃圾回收
     uncollected = gc.garbage
@@ -324,7 +324,7 @@ def judgment(temp):
     global resolution_width
     global resolution_height
     global dpi
-
+    global ErrorCount
     start_point = (262, 800)  # 起始坐標 (x, y)
     end_point = (880, 1350)    # 結束坐標 (x, y)
       
@@ -346,7 +346,7 @@ def judgment(temp):
     
  
     if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
-       
+        turn_on_screen()
         start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
         end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
         print("比對领取-2" + " " + str(jump))
@@ -361,7 +361,7 @@ def judgment(temp):
             tap(device, str(resolution_width - 106) + " " + str(index))
             time.sleep(3.0)
             if (resolution_height < 2400):
-                index = 1420 
+                index = 1360 
                 tap(device, str(542) + " " + str(index))
             else:
                 index = 1400 + (abs(2380 - resolution_height) * 2)
@@ -421,15 +421,18 @@ def judgment(temp):
             return "next"
     else:
         print("解析蝦皮和時間錯誤")
-
-        return "next"
+        ErrorCount = ErrorCount + 1
+        if (ErrorCount < 2):
+            return "wait"
+        else:
+            return "next"
     
 if __name__ == '__main__':
   
-
   #deviceid = "FA75V1802306"
-  deviceid = "46081JEKB10015"
-
+  #deviceid = "46081JEKB10015"
+  deviceid = "CTLGAD3852600256"
+  
   if len(sys.argv) > 1:
         print("你輸入的參數如下：")
         for i, arg in enumerate(sys.argv[1:], start=1):
@@ -438,6 +441,8 @@ if __name__ == '__main__':
   else:
     print("沒有輸入任何參數")
   
+ 
+
   device, client = connect(deviceid)
   device_id = device.serial
   jump = 100
@@ -483,7 +488,9 @@ if __name__ == '__main__':
         output = device.shell(start_command)
         print(f"Shopee 已啟動，輸出：\n{output}")
         time.sleep(4.0)
-        tap(device, "545 2180 ")
+        
+        tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 200))
+        #tap(device, "545 2180 ")
         time.sleep(2.0)
         
         # tap(device, "740 190 ")
@@ -506,9 +513,11 @@ if __name__ == '__main__':
         time.sleep(10.0)
         jump = 100
         Shopeecount = Shopeecount + 1
+        ErrorCount = 0
     elif result == "ok":
         Shopeecount = 0
         jump = 100
+        ErrorCount = 0
         turn_on_screen()
         continue
     
