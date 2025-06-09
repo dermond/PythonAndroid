@@ -332,8 +332,9 @@ def judgment(temp):
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
     resulttext = paddleocr_image(cropped_img)  
-
-
+    if resulttext.find("紅包雨")  > -1:
+        tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) + 283))
+    
      #判斷數值
     start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
     end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
@@ -430,8 +431,8 @@ def judgment(temp):
 if __name__ == '__main__':
   
   #deviceid = "FA75V1802306"
-  #deviceid = "46081JEKB10015"
-  deviceid = "CTLGAD3852600256"
+  deviceid = "46081JEKB10015"
+  #deviceid = "CTLGAD3852600256"
   
   if len(sys.argv) > 1:
         print("你輸入的參數如下：")
