@@ -333,7 +333,10 @@ def judgment(temp):
     cropped_img = crop_image(img, start_point, end_point)
     resulttext = paddleocr_image(cropped_img)  
     if resulttext.find("紅包雨")  > -1:
-        tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) + 283))
+        tap(device, str((resolution_width / 2)) + " " + str(calculate_x(resolution_height)))
+    
+    if resulttext.find("您已觀看逹30秒")  > -1:
+        tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
     
      #判斷數值
     start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
@@ -427,11 +430,21 @@ def judgment(temp):
             return "wait"
         else:
             return "next"
-    
+   
+def calculate_x(y):
+    #2400,1483
+    #2560,1774
+    return round(1.81875 * y - 2882)
+
+def calculate_x2(y):
+    #2400,1592
+    #2560,1846
+    return round(1.5875 * y - 2218)
+
 if __name__ == '__main__':
   
-  #deviceid = "FA75V1802306"
-  deviceid = "46081JEKB10015"
+  deviceid = "FA75V1802306"
+  #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
   if len(sys.argv) > 1:
