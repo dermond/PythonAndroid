@@ -335,7 +335,9 @@ def judgment(temp):
     if resulttext.find("紅包雨")  > -1:
         tap(device, str((resolution_width / 2)) + " " + str(calculate_x(resolution_height)))
     
-    if resulttext.find("您已觀看逹30秒")  > -1:
+    if resulttext.find("您已觀看達30秒")  > -1:
+        tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
+    elif resulttext.find("第3天")  > -1:
         tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
     
      #判斷數值
@@ -373,6 +375,48 @@ def judgment(temp):
          
             
             time.sleep(3.0)
+
+            #判斷 下方位置是否有參加 可以按
+            start_point = (900+ Leftspace, 450+jump)  # 起始坐標 (x, y)
+            end_point = (1150+ Leftspace, 590+jump)    # 結束坐標 (x, y)
+      
+            # 截圖並裁剪
+            img = capture_screenshot(device)
+            cropped_img = crop_image(img, start_point, end_point)
+
+            # 執行 OCR
+            #resulttext = pytesseract_image(cropped_img)
+            resulttext = paddleocr_image(cropped_img)  
+        
+            try:
+        
+                if resulttext.find("参加") > -1 and resulttext.find("已参加") == -1:
+                  #轉盤
+                  index = 520+jump
+
+                  tap(device, str(resolution_width  - 100) + " " + str(index) )
+                  time.sleep(2.0)
+
+                  index = (resolution_height / 2 ) - 100
+                  tap(device, str(resolution_width / 2) + " " + str(index))
+                  time.sleep(12.0)
+
+                  #tap(device, "542 1058 ")
+                  #time.sleep(3.0)
+
+                  #tap(device, "754 1300 ")
+                  #time.sleep(12.0)
+
+                  index = (resolution_height / 2 ) + 282
+                  tap(device, str(resolution_width / 2) + " " + str(index))
+                  time.sleep(2.0)
+
+                  #tap(device, "545 1481 ")
+                  #time.sleep(2.0)
+        
+            except ValueError:
+       
+                print("轉盤有錯誤")
 
             #if (device_id == "FA75V1802306"):
             #    tap(device, str(resolution_width - 106) + " " + str(index))
@@ -465,6 +509,7 @@ if __name__ == '__main__':
 
   #解析度（wm size）：(1080, 2400)
   #解析度（wm size）：(1440, 2560)
+  #解析度（wm size）：(1080, 2280) 螢幕密度（wm density）：420 dpi
 
   resolution, density, display_info = get_screen_info_from_device(device)
 
@@ -524,7 +569,7 @@ if __name__ == '__main__':
         swipe_start = '500 1300'
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(10.0)
+        time.sleep(6.0)
         jump = 100
         Shopeecount = Shopeecount + 1
         ErrorCount = 0
