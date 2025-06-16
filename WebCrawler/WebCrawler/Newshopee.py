@@ -31,7 +31,7 @@ import cv2
 device_id = ''
 deviceid = ''
 ocr = ddddocr.DdddOcr()
-Pocr = PaddleOCR(use_angle_cls=True, lang='ch')  # lang='ch' 支援
+Pocr = PaddleOCR(use_angle_cls=False, lang='ch')  # lang='ch' 支援
 Leftspace = 0
 jump = 0
 resolution_width = 0
