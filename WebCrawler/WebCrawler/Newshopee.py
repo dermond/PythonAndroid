@@ -503,7 +503,7 @@ if __name__ == '__main__':
 
   device, client = connect(deviceid)
   device_id = device.serial
-  jump = 100
+  jump = 70
   Leftspace = 0
   dpi = 10
 
@@ -570,12 +570,12 @@ if __name__ == '__main__':
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(6.0)
-        jump = 100
+        jump = 70
         Shopeecount = Shopeecount + 1
         ErrorCount = 0
     elif result == "ok":
         Shopeecount = 0
-        jump = 100
+        jump = 70
         ErrorCount = 0
         turn_on_screen()
         continue
