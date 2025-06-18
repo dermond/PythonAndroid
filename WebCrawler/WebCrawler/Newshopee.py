@@ -388,35 +388,43 @@ def judgment(temp):
             #resulttext = pytesseract_image(cropped_img)
             resulttext = paddleocr_image(cropped_img)  
         
-            #try:
+            try:
         
-            #    if resulttext.find("参加") > -1 and resulttext.find("已参加") == -1:
-            #      #轉盤
-            #      index = 520+jump
+                if resulttext.find("参加") > -1 and resulttext.find("已参加") == -1:
+                  #轉盤
+                  index = 520+jump
 
-            #      tap(device, str(resolution_width  - 100) + " " + str(index) )
-            #      time.sleep(2.0)
+                  tap(device, str(resolution_width  - 100) + " " + str(index) )
+                  time.sleep(2.0)
 
-            #      index = (resolution_height / 2 ) - 100
-            #      tap(device, str(resolution_width / 2) + " " + str(index))
-            #      time.sleep(12.0)
+                  start_point = (262, 800)  # 起始坐標 (x, y)
+                  end_point = (880, 1350)    # 結束坐標 (x, y)
+      
+                  # 截圖並裁剪
+                  img = capture_screenshot(device)
+                  cropped_img = crop_image(img, start_point, end_point)
+                  resulttext = paddleocr_image(cropped_img) 
+                  
+                  if resulttext.find("需先證手機") > -1:
+                    index = (resolution_height / 2 ) + 220
+                    tap(device, str(resolution_width / 4) + " " + str(index))
+                    time.sleep(3.0)
 
-            #      #tap(device, "542 1058 ")
-            #      #time.sleep(3.0)
+                  
+                  index = (resolution_height / 2 ) - 100
+                  tap(device, str(resolution_width / 2) + " " + str(index))
+                  time.sleep(12.0)
 
-            #      #tap(device, "754 1300 ")
-            #      #time.sleep(12.0)
+                 
 
-            #      index = (resolution_height / 2 ) + 282
-            #      tap(device, str(resolution_width / 2) + " " + str(index))
-            #      time.sleep(2.0)
+                  index = (resolution_height / 2 ) + 282
+                  tap(device, str(resolution_width / 2) + " " + str(index))
+                  time.sleep(2.0)
 
-            #      #tap(device, "545 1481 ")
-            #      #time.sleep(2.0)
         
-            #except ValueError:
+            except ValueError:
        
-            #    print("轉盤有錯誤")
+                print("轉盤有錯誤")
 
             #if (device_id == "FA75V1802306"):
             #    tap(device, str(resolution_width - 106) + " " + str(index))
@@ -559,7 +567,7 @@ if __name__ == '__main__':
         # time.sleep(1.0)
         Shopeecount = 0
    
-
+    
     result = judgment(0)
     if result == "wait":
         
