@@ -9,6 +9,7 @@ Created on Sat Mar 27 12:23:27 2021
 
 import psutil
 import time
+import datetime
 import pytesseract
 from PIL import Image
 import io
@@ -18,16 +19,16 @@ import re
 import subprocess
 from PIL import Image, ImageEnhance, ImageFilter
 from ppadb.client import Client as AdbClient
-from datetime import datetime
+#from datetime import datetime
 import gc
 import sys
 from paddleocr import PaddleOCR #paddlepaddle
 import subprocess
 import re
 import cv2
+import Service.SettingReader as SettingReader
 
-
-
+TotalCount = 0
 device_id = ''
 deviceid = ''
 ocr = ddddocr.DdddOcr()
@@ -38,6 +39,9 @@ resolution_width = 0
 resolution_height = 0
 dpi = 10
 ErrorCount = 0
+
+last_date = datetime.date.today()
+
 def check_garbage_objects():
     gc.collect()  # 手動觸發垃圾回收
     uncollected = gc.garbage
@@ -325,6 +329,7 @@ def judgment(temp):
     global resolution_height
     global dpi
     global ErrorCount
+    global TotalCount
     start_point = (262, 800)  # 起始坐標 (x, y)
     end_point = (880, 1350)    # 結束坐標 (x, y)
       
@@ -375,7 +380,9 @@ def judgment(temp):
          
             
             time.sleep(3.0)
-
+            
+            TotalCount = TotalCount + 1
+            SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
             #判斷 下方位置是否有參加 可以按
             start_point = (900+ Leftspace, 450+jump)  # 起始坐標 (x, y)
             end_point = (1150+ Leftspace, 590+jump)    # 結束坐標 (x, y)
@@ -395,7 +402,7 @@ def judgment(temp):
                   index = 520+jump
 
                   tap(device, str(resolution_width  - 100) + " " + str(index) )
-                  time.sleep(2.0)
+                  time.sleep(4.0)
 
                   start_point = (262, 800)  # 起始坐標 (x, y)
                   end_point = (880, 1350)    # 結束坐標 (x, y)
@@ -405,8 +412,8 @@ def judgment(temp):
                   cropped_img = crop_image(img, start_point, end_point)
                   resulttext = paddleocr_image(cropped_img) 
                   
-                  if resulttext.find("需先證手機") > -1:
-                    index = (resolution_height / 2 ) + 220
+                  if resulttext.find("手機號碼") > -1:
+                    index = (resolution_height / 2 ) + 100
                     tap(device, str(resolution_width / 4) + " " + str(index))
                     time.sleep(3.0)
 
@@ -449,8 +456,31 @@ def judgment(temp):
         print("數值：", value)
         print("時間：", time2)
         ErrorCount = 0
-        if value >= 0.2:
-            print("數值大於或等於 0.2")
+        
+        # 將 MM:SS 轉換為「總分鐘」
+        minutes, seconds = map(int, time2.split(":"))
+        wait_minutes = minutes + seconds / 60.0
+        wait_sec = int(wait_minutes * 60)
+        # 計算每分鐘收益
+        value_per_minute = value / wait_minutes
+
+        # 設定門檻值（你可以調整這個值）
+        threshold = 0.02857
+
+        # 顯示資訊
+        print(f"數值：{value}")
+        print(f"時間：{time2}（約 {wait_minutes:.2f} 分鐘）")
+        print(f"每分鐘收益：{value_per_minute:.4f}")
+
+        # 判斷是否執行
+        if value_per_minute >= threshold:
+            print("✅ 值得執行！")
+        else:
+            print("❌ 不值得執行")
+            return "next"
+            
+        if value_per_minute >= threshold:
+            print("每分鐘收益 值得執行")
             
             start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
             end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
@@ -463,6 +493,12 @@ def judgment(temp):
             valid, value, time2 = validate_block(spilt)
             if valid:
                 print("找到數值或是時間")
+                for _ in range(wait_sec):
+
+                    time.sleep(1)
+                    wait_sec = wait_sec -1
+                    print("還剩下" + str(wait_sec) + "秒")
+
             else:
                 jump = jump + dpi
                     
@@ -478,7 +514,7 @@ def judgment(temp):
     else:
         print("解析蝦皮和時間錯誤")
         ErrorCount = ErrorCount + 1
-        if (ErrorCount < 2):
+        if (ErrorCount < 1):
             return "wait"
         else:
             return "next"
@@ -538,7 +574,21 @@ if __name__ == '__main__':
   
   Shopeecount = 0
   ErrorCount = 0
+  
+  TotalCount = SettingReader.getSetting("base",deviceid + "TotalCount")
+  if TotalCount == '':
+      TotalCount = 0
+      SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
+  TotalCount = int(TotalCount)
+  
+  
+    
+  today = datetime.date.today()
+  yesterday = today - datetime.timedelta(days=1)
+
   for i in range(99999999):
+    
+    current_date = datetime.date.today()
 
     check_garbage_objects()
     print_memory_usage()
@@ -566,8 +616,33 @@ if __name__ == '__main__':
         # tap(device, "322 1263 ")
         # time.sleep(1.0)
         Shopeecount = 0
-   
+        
+
     
+    print(f"TotalCount：\n{TotalCount}")
+    if int(TotalCount) > 90:
+        print(f"TotalCount 大於90次：\n{TotalCount}")
+        time.sleep(10.0)
+
+    last_reset_time = None  # 初始未重置
+
+    now = datetime.datetime.now()
+
+    # 今天 00:00 與 00:10 時間點
+    midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    limit_time = now.replace(hour=0, minute=10, second=0, microsecond=0)
+
+    # 判斷條件：
+    # - 現在時間在 00:00 ~ 00:10 之間
+    # - 尚未歸零過
+    if midnight <= now < limit_time and (last_reset_time is None or last_reset_time < midnight):
+        TotalCount = 0
+        SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
+        last_reset_time = now
+        print("✅ 已過午夜，TotalCount 歸零")
+    elif now >= limit_time:
+        print("⏱️ 超過 00:10，不再執行歸零")
+
     result = judgment(0)
     if result == "wait":
         
@@ -589,7 +664,8 @@ if __name__ == '__main__':
         continue
     
     print("重複")
-
+    
+    last_date = datetime.date.today()
     # tap(device, "550 1250 ")
     # time.sleep(1.0)
 
