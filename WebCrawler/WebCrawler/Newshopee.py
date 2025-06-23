@@ -72,8 +72,8 @@ def connect(serial: str):
         fallback_device = devices[0]
         print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
         #quit()
-
-    sys.exit()
+    else:
+        sys.exit()
     return fallback_device, client
 
 def tap(device, position):
@@ -361,95 +361,87 @@ def judgment(temp):
  
     if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
         turn_on_screen()
-        start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
-        end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
-        print("比對领取-2" + " " + str(jump))
+       
+        index = 321+jump 
+            
+        tap(device, str(resolution_width - 106) + " " + str(index))
+        time.sleep(3.0)
+        if (resolution_height < 2400):
+            index = 1360 
+            tap(device, str(542) + " " + str(index))
+        else:
+            index = 1400 + (abs(2380 - resolution_height) * 2)
+            tap(device, str(resolution_width / 2) + " " + str(index))
+         
+            
+        time.sleep(3.0)
+            
+        TotalCount = TotalCount + 1
+        SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
+        #判斷 下方位置是否有參加 可以按
+        start_point = (900+ Leftspace, 450+jump)  # 起始坐標 (x, y)
+        end_point = (1150+ Leftspace, 590+jump)    # 結束坐標 (x, y)
+      
         # 截圖並裁剪
         img = capture_screenshot(device)
         cropped_img = crop_image(img, start_point, end_point)
-        resulttext2 = paddleocr_image(cropped_img)  
-           
-        if resulttext2.find("領取")  > -1 or resulttext2.find("领取")  > -1 :
-            index = 321+jump 
-            
-            tap(device, str(resolution_width - 106) + " " + str(index))
-            time.sleep(3.0)
-            if (resolution_height < 2400):
-                index = 1360 
-                tap(device, str(542) + " " + str(index))
-            else:
-                index = 1400 + (abs(2380 - resolution_height) * 2)
-                tap(device, str(resolution_width / 2) + " " + str(index))
-         
-            
-            time.sleep(3.0)
-            
-            TotalCount = TotalCount + 1
-            SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
-            #判斷 下方位置是否有參加 可以按
-            start_point = (900+ Leftspace, 450+jump)  # 起始坐標 (x, y)
-            end_point = (1150+ Leftspace, 590+jump)    # 結束坐標 (x, y)
-      
-            # 截圖並裁剪
-            img = capture_screenshot(device)
-            cropped_img = crop_image(img, start_point, end_point)
 
-            # 執行 OCR
-            #resulttext = pytesseract_image(cropped_img)
-            resulttext = paddleocr_image(cropped_img)  
+        # 執行 OCR
+        #resulttext = pytesseract_image(cropped_img)
+        resulttext = paddleocr_image(cropped_img)  
         
-            try:
+        try:
         
-                if resulttext.find("参加") > -1 and resulttext.find("已参加") == -1:
-                  #轉盤
-                  index = 520+jump
+            if resulttext.find("参加") > -1 and resulttext.find("已参加") == -1:
+                #轉盤
+                index = 520+jump
 
-                  tap(device, str(resolution_width  - 100) + " " + str(index) )
-                  time.sleep(4.0)
+                tap(device, str(resolution_width  - 100) + " " + str(index) )
+                time.sleep(4.0)
 
-                  start_point = (262, 800)  # 起始坐標 (x, y)
-                  end_point = (880, 1350)    # 結束坐標 (x, y)
+                start_point = (262, 800)  # 起始坐標 (x, y)
+                end_point = (880, 1350)    # 結束坐標 (x, y)
       
-                  # 截圖並裁剪
-                  img = capture_screenshot(device)
-                  cropped_img = crop_image(img, start_point, end_point)
-                  resulttext = paddleocr_image(cropped_img) 
+                # 截圖並裁剪
+                img = capture_screenshot(device)
+                cropped_img = crop_image(img, start_point, end_point)
+                resulttext = paddleocr_image(cropped_img) 
                   
-                  if resulttext.find("手機號碼") > -1:
+                if resulttext.find("手機號碼") > -1:
                     index = (resolution_height / 2 ) + 100
                     tap(device, str(resolution_width / 4) + " " + str(index))
                     time.sleep(3.0)
 
                   
-                  index = (resolution_height / 2 ) - 100
-                  tap(device, str(resolution_width / 2) + " " + str(index))
-                  time.sleep(12.0)
+                index = (resolution_height / 2 ) - 100
+                tap(device, str(resolution_width / 2) + " " + str(index))
+                time.sleep(12.0)
 
                  
 
-                  index = (resolution_height / 2 ) + 282
-                  tap(device, str(resolution_width / 2) + " " + str(index))
-                  time.sleep(2.0)
+                index = (resolution_height / 2 ) + 282
+                tap(device, str(resolution_width / 2) + " " + str(index))
+                time.sleep(2.0)
 
         
-            except ValueError:
+        except ValueError:
        
-                print("轉盤有錯誤")
+            print("轉盤有錯誤")
 
-            #if (device_id == "FA75V1802306"):
-            #    tap(device, str(resolution_width - 106) + " " + str(index))
-            #    time.sleep(3.0)
-            #    index = 1732
-            #    tap(device, "780 "+ str(index))
-            #    time.sleep(3.0)
-            #else:
-            #    tap(device, str(984 + Leftspace) + " " + str(index))
-            #    time.sleep(4.0)
+        #if (device_id == "FA75V1802306"):
+        #    tap(device, str(resolution_width - 106) + " " + str(index))
+        #    time.sleep(3.0)
+        #    index = 1732
+        #    tap(device, "780 "+ str(index))
+        #    time.sleep(3.0)
+        #else:
+        #    tap(device, str(984 + Leftspace) + " " + str(index))
+        #    time.sleep(4.0)
       
-            #    index = 1473
-            #    tap(device, str(554 + Leftspace) + " " + str(index))
-            #    time.sleep(4.0)
-            return "ok"
+        #    index = 1473
+        #    tap(device, str(554 + Leftspace) + " " + str(index))
+        #    time.sleep(4.0)
+        return "ok"
                
         
        
