@@ -68,9 +68,11 @@ def connect(serial: str):
             return device, client
 
     # 找不到時回傳第一筆裝置
-    fallback_device = devices[0]
-    print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
-    #quit()
+    if serial == "":
+        fallback_device = devices[0]
+        print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
+        #quit()
+    quit()
     return fallback_device, client
 
 def tap(device, position):
