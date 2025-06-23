@@ -58,7 +58,7 @@ def connect(serial: str):
     devices = client.devices()
     if not devices:
         print('No devices')
-        quit()
+        sys.exit()
 
     # 嘗試找出符合 serial 的裝置
     for device in devices:
@@ -72,7 +72,8 @@ def connect(serial: str):
         fallback_device = devices[0]
         print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
         #quit()
-    quit()
+
+    sys.exit()
     return fallback_device, client
 
 def tap(device, position):
@@ -533,7 +534,7 @@ def calculate_x2(y):
 
 if __name__ == '__main__':
   
-  deviceid = "FA75V1802306"
+  deviceid = ""
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
