@@ -617,7 +617,8 @@ if __name__ == '__main__':
     print(f"TotalCount：\n{TotalCount}")
     if int(TotalCount) > 90:
         print(f"TotalCount 大於90次：\n{TotalCount}")
-        time.sleep(10.0)
+        time.sleep(300.0)
+        continue
 
     last_reset_time = None  # 初始未重置
 
