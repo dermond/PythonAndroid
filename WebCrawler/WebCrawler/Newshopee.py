@@ -576,14 +576,21 @@ if __name__ == '__main__':
       SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
   TotalCount = int(TotalCount)
   
-  
-    
+
   today = datetime.date.today()
   yesterday = today - datetime.timedelta(days=1)
 
   for i in range(99999999):
     
     current_date = datetime.date.today()
+    getdate = SettingReader.getSetting("base",deviceid + "date")
+
+    if getdate != current_date:
+        TotalCount = 0
+        SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
+
+    SettingReader.setSetting("base",deviceid + "date", current_date )
+
 
     check_garbage_objects()
     print_memory_usage()
@@ -619,25 +626,6 @@ if __name__ == '__main__':
         print(f"TotalCount 大於90次：\n{TotalCount}")
         time.sleep(100.0)
         continue
-
-    last_reset_time = None  # 初始未重置
-
-    now = datetime.datetime.now()
-
-    # 今天 00:00 與 00:10 時間點
-    midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
-    limit_time = now.replace(hour=0, minute=10, second=0, microsecond=0)
-
-    # 判斷條件：
-    # - 現在時間在 00:00 ~ 00:10 之間
-    # - 尚未歸零過
-    if midnight <= now < limit_time and (last_reset_time is None or last_reset_time < midnight):
-        TotalCount = 0
-        SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
-        last_reset_time = now
-        print("✅ 已過午夜，TotalCount 歸零")
-    elif now >= limit_time:
-        print("⏱️ 超過 00:10，不再執行歸零")
 
     result = judgment(0)
     if result == "wait":
