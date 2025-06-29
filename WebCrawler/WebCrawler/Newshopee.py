@@ -362,6 +362,28 @@ def judgment(temp):
     if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
         turn_on_screen()
        
+        start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
+        end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
+        print("比對领取" + " " + str(jump))
+        
+        # 截圖並裁剪
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext2 = paddleocr_image(cropped_img)  
+        
+        if resulttext2.find("領取")  > -1 or resulttext2.find("领取")  > -1 :
+           
+            print("第2次比對")
+        else:
+            jump = jump + dpi
+                    
+            if jump > 450:
+                return "next"
+            
+            return "wait"
+            
+
+
         index = 321+jump 
             
         tap(device, str(resolution_width - 106) + " " + str(index))
@@ -376,8 +398,8 @@ def judgment(temp):
             
         time.sleep(3.0)
             
-        TotalCount = TotalCount + 1
-        SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
+        TotalCount = int(TotalCount) + 1
+        SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
         #判斷 下方位置是否有參加 可以按
         start_point = (900+ Leftspace, 450+jump)  # 起始坐標 (x, y)
         end_point = (1150+ Leftspace, 590+jump)    # 結束坐標 (x, y)
@@ -526,7 +548,7 @@ def calculate_x2(y):
 
 if __name__ == '__main__':
   
-  deviceid = ""
+  deviceid = "FA75V1802306"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -582,9 +604,11 @@ if __name__ == '__main__':
 
   for i in range(99999999):
     
-    current_date = datetime.date.today()
+    current_date = str(datetime.date.today())
     getdate = SettingReader.getSetting("base",deviceid + "date")
-
+    
+    TotalCount = SettingReader.getSetting("base",deviceid + "TotalCount")
+    
     if getdate != current_date:
         TotalCount = 0
         SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
@@ -619,7 +643,12 @@ if __name__ == '__main__':
         # time.sleep(1.0)
         Shopeecount = 0
         
-
+    now = datetime.datetime.now().time()
+    # 如果現在時間是 00:00 ~ 11:00，跳過這次迴圈
+    if datetime.time(1, 0) <= now < datetime.time(12, 0):
+        print("現在是早上，continue" + str( datetime.datetime.now()) )
+        time.sleep(100.0)
+        continue
     
     print(f"TotalCount：\n{TotalCount}")
     if int(TotalCount) > 90:
