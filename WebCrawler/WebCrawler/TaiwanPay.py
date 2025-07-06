@@ -170,6 +170,12 @@ if __name__ == '__main__':
 
   for _ in range(10):
       
+       #滑動
+      swipe_start = '500 1300'
+      swipe_end = '500 500'
+      swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+      time.sleep(2.0)
+
       #轉帳
       #判斷
       start_point = (574, 1355)  # 起始坐標 (x, y)
@@ -185,7 +191,7 @@ if __name__ == '__main__':
         tap(device, "684 1270")
       else:
          
-        tap(device, "644 1610")
+        tap(device, "644 1172")
       #tap(device, "689 1509")
       time.sleep(1.0)
   

@@ -170,6 +170,12 @@ if __name__ == '__main__':
 
   for _ in range(10):
       
+       #滑動
+      swipe_start = '500 1300'
+      swipe_end = '500 500'
+      swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+      time.sleep(2.0)
+
       #轉帳
       #判斷
       start_point = (574, 1355)  # 起始坐標 (x, y)
@@ -271,9 +277,9 @@ if __name__ == '__main__':
       
       time.sleep(1.0)
       ##tap(device, "582 1191") #台灣銀行
-      tap(device, "582 1937") #第一銀行(2)
+      #tap(device, "582 1937") #第一銀行(2)
       #tap(device, "582 1729") #第一銀行(3)
-      #tap(device, "582 2151") #第一銀行(1)
+      tap(device, "582 2151") #第一銀行(1)
       ##tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
