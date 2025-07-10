@@ -28,6 +28,7 @@ import re
 import cv2
 import Service.SettingReader as SettingReader
 
+
 TotalCount = 0
 device_id = ''
 deviceid = ''
@@ -293,7 +294,7 @@ def get_screen_info_from_device(device):
     """
     global resolution_width
     global resolution_height
-
+    
     # 取得解析度
     wm_size_output = device.shell("wm size")
     match_size = re.search(r'(Override|Physical) size:\s*(\d+)x(\d+)', wm_size_output)
@@ -333,6 +334,8 @@ def judgment(temp):
     global dpi
     global ErrorCount
     global TotalCount
+    global LimitTotalCount
+
     start_point = (262, 800)  # 起始坐標 (x, y)
     end_point = (880, 1350)    # 結束坐標 (x, y)
       
@@ -592,6 +595,11 @@ if __name__ == '__main__':
   Shopeecount = 0
   ErrorCount = 0
   
+  LimitTotalCount = SettingReader.getSetting("base",deviceid + "LimitTotalCount")
+  if LimitTotalCount == '':
+      LimitTotalCount = 80
+      SettingReader.setSetting("base",deviceid + "LimitTotalCount", TotalCount )
+
   TotalCount = SettingReader.getSetting("base",deviceid + "TotalCount")
   if TotalCount == '':
       TotalCount = 0
@@ -651,8 +659,8 @@ if __name__ == '__main__':
         continue
     
     print(f"TotalCount：\n{TotalCount}")
-    if int(TotalCount) > 90:
-        print(f"TotalCount 大於90次：\n{TotalCount}")
+    if int(TotalCount) > LimitTotalCount:
+        print(f"TotalCount 大於"+str(LimitTotalCount)+f"次：\n{TotalCount}")
         time.sleep(100.0)
         continue
 
