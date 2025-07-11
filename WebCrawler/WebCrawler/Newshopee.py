@@ -598,7 +598,7 @@ if __name__ == '__main__':
   LimitTotalCount = SettingReader.getSetting("base",deviceid + "LimitTotalCount")
   if LimitTotalCount == '':
       LimitTotalCount = 80
-      SettingReader.setSetting("base",deviceid + "LimitTotalCount", TotalCount )
+      SettingReader.setSetting("base",deviceid + "LimitTotalCount", LimitTotalCount )
 
   TotalCount = SettingReader.getSetting("base",deviceid + "TotalCount")
   if TotalCount == '':
