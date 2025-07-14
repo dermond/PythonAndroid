@@ -551,7 +551,9 @@ def calculate_x2(y):
 
 if __name__ == '__main__':
   
-  deviceid = "FA75V1802306"
+  goflag = 0
+
+  deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -651,15 +653,67 @@ if __name__ == '__main__':
         # time.sleep(1.0)
         Shopeecount = 0
         
-    now = datetime.datetime.now().time()
-    # 如果現在時間是 00:00 ~ 11:00，跳過這次迴圈
-    if datetime.time(1, 0) <= now < datetime.time(12, 0):
-        print("現在是早上，continue" + str( datetime.datetime.now()) )
-        time.sleep(100.0)
+    now = datetime.datetime.now()
+    now_time = now.time()
+    weekday = now.weekday()  # 0 = 星期一, 6 = 星期日
+
+    # 定義每天的禁止執行時間區段（start_time, end_time）
+    restricted_times = {
+        0: (datetime.time(1, 0), datetime.time(12, 0)),   # 星期一
+        1: (datetime.time(0, 0), datetime.time(11, 0)),   # 星期二
+        2: (datetime.time(23, 0), datetime.time(10, 0)),  # 星期三
+        3: (datetime.time(22, 0), datetime.time(9, 0)),   # 星期四
+        4: (datetime.time(21, 0), datetime.time(8, 0)),   # 星期五
+        5: (datetime.time(1, 0), datetime.time(12, 0)),   # 星期六
+        6: (datetime.time(0, 0), datetime.time(11, 0)),   # 星期日
+    }
+
+    start, end = restricted_times[weekday]
+
+    # 判斷是否在禁止區段內（處理跨午夜的情況）
+    in_restricted = False
+    if start < end:
+        # 時間區段沒有跨午夜
+        in_restricted = start <= now_time < end
+    else:
+        # 時間區段跨午夜，例如 23:00 ~ 10:00
+        in_restricted = now_time >= start or now_time < end
+
+    if in_restricted:
+        print(f"現在時間 {now_time} 在禁止區段 ({start}~{end})，跳過執行，時間：{now}")
+        time.sleep(30.0)
+        
+        #滑動
+        swipe_start = '500 1300'
+        swipe_end = '500 500'
+        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+        time.sleep(2.0)
+
+        if goflag == 0 :
+            device.shell(f"am force-stop {package_name}")
+            print("Shopee 已停止")
+            time.sleep(2.0)
+            
+        goflag = 1
         continue
+
+    if goflag == 1 :
+        # 啟動 Shopee
+        start_command = f"am start -n {package_name}/{activity_name}"
+        output = device.shell(start_command)
+        print(f"Shopee 已啟動，輸出：\n{output}")
+        time.sleep(4.0)
+        
+        tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 200))
+        #tap(device, "545 2180 ")
+        time.sleep(2.0)
+    goflag = 0
+
+    # 如果不在禁止區段，就執行你的主程式
+    print(f"現在時間 {now_time} 可以執行，時間：{now}")
     
     print(f"TotalCount：\n{TotalCount}")
-    if int(TotalCount) > LimitTotalCount:
+    if int(TotalCount) > int(LimitTotalCount):
         print(f"TotalCount 大於"+str(LimitTotalCount)+f"次：\n{TotalCount}")
         time.sleep(100.0)
         continue
