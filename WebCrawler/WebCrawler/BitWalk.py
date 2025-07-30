@@ -14,8 +14,10 @@ import ddddocr
 import subprocess
 import cv2
 import numpy as np
+from paddleocr import PaddleOCR #paddlepaddle
 
 ocr = ddddocr.DdddOcr()
+Pocr = PaddleOCR(use_angle_cls=False, lang='ch')  # lang='ch' 支援
 
 def connect(index = 0):
 
@@ -146,6 +148,13 @@ def pytesseract_image(img):
 
    return result.strip()  # 去除前後空白字元
 
+def paddleocr_image(img_path):
+    full_path = os.path.join(os.getcwd(),  'cropped_image.png')
+    results = Pocr.ocr(full_path, cls=True)
+    # 組合所有辨識到的文字
+    text = '\n'.join([ line[1][0] for block in results for line in block ])
+    return text
+
 def check_error_code(text, error_code):
     # 检查文本中是否包含指定的错误码
     if error_code in text:
@@ -274,7 +283,7 @@ if __name__ == '__main__':
           print("判斷>-2")
        #判斷x
       resulttext2 = ddddocr_image(cropped_img)
-      if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1 or resulttext2.find("t") > -1:
+      if resulttext2.find("x") > -1 or resulttext2.find("大") > -1 or resulttext2.find("十") > -1 or resulttext2.find("t") > -1  or resulttext2.find("8") > -1 :
           tap(device, "1022 185")
           time.sleep(1.0)
           print("判斷x-3")
@@ -379,6 +388,38 @@ if __name__ == '__main__':
           #time.sleep(2.0)
 
     
+      start_point = (340, 1600)  # 起始坐標 (x, y)
+      end_point = (900, 1800)    # 結束坐標 (x, y)
+
+      img = capture_screenshot(device)
+      cropped_img = crop_image(img, start_point, end_point)
+      resulttext = pytesseract_image(cropped_img)
+      
+      resulttext2 = ddddocr_image(cropped_img)
+      resulttext3 = paddleocr_image(cropped_img)
+      if resulttext3.find("BTC") > -1 :
+         
+          tap(device, "547 1689")
+          time.sleep(2.0)
+
+          print("Bitcoin")
+          #tap(device, "547 1610")
+          #time.sleep(2.0)
+
+
+      start_point = (340, 1750)  # 起始坐標 (x, y)
+      end_point = (900, 1900)    # 結束坐標 (x, y)
+
+      img = capture_screenshot(device)
+      cropped_img = crop_image(img, start_point, end_point)
+      resulttext = pytesseract_image(cropped_img)
+      
+      resulttext2 = ddddocr_image(cropped_img)
+      resulttext3 = paddleocr_image(cropped_img)
+      if resulttext3.find("關開") > -1 :
+          tap(device, "547 1843")
+          time.sleep(2.0)
+
       #tap(device, "644 1610")
       #tap(device, "689 1509")
       #time.sleep(1.0)

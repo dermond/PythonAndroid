@@ -191,8 +191,8 @@ if __name__ == '__main__':
         tap(device, "684 1270")
       else:
          
-        tap(device, "644 1884")
-        #tap(device, "644 1610")
+        #tap(device, "644 1884")
+        tap(device, "644 1610")
 
       #tap(device, "689 1509")
       time.sleep(1.0)
