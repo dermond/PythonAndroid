@@ -168,7 +168,7 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(10):
+  for _ in range(100):
       
       # #滑動
       #swipe_start = '500 1300'
@@ -191,7 +191,8 @@ if __name__ == '__main__':
         tap(device, "684 1270")
       else:
          
-        tap(device, "644 1172")
+        #tap(device, "644 1172")
+        tap(device, "644 1302")
       #tap(device, "689 1509")
       time.sleep(1.0)
   
@@ -253,7 +254,7 @@ if __name__ == '__main__':
       tap(device, "548 680")
       #tap(device, "548 1063")
       #tap(device, "232 1192")
-      input_characters(device, "666")
+      input_characters(device, "88")
       time.sleep(1.0)
 
       #滑動
