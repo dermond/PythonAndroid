@@ -212,7 +212,8 @@ if __name__ == '__main__':
       if resulttext2.find("轉帐對象") > -1 :
           print("依轉帳位置 來決定 按鈕的步驟")
           point = 0
-
+      else:
+          point = 1
 
        #滑動
       swipe_start = '500 500'
@@ -222,18 +223,16 @@ if __name__ == '__main__':
 
       if (point == 0):
         dropdown_position = '474 1200'  # 下拉清單的位置
+        option_position = '454 1030'    # 選擇的選項的位置
       else:
         dropdown_position = '679 695'  # 下拉清單的位置
+        option_position = '454 854'    # 選擇的選項的位置
       
       #text_to_input = '008'  # 輸入的文字 #華南銀行
       #text_to_input = '700'  # 輸入的文字 #郵局
       text_to_input = '007'  # 輸入的文字 #第一銀行
       #text_to_input = '004'  # 輸入的文字 #台灣銀行
-      
-      option_position = '454 1030'    # 選擇的選項的位置
-      #option_position = '454 854'    # 選擇的選項的位置
-
-    
+          
 
       # 從下拉清單中選擇
       select_from_dropdown(device, dropdown_position,text_to_input, option_position)
@@ -244,16 +243,19 @@ if __name__ == '__main__':
       #input_characters(device, "0972461422")
       time.sleep(1.0)
   
-      #滑動
-      swipe_start = '500 1300'
-      swipe_end = '500 500'
-      swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-      time.sleep(2.0)
+      if (point == 0):
+          #滑動
+          swipe_start = '500 1300'
+          swipe_end = '500 500'
+          swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+          time.sleep(2.0)
   
       #金額
-      tap(device, "548 680")
-      #tap(device, "548 1063")
-      #tap(device, "232 1192")
+      if (point == 0):
+        tap(device, "548 680")
+      else:
+        #tap(device, "548 1063")
+        tap(device, "232 1192")
       input_characters(device, "88")
       time.sleep(1.0)
 
