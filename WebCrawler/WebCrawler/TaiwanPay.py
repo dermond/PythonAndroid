@@ -274,7 +274,7 @@ if __name__ == '__main__':
       if (point == 0):
         tap(device, "564 1066")
       else:
-        tap(device, "558 1194")
+        tap(device, "558 1066")
       
       time.sleep(1.0)
       #tap(device, "582 1191") #台灣銀行
