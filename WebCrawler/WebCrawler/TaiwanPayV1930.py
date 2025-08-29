@@ -260,12 +260,12 @@ if __name__ == '__main__':
       time.sleep(1.0)
       
       #滑動
-      swipe_start = '500 1500'
+      swipe_start = '500 1200'
       swipe_end = '500 500'
       swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
       time.sleep(1.0)
       
-      swipe_start = '500 1500'
+      swipe_start = '500 1200'
       swipe_end = '500 500'
       swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
       time.sleep(1.0)
