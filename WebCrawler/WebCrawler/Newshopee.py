@@ -136,7 +136,7 @@ def swipe_to_position(device, start, end, duration=500):
 
 #     try:
 #         # 使用 adb shell screencap 指令截圖
-#         os.system(f"adb shell screencap -p {remote_path}")
+        #os.system(f"adb shell screencap -p {remote_path}")
 #         time.sleep(0.5)  # 確保檔案生成完成
 
 #         # 將圖片從設備拉回本地
@@ -553,7 +553,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "de824891"
+  deviceid = "46081JEKB10015"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -659,13 +659,13 @@ if __name__ == '__main__':
 
     # 定義每天的禁止執行時間區段（start_time, end_time）
     restricted_times = {
-        0: (datetime.time(1, 0), datetime.time(12, 0)),   # 星期一
-        1: (datetime.time(0, 0), datetime.time(11, 0)),   # 星期二
-        2: (datetime.time(23, 0), datetime.time(10, 0)),  # 星期三
-        3: (datetime.time(22, 0), datetime.time(9, 0)),   # 星期四
-        4: (datetime.time(21, 0), datetime.time(8, 0)),   # 星期五
-        5: (datetime.time(1, 0), datetime.time(12, 0)),   # 星期六
-        6: (datetime.time(0, 0), datetime.time(11, 0)),   # 星期日
+        0: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期一
+        1: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期二
+        2: (datetime.time(1, 0), datetime.time(14, 0)),  # 星期三
+        3: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期四
+        4: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期五
+        5: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期六
+        6: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期日
     }
 
     start, end = restricted_times[weekday]
