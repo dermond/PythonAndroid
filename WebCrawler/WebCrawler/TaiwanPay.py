@@ -190,9 +190,20 @@ if __name__ == '__main__':
 
         tap(device, "684 1270")
       else:
-         
-        #tap(device, "644 1172")
-        tap(device, "644 1302")
+          start_point = (574, 1705)  # 起始坐標 (x, y)
+          end_point = (761, 1801)    # 結束坐標 (x, y)
+
+          img = capture_screenshot(device)
+          cropped_img = crop_image(img, start_point, end_point)
+          #resulttext = pytesseract_image(cropped_img)
+          resulttext2 = paddleocr_image(cropped_img)
+          
+          if resulttext2.find("轉帐") > -1 :
+            tap(device, "644 1667")
+          else:
+             
+            #tap(device, "644 1172")
+            tap(device, "644 1302")
       #tap(device, "689 1509")
       time.sleep(1.0)
   
@@ -230,8 +241,8 @@ if __name__ == '__main__':
       
       #text_to_input = '008'  # 輸入的文字 #華南銀行
       #text_to_input = '700'  # 輸入的文字 #郵局
-      text_to_input = '007'  # 輸入的文字 #第一銀行
-      #text_to_input = '004'  # 輸入的文字 #台灣銀行
+      #text_to_input = '007'  # 輸入的文字 #第一銀行
+      text_to_input = '004'  # 輸入的文字 #台灣銀行
           
 
       # 從下拉清單中選擇
@@ -278,9 +289,9 @@ if __name__ == '__main__':
       
       time.sleep(1.0)
       #tap(device, "582 1191") #台灣銀行
-      #tap(device, "582 1937") #第一銀行(1)
+      tap(device, "582 1937") #第一銀行(1)
       #tap(device, "582 1729") #第一銀行(2)
-      tap(device, "582 2151") #華南
+      #tap(device, "582 2151") #華南
       #tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
