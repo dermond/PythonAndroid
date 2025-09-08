@@ -336,6 +336,18 @@ def judgment(temp):
     global TotalCount
     global LimitTotalCount
 
+
+    start_point = (480, 1780)  # 起始坐標 (x, y)
+    end_point = (640, 1900)    # 結束坐標 (x, y)
+      
+    # 截圖並裁剪
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = ddddocr_image(cropped_img)  
+    if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+        index = 1800 
+        tap(device, str(resolution_width / 2) + " " + str(index))
+
     start_point = (262, 800)  # 起始坐標 (x, y)
     end_point = (880, 1350)    # 結束坐標 (x, y)
       
@@ -553,7 +565,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "46081JEKB10015"
+  deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -659,13 +671,13 @@ if __name__ == '__main__':
 
     # 定義每天的禁止執行時間區段（start_time, end_time）
     restricted_times = {
-        0: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期一
-        1: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期二
-        2: (datetime.time(1, 0), datetime.time(14, 0)),  # 星期三
-        3: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期四
-        4: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期五
-        5: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期六
-        6: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期日
+        0: (datetime.time(1, 0), datetime.time(15, 0)),   # 星期一
+        1: (datetime.time(1, 0), datetime.time(15, 0)),   # 星期二
+        2: (datetime.time(1, 0), datetime.time(15, 0)),  # 星期三
+        3: (datetime.time(1, 0), datetime.time(15, 0)),   # 星期四
+        4: (datetime.time(1, 0), datetime.time(15, 0)),   # 星期五
+        5: (datetime.time(1, 0), datetime.time(15, 0)),   # 星期六
+        6: (datetime.time(1, 0), datetime.time(15, 0)),   # 星期日
     }
 
     start, end = restricted_times[weekday]
@@ -681,7 +693,7 @@ if __name__ == '__main__':
 
     if in_restricted:
         print(f"現在時間 {now_time} 在禁止區段 ({start}~{end})，跳過執行，時間：{now}")
-        time.sleep(30.0)
+        time.sleep(10.0)
         
         #滑動
         swipe_start = '500 1300'

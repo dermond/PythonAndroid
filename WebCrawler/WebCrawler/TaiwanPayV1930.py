@@ -170,7 +170,7 @@ if __name__ == '__main__':
 
   for _ in range(300):
       
-       # #滑動
+      # #滑動
       #swipe_start = '500 1300'
       #swipe_end = '500 500'
       #swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
@@ -190,9 +190,20 @@ if __name__ == '__main__':
 
         tap(device, "684 1270")
       else:
-         
-        #tap(device, "644 1172")
-        tap(device, "644 1302")
+          start_point = (574, 1705)  # 起始坐標 (x, y)
+          end_point = (761, 1801)    # 結束坐標 (x, y)
+
+          img = capture_screenshot(device)
+          cropped_img = crop_image(img, start_point, end_point)
+          #resulttext = pytesseract_image(cropped_img)
+          resulttext2 = paddleocr_image(cropped_img)
+          
+          if resulttext2.find("轉帐") > -1 :
+            tap(device, "644 1667")
+          else:
+             
+            #tap(device, "644 1172")
+            tap(device, "644 1302")
       #tap(device, "689 1509")
       time.sleep(1.0)
   
