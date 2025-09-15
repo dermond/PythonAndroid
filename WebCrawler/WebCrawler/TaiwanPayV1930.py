@@ -289,9 +289,9 @@ if __name__ == '__main__':
       
       time.sleep(1.0)
       ##tap(device, "582 1191") #台灣銀行
-      #tap(device, "582 1937") #第一銀行(3)
-      #tap(device, "582 1729") #第一銀行(2)
-      tap(device, "582 2151") #第一銀行(1)
+      tap(device, "582 1537") #第一銀行(2)
+      #tap(device, "582 1729") #第一銀行(3)
+      #tap(device, "582 2151") #第一銀行(1)
       ##tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
