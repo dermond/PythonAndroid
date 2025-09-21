@@ -208,8 +208,23 @@ if __name__ == '__main__':
       time.sleep(1.0)
   
       #手機轉帳
-      tap(device, "886 334")
-      time.sleep(1.0)
+      while True:
+
+          start_point = (750, 310)  # 起始坐標 (x, y)
+          end_point = (1000, 400)    # 結束坐標 (x, y)
+
+          img = capture_screenshot(device)
+          cropped_img = crop_image(img, start_point, end_point)
+          #resulttext = pytesseract_image(cropped_img)
+          resulttext2 = paddleocr_image(cropped_img)
+          if "手機門号" in resulttext2:
+            print("偵測到手機門號欄位，準備輸入")
+            tap(device, "886 334")
+            time.sleep(1.0)
+            break
+          else:
+            print("尚未偵測到手機門號欄位，等待中...")
+            time.sleep(1.0)
 
       #判斷
       start_point = (160, 994)  # 起始坐標 (x, y)

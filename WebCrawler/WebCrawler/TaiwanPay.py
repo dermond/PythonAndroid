@@ -10,7 +10,7 @@ import pytesseract
 from PIL import Image
 import io
 import os
-import ddddocr
+import ddddocr #opencv-python==3.4.16.59
 import subprocess
 from paddleocr import PaddleOCR #paddlepaddle
 
@@ -207,9 +207,25 @@ if __name__ == '__main__':
       #tap(device, "689 1509")
       time.sleep(1.0)
   
+  
       #手機轉帳
-      tap(device, "886 334")
-      time.sleep(1.0)
+      while True:
+
+          start_point = (750, 310)  # 起始坐標 (x, y)
+          end_point = (1000, 400)    # 結束坐標 (x, y)
+
+          img = capture_screenshot(device)
+          cropped_img = crop_image(img, start_point, end_point)
+          #resulttext = pytesseract_image(cropped_img)
+          resulttext2 = paddleocr_image(cropped_img)
+          if "手機門号" in resulttext2:
+            print("偵測到手機門號欄位，準備輸入")
+            tap(device, "886 334")
+            time.sleep(1.0)
+            break
+          else:
+            print("尚未偵測到手機門號欄位，等待中...")
+            time.sleep(1.0)
 
       #判斷
       start_point = (160, 994)  # 起始坐標 (x, y)
@@ -241,8 +257,8 @@ if __name__ == '__main__':
       
       #text_to_input = '008'  # 輸入的文字 #華南銀行
       #text_to_input = '700'  # 輸入的文字 #郵局
-      #text_to_input = '007'  # 輸入的文字 #第一銀行
-      text_to_input = '004'  # 輸入的文字 #台灣銀行
+      text_to_input = '007'  # 輸入的文字 #第一銀行
+      #text_to_input = '004'  # 輸入的文字 #台灣銀行
           
 
       # 從下拉清單中選擇
@@ -288,8 +304,8 @@ if __name__ == '__main__':
         tap(device, "558 1066")
       
       time.sleep(1.0)
-      #tap(device, "582 1191") #台灣銀行
-      tap(device, "582 1937") #第一銀行(1)
+      tap(device, "582 1191") #台灣銀行
+      #tap(device, "582 1937") #第一銀行(1)
       #tap(device, "582 1729") #第一銀行(2)
       #tap(device, "582 2151") #華南
       #tap(device, "582 1485") #郵局
@@ -468,7 +484,7 @@ if __name__ == '__main__':
       tap(device, "321 2162")
       time.sleep(1.0)
 
-      time.sleep(14.0)
+      #time.sleep(14.0)
   
   
   
