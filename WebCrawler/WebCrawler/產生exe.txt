@@ -62,3 +62,9 @@ D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\P
 HTC
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py FA75V1802306
 
+A20
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py R58N10RXWVF
+
+
+
+

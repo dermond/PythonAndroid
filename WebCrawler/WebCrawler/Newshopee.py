@@ -244,13 +244,21 @@ def turn_on_screen():
         subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
         # 將亮度設置為最低，接近關閉背光
-        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "70"], check=True)
+        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "1"], check=True)
 
   
         print("螢幕已開啟")
     except:
         print(f"錯誤")
-   
+def Key_Return():
+    try:
+        subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "4"], check=True)
+  
+        print("Key_Return")
+    except:
+        print(f"Key_Return 錯誤")
+        
+  
 def log(message):
     with open("log.txt", "a", encoding="utf-8") as f:
         f.write(message + "\n")
@@ -363,6 +371,66 @@ def judgment(temp):
     elif resulttext.find("第3天")  > -1:
         tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
     
+
+    # 下一個場次
+    start_point = (30, 270)  # 起始坐標 (x, y)
+    end_point = (200, 500)    # 結束坐標 (x, y)
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = paddleocr_image(cropped_img)  
+    if resulttext.find("下一場次") > -1 :
+
+        tap(device, str("138") + " " + str("350"))
+        time.sleep(3.0)
+        if resolution_height > 2000:
+            index = (resolution_height / 2)  - 10
+            tap(device, str(resolution_width - 240) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 500
+            tap(device, str(resolution_width - 240) + " " + str(index))
+            time.sleep(5.0)
+        else:
+            index = (resolution_height / 2)  - 80
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 300
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+
+        Key_Return()
+        
+    # 下一個場次
+    start_point = (30, 170)  # 起始坐標 (x, y)
+    end_point = (200, 400)    # 結束坐標 (x, y)
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = paddleocr_image(cropped_img)  
+    if resulttext.find("下一場次") > -1 :
+
+        tap(device, str("138") + " " + str("250"))
+        time.sleep(3.0)
+        
+        if resolution_height > 2000:
+            index = (resolution_height / 2)  - 10
+            tap(device, str(resolution_width - 240) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 500
+            tap(device, str(resolution_width - 240) + " " + str(index))
+            time.sleep(5.0)
+        else:
+            index = (resolution_height / 2)  - 80
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 300
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+
+        Key_Return()
+
      #判斷數值
     start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
     end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
@@ -449,12 +517,16 @@ def judgment(temp):
                     tap(device, str(resolution_width / 4) + " " + str(index))
                     time.sleep(3.0)
 
+               
+                
                   
                 index = (resolution_height / 2 ) - 100
                 tap(device, str(resolution_width / 2) + " " + str(index))
                 time.sleep(12.0)
 
-                 
+                index = (resolution_height / 2 ) + 100
+                tap(device, str((resolution_width / 2) + 200) + " " + str(index))
+                time.sleep(12.0)
 
                 index = (resolution_height / 2 ) + 282
                 tap(device, str(resolution_width / 2) + " " + str(index))
@@ -482,6 +554,7 @@ def judgment(temp):
                
         
        
+    
     spilt = resulttext.split('\n')
     valid, value, time2 = validate_block(spilt)
     if valid:
@@ -565,7 +638,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "de824891"
+  deviceid = "46081JEKB10015"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -654,7 +727,7 @@ if __name__ == '__main__':
         print(f"Shopee 已啟動，輸出：\n{output}")
         time.sleep(4.0)
         
-        tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 200))
+        tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
         #tap(device, "545 2180 ")
         time.sleep(2.0)
         
