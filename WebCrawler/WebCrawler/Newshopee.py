@@ -36,11 +36,12 @@ ocr = ddddocr.DdddOcr()
 Pocr = PaddleOCR(use_angle_cls=False, lang='ch')  # lang='ch' 支援
 Leftspace = 0
 jump = 0
+BaseJump = 0
 resolution_width = 0
 resolution_height = 0
 dpi = 10
 ErrorCount = 0
-
+nextsession = 0
 last_date = datetime.date.today()
 
 def check_garbage_objects():
@@ -343,8 +344,8 @@ def judgment(temp):
     global ErrorCount
     global TotalCount
     global LimitTotalCount
-
-
+    global BaseJump
+    global nextsession
     start_point = (480, 1780)  # 起始坐標 (x, y)
     end_point = (640, 1900)    # 結束坐標 (x, y)
       
@@ -352,6 +353,18 @@ def judgment(temp):
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
     resulttext = ddddocr_image(cropped_img)  
+    #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+    if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+        index = 1800 
+        tap(device, str(resolution_width / 2) + " " + str(index))
+
+    start_point = (480, 1730)  # 起始坐標 (x, y)
+    end_point = (640, 1850)    # 結束坐標 (x, y)
+    # 截圖並裁剪
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = ddddocr_image(cropped_img)  
+    #resulttext2 = pytesseract_image_Chitra(cropped_img)  
     if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
         index = 1800 
         tap(device, str(resolution_width / 2) + " " + str(index))
@@ -378,7 +391,7 @@ def judgment(temp):
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
     resulttext = paddleocr_image(cropped_img)  
-    if resulttext.find("下一場次") > -1 :
+    if resulttext.find("下一場次") > -1 and nextsession == 0:
 
         tap(device, str("138") + " " + str("350"))
         time.sleep(3.0)
@@ -400,14 +413,14 @@ def judgment(temp):
             time.sleep(5.0)
 
         Key_Return()
-        
+        nextsession = 1
     # 下一個場次
     start_point = (30, 170)  # 起始坐標 (x, y)
     end_point = (200, 400)    # 結束坐標 (x, y)
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
     resulttext = paddleocr_image(cropped_img)  
-    if resulttext.find("下一場次") > -1 :
+    if resulttext.find("下一場次") > -1 and nextsession == 0:
 
         tap(device, str("138") + " " + str("250"))
         time.sleep(3.0)
@@ -420,6 +433,14 @@ def judgment(temp):
             index = resolution_height  - 500
             tap(device, str(resolution_width - 240) + " " + str(index))
             time.sleep(5.0)
+        elif resolution_height > 1500:
+            index = (resolution_height / 2)  - 0
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 300
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
         else:
             index = (resolution_height / 2)  - 80
             tap(device, str(resolution_width - 140) + " " + str(index))
@@ -430,7 +451,7 @@ def judgment(temp):
             time.sleep(5.0)
 
         Key_Return()
-
+        nextsession = 1
      #判斷數值
     start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
     end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
@@ -457,6 +478,13 @@ def judgment(temp):
         if resulttext2.find("領取")  > -1 or resulttext2.find("领取")  > -1 :
            
             print("第2次比對")
+            if (jump > 100):
+                BaseJump = 50
+            
+            elif (jump > 200):
+                BaseJump = 100
+            else:
+                BaseJump = 0
         else:
             jump = jump + dpi
                     
@@ -470,7 +498,7 @@ def judgment(temp):
         index = 321+jump 
             
         tap(device, str(resolution_width - 106) + " " + str(index))
-        time.sleep(3.0)
+        time.sleep(4.0)
         if (resolution_height < 2400):
             index = 1360 
             tap(device, str(542) + " " + str(index))
@@ -479,7 +507,7 @@ def judgment(temp):
             tap(device, str(resolution_width / 2) + " " + str(index))
          
             
-        time.sleep(3.0)
+        time.sleep(4.0)
             
         TotalCount = int(TotalCount) + 1
         SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
@@ -655,6 +683,7 @@ if __name__ == '__main__':
   device, client = connect(deviceid)
   device_id = device.serial
   jump = 50
+  BaseJump = 0
   Leftspace = 0
   dpi = 10
 
@@ -704,6 +733,11 @@ if __name__ == '__main__':
     
     TotalCount = SettingReader.getSetting("base",deviceid + "TotalCount")
     
+    # 如果是空字串，給預設值 0
+    if TotalCount == "" or TotalCount is None:
+        TotalCount = 0
+        SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
+    
     if getdate != current_date:
         TotalCount = 0
         SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
@@ -720,16 +754,16 @@ if __name__ == '__main__':
         # 關閉 Shopee
         device.shell(f"am force-stop {package_name}")
         print("Shopee 已停止")
-        time.sleep(2.0)
+        time.sleep(4.0)
         # 啟動 Shopee
         start_command = f"am start -n {package_name}/{activity_name}"
         output = device.shell(start_command)
         print(f"Shopee 已啟動，輸出：\n{output}")
-        time.sleep(4.0)
+        time.sleep(6.0)
         
         tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
         #tap(device, "545 2180 ")
-        time.sleep(2.0)
+        time.sleep(4.0)
         
         # tap(device, "740 190 ")
         # time.sleep(3.0)
@@ -744,13 +778,13 @@ if __name__ == '__main__':
 
     # 定義每天的禁止執行時間區段（start_time, end_time）
     restricted_times = {
-        0: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期一
-        1: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期二
-        2: (datetime.time(1, 0), datetime.time(14, 0)),  # 星期三
-        3: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期四
-        4: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期五
-        5: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期六
-        6: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期日
+        0: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期一
+        1: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期二
+        2: (datetime.time(1, 0), datetime.time(13, 0)),  # 星期三
+        3: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期四
+        4: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期五
+        5: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期六
+        6: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期日
     }
 
     start, end = restricted_times[weekday]
@@ -780,6 +814,7 @@ if __name__ == '__main__':
             time.sleep(2.0)
             
         goflag = 1
+        nextsession = 0
         continue
 
     if goflag == 1 :
@@ -797,9 +832,9 @@ if __name__ == '__main__':
     # 如果不在禁止區段，就執行你的主程式
     print(f"現在時間 {now_time} 可以執行，時間：{now}")
     
-    print(f"TotalCount：\n{TotalCount}")
+    print(f"TotalCount：\n{str(TotalCount)}")
     if int(TotalCount) > int(LimitTotalCount):
-        print(f"TotalCount 大於"+str(LimitTotalCount)+f"次：\n{TotalCount}")
+        print(f"TotalCount 大於"+str(LimitTotalCount)+f"次：\n{str(TotalCount)}")
         time.sleep(100.0)
         continue
 
@@ -813,12 +848,12 @@ if __name__ == '__main__':
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(6.0)
-        jump = 50
+        jump = 50 + BaseJump
         Shopeecount = Shopeecount + 1
         ErrorCount = 0
     elif result == "ok":
         Shopeecount = 0
-        jump = 50
+        jump = 50 + BaseJump
         ErrorCount = 0
         turn_on_screen()
         continue
