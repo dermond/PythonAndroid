@@ -168,7 +168,7 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(300):
+  for _ in range(5):
       
       # #滑動
       #swipe_start = '500 1300'
@@ -176,7 +176,7 @@ if __name__ == '__main__':
       #swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
       #time.sleep(2.0)
 
-      #轉帳
+        #轉帳
       #判斷
       start_point = (574, 1355)  # 起始坐標 (x, y)
       end_point = (761, 1451)    # 結束坐標 (x, y)
@@ -202,8 +202,20 @@ if __name__ == '__main__':
             tap(device, "644 1667")
           else:
              
-            #tap(device, "644 1172")
-            tap(device, "644 1302")
+              start_point = (574, 1450)  # 起始坐標 (x, y)
+              end_point = (761, 1650)    # 結束坐標 (x, y)
+
+              img = capture_screenshot(device)
+              cropped_img = crop_image(img, start_point, end_point)
+              #resulttext = pytesseract_image(cropped_img)
+              resulttext2 = paddleocr_image(cropped_img)
+          
+              if resulttext2.find("轉帐") > -1 :
+                tap(device, "644 1540")
+              else:
+             
+                #tap(device, "644 1172")
+                tap(device, "644 1302")
       #tap(device, "689 1509")
       time.sleep(1.0)
   
@@ -255,8 +267,8 @@ if __name__ == '__main__':
         option_position = '454 854'    # 選擇的選項的位置
       
       #text_to_input = '008'  # 輸入的文字 #華南銀行
-      text_to_input = '700'  # 輸入的文字 #郵局
-      #text_to_input = '007'  # 輸入的文字 #第一銀行
+      #text_to_input = '700'  # 輸入的文字 #郵局
+      text_to_input = '007'  # 輸入的文字 #第一銀行
       #text_to_input = '004'  # 輸入的文字 #台灣銀行
           
 
@@ -278,11 +290,11 @@ if __name__ == '__main__':
   
       #金額
       if (point == 0):
-        tap(device, "548 680")
+        tap(device, "548 585")
       else:
         #tap(device, "548 1063")
         tap(device, "232 1192")
-      input_characters(device, "88")
+      input_characters(device, "666")
       time.sleep(1.0)
       
       #滑動
@@ -305,7 +317,7 @@ if __name__ == '__main__':
       time.sleep(1.0)
       ##tap(device, "582 1191") #台灣銀行
       tap(device, "582 1537") #第一銀行(2)
-      #tap(device, "582 1729") #第一銀行(3)
+      #tap(device, "582 1881") #第一銀行(3)
       #tap(device, "582 2151") #第一銀行(1)
       ##tap(device, "582 1485") #郵局
       time.sleep(1.0)
@@ -443,11 +455,11 @@ if __name__ == '__main__':
             print(f"結束")
             #確認
             break
-          elif check_error_code(resulttext,  'ERENT') or check_error_code(resulttext,  'BBA SSR'):
+          elif check_error_code(resulttext,  'ERENT') or check_error_code(resulttext,  'BBA SSR') or check_error_code(resulttext,  'RAR BE RATT'):
             print(f"結束")
             #確認
             break  
-          elif check_error_code(resulttext,  'WARE RE AI FC HY'):
+          elif check_error_code(resulttext,  'WARE RE AI FC HY') or check_error_code(resulttext2,  '警政署165') :
             print(f"結束")
             #確認
             break  

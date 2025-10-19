@@ -15,19 +15,26 @@ import subprocess
 
 ocr = ddddocr.DdddOcr()
 
-def connect(index = 0):
+def connect(serial: str):
+    client = AdbClient(host='127.0.0.1', port=5037)
 
-  client = AdbClient(host='127.0.0.1', port=5037)
+    devices = client.devices()
+    if not devices:
+        print('No devices')
+        quit()
 
-  devices = client.devices()
-  if len(devices) == 0:
-    print('No devices')
-    quit()
+    # 嘗試找出符合 serial 的裝置
+    for device in devices:
+        print(str(device.serial))
+        if device.serial == serial:
+            print(f'Connected to {device}')
+            return device, client
 
-  device = devices[index]
-  print(f'Connected to {device}')
-
-  return device, client
+    # 找不到時回傳第一筆裝置
+    fallback_device = devices[0]
+    print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
+    #quit()
+    return fallback_device, client
 
 def tap(device, position):
     device.shell(f'input tap {position}')
@@ -144,7 +151,8 @@ def switch_to_english():
 
 if __name__ == '__main__':
 
-  device, client = connect()
+  deviceid = "46081JEKB10015"
+  device, client = connect(deviceid)
 
   #目前按鈕特性 是給 google pixel 8a用
   # 

@@ -703,6 +703,8 @@ if __name__ == '__main__':
   if (density >= 640):
       dpi = 20
 
+  if (resolution_height > 2000):
+       jump = 100
   # #錯誤視窗判斷
   # Shopee 的包名與主 Activity
   package_name = "com.shopee.tw"
@@ -848,12 +850,18 @@ if __name__ == '__main__':
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(6.0)
-        jump = 50 + BaseJump
+        if (resolution_height > 2000):
+            jump = 100 + BaseJump
+        else:
+            jump = 50 + BaseJump
         Shopeecount = Shopeecount + 1
         ErrorCount = 0
     elif result == "ok":
         Shopeecount = 0
-        jump = 50 + BaseJump
+        if (resolution_height > 2000):
+            jump = 100 + BaseJump
+        else:
+            jump = 50 + BaseJump
         ErrorCount = 0
         turn_on_screen()
         continue
