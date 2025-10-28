@@ -346,8 +346,14 @@ def judgment(temp):
     global LimitTotalCount
     global BaseJump
     global nextsession
-    start_point = (480, 1780)  # 起始坐標 (x, y)
-    end_point = (640, 1900)    # 結束坐標 (x, y)
+
+    if resolution_width == 720 and resolution_height == 1560:
+        start_point = (250, 1300)  # 起始坐標 (x, y)
+        end_point = (350, 1450)    # 結束坐標 (x, y)
+    else:
+        start_point = (480, 1780)  # 起始坐標 (x, y)
+        end_point = (640, 1900)    # 結束坐標 (x, y)
+
       
     # 截圖並裁剪
     img = capture_screenshot(device)
@@ -358,8 +364,14 @@ def judgment(temp):
         index = 1800 
         tap(device, str(resolution_width / 2) + " " + str(index))
 
-    start_point = (480, 1730)  # 起始坐標 (x, y)
-    end_point = (640, 1850)    # 結束坐標 (x, y)
+    if resolution_width == 720 and resolution_height == 1560:
+        start_point = (250, 1300)  # 起始坐標 (x, y)
+        end_point = (350, 1450)    # 結束坐標 (x, y)
+    else:
+        start_point = (480, 1730)  # 起始坐標 (x, y)
+        end_point = (640, 1850)    # 結束坐標 (x, y)
+
+
     # 截圖並裁剪
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
@@ -452,9 +464,14 @@ def judgment(temp):
 
         Key_Return()
         nextsession = 1
-     #判斷數值
-    start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
-    end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
+    #判斷數值
+    if resolution_width == 720 and resolution_height == 1560:
+        start_point = (600+ Leftspace, 100)  # 起始坐標 (x, y)
+        end_point = (700+ Leftspace, 1050)    # 結束坐標 (x, y)
+    else:
+        start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
+        end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
+
       
     # 截圖並裁剪
     img = capture_screenshot(device)
@@ -466,8 +483,13 @@ def judgment(temp):
     if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
         turn_on_screen()
        
-        start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
-        end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
+        if resolution_width == 720 and resolution_height == 1560:
+            start_point = (600+ Leftspace, 100+jump)  # 起始坐標 (x, y)
+            end_point = (700+ Leftspace, 200+jump)    # 結束坐標 (x, y)
+        else:
+            start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
+            end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
+
         print("比對领取" + " " + str(jump))
         
         # 截圖並裁剪
@@ -496,10 +518,16 @@ def judgment(temp):
 
 
         index = 321+jump 
-            
-        tap(device, str(resolution_width - 106) + " " + str(index))
+        if resolution_width == 720 and resolution_height == 1560:
+            index = 165+jump
+            tap(device, str(650) + " " + str(index))
+        else:
+            tap(device, str(resolution_width - 106) + " " + str(index))
         time.sleep(4.0)
-        if (resolution_height < 2400):
+        if resolution_width == 720 and resolution_height == 1560:
+            index = 935 
+            tap(device, str(365) + " " + str(index))
+        elif (resolution_height < 2400):
             index = 1360 
             tap(device, str(542) + " " + str(index))
         else:
@@ -507,6 +535,7 @@ def judgment(temp):
             tap(device, str(resolution_width / 2) + " " + str(index))
          
             
+
         time.sleep(4.0)
             
         TotalCount = int(TotalCount) + 1
@@ -615,8 +644,13 @@ def judgment(temp):
         if value_per_minute >= threshold:
             print("每分鐘收益 值得執行")
             
-            start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
-            end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
+            if resolution_width == 720 and resolution_height == 1560:
+                start_point = (600+ Leftspace, 100+jump)  # 起始坐標 (x, y)
+                end_point = (700+ Leftspace, 200+jump)    # 結束坐標 (x, y)
+            else:
+                start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
+                end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
+
             print("比對领取" + " " + str(jump))
             # 截圖並裁剪
             img = capture_screenshot(device)
