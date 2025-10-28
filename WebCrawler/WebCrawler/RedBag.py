@@ -12,8 +12,13 @@ import io
 import os
 import ddddocr
 import subprocess
+from paddleocr import PaddleOCR #paddlepaddle
+
 
 ocr = ddddocr.DdddOcr()
+# 建一次 OCR 物件就好，重複呼叫時不用每次都 new
+Pocr = PaddleOCR(use_angle_cls=False, lang='ch')  # lang='ch' 支援簡繁中
+
 
 def connect(serial: str):
     client = AdbClient(host='127.0.0.1', port=5037)
@@ -147,6 +152,12 @@ def switch_to_english():
         except subprocess.CalledProcessError:
             print("Failed to switch input method.")
 
+def paddleocr_image(img_path):
+    full_path = os.path.join(os.getcwd(), 'cropped_image.png')
+    results = Pocr.ocr(full_path, cls=True)
+    # 組合所有辨識到的文字
+    text = '\n'.join([ line[1][0] for block in results for line in block ])
+    return text
 
 
 if __name__ == '__main__':
@@ -159,6 +170,16 @@ if __name__ == '__main__':
 
   for _ in range(9999):
       
+      start_point = (730, 600)  # 起始坐標 (x, y)
+      end_point = (1100, 730)    # 結束坐標 (x, y)
+
+      img = capture_screenshot(device)
+      cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
+      resulttext2 = paddleocr_image(cropped_img)
+      if resulttext2.find("收款成功") > -1 :
+        tap(device, "77 200")
+        time.sleep(2.0)
       #轉帳
       tap(device, "950 1410")
       time.sleep(1.0)

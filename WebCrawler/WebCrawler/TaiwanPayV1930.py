@@ -217,7 +217,7 @@ if __name__ == '__main__':
                 #tap(device, "644 1172")
                 tap(device, "644 1302")
       #tap(device, "689 1509")
-      time.sleep(1.0)
+      time.sleep(4.0)
   
       #手機轉帳
       while True:
@@ -231,12 +231,24 @@ if __name__ == '__main__':
           resulttext2 = paddleocr_image(cropped_img)
           if "手機門号" in resulttext2:
             print("偵測到手機門號欄位，準備輸入")
+              #滑動
+            swipe_start = '500 100'
+            swipe_end = '500 0'
+            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+            time.sleep(1.0)
+
             tap(device, "886 334")
             time.sleep(1.0)
             break
           else:
             print("尚未偵測到手機門號欄位，等待中...")
             time.sleep(1.0)
+             #滑動
+            swipe_start = '500 100'
+            swipe_end = '500 0'
+            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+            time.sleep(1.0)
+
 
       #判斷
       start_point = (160, 994)  # 起始坐標 (x, y)
@@ -319,7 +331,7 @@ if __name__ == '__main__':
       tap(device, "582 1537") #第一銀行(2)
       #tap(device, "582 1881") #第一銀行(3)
       #tap(device, "582 2151") #第一銀行(1)
-      ##tap(device, "582 1485") #郵局
+      #tap(device, "582 1485") #郵局
       time.sleep(1.0)
   
   
@@ -471,7 +483,7 @@ if __name__ == '__main__':
             #break
 
 
-
+      time.sleep(2.0)
       tap(device, "844 1361")
       time.sleep(4.0)
   
