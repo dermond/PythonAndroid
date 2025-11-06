@@ -472,7 +472,15 @@ def judgment(temp):
         start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
         end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
 
-      
+     # 截圖並裁剪
+    start_point = (1050, 1550)  # 起始坐標 (x, y)
+    end_point = (1300, 1700)    # 結束坐標 (x, y)
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = paddleocr_image(cropped_img)    
+    if resulttext.find("確定")  > -1 :
+        tap(device, str(1175) + " " + str(1625))
+
     # 截圖並裁剪
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
@@ -700,7 +708,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "46081JEKB10015"
+  deviceid = "FA75V1802306"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
