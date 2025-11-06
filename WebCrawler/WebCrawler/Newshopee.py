@@ -347,6 +347,15 @@ def judgment(temp):
     global BaseJump
     global nextsession
 
+    # 截圖並裁剪 A20 存取手機
+    start_point = (475, 1350)  # 起始坐標 (x, y)
+    end_point = (594, 1410)    # 結束坐標 (x, y)
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = paddleocr_image(cropped_img)    
+    if resulttext.find("允許")  > -1 :
+        tap(device, str(534) + " " + str(1380))
+
     if resolution_width == 720 and resolution_height == 1560:
         start_point = (250, 1300)  # 起始坐標 (x, y)
         end_point = (350, 1450)    # 結束坐標 (x, y)
@@ -480,6 +489,9 @@ def judgment(temp):
     resulttext = paddleocr_image(cropped_img)    
     if resulttext.find("確定")  > -1 :
         tap(device, str(1175) + " " + str(1625))
+
+    
+
 
     # 截圖並裁剪
     img = capture_screenshot(device)
@@ -708,7 +720,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "FA75V1802306"
+  deviceid = "R58N10RXWVF"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
