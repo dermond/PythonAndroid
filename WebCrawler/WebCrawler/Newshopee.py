@@ -473,15 +473,8 @@ def judgment(temp):
 
         Key_Return()
         nextsession = 1
-    #判斷數值
-    if resolution_width == 720 and resolution_height == 1560:
-        start_point = (600+ Leftspace, 100)  # 起始坐標 (x, y)
-        end_point = (700+ Leftspace, 1050)    # 結束坐標 (x, y)
-    else:
-        start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
-        end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
-
-     # 截圖並裁剪 HTC手機 無法充電的提示
+        
+    # 截圖並裁剪 HTC手機 無法充電的提示
     start_point = (1050, 1550)  # 起始坐標 (x, y)
     end_point = (1300, 1700)    # 結束坐標 (x, y)
     img = capture_screenshot(device)
@@ -490,6 +483,16 @@ def judgment(temp):
     if resulttext.find("確定")  > -1 :
         tap(device, str(1175) + " " + str(1625))
 
+
+    #判斷數值
+    if resolution_width == 720 and resolution_height == 1560:
+        start_point = (600+ Leftspace, 100)  # 起始坐標 (x, y)
+        end_point = (700+ Leftspace, 1050)    # 結束坐標 (x, y)
+    else:
+        start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
+        end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
+
+     
     
 
 
