@@ -472,7 +472,7 @@ def judgment(temp):
         start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
         end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
 
-     # 截圖並裁剪
+     # 截圖並裁剪 HTC手機 無法充電的提示
     start_point = (1050, 1550)  # 起始坐標 (x, y)
     end_point = (1300, 1700)    # 結束坐標 (x, y)
     img = capture_screenshot(device)
