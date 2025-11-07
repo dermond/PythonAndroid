@@ -786,146 +786,148 @@ if __name__ == '__main__':
   yesterday = today - datetime.timedelta(days=1)
 
   for i in range(99999999):
+    try:
+        current_date = str(datetime.date.today())
+        getdate = SettingReader.getSetting("base",deviceid + "date")
     
-    current_date = str(datetime.date.today())
-    getdate = SettingReader.getSetting("base",deviceid + "date")
+        TotalCount = SettingReader.getSetting("base",deviceid + "TotalCount")
     
-    TotalCount = SettingReader.getSetting("base",deviceid + "TotalCount")
+        # 如果是空字串，給預設值 0
+        if TotalCount == "" or TotalCount is None:
+            TotalCount = 0
+            SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
     
-    # 如果是空字串，給預設值 0
-    if TotalCount == "" or TotalCount is None:
-        TotalCount = 0
-        SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
-    
-    if getdate != current_date:
-        TotalCount = 0
-        SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
+        if getdate != current_date:
+            TotalCount = 0
+            SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
 
-    SettingReader.setSetting("base",deviceid + "date", current_date )
+        SettingReader.setSetting("base",deviceid + "date", current_date )
 
 
-    check_garbage_objects()
-    print_memory_usage()
-    turn_off_screen()
-    if Shopeecount > 10:  # 如果 i 是 10 的倍數
-        print(f"第 {i} 次操作：重啟 Shopee App")
+        check_garbage_objects()
+        print_memory_usage()
+        turn_off_screen()
+        if Shopeecount > 10:  # 如果 i 是 10 的倍數
+            print(f"第 {i} 次操作：重啟 Shopee App")
         
-        # 關閉 Shopee
-        device.shell(f"am force-stop {package_name}")
-        print("Shopee 已停止")
-        time.sleep(4.0)
-        # 啟動 Shopee
-        start_command = f"am start -n {package_name}/{activity_name}"
-        output = device.shell(start_command)
-        print(f"Shopee 已啟動，輸出：\n{output}")
-        time.sleep(6.0)
-        
-        tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
-        #tap(device, "545 2180 ")
-        time.sleep(4.0)
-        
-        # tap(device, "740 190 ")
-        # time.sleep(3.0)
-        
-        # tap(device, "322 1263 ")
-        # time.sleep(1.0)
-        Shopeecount = 0
-        
-    now = datetime.datetime.now()
-    now_time = now.time()
-    weekday = now.weekday()  # 0 = 星期一, 6 = 星期日
-
-    # 定義每天的禁止執行時間區段（start_time, end_time）
-    restricted_times = {
-        0: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期一
-        1: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期二
-        2: (datetime.time(1, 0), datetime.time(13, 0)),  # 星期三
-        3: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期四
-        4: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期五
-        5: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期六
-        6: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期日
-    }
-
-    start, end = restricted_times[weekday]
-
-    # 判斷是否在禁止區段內（處理跨午夜的情況）
-    in_restricted = False
-    if start < end:
-        # 時間區段沒有跨午夜
-        in_restricted = start <= now_time < end
-    else:
-        # 時間區段跨午夜，例如 23:00 ~ 10:00
-        in_restricted = now_time >= start or now_time < end
-
-    if in_restricted:
-        print(f"現在時間 {now_time} 在禁止區段 ({start}~{end})，跳過執行，時間：{now}")
-        time.sleep(10.0)
-        
-        #滑動
-        swipe_start = '500 1300'
-        swipe_end = '500 500'
-        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(2.0)
-
-        if goflag == 0 :
+            # 關閉 Shopee
             device.shell(f"am force-stop {package_name}")
             print("Shopee 已停止")
+            time.sleep(4.0)
+            # 啟動 Shopee
+            start_command = f"am start -n {package_name}/{activity_name}"
+            output = device.shell(start_command)
+            print(f"Shopee 已啟動，輸出：\n{output}")
+            time.sleep(6.0)
+        
+            tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
+            #tap(device, "545 2180 ")
+            time.sleep(4.0)
+        
+            # tap(device, "740 190 ")
+            # time.sleep(3.0)
+        
+            # tap(device, "322 1263 ")
+            # time.sleep(1.0)
+            Shopeecount = 0
+        
+        now = datetime.datetime.now()
+        now_time = now.time()
+        weekday = now.weekday()  # 0 = 星期一, 6 = 星期日
+
+        # 定義每天的禁止執行時間區段（start_time, end_time）
+        restricted_times = {
+            0: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期一
+            1: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期二
+            2: (datetime.time(1, 0), datetime.time(13, 0)),  # 星期三
+            3: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期四
+            4: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期五
+            5: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期六
+            6: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期日
+        }
+
+        start, end = restricted_times[weekday]
+
+        # 判斷是否在禁止區段內（處理跨午夜的情況）
+        in_restricted = False
+        if start < end:
+            # 時間區段沒有跨午夜
+            in_restricted = start <= now_time < end
+        else:
+            # 時間區段跨午夜，例如 23:00 ~ 10:00
+            in_restricted = now_time >= start or now_time < end
+
+        if in_restricted:
+            print(f"現在時間 {now_time} 在禁止區段 ({start}~{end})，跳過執行，時間：{now}")
+            time.sleep(10.0)
+        
+            #滑動
+            swipe_start = '500 1300'
+            swipe_end = '500 500'
+            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
+
+            if goflag == 0 :
+                device.shell(f"am force-stop {package_name}")
+                print("Shopee 已停止")
+                time.sleep(2.0)
             
-        goflag = 1
-        nextsession = 0
-        continue
+            goflag = 1
+            nextsession = 0
+            continue
 
-    if goflag == 1 :
-        # 啟動 Shopee
-        start_command = f"am start -n {package_name}/{activity_name}"
-        output = device.shell(start_command)
-        print(f"Shopee 已啟動，輸出：\n{output}")
-        time.sleep(4.0)
+        if goflag == 1 :
+            # 啟動 Shopee
+            start_command = f"am start -n {package_name}/{activity_name}"
+            output = device.shell(start_command)
+            print(f"Shopee 已啟動，輸出：\n{output}")
+            time.sleep(4.0)
         
-        tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 200))
-        #tap(device, "545 2180 ")
-        time.sleep(2.0)
-    goflag = 0
+            tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 200))
+            #tap(device, "545 2180 ")
+            time.sleep(2.0)
+        goflag = 0
 
-    # 如果不在禁止區段，就執行你的主程式
-    print(f"現在時間 {now_time} 可以執行，時間：{now}")
+        # 如果不在禁止區段，就執行你的主程式
+        print(f"現在時間 {now_time} 可以執行，時間：{now}")
     
-    print(f"TotalCount：\n{str(TotalCount)}")
-    if int(TotalCount) > int(LimitTotalCount):
-        print(f"TotalCount 大於"+str(LimitTotalCount)+f"次：\n{str(TotalCount)}")
-        time.sleep(100.0)
-        continue
+        print(f"TotalCount：\n{str(TotalCount)}")
+        if int(TotalCount) > int(LimitTotalCount):
+            print(f"TotalCount 大於"+str(LimitTotalCount)+f"次：\n{str(TotalCount)}")
+            time.sleep(100.0)
+            continue
 
-    result = judgment(0)
-    if result == "wait":
+        result = judgment(0)
+        if result == "wait":
         
-        print("等待 不用處理")
-    elif result == "next":
-        print("下一筆")
-        swipe_start = '500 1300'
-        swipe_end = '500 100'
-        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(6.0)
-        if (resolution_height > 2000):
-            jump = 100 + BaseJump
-        else:
-            jump = 50 + BaseJump
-        Shopeecount = Shopeecount + 1
-        ErrorCount = 0
-    elif result == "ok":
-        Shopeecount = 0
-        if (resolution_height > 2000):
-            jump = 100 + BaseJump
-        else:
-            jump = 50 + BaseJump
-        ErrorCount = 0
-        turn_on_screen()
-        continue
+            print("等待 不用處理")
+        elif result == "next":
+            print("下一筆")
+            swipe_start = '500 1300'
+            swipe_end = '500 100'
+            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+            time.sleep(6.0)
+            if (resolution_height > 2000):
+                jump = 100 + BaseJump
+            else:
+                jump = 50 + BaseJump
+            Shopeecount = Shopeecount + 1
+            ErrorCount = 0
+        elif result == "ok":
+            Shopeecount = 0
+            if (resolution_height > 2000):
+                jump = 100 + BaseJump
+            else:
+                jump = 50 + BaseJump
+            ErrorCount = 0
+            turn_on_screen()
+            continue
     
-    print("重複")
+        print("重複")
     
-    last_date = datetime.date.today()
+        last_date = datetime.date.today()
+    except Exception as ex:
+        print("有重大錯誤" + ex.args[0])
     # tap(device, "550 1250 ")
     # time.sleep(1.0)
 
