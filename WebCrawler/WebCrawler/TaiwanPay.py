@@ -103,11 +103,14 @@ def capture_screenshot(device):
     return img
 
 def crop_image(img, start_point, end_point):
-    left, top = start_point
-    right, bottom = end_point
-    cropped_img = img.crop((left, top, right, bottom))
-     # 保存到当前工作目录
-    cropped_img.save(os.path.join(os.getcwd(), 'cropped_image.png'))
+    try:
+        left, top = start_point
+        right, bottom = end_point
+        cropped_img = img.crop((left, top, right, bottom))
+         # 保存到当前工作目录
+        cropped_img.save(os.path.join(os.getcwd(), 'cropped_image.png'))
+    except Exception as ex:
+       crop_image(img, start_point, end_point)
     return cropped_img
 
 def ddddocr_image(img):
@@ -168,7 +171,27 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-  for _ in range(5):
+  #收款帳號
+
+  #text_to_input = '008'  # 輸入的文字 #華南銀行
+  #text_to_input = '700'  # 輸入的文字 #郵局
+  text_to_input = '007'  # 輸入的文字 #第一銀行
+  #text_to_input = '004'  # 輸入的文字 #台灣銀行
+          
+  #PhoneNumber = "0926865002"
+  PhoneNumber = "0972461422"
+  
+  #匯款帳號
+  #BankPoint = "582 1191" #台灣銀行
+  #BankPoint = "582 1937" #第一銀行(1)
+  #BankPoint = "582 1729" #第一銀行(2)
+  #BankPoint = "582 2151" #華南
+  BankPoint = "582 1485" #郵局
+ 
+  #次數
+  ForCount = 1
+  
+  for _ in range(ForCount):
  
       # #滑動
       #swipe_start = '500 1300'
@@ -280,19 +303,15 @@ if __name__ == '__main__':
         dropdown_position = '679 695'  # 下拉清單的位置
         option_position = '454 854'    # 選擇的選項的位置
       
-      #text_to_input = '008'  # 輸入的文字 #華南銀行
-      #text_to_input = '700'  # 輸入的文字 #郵局
-      text_to_input = '007'  # 輸入的文字 #第一銀行
-      #text_to_input = '004'  # 輸入的文字 #台灣銀行
-          
 
       # 從下拉清單中選擇
       select_from_dropdown(device, dropdown_position,text_to_input, option_position)
       time.sleep(1.0)
 
       #輸入帳號
-      input_characters(device, "0926865002")
+      #input_characters(device, "0926865002")
       #input_characters(device, "0972461422")
+      input_characters(device, PhoneNumber)
       time.sleep(1.0)
   
       if (point == 0):
@@ -329,7 +348,8 @@ if __name__ == '__main__':
         tap(device, "558 1066")
       
       time.sleep(1.0)
-      tap(device, "582 1191") #台灣銀行
+      tap(device, BankPoint) 
+      #tap(device, "582 1191") #台灣銀行
       #tap(device, "582 1937") #第一銀行(1)
       #tap(device, "582 1729") #第一銀行(2)
       #tap(device, "582 2151") #華南

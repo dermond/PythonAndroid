@@ -348,14 +348,36 @@ def judgment(temp):
     global nextsession
 
     # 截圖並裁剪 A20 存取手機
-    start_point = (475, 1350)  # 起始坐標 (x, y)
-    end_point = (594, 1410)    # 結束坐標 (x, y)
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = paddleocr_image(cropped_img)    
-    if resulttext.find("允許")  > -1 :
-        tap(device, str(534) + " " + str(1380))
+    if deviceid == "R58N10RXWVF":
+        start_point = (475, 1350)  # 起始坐標 (x, y)
+        end_point = (594, 1410)    # 結束坐標 (x, y)
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = paddleocr_image(cropped_img)    
+        if resulttext.find("允許")  > -1 :
+            tap(device, str(534) + " " + str(1380))
 
+    # 截圖並裁剪 HTC手機 無法充電的提示
+    if deviceid == "FA75V1802306":
+        start_point = (1050, 1550)  # 起始坐標 (x, y)
+        end_point = (1300, 1700)    # 結束坐標 (x, y)
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = paddleocr_image(cropped_img)    
+        if resulttext.find("確定")  > -1 :
+            tap(device, str(1175) + " " + str(1625))
+            
+    # 截圖並裁剪 VIVO手機 無法充電的提示
+    if deviceid == "de824891":
+        start_point = (380, 2080)  # 起始坐標 (x, y)
+        end_point = (750, 2250)    # 結束坐標 (x, y)
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = paddleocr_image(cropped_img)    
+        if resulttext.find("確定")  > -1 :
+            tap(device, str(565) + " " + str(2165))
+            
+    # 截圖並裁剪 偵測X 去按下
     if resolution_width == 720 and resolution_height == 1560:
         start_point = (250, 1300)  # 起始坐標 (x, y)
         end_point = (350, 1450)    # 結束坐標 (x, y)
@@ -363,8 +385,6 @@ def judgment(temp):
         start_point = (480, 1780)  # 起始坐標 (x, y)
         end_point = (640, 1900)    # 結束坐標 (x, y)
 
-      
-    # 截圖並裁剪
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
     resulttext = ddddocr_image(cropped_img)  
@@ -373,6 +393,7 @@ def judgment(temp):
         index = 1800 
         tap(device, str(resolution_width / 2) + " " + str(index))
 
+    # 截圖並裁剪 偵測X 去按下
     if resolution_width == 720 and resolution_height == 1560:
         start_point = (250, 1300)  # 起始坐標 (x, y)
         end_point = (350, 1450)    # 結束坐標 (x, y)
@@ -390,99 +411,22 @@ def judgment(temp):
         index = 1800 
         tap(device, str(resolution_width / 2) + " " + str(index))
 
-    start_point = (262, 800)  # 起始坐標 (x, y)
-    end_point = (880, 1350)    # 結束坐標 (x, y)
+
+    # start_point = (262, 800)  # 起始坐標 (x, y)
+    # end_point = (880, 1350)    # 結束坐標 (x, y)
       
-    # 截圖並裁剪
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = paddleocr_image(cropped_img)  
-    if resulttext.find("紅包雨")  > -1:
-        tap(device, str((resolution_width / 2)) + " " + str(calculate_x(resolution_height)))
+    # # 截圖並裁剪
+    # img = capture_screenshot(device)
+    # cropped_img = crop_image(img, start_point, end_point)
+    # resulttext = paddleocr_image(cropped_img)  
+    # if resulttext.find("紅包雨")  > -1:
+    #     tap(device, str((resolution_width / 2)) + " " + str(calculate_x(resolution_height)))
     
-    if resulttext.find("您已觀看達30秒")  > -1:
-        tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
-    elif resulttext.find("第3天")  > -1:
-        tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
+    # if resulttext.find("您已觀看達30秒")  > -1:
+    #     tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
+    # elif resulttext.find("第3天")  > -1:
+    #     tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
     
-
-    # 下一個場次
-    start_point = (30, 270)  # 起始坐標 (x, y)
-    end_point = (200, 500)    # 結束坐標 (x, y)
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = paddleocr_image(cropped_img)  
-    if resulttext.find("下一場次") > -1 and nextsession == 0:
-
-        tap(device, str("138") + " " + str("350"))
-        time.sleep(3.0)
-        if resolution_height > 2000:
-            index = (resolution_height / 2)  - 10
-            tap(device, str(resolution_width - 240) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 500
-            tap(device, str(resolution_width - 240) + " " + str(index))
-            time.sleep(5.0)
-        else:
-            index = (resolution_height / 2)  - 80
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 300
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-
-        Key_Return()
-        nextsession = 1
-    # 下一個場次
-    start_point = (30, 170)  # 起始坐標 (x, y)
-    end_point = (200, 400)    # 結束坐標 (x, y)
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = paddleocr_image(cropped_img)  
-    if resulttext.find("下一場次") > -1 and nextsession == 0:
-
-        tap(device, str("138") + " " + str("250"))
-        time.sleep(3.0)
-        
-        if resolution_height > 2000:
-            index = (resolution_height / 2)  - 10
-            tap(device, str(resolution_width - 240) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 500
-            tap(device, str(resolution_width - 240) + " " + str(index))
-            time.sleep(5.0)
-        elif resolution_height > 1500:
-            index = (resolution_height / 2)  - 0
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 300
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-        else:
-            index = (resolution_height / 2)  - 80
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 300
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-
-        Key_Return()
-        nextsession = 1
-        
-    # 截圖並裁剪 HTC手機 無法充電的提示
-    start_point = (1050, 1550)  # 起始坐標 (x, y)
-    end_point = (1300, 1700)    # 結束坐標 (x, y)
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = paddleocr_image(cropped_img)    
-    if resulttext.find("確定")  > -1 :
-        tap(device, str(1175) + " " + str(1625))
-
 
     #判斷數值
     if resolution_width == 720 and resolution_height == 1560:
@@ -492,17 +436,11 @@ def judgment(temp):
         start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
         end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
 
-     
-    
-
-
     # 截圖並裁剪
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
     resulttext = paddleocr_image(cropped_img)  
 
-    
- 
     if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
         turn_on_screen()
        
@@ -617,6 +555,77 @@ def judgment(temp):
        
             print("轉盤有錯誤")
 
+
+        # 下一個場次
+        start_point = (30, 270)  # 起始坐標 (x, y)
+        end_point = (200, 500)    # 結束坐標 (x, y)
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = paddleocr_image(cropped_img)  
+        if resulttext.find("下一場次") > -1 and nextsession == 0:
+
+            tap(device, str("138") + " " + str("350"))
+            time.sleep(3.0)
+            if resolution_height > 2000:
+                index = (resolution_height / 2)  - 10
+                tap(device, str(resolution_width - 240) + " " + str(index))
+                time.sleep(5.0)
+        
+                index = resolution_height  - 500
+                tap(device, str(resolution_width - 240) + " " + str(index))
+                time.sleep(5.0)
+            else:
+                index = (resolution_height / 2)  - 80
+                tap(device, str(resolution_width - 140) + " " + str(index))
+                time.sleep(5.0)
+        
+                index = resolution_height  - 300
+                tap(device, str(resolution_width - 140) + " " + str(index))
+                time.sleep(5.0)
+
+            Key_Return()
+            nextsession = 1
+        # 下一個場次
+        start_point = (30, 170)  # 起始坐標 (x, y)
+        end_point = (200, 400)    # 結束坐標 (x, y)
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = paddleocr_image(cropped_img)  
+        if resulttext.find("下一場次") > -1 and nextsession == 0:
+
+            tap(device, str("138") + " " + str("250"))
+            time.sleep(3.0)
+        
+            if resolution_height > 2000:
+                index = (resolution_height / 2)  - 10
+                tap(device, str(resolution_width - 240) + " " + str(index))
+                time.sleep(5.0)
+        
+                index = resolution_height  - 500
+                tap(device, str(resolution_width - 240) + " " + str(index))
+                time.sleep(5.0)
+            elif resolution_height > 1500:
+                index = (resolution_height / 2)  - 0
+                tap(device, str(resolution_width - 140) + " " + str(index))
+                time.sleep(5.0)
+        
+                index = resolution_height  - 300
+                tap(device, str(resolution_width - 140) + " " + str(index))
+                time.sleep(5.0)
+            else:
+                index = (resolution_height / 2)  - 80
+                tap(device, str(resolution_width - 140) + " " + str(index))
+                time.sleep(5.0)
+        
+                index = resolution_height  - 300
+                tap(device, str(resolution_width - 140) + " " + str(index))
+                time.sleep(5.0)
+
+            Key_Return()
+            nextsession = 1
+        
+   
+
         #if (device_id == "FA75V1802306"):
         #    tap(device, str(resolution_width - 106) + " " + str(index))
         #    time.sleep(3.0)
@@ -723,7 +732,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "R58N10RXWVF"
+  deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
