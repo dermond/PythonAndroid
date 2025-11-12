@@ -184,12 +184,12 @@ if __name__ == '__main__':
   #匯款帳號
   #BankPoint = "582 1191" #台灣銀行
   #BankPoint = "582 1937" #第一銀行(1)
-  #BankPoint = "582 1729" #第一銀行(2)
+  BankPoint = "582 1729" #第一銀行(2)
   #BankPoint = "582 2151" #華南
-  BankPoint = "582 1485" #郵局
+  #BankPoint = "582 1485" #郵局
  
   #次數
-  ForCount = 1
+  ForCount = 5
   
   for _ in range(ForCount):
  
@@ -240,7 +240,7 @@ if __name__ == '__main__':
                 #tap(device, "644 1172")
                 tap(device, "644 1302")
       #tap(device, "689 1509")
-      time.sleep(4.0)
+      time.sleep(8.0)
   
   
       #手機轉帳

@@ -239,7 +239,7 @@ if __name__ == '__main__':
                 #tap(device, "644 1172")
                 tap(device, "644 1302")
       #tap(device, "689 1509")
-      time.sleep(4.0)
+      time.sleep(8.0)
   
       #手機轉帳
       while True:
