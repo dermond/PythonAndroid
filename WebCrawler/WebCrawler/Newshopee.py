@@ -356,9 +356,52 @@ def judgment(temp):
         resulttext = paddleocr_image(cropped_img)    
         if resulttext.find("允許")  > -1 :
             tap(device, str(534) + " " + str(1380))
+            
+        # 截圖並裁剪 偵測X 去按下
+        if resolution_width == 720 and resolution_height == 1560:
+            start_point = (250, 1300)  # 起始坐標 (x, y)
+            end_point = (350, 1450)    # 結束坐標 (x, y)
+        else:
+            start_point = (480, 1780)  # 起始坐標 (x, y)
+            end_point = (640, 1900)    # 結束坐標 (x, y)
 
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = ddddocr_image(cropped_img)  
+        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+            index = 1800 
+            tap(device, str(resolution_width / 2) + " " + str(index))
+
+        # 截圖並裁剪 偵測X 去按下
+        if resolution_width == 720 and resolution_height == 1560:
+            start_point = (250, 1300)  # 起始坐標 (x, y)
+            end_point = (350, 1450)    # 結束坐標 (x, y)
+        else:
+            start_point = (480, 1730)  # 起始坐標 (x, y)
+            end_point = (640, 1850)    # 結束坐標 (x, y)
+
+
+        # 截圖並裁剪
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = ddddocr_image(cropped_img)  
+        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+            index = 1800 
+            tap(device, str(resolution_width / 2) + " " + str(index))
+            
+   
+    elif deviceid == "46081JEKB10015":
+        start_point = (380, 1580)  # 起始坐標 (x, y)
+        end_point = (740, 1700)    # 結束坐標 (x, y)
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = paddleocr_image(cropped_img)    
+        if resulttext.find("簽到")  > -1 :
+            tap(device, str(560) + " " + str(1640 ))        
     # 截圖並裁剪 HTC手機 無法充電的提示
-    if deviceid == "FA75V1802306":
+    elif deviceid == "FA75V1802306":
         start_point = (1050, 1550)  # 起始坐標 (x, y)
         end_point = (1300, 1700)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
@@ -367,8 +410,43 @@ def judgment(temp):
         if resulttext.find("確定")  > -1 :
             tap(device, str(1175) + " " + str(1625))
             
+        # 截圖並裁剪 偵測X 去按下
+        if resolution_width == 720 and resolution_height == 1560:
+            start_point = (250, 1300)  # 起始坐標 (x, y)
+            end_point = (350, 1450)    # 結束坐標 (x, y)
+        else:
+            start_point = (480, 1780)  # 起始坐標 (x, y)
+            end_point = (640, 1900)    # 結束坐標 (x, y)
+
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = ddddocr_image(cropped_img)  
+        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+            index = 1800 
+            tap(device, str(resolution_width / 2) + " " + str(index))
+
+        # 截圖並裁剪 偵測X 去按下
+        if resolution_width == 720 and resolution_height == 1560:
+            start_point = (250, 1300)  # 起始坐標 (x, y)
+            end_point = (350, 1450)    # 結束坐標 (x, y)
+        else:
+            start_point = (480, 1730)  # 起始坐標 (x, y)
+            end_point = (640, 1850)    # 結束坐標 (x, y)
+
+
+        # 截圖並裁剪
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = ddddocr_image(cropped_img)  
+        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+            index = 1800 
+            tap(device, str(resolution_width / 2) + " " + str(index))
+            
+   
     # 截圖並裁剪 VIVO手機 無法充電的提示
-    if deviceid == "de824891":
+    elif deviceid == "de824891":
         start_point = (380, 2080)  # 起始坐標 (x, y)
         end_point = (750, 2250)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
@@ -377,39 +455,75 @@ def judgment(temp):
         if resulttext.find("確定")  > -1 :
             tap(device, str(565) + " " + str(2165))
             
-    # 截圖並裁剪 偵測X 去按下
-    if resolution_width == 720 and resolution_height == 1560:
-        start_point = (250, 1300)  # 起始坐標 (x, y)
-        end_point = (350, 1450)    # 結束坐標 (x, y)
+        # 截圖並裁剪 偵測X 去按下
+        if resolution_width == 720 and resolution_height == 1560:
+            start_point = (250, 1300)  # 起始坐標 (x, y)
+            end_point = (350, 1450)    # 結束坐標 (x, y)
+        else:
+            start_point = (480, 1780)  # 起始坐標 (x, y)
+            end_point = (640, 1900)    # 結束坐標 (x, y)
+
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = ddddocr_image(cropped_img)  
+        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+            index = 1800 
+            tap(device, str(resolution_width / 2) + " " + str(index))
+
+        # 截圖並裁剪 偵測X 去按下
+        if resolution_width == 720 and resolution_height == 1560:
+            start_point = (250, 1300)  # 起始坐標 (x, y)
+            end_point = (350, 1450)    # 結束坐標 (x, y)
+        else:
+            start_point = (480, 1730)  # 起始坐標 (x, y)
+            end_point = (640, 1850)    # 結束坐標 (x, y)
+
+
+        # 截圖並裁剪
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = ddddocr_image(cropped_img)  
+        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+            index = 1800 
+            tap(device, str(resolution_width / 2) + " " + str(index))
     else:
-        start_point = (480, 1780)  # 起始坐標 (x, y)
-        end_point = (640, 1900)    # 結束坐標 (x, y)
+        # 截圖並裁剪 偵測X 去按下
+        if resolution_width == 720 and resolution_height == 1560:
+            start_point = (250, 1300)  # 起始坐標 (x, y)
+            end_point = (350, 1450)    # 結束坐標 (x, y)
+        else:
+            start_point = (480, 1780)  # 起始坐標 (x, y)
+            end_point = (640, 1900)    # 結束坐標 (x, y)
 
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = ddddocr_image(cropped_img)  
-    #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-    if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-        index = 1800 
-        tap(device, str(resolution_width / 2) + " " + str(index))
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = ddddocr_image(cropped_img)  
+        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+            index = 1800 
+            tap(device, str(resolution_width / 2) + " " + str(index))
 
-    # 截圖並裁剪 偵測X 去按下
-    if resolution_width == 720 and resolution_height == 1560:
-        start_point = (250, 1300)  # 起始坐標 (x, y)
-        end_point = (350, 1450)    # 結束坐標 (x, y)
-    else:
-        start_point = (480, 1730)  # 起始坐標 (x, y)
-        end_point = (640, 1850)    # 結束坐標 (x, y)
+        # 截圖並裁剪 偵測X 去按下
+        if resolution_width == 720 and resolution_height == 1560:
+            start_point = (250, 1300)  # 起始坐標 (x, y)
+            end_point = (350, 1450)    # 結束坐標 (x, y)
+        else:
+            start_point = (480, 1730)  # 起始坐標 (x, y)
+            end_point = (640, 1850)    # 結束坐標 (x, y)
 
 
-    # 截圖並裁剪
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = ddddocr_image(cropped_img)  
-    #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-    if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-        index = 1800 
-        tap(device, str(resolution_width / 2) + " " + str(index))
+        # 截圖並裁剪
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = ddddocr_image(cropped_img)  
+        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+            index = 1800 
+            tap(device, str(resolution_width / 2) + " " + str(index))
+            
+   
 
 
     # start_point = (262, 800)  # 起始坐標 (x, y)
@@ -732,7 +846,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "de824891"
+  deviceid = "46081JEKB10015"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
