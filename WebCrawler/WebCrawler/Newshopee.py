@@ -393,13 +393,13 @@ def judgment(temp):
             
    
     elif deviceid == "46081JEKB10015":
-        start_point = (380, 1580)  # 起始坐標 (x, y)
-        end_point = (740, 1700)    # 結束坐標 (x, y)
+        start_point = (380, 1500)  # 起始坐標 (x, y)
+        end_point = (740, 1650)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
         cropped_img = crop_image(img, start_point, end_point)
         resulttext = paddleocr_image(cropped_img)    
-        if resulttext.find("簽到")  > -1 :
-            tap(device, str(560) + " " + str(1640 ))        
+        if resulttext.find("簽到")  > -1 or resulttext.find("立即到")  > -1 or resulttext.find("立即")  > -1:
+            tap(device, str(560) + " " + str(1575 ))        
     # 截圖並裁剪 HTC手機 無法充電的提示
     elif deviceid == "FA75V1802306":
         start_point = (1050, 1550)  # 起始坐標 (x, y)
