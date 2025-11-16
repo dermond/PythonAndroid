@@ -410,39 +410,47 @@ def judgment(temp):
         if resulttext.find("確定")  > -1 :
             tap(device, str(1175) + " " + str(1625))
             
-        # 截圖並裁剪 偵測X 去按下
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (250, 1300)  # 起始坐標 (x, y)
-            end_point = (350, 1450)    # 結束坐標 (x, y)
-        else:
-            start_point = (480, 1780)  # 起始坐標 (x, y)
-            end_point = (640, 1900)    # 結束坐標 (x, y)
-
+        start_point = (530, 1780)  # 起始坐標 (x, y)
+        end_point = (930, 1980)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
         cropped_img = crop_image(img, start_point, end_point)
-        resulttext = ddddocr_image(cropped_img)  
-        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-            index = 1800 
-            tap(device, str(resolution_width / 2) + " " + str(index))
+        resulttext = paddleocr_image(cropped_img)    
+        if resulttext.find("簽到")  > -1 or resulttext.find("立即到")  > -1 or resulttext.find("打開到")  > -1:
+            tap(device, str(734) + " " + str(1880 ))        
+        
+        # # 截圖並裁剪 偵測X 去按下
+        # if resolution_width == 720 and resolution_height == 1560:
+        #     start_point = (250, 1300)  # 起始坐標 (x, y)
+        #     end_point = (350, 1450)    # 結束坐標 (x, y)
+        # else:
+        #     start_point = (480, 1780)  # 起始坐標 (x, y)
+        #     end_point = (640, 1900)    # 結束坐標 (x, y)
 
-        # 截圖並裁剪 偵測X 去按下
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (250, 1300)  # 起始坐標 (x, y)
-            end_point = (350, 1450)    # 結束坐標 (x, y)
-        else:
-            start_point = (480, 1730)  # 起始坐標 (x, y)
-            end_point = (640, 1850)    # 結束坐標 (x, y)
+        # img = capture_screenshot(device)
+        # cropped_img = crop_image(img, start_point, end_point)
+        # resulttext = ddddocr_image(cropped_img)  
+        # #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        # if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+        #     index = 1800 
+        #     tap(device, str(resolution_width / 2) + " " + str(index))
+
+        # # 截圖並裁剪 偵測X 去按下
+        # if resolution_width == 720 and resolution_height == 1560:
+        #     start_point = (250, 1300)  # 起始坐標 (x, y)
+        #     end_point = (350, 1450)    # 結束坐標 (x, y)
+        # else:
+        #     start_point = (480, 1730)  # 起始坐標 (x, y)
+        #     end_point = (640, 1850)    # 結束坐標 (x, y)
 
 
-        # 截圖並裁剪
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = ddddocr_image(cropped_img)  
-        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-            index = 1800 
-            tap(device, str(resolution_width / 2) + " " + str(index))
+        # # 截圖並裁剪
+        # img = capture_screenshot(device)
+        # cropped_img = crop_image(img, start_point, end_point)
+        # resulttext = ddddocr_image(cropped_img)  
+        # #resulttext2 = pytesseract_image_Chitra(cropped_img)  
+        # if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
+        #     index = 1800 
+        #     tap(device, str(resolution_width / 2) + " " + str(index))
             
    
     # 截圖並裁剪 VIVO手機 無法充電的提示
@@ -846,7 +854,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "46081JEKB10015"
+  deviceid = "FA75V1802306"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -960,13 +968,13 @@ if __name__ == '__main__':
 
         # 定義每天的禁止執行時間區段（start_time, end_time）
         restricted_times = {
-            0: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期一
-            1: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期二
-            2: (datetime.time(1, 0), datetime.time(13, 0)),  # 星期三
-            3: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期四
-            4: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期五
-            5: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期六
-            6: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期日
+            0: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期一
+            1: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期二
+            2: (datetime.time(1, 0), datetime.time(14, 0)),  # 星期三
+            3: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期四
+            4: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期五
+            5: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期六
+            6: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期日
         }
 
         start, end = restricted_times[weekday]
