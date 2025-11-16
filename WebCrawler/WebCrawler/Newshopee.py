@@ -968,13 +968,13 @@ if __name__ == '__main__':
 
         # 定義每天的禁止執行時間區段（start_time, end_time）
         restricted_times = {
-            0: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期一
-            1: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期二
-            2: (datetime.time(1, 0), datetime.time(14, 0)),  # 星期三
-            3: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期四
-            4: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期五
-            5: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期六
-            6: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期日
+            0: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期一
+            1: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期二
+            2: (datetime.time(1, 0), datetime.time(13, 0)),  # 星期三
+            3: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期四
+            4: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期五
+            5: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期六
+            6: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期日
         }
 
         start, end = restricted_times[weekday]
