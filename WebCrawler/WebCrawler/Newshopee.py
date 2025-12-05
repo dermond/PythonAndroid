@@ -157,6 +157,41 @@ def swipe_to_position(device, start, end, duration=500):
 #         print(f"截圖失敗：{e}")
 #         return None
     
+def adb_init(device_id):
+
+    subprocess.run(["adb", "-s", device_id, "root"], check=True)
+    # 1. 重新啟動 ADB（避免長時間卡死）
+    #subprocess.run(["adb", "kill-server"])
+    #subprocess.run(["adb", "start-server"])
+
+    # 2. 重新連線裝置
+    subprocess.run(["adb", "-s", device_id, "wait-for-device"])
+
+    # 3. 讓手機永遠不睡眠
+    subprocess.run([
+        "adb", "-s", device_id, 
+        "shell", "settings", "put", "global", "stay_on_while_plugged_in", "3"
+    ])
+
+    # 4. 關閉 Doze（避免 framebuffer / GPU 停止渲染）
+    subprocess.run([
+        "adb", "-s", device_id,
+        "shell", "dumpsys", "deviceidle", "disable"
+    ])
+
+    # 5. 防止 USB 進入省電模式
+    subprocess.run([
+        "adb", "-s", device_id,
+        "shell", "svc", "usb", "setFunctions", "mtp"
+    ])
+
+    # 6. 再執行 root（若裝置支援）
+    try:
+        subprocess.run(["adb", "-s", device_id, "root"], check=True)
+    except:
+        print("裝置不支援 adb root，忽略")
+
+    print(f"{device_id} 初始化完成，可開始穩定截圖。")
 def capture_screenshot(device):
     try:
         result = device.screencap()
@@ -167,6 +202,15 @@ def capture_screenshot(device):
         img = None 
     return img
 
+def is_black_image(threshold=10):
+    import numpy as np
+    """
+    threshold = 平均亮度低於多少視為黑畫面（0~255）
+    """
+    image = Image.open(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png')).convert("L")  # 轉灰階
+    arr = np.array(image)
+    mean_brightness = arr.mean()
+    return mean_brightness < threshold
 def crop_image(img, start_point, end_point):
     try:
         image2 = Image.open(os.path.join(os.getcwd(), 'full_screen_'+str(deviceid)+'.png')).convert("RGB")
@@ -176,7 +220,15 @@ def crop_image(img, start_point, end_point):
         cropped_img = image2.crop((left, top, right, bottom))
          # 保存到当前工作目录
         cropped_img.save(os.path.join(os.getcwd(), 'cropped_image_'+str(deviceid)+'.png'))
-    except:
+
+        # 判斷是否黑畫面
+        if is_black_image():
+            print("⚠️  偵測到黑畫面！開始修復...")
+            adb_recover(device_id)
+            # 修好後重新建立 device 連線
+            d = adbutils.adb.device(device_id)
+
+    except Exception as e:
         cropped_img = None
     return cropped_img
 
@@ -234,7 +286,7 @@ def turn_off_screen():
 
 
         print("螢幕已關閉")
-    except:
+    except Exception as e:
         print(f"錯誤")
    
 def turn_on_screen():
@@ -249,14 +301,14 @@ def turn_on_screen():
 
   
         print("螢幕已開啟")
-    except:
+    except Exception as e:
         print(f"錯誤")
 def Key_Return():
     try:
         subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "4"], check=True)
   
         print("Key_Return")
-    except:
+    except Exception as e:
         print(f"Key_Return 錯誤")
         
   
@@ -854,7 +906,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "FA75V1802306"
+  deviceid = "46081JEKB10015"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -915,9 +967,11 @@ if __name__ == '__main__':
 
   today = datetime.date.today()
   yesterday = today - datetime.timedelta(days=1)
-
+  adb_init(deviceid)
   for i in range(99999999):
     try:
+
+  
         current_date = str(datetime.date.today())
         getdate = SettingReader.getSetting("base",deviceid + "date")
     
