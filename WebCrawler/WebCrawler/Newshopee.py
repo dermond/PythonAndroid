@@ -57,7 +57,11 @@ def print_memory_usage():
 def connect(serial: str):
     client = AdbClient(host='127.0.0.1', port=5037)
 
-    devices = client.devices()
+    try:
+        devices = client.devices()
+    except:
+        subprocess.run(["adb", "start-server"])
+        devices = client.devices()
     if not devices:
         print('No devices')
         sys.exit()
@@ -161,9 +165,10 @@ def adb_init(device_id):
 
     subprocess.run(["adb", "-s", device_id, "root"], check=True)
     # 1. 重新啟動 ADB（避免長時間卡死）
-    #subprocess.run(["adb", "kill-server"])
-    #subprocess.run(["adb", "start-server"])
-
+    subprocess.run(["adb", "kill-server"])
+    time.sleep(2.0)
+    subprocess.run(["adb", "start-server"])
+    time.sleep(2.0)
     # 2. 重新連線裝置
     subprocess.run(["adb", "-s", device_id, "wait-for-device"])
 
