@@ -207,9 +207,12 @@ def adb_init(device_id):
     #subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "26"])  # 電源鍵
     #time.sleep(1)
     #subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "3"])   # Home
-    #subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "1080x2400"])
-    #time.sleep(1)
-    #subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"])
+    subprocess.run([
+        "adb", "-s", device_id, 
+        "shell", "wm", "size", f"{resolution_width}x{resolution_height}"
+    ])
+    time.sleep(1)
+    subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"])
 
 def capture_screenshot(device):
     try:
