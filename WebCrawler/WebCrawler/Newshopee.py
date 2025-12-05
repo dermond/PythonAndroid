@@ -27,7 +27,9 @@ import subprocess
 import re
 import cv2
 import Service.SettingReader as SettingReader
-
+import threading
+import socket
+import struct
 
 TotalCount = 0
 device_id = ''
@@ -59,9 +61,10 @@ def connect(serial: str):
 
     try:
         devices = client.devices()
-    except:
-        subprocess.run(["adb", "start-server"])
-        devices = client.devices()
+    except Exception as e:
+        if e.args[0].find("Is adb running on your computer?") > -1 :
+            subprocess.run(["adb", "start-server"])
+            devices = client.devices()
     if not devices:
         print('No devices')
         sys.exit()
@@ -197,12 +200,25 @@ def adb_init(device_id):
         print("裝置不支援 adb root，忽略")
 
     print(f"{device_id} 初始化完成，可開始穩定截圖。")
+
+    subprocess.run(["adb", "-s", device_id, "shell", "killall", "surfaceflinger"])
+    time.sleep(2)
+
+    #subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "26"])  # 電源鍵
+    #time.sleep(1)
+    #subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "3"])   # Home
+    #subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "1080x2400"])
+    #time.sleep(1)
+    #subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"])
+
 def capture_screenshot(device):
     try:
         result = device.screencap()
         img = Image.open(io.BytesIO(result))
          # 保存到当前工作目录
         img.save(os.path.join(os.getcwd(), 'full_screen_'+str(deviceid)+'.png'))
+
+     
     except:
         img = None 
     return img
