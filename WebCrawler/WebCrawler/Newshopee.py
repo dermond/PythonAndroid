@@ -1009,8 +1009,9 @@ if __name__ == '__main__':
         if getdate != current_date:
             TotalCount = 0
             SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
+            SettingReader.setSetting("base",deviceid + "date", current_date )
 
-        SettingReader.setSetting("base",deviceid + "date", current_date )
+        
 
 
         check_garbage_objects()
