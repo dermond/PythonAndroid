@@ -1010,7 +1010,7 @@ if __name__ == '__main__':
             TotalCount = 0
             SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
             SettingReader.setSetting("base",deviceid + "date", current_date )
-
+            adb_init(deviceid)
         
 
 
