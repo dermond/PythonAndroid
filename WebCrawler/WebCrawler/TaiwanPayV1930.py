@@ -183,11 +183,11 @@ if __name__ == '__main__':
   PhoneNumber = "0972461422"
   
   #匯款帳號
-  #BankPoint = "582 1186" #第一銀行(2)
+  BankPoint = "582 1186" #第一銀行(2)
   #BankPoint = "582 1900" #第一銀行(3)
   #BankPoint = "582 2126" #第一銀行(1)
   #BankPoint = "582 1651" #兆豐
-  BankPoint = "582 1397" #郵局
+  #BankPoint = "582 1397" #郵局
   #次數
   ForCount = 5
   

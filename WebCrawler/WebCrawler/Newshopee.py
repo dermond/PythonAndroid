@@ -5,15 +5,14 @@ Created on Sat Mar 27 12:23:27 2021
 @author: dermo
 """
 
-
-
+import io
+import os
 import psutil
 import time
 import datetime
 import pytesseract
 from PIL import Image
-import io
-import os
+import paddle
 import ddddocr
 import re
 import subprocess
@@ -30,6 +29,7 @@ import Service.SettingReader as SettingReader
 import threading
 import socket
 import struct
+
 
 TotalCount = 0
 device_id = ''
@@ -287,7 +287,7 @@ def pytesseract_image_Chitra(img):
 
 def paddleocr_image(img_path):
     full_path = os.path.join(os.getcwd(),  'cropped_image_'+str(deviceid)+'.png')
-    results = Pocr.ocr(full_path, cls=True)
+    results = Pocr.ocr(full_path)
     # 組合所有辨識到的文字
     text = '\n'.join([ line[1][0] for block in results for line in block ])
     return text
