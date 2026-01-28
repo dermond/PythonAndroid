@@ -46,6 +46,11 @@ ErrorCount = 0
 nextsession = 0
 last_date = datetime.date.today()
 
+# 基準解析度（你定點位用的那台）
+BASE_WIDTH  = 1080
+BASE_HEIGHT = 2400
+BASE_DPI = 420
+
 def check_garbage_objects():
     gc.collect()  # 手動觸發垃圾回收
     uncollected = gc.garbage
@@ -166,7 +171,7 @@ def swipe_to_position(device, start, end, duration=500):
     
 def adb_init(device_id):
 
-    subprocess.run(["adb", "-s", device_id, "root"], check=True)
+  
     # 1. 重新啟動 ADB（避免長時間卡死）
     subprocess.run(["adb", "kill-server"])
     time.sleep(2.0)
@@ -412,6 +417,27 @@ def get_screen_info_from_device(device):
 
     return resolution, density, display_info
 
+def convert_xy_with_dpi(x_base, y_base):
+    """
+    將基準裝置 (1080x2400, 420dpi) 上量到的 UI 點位
+    轉換為目前裝置上的實際 tap 座標
+    """
+    # 1️⃣ px → dp（抽象成 UI 單位）
+    dp_x = x_base * 160 / BASE_DPI
+    dp_y = y_base * 160 / BASE_DPI
+
+    # 2️⃣ dp → 基準 px（標準化）
+    norm_x = dp_x * BASE_DPI / 160
+    norm_y = dp_y * BASE_DPI / 160
+    # ↑ 這一步其實等於回到 x_base / y_base
+    #   目的是讓你看清「dpi 不該單獨決定位置」
+
+    # 3️⃣ 依解析度比例調整位置
+    x_target = int(norm_x / BASE_WIDTH  * resolution_width)
+    y_target = int(norm_y / BASE_HEIGHT * resolution_height)
+
+    return x_target, y_target
+
 def judgment(temp):
     global jump
     global resolution_width
@@ -424,7 +450,7 @@ def judgment(temp):
     global nextsession
 
     # 截圖並裁剪 A20 存取手機
-    if deviceid == "R58N10RXWVF":
+    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
         start_point = (475, 1350)  # 起始坐標 (x, y)
         end_point = (594, 1410)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
@@ -468,7 +494,7 @@ def judgment(temp):
             tap(device, str(resolution_width / 2) + " " + str(index))
             
    
-    elif deviceid == "46081JEKB10015":
+    elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
         start_point = (380, 1500)  # 起始坐標 (x, y)
         end_point = (740, 1650)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
@@ -477,7 +503,7 @@ def judgment(temp):
         if resulttext.find("簽到")  > -1 or resulttext.find("立即到")  > -1 or resulttext.find("立即")  > -1:
             tap(device, str(560) + " " + str(1575 ))        
     # 截圖並裁剪 HTC手機 無法充電的提示
-    elif deviceid == "FA75V1802306":
+    elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
         start_point = (1050, 1550)  # 起始坐標 (x, y)
         end_point = (1300, 1700)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
@@ -494,43 +520,9 @@ def judgment(temp):
         if resulttext.find("簽到")  > -1 or resulttext.find("立即到")  > -1 or resulttext.find("打開到")  > -1:
             tap(device, str(734) + " " + str(1880 ))        
         
-        # # 截圖並裁剪 偵測X 去按下
-        # if resolution_width == 720 and resolution_height == 1560:
-        #     start_point = (250, 1300)  # 起始坐標 (x, y)
-        #     end_point = (350, 1450)    # 結束坐標 (x, y)
-        # else:
-        #     start_point = (480, 1780)  # 起始坐標 (x, y)
-        #     end_point = (640, 1900)    # 結束坐標 (x, y)
-
-        # img = capture_screenshot(device)
-        # cropped_img = crop_image(img, start_point, end_point)
-        # resulttext = ddddocr_image(cropped_img)  
-        # #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        # if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-        #     index = 1800 
-        #     tap(device, str(resolution_width / 2) + " " + str(index))
-
-        # # 截圖並裁剪 偵測X 去按下
-        # if resolution_width == 720 and resolution_height == 1560:
-        #     start_point = (250, 1300)  # 起始坐標 (x, y)
-        #     end_point = (350, 1450)    # 結束坐標 (x, y)
-        # else:
-        #     start_point = (480, 1730)  # 起始坐標 (x, y)
-        #     end_point = (640, 1850)    # 結束坐標 (x, y)
-
-
-        # # 截圖並裁剪
-        # img = capture_screenshot(device)
-        # cropped_img = crop_image(img, start_point, end_point)
-        # resulttext = ddddocr_image(cropped_img)  
-        # #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        # if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-        #     index = 1800 
-        #     tap(device, str(resolution_width / 2) + " " + str(index))
-            
    
     # 截圖並裁剪 VIVO手機 無法充電的提示
-    elif deviceid == "de824891":
+    elif resolution_width == 1080 and resolution_height == 2400 and density == 480 : #(1080, 2400)  de824891  :
         start_point = (380, 2080)  # 起始坐標 (x, y)
         end_point = (750, 2250)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
@@ -943,7 +935,7 @@ if __name__ == '__main__':
     print("沒有輸入任何參數")
   
  
-
+  adb_init(deviceid)
   device, client = connect(deviceid)
   device_id = device.serial
   jump = 50
@@ -951,8 +943,9 @@ if __name__ == '__main__':
   Leftspace = 0
   dpi = 10
 
-  #解析度（wm size）：(1080, 2400)
-  #解析度（wm size）：(1440, 2560)
+  #解析度（wm size）：(1080, 2400) 螢幕密度（wm density）：480 dpi de824891
+  #解析度（wm size）：(1080, 2400) 螢幕密度（wm density）：420 dpi 46081JEKB10015
+  #解析度（wm size）：(1440, 2560) 螢幕密度（wm density）：640 dpi FA75V1802306
   #解析度（wm size）：(1080, 2280) 螢幕密度（wm density）：420 dpi
 
   resolution, density, display_info = get_screen_info_from_device(device)
@@ -962,6 +955,8 @@ if __name__ == '__main__':
   if display_info:
     print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
     
+
+  
   if (resolution_width == 1440):
       Leftspace = 340
   if (density >= 640):
@@ -991,7 +986,8 @@ if __name__ == '__main__':
 
   today = datetime.date.today()
   yesterday = today - datetime.timedelta(days=1)
-  adb_init(deviceid)
+  
+  (xpoint,ypoint) =convert_xy_with_dpi(130,430);
   for i in range(99999999):
     try:
 
