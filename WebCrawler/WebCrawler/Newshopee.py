@@ -745,7 +745,14 @@ def judgment(temp):
        
             print("轉盤有錯誤")
 
+        now = datetime.now().time()
+        limit_time = time(23, 30)  # 23:30
 
+        # ⛔ 還沒到 23:30
+        if now < limit_time:
+            return "ok"
+
+        #以下只要23:30才會執行過來
         # 下一個場次
         start_point = (30, 270)  # 起始坐標 (x, y)
         end_point = (200, 500)    # 結束坐標 (x, y)
