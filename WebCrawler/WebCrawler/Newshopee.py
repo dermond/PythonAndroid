@@ -1017,10 +1017,10 @@ if __name__ == '__main__':
             SettingReader.setSetting("base",deviceid + "date", current_date )
             adb_init(deviceid)
         
-        now = datetime.date.now().time()
+        now = datetime.datetime.now().time()
 
-        start_time = time(5, 0)    # 05:00
-        end_time   = time(5, 30)   # 05:30
+        start_time = datetime.time(5, 0)    # 05:00
+        end_time   = datetime.time(5, 30)   # 05:30
 
         # ✅ 只有在 05:00~05:30 之間
         if start_time <= now <= end_time:
