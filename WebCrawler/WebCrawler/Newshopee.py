@@ -1017,7 +1017,7 @@ if __name__ == '__main__':
             SettingReader.setSetting("base",deviceid + "date", current_date )
             adb_init(deviceid)
         
-        now = datetime.now().time()
+        now = datetime.date.now().time()
 
         start_time = time(5, 0)    # 05:00
         end_time   = time(5, 30)   # 05:30
