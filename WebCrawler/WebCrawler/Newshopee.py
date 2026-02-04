@@ -1170,5 +1170,5 @@ if __name__ == '__main__':
     
         last_date = datetime.date.today()
     except Exception as ex:
-        print("有重大錯誤" + ex.args[0])
+        print(f"有重大錯誤{ex.args[0]}")
    
