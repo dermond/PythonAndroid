@@ -149,6 +149,8 @@ def pytesseract_image(img):
    return result.strip()  # 去除前後空白字元
 
 def paddleocr_image(img_path):
+    if img_path == None:
+        return "" 
     full_path = os.path.join(os.getcwd(),  'cropped_image.png')
     results = Pocr.ocr(full_path, cls=True)
     # 組合所有辨識到的文字
@@ -288,7 +290,20 @@ if __name__ == '__main__':
           time.sleep(1.0)
           print("判斷x-3")
 
+       #判斷>>
+      start_point = (949, 208)  # 起始坐標 (x, y)
+      end_point = (1034, 296)    # 結束坐標 (x, y)
 
+      img = capture_screenshot(device)
+      cropped_img = crop_image(img, start_point, end_point)
+      resulttext = pytesseract_image(cropped_img)
+      
+      resulttext2 = ddddocr_image(cropped_img)
+      resulttext3 = paddleocr_image(cropped_img)
+      if resulttext3.find(">>") > -1 :
+          tap(device, "991 252")
+          time.sleep(1.0)
+          print("判斷>>")
       start_point = (902, 195)  # 起始坐標 (x, y)
       end_point = (1058, 325)    # 結束坐標 (x, y)
 
@@ -388,8 +403,8 @@ if __name__ == '__main__':
           #time.sleep(2.0)
 
     
-      start_point = (340, 1600)  # 起始坐標 (x, y)
-      end_point = (900, 1800)    # 結束坐標 (x, y)
+      start_point = (640, 1440)  # 起始坐標 (x, y)
+      end_point = (890, 1590)    # 結束坐標 (x, y)
 
       img = capture_screenshot(device)
       cropped_img = crop_image(img, start_point, end_point)
@@ -399,7 +414,7 @@ if __name__ == '__main__':
       resulttext3 = paddleocr_image(cropped_img)
       if resulttext3.find("BTC") > -1 :
          
-          tap(device, "547 1689")
+          tap(device, "765 1515")
           time.sleep(2.0)
 
           print("Bitcoin")
@@ -407,8 +422,8 @@ if __name__ == '__main__':
           #time.sleep(2.0)
 
 
-      start_point = (340, 1750)  # 起始坐標 (x, y)
-      end_point = (900, 1900)    # 結束坐標 (x, y)
+      start_point = (406, 1760)  # 起始坐標 (x, y)
+      end_point = (664, 1920)    # 結束坐標 (x, y)
 
       img = capture_screenshot(device)
       cropped_img = crop_image(img, start_point, end_point)
@@ -416,8 +431,8 @@ if __name__ == '__main__':
       
       resulttext2 = ddddocr_image(cropped_img)
       resulttext3 = paddleocr_image(cropped_img)
-      if resulttext3.find("關開") > -1 :
-          tap(device, "547 1843")
+      if resulttext3.find("關開") > -1  or resulttext2.find("删朗") > -1:
+          tap(device, "535 1840")
           time.sleep(2.0)
 
       #tap(device, "644 1610")
