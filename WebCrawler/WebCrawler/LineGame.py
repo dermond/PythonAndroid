@@ -15,23 +15,39 @@ import subprocess
 import cv2
 import numpy as np
 from paddleocr import PaddleOCR #paddlepaddle
+import sys
 
 ocr = ddddocr.DdddOcr()
 Pocr = PaddleOCR(use_angle_cls=False, lang='ch')  # lang='ch' 支援
 
-def connect(index = 0):
+def connect(serial: str):
+    client = AdbClient(host='127.0.0.1', port=5037)
 
-  client = AdbClient(host='127.0.0.1', port=5037)
+    try:
+        devices = client.devices()
+    except Exception as e:
+        if e.args[0].find("Is adb running on your computer?") > -1 :
+            subprocess.run(["adb", "start-server"])
+            devices = client.devices()
+    if not devices:
+        print('No devices')
+        sys.exit()
 
-  devices = client.devices()
-  if len(devices) == 0:
-    print('No devices')
-    quit()
+    # 嘗試找出符合 serial 的裝置
+    for device in devices:
+        print(str(device.serial))
+        if device.serial == serial:
+            print(f'Connected to {device}')
+            return device, client
 
-  device = devices[index]
-  print(f'Connected to {device}')
-
-  return device, client
+    # 找不到時回傳第一筆裝置
+    if serial == "":
+        fallback_device = devices[0]
+        print(f'Device with serial "{serial}" not found, fallback to {fallback_device.serial}')
+        #quit()
+    else:
+        sys.exit()
+    return fallback_device, client
 
 def tap(device, position):
     device.shell(f'input tap {position}')
@@ -188,13 +204,13 @@ def switch_to_english():
         except subprocess.CalledProcessError:
             print("Failed to switch input method.")
 
-def adb_tap(x, y):
+def adb_tap(device,x, y):
     """發送 ADB 點擊指令"""
-    os.system(f"adb shell input tap {x} {y}")
+    device.shell(f"input tap {x} {y}")
 
 def solve_sudoku():
 
-    start_row=6
+    start_row=5
     start_col=1
 
 
@@ -244,31 +260,32 @@ def solve_sudoku():
         
         # 3. 執行點擊：先點位置，再點數字
         print(f"填寫 [{row}, {col}] 為 {val} -> 座標({target_x}, {target_y})")
-        adb_tap(target_x, target_y)
-        time.sleep(1) # 稍微延遲避免手機反應不及
-        adb_tap(val_x, num_y)
-        time.sleep(1)
+        adb_tap(device,target_x, target_y)
+        time.sleep(0.5) # 稍微延遲避免手機反應不及
+        adb_tap(device,val_x, num_y)
+        time.sleep(0.5)
 
     print("填寫完成！")
 
 if __name__ == '__main__':
 
-  device, client = connect()
+  deviceid = "46081JEKB10015"
+  device, client = connect(deviceid)
 
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
   # 數獨解答資料 (僅填入空白格)
   solution_data = [
-  [1,1,1],[1,2,5],[1,3,4],[1,4,3],[1,5,2],[1,6,6],[1,7,8],[1,8,7],[1,9,9],
-  [2,1,9],[2,2,2],[2,3,8],[2,4,4],[2,5,7],[2,6,1],[2,7,3],[2,8,5],[2,9,6],
-  [3,1,6],[3,2,7],[3,3,3],[3,4,9],[3,5,5],[3,6,8],[3,7,1],[3,8,2],[3,9,4],
-  [4,1,4],[4,2,8],[4,3,6],[4,4,5],[4,5,3],[4,6,2],[4,7,9],[4,8,1],[4,9,7],
-  [5,1,3],[5,2,1],[5,3,7],[5,4,8],[5,5,9],[5,6,4],[5,7,2],[5,8,6],[5,9,5],
-  [6,1,2],[6,2,9],[6,3,5],[6,4,1],[6,5,6],[6,6,7],[6,7,4],[6,8,8],[6,9,3],
-  [7,1,8],[7,2,6],[7,3,9],[7,4,7],[7,5,1],[7,6,3],[7,7,5],[7,8,4],[7,9,2],
-  [8,1,5],[8,2,4],[8,3,2],[8,4,6],[8,5,8],[8,6,9],[8,7,7],[8,8,3],[8,9,1],
-  [9,1,7],[9,2,3],[9,3,1],[9,4,2],[9,5,4],[9,6,5],[9,7,6],[9,8,9],[9,9,8]
+  [1,1,4],[1,2,7],[1,3,6],[1,4,9],[1,5,8],[1,6,2],[1,7,5],[1,8,3],[1,9,1],
+  [2,1,5],[2,2,2],[2,3,8],[2,4,3],[2,5,1],[2,6,6],[2,7,9],[2,8,7],[2,9,4],
+  [3,1,9],[3,2,1],[3,3,3],[3,4,7],[3,5,5],[3,6,4],[3,7,6],[3,8,2],[3,9,8],
+  [4,1,6],[4,2,9],[4,3,1],[4,4,2],[4,5,3],[4,6,8],[4,7,4],[4,8,5],[4,9,7],
+  [5,1,7],[5,2,3],[5,3,5],[5,4,1],[5,5,4],[5,6,9],[5,7,8],[5,8,6],[5,9,2],
+  [6,1,2],[6,2,8],[6,3,4],[6,4,5],[6,5,6],[6,6,7],[6,7,1],[6,8,9],[6,9,3],
+  [7,1,1],[7,2,6],[7,3,2],[7,4,8],[7,5,7],[7,6,5],[7,7,3],[7,8,4],[7,9,9],
+  [8,1,8],[8,2,5],[8,3,7],[8,4,4],[8,5,9],[8,6,3],[8,7,2],[8,8,1],[8,9,6],
+  [9,1,3],[9,2,4],[9,3,9],[9,4,6],[9,5,2],[9,6,1],[9,7,7],[9,8,8],[9,9,5]
 ]
 
   solve_sudoku()
