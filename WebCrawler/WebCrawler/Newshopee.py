@@ -900,7 +900,7 @@ def judgment(temp):
             else:
                 jump = jump + dpi
                     
-                if jump > 450:
+                if jump > 500:
                     return "next"
 
 
@@ -979,7 +979,7 @@ if __name__ == '__main__':
   adb_init(deviceid)
   device, client = connect(deviceid)
   device_id = device.serial
-  jump = 50
+  jump = 150
   BaseJump = 0
   Leftspace = 0
   dpi = 10
@@ -1004,7 +1004,7 @@ if __name__ == '__main__':
       dpi = 20
 
   if (resolution_height > 2000):
-       jump = 100
+       jump = 200
   # #錯誤視窗判斷
   # Shopee 的包名與主 Activity
   package_name = "com.shopee.tw"
@@ -1154,9 +1154,9 @@ if __name__ == '__main__':
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(6.0)
             if (resolution_height > 2000):
-                jump = 100 + BaseJump
+                jump = 200 + BaseJump
             else:
-                jump = 50 + BaseJump
+                jump = 150 + BaseJump
             Shopeecount = Shopeecount + 1
             ErrorCount = 0
         elif result == "ok":
@@ -1178,9 +1178,9 @@ if __name__ == '__main__':
                 continue
             Shopeecount = 0
             if (resolution_height > 2000):
-                jump = 100 + BaseJump
+                jump = 200 + BaseJump
             else:
-                jump = 50 + BaseJump
+                jump = 150 + BaseJump
             ErrorCount = 0
             turn_on_screen()
             okflag = 1
