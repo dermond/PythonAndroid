@@ -927,6 +927,38 @@ def calculate_x2(y):
     #2560,1846
     return round(1.5875 * y - 2218)
 
+def ReLoadShopee():
+    # 關閉 Shopee
+    device.shell(f"am force-stop {package_name}")
+    print("Shopee 已停止")
+    time.sleep(4.0)
+    # 啟動 Shopee
+    start_command = f"am start -n {package_name}/{activity_name}"
+    output = device.shell(start_command)
+    print(f"Shopee 已啟動，輸出：\n{output}")
+    time.sleep(6.0)
+        
+    tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
+    #tap(device, "545 2180 ")
+    time.sleep(4.0)
+    
+    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
+        tap(device, "600 203 ")
+        time.sleep(2.0)
+    elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
+        tap(device, "600 203 ")
+        time.sleep(2.0)
+
+    elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
+        tap(device, "825 220 ")
+        time.sleep(2.0)
+    elif resolution_width == 1080 and resolution_height == 2400 and density == 480 : #(1080, 2400)  de824891  :
+        tap(device, "620 170 ")
+        time.sleep(2.0)
+    else:
+        tap(device, "600 203 ")
+        time.sleep(2.0)
+
 if __name__ == '__main__':
   
   goflag = 0
@@ -1035,20 +1067,8 @@ if __name__ == '__main__':
         if Shopeecount > 10:  # 如果 i 是 10 的倍數
             print(f"第 {i} 次操作：重啟 Shopee App")
         
-            # 關閉 Shopee
-            device.shell(f"am force-stop {package_name}")
-            print("Shopee 已停止")
-            time.sleep(4.0)
-            # 啟動 Shopee
-            start_command = f"am start -n {package_name}/{activity_name}"
-            output = device.shell(start_command)
-            print(f"Shopee 已啟動，輸出：\n{output}")
-            time.sleep(6.0)
-        
-            tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
-            #tap(device, "545 2180 ")
-            time.sleep(4.0)
-        
+           
+            ReLoadShopee()
             # tap(device, "740 190 ")
             # time.sleep(3.0)
         
@@ -1062,13 +1082,13 @@ if __name__ == '__main__':
 
         # 定義每天的禁止執行時間區段（start_time, end_time）
         restricted_times = {
-            0: (datetime.time(2, 0), datetime.time(13, 0)),   # 星期一
-            1: (datetime.time(2, 0), datetime.time(13, 0)),   # 星期二
-            2: (datetime.time(2, 0), datetime.time(13, 0)),  # 星期三
-            3: (datetime.time(2, 0), datetime.time(13, 0)),   # 星期四
-            4: (datetime.time(2, 0), datetime.time(13, 0)),   # 星期五
-            5: (datetime.time(2, 0), datetime.time(13, 0)),   # 星期六
-            6: (datetime.time(2, 0), datetime.time(13, 0)),   # 星期日
+            0: (datetime.time(3, 0), datetime.time(13, 0)),   # 星期一
+            1: (datetime.time(3, 0), datetime.time(13, 0)),   # 星期二
+            2: (datetime.time(3, 0), datetime.time(13, 0)),   # 星期三
+            3: (datetime.time(3, 0), datetime.time(13, 0)),   # 星期四
+            4: (datetime.time(3, 0), datetime.time(13, 0)),   # 星期五
+            5: (datetime.time(3, 0), datetime.time(13, 0)),   # 星期六
+            6: (datetime.time(3, 0), datetime.time(13, 0)),   # 星期日
         }
 
         start, end = restricted_times[weekday]
