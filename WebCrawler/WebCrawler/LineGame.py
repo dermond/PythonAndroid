@@ -251,6 +251,15 @@ def solve_sudoku():
             print(f"略過 [{row},{col}] val={val}（不在1~9）")
             continue
 
+        start_point = (810, 458)  # 起始坐標 (x, y)
+        end_point = (1046, 528)    # 結束坐標 (x, y)
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = paddleocr_image(cropped_img)  
+        if (resulttext.find("游戳教享")  == -1 ):
+            continue
+
+
         # 1. 計算該格子的畫面座標
         target_x = int(start_x + (col - 1) * step_x)
         target_y = int(start_y + (row - 1) * step_y)
