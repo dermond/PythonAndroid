@@ -1003,7 +1003,10 @@ if __name__ == '__main__':
   if (density >= 640):
       dpi = 20
 
-  if (resolution_height > 2000):
+  if (resolution_height > 2000 and density == 640):
+       jump = 300
+
+  if (resolution_height > 2000 and density == 480):
        jump = 200
   # #錯誤視窗判斷
   # Shopee 的包名與主 Activity
