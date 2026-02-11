@@ -663,7 +663,7 @@ def judgment(temp):
         else:
             jump = jump + dpi
                     
-            if jump > 450:
+            if jump > 550:
                 return "next"
             
             return "wait"
@@ -900,7 +900,7 @@ def judgment(temp):
             else:
                 jump = jump + dpi
                     
-                if jump > 500:
+                if jump > 550:
                     return "next"
 
 
