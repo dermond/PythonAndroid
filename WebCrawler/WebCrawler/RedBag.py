@@ -195,7 +195,18 @@ if __name__ == '__main__':
         time.sleep(1.0)
         continue 
 
-      
+      start_point = (144, 1094)  # 起始坐標 (x, y)
+      end_point = (792, 1243)    # 結束坐標 (x, y)
+
+      img = capture_screenshot(device)
+      cropped_img = crop_image(img, start_point, end_point)
+      #resulttext = pytesseract_image(cropped_img)
+      resulttext2 = paddleocr_image(cropped_img)
+      if resulttext2.find("收款成功") > -1 :
+        tap(device, "77 200")
+        time.sleep(2.0)
+
+      tap(device, "944 1482")
       tap(device, "874 1269")
       time.sleep(1.0)
       #tap(device, "644 1610")

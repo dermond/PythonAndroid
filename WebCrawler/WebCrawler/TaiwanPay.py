@@ -179,15 +179,15 @@ if __name__ == '__main__':
   #text_to_input = '004'  # 輸入的文字 #台灣銀行
   #text_to_input = '017'  # 輸入的文字 #兆豐
 
-  #PhoneNumber = "0926865002"
-  PhoneNumber = "0972461422"
+  PhoneNumber = "0926865002"
+  #PhoneNumber = "0972461422"
   
   #匯款帳號
-  #BankPoint = "582 1191" #台灣銀行
+  BankPoint = "582 1191" #台灣銀行
   #BankPoint = "582 1937" #第一銀行(1)
   #BankPoint = "582 1729" #第一銀行(2)
   #BankPoint = "582 2151" #華南
-  BankPoint = "582 1485" #郵局
+  #BankPoint = "582 1485" #郵局
  
   #次數
   ForCount = 5
@@ -285,7 +285,7 @@ if __name__ == '__main__':
       resulttext = pytesseract_image(cropped_img)
       resulttext2 = paddleocr_image(cropped_img)
 
-      if resulttext2.find("轉帐對象") > -1 :
+      if resulttext2.find("轉帐對象") > -1 or resulttext2.find("转對象") > -1 :
           print("依轉帳位置 來決定 按鈕的步驟")
           point = 0
       else:

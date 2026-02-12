@@ -183,8 +183,8 @@ if __name__ == '__main__':
   PhoneNumber = "0972461422"
   
   #匯款帳號
-  BankPoint = "582 1186" #第一銀行(2)
-  #BankPoint = "582 1900" #第一銀行(3)
+  #BankPoint = "582 1186" #第一銀行(2)
+  BankPoint = "582 1900" #第一銀行(3)
   #BankPoint = "582 2126" #第一銀行(1)
   #BankPoint = "582 1651" #兆豐
   #BankPoint = "582 1397" #郵局
@@ -283,7 +283,7 @@ if __name__ == '__main__':
       resulttext = pytesseract_image(cropped_img)
       resulttext2 = paddleocr_image(cropped_img)
 
-      if resulttext2.find("轉帐對象") > -1 :
+      if resulttext2.find("轉帐對象") > -1 or resulttext2.find("转對象") > -1 :
           print("依轉帳位置 來決定 按鈕的步驟")
           point = 0
       else:
@@ -509,10 +509,10 @@ if __name__ == '__main__':
             #break
 
 
-      time.sleep(2.0)
-      tap(device, "844 1361")
       time.sleep(4.0)
-  
+      tap(device, "844 1500")
+      time.sleep(4.0)
+      print("結束-End-4")
       error_code = '9999'
       if check_error_code(resulttext, error_code):
         print(f"Error code {error_code} found in the image!")
@@ -520,7 +520,8 @@ if __name__ == '__main__':
         tap(device, "845 1276")
         #tap(device, "855 1355")
         time.sleep(2.0)
-          
+       
+      print("結束-End-3")
       # else:
       #   print(f"Error code {error_code} not found in the image.")
       #   time.sleep(3.0)
@@ -529,11 +530,16 @@ if __name__ == '__main__':
 
       tap(device, "847 1380")
       time.sleep(6.0)
-  
+      print("結束-End-2")
       tap(device, "321 2162")
       time.sleep(1.0)
+      print("結束-End-1")
+      #time.sleep(14.0)
+  
+  
+  
 
-      time.sleep(14.0)
+    
   
   
   

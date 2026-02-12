@@ -440,6 +440,143 @@ def convert_xy_with_dpi(x_base, y_base):
 
     return x_target, y_target
 
+def calculate_x(y):
+    #2400,1483
+    #2560,1774
+    return round(1.81875 * y - 2882)
+
+def calculate_x2(y):
+    #2400,1592
+    #2560,1846
+    return round(1.5875 * y - 2218)
+
+def ReLoadShopee():
+    # 關閉 Shopee
+    device.shell(f"am force-stop {package_name}")
+    print("Shopee 已停止")
+    time.sleep(4.0)
+    # 啟動 Shopee
+    start_command = f"am start -n {package_name}/{activity_name}"
+    output = device.shell(start_command)
+    print(f"Shopee 已啟動，輸出：\n{output}")
+    time.sleep(6.0)
+        
+    tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
+    #tap(device, "545 2180 ")
+    time.sleep(4.0)
+    
+    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
+        tap(device, "600 203 ")
+        time.sleep(2.0)
+    elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
+        tap(device, "600 203 ")
+        time.sleep(2.0)
+
+    elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
+        tap(device, "825 220 ")
+        time.sleep(2.0)
+    elif resolution_width == 1080 and resolution_height == 2400 and density == 480 : #(1080, 2400)  de824891  :
+        tap(device, "620 170 ")
+        time.sleep(2.0)
+    else:
+        tap(device, "600 203 ")
+        time.sleep(2.0)
+
+def Nextshow(temp):
+    #重啟Shopee
+    ReLoadShopee()
+    #按下 直播
+    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
+        tap(device, "500 203 ")
+        time.sleep(2.0)
+    elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
+        tap(device, "500 203 ")
+        time.sleep(2.0)
+
+    elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
+        tap(device, "725 220 ")
+        time.sleep(2.0)
+    elif resolution_width == 1080 and resolution_height == 2400 and density == 480 : #(1080, 2400)  de824891  :
+        tap(device, "520 170 ")
+        time.sleep(2.0)
+    else:
+        tap(device, "500 203 ")
+        time.sleep(2.0)
+
+
+    start_point = (30, 270)  # 起始坐標 (x, y)
+    end_point = (200, 500)    # 結束坐標 (x, y)
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = paddleocr_image(cropped_img)  
+    if resulttext.find("下一場次") > -1 and nextsession == 0:
+
+        tap(device, str("138") + " " + str("350"))
+        time.sleep(3.0)
+        if resolution_height > 2000:
+            index = (resolution_height / 2)  - 10
+            tap(device, str(resolution_width - 240) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 500
+            tap(device, str(resolution_width - 240) + " " + str(index))
+            time.sleep(5.0)
+        else:
+            index = (resolution_height / 2)  - 80
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 300
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+
+        Key_Return()
+        nextsession = 1
+
+    # 下一個場次
+    start_point = (30, 170)  # 起始坐標 (x, y)
+    end_point = (200, 400)    # 結束坐標 (x, y)
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = paddleocr_image(cropped_img)  
+    if resulttext.find("下一場次") > -1 and nextsession == 0:
+
+        tap(device, str("138") + " " + str("250"))
+        time.sleep(3.0)
+        
+        if resolution_height > 2000:
+            index = (resolution_height / 2)  - 10
+            tap(device, str(resolution_width - 240) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 500
+            tap(device, str(resolution_width - 240) + " " + str(index))
+            time.sleep(5.0)
+        elif resolution_height > 1500:
+            index = (resolution_height / 2)  - 0
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 300
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+        else:
+            index = (resolution_height / 2)  - 80
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+        
+            index = resolution_height  - 300
+            tap(device, str(resolution_width - 140) + " " + str(index))
+            time.sleep(5.0)
+
+        Key_Return()
+        nextsession = 1
+    
+    #往下一筆 短影音
+    swipe_start = '500 1300'
+    swipe_end = '500 100'
+    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+
 def judgment(temp):
     global jump
     global resolution_width
@@ -754,77 +891,7 @@ def judgment(temp):
         if now < limit_time:
             return "ok"
 
-        #以下只要23:30才會執行過來
-        # 下一個場次
-        start_point = (30, 270)  # 起始坐標 (x, y)
-        end_point = (200, 500)    # 結束坐標 (x, y)
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)  
-        if resulttext.find("下一場次") > -1 and nextsession == 0:
-
-            tap(device, str("138") + " " + str("350"))
-            time.sleep(3.0)
-            if resolution_height > 2000:
-                index = (resolution_height / 2)  - 10
-                tap(device, str(resolution_width - 240) + " " + str(index))
-                time.sleep(5.0)
         
-                index = resolution_height  - 500
-                tap(device, str(resolution_width - 240) + " " + str(index))
-                time.sleep(5.0)
-            else:
-                index = (resolution_height / 2)  - 80
-                tap(device, str(resolution_width - 140) + " " + str(index))
-                time.sleep(5.0)
-        
-                index = resolution_height  - 300
-                tap(device, str(resolution_width - 140) + " " + str(index))
-                time.sleep(5.0)
-
-            Key_Return()
-            nextsession = 1
-        # 下一個場次
-        start_point = (30, 170)  # 起始坐標 (x, y)
-        end_point = (200, 400)    # 結束坐標 (x, y)
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)  
-        if resulttext.find("下一場次") > -1 and nextsession == 0:
-
-            tap(device, str("138") + " " + str("250"))
-            time.sleep(3.0)
-        
-            if resolution_height > 2000:
-                index = (resolution_height / 2)  - 10
-                tap(device, str(resolution_width - 240) + " " + str(index))
-                time.sleep(5.0)
-        
-                index = resolution_height  - 500
-                tap(device, str(resolution_width - 240) + " " + str(index))
-                time.sleep(5.0)
-            elif resolution_height > 1500:
-                index = (resolution_height / 2)  - 0
-                tap(device, str(resolution_width - 140) + " " + str(index))
-                time.sleep(5.0)
-        
-                index = resolution_height  - 300
-                tap(device, str(resolution_width - 140) + " " + str(index))
-                time.sleep(5.0)
-            else:
-                index = (resolution_height / 2)  - 80
-                tap(device, str(resolution_width - 140) + " " + str(index))
-                time.sleep(5.0)
-        
-                index = resolution_height  - 300
-                tap(device, str(resolution_width - 140) + " " + str(index))
-                time.sleep(5.0)
-
-            Key_Return()
-            nextsession = 1
-        
-   
-
         #if (device_id == "FA75V1802306"):
         #    tap(device, str(resolution_width - 106) + " " + str(index))
         #    time.sleep(3.0)
@@ -917,47 +984,6 @@ def judgment(temp):
         else:
             return "next"
    
-def calculate_x(y):
-    #2400,1483
-    #2560,1774
-    return round(1.81875 * y - 2882)
-
-def calculate_x2(y):
-    #2400,1592
-    #2560,1846
-    return round(1.5875 * y - 2218)
-
-def ReLoadShopee():
-    # 關閉 Shopee
-    device.shell(f"am force-stop {package_name}")
-    print("Shopee 已停止")
-    time.sleep(4.0)
-    # 啟動 Shopee
-    start_command = f"am start -n {package_name}/{activity_name}"
-    output = device.shell(start_command)
-    print(f"Shopee 已啟動，輸出：\n{output}")
-    time.sleep(6.0)
-        
-    tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
-    #tap(device, "545 2180 ")
-    time.sleep(4.0)
-    
-    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
-        tap(device, "600 203 ")
-        time.sleep(2.0)
-    elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
-        tap(device, "600 203 ")
-        time.sleep(2.0)
-
-    elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
-        tap(device, "825 220 ")
-        time.sleep(2.0)
-    elif resolution_width == 1080 and resolution_height == 2400 and density == 480 : #(1080, 2400)  de824891  :
-        tap(device, "620 170 ")
-        time.sleep(2.0)
-    else:
-        tap(device, "600 203 ")
-        time.sleep(2.0)
 
 if __name__ == '__main__':
   
@@ -1079,6 +1105,14 @@ if __name__ == '__main__':
             # time.sleep(1.0)
             Shopeecount = 0
         
+        start_time = datetime.time(8, 0)    # 08:00
+        end_time   = datetime.time(11, 00)   # 11:00
+        # ✅ 只有在 08:00~11:00 之間
+        if start_time <= now <= end_time:
+            #進行
+            Nextshow(0)
+
+
         now = datetime.datetime.now()
         now_time = now.time()
         weekday = now.weekday()  # 0 = 星期一, 6 = 星期日
