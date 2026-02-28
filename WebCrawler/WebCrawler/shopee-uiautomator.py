@@ -1012,8 +1012,8 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "R58N10RXWVF"
-  #deviceid = "46081JEKB10015"
+  #deviceid = "R58N10RXWVF"
+  deviceid = "46081JEKB10015"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -1050,11 +1050,13 @@ if __name__ == '__main__':
   print("正在獲取螢幕物件配置...")
   for i in range(99999999):
       # 連接手機 (如果只有一台手機，通常不用填 serial
-
+      print("---Start---------...")
       time.sleep(1.0)
       allspace = True
       d = u2.connect()
       time.sleep(1.0)
+      cancelflag = False
+
       # 獲取當前頁面所有元素
       # 使用 xpath 抓取所有節點
       for el in d.xpath('//*').all():
@@ -1075,6 +1077,7 @@ if __name__ == '__main__':
                 click_bounds(d, bounds)
                 allspace =False
                 time.sleep(2.0)
+                break
             if text == "關注":
                 click_bounds(d, bounds)
                 allspace =False
@@ -1086,6 +1089,14 @@ if __name__ == '__main__':
             if text == "下一場次":
                 click_bounds(d, bounds)
                 allspace =False
+                time.sleep(2.0)
+
+            if text == "簽到":
+                click_bounds(d, bounds)
+                allspace =False
+                time.sleep(2.0)
+                # 觸發系統「返回鍵」
+                d.press("back")
                 time.sleep(2.0)
 
             if text == "領取":
@@ -1102,6 +1113,13 @@ if __name__ == '__main__':
                 d.press("back")
                 time.sleep(2.0)
 
+            if text == "推薦":
+               time.sleep(2.0)
+            if text == "直播":
+               time.sleep(2.0)
+            if text == "短影音":
+               time.sleep(2.0)
+
             if text == "幸運轉盤":
                 # 截圖並裁剪
                 start_point = ((resolution_width / 2 ) - 150, (resolution_height / 2 ) - 250)  # 起始坐標 (x, y)
@@ -1116,6 +1134,19 @@ if __name__ == '__main__':
                 click_action(d, actionx , actiony)
                 allspace =False
                 time.sleep(2.0)
+
+
+            #if d(resourceId="com.shopee.tw.dfpluginshopee7:id/main_play_layout").exists:
+            #    #print("發現蝦皮關閉按鈕，正在點擊...")
+            #    d(resourceId="com.shopee.tw.dfpluginshopee7:id/main_play_layout").click()
+            #    #allspace =False
+            #    time.sleep(2.0)
+
+            #else:
+            #    print("未發現關閉按鈕")
+
+       
+
             if text == "瀏覽獲獎結果":
 
                 index = (resolution_height / 2 ) + 282
@@ -1135,8 +1166,46 @@ if __name__ == '__main__':
                 swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
                 time.sleep(2.0)
                 allspace =False
+            if text == "前往驗證":
+                cancelflag = True
+            if text == "取消":
+                if cancelflag :
+                    click_bounds(d, bounds)
+                    allspace =True
+        else:
+             # 獲取座標 (attrib 裡面的 bounds)
+            bounds = el.attrib.get('bounds')
+            # 獲取類別
+            classname = el.attrib.get('class')
+
+            print(f"內容: {text}")
+            print(f"位置: {bounds}")
+            print(f"類型: {classname}")
+
+            # 嘗試列印出所有屬性看看
+            print(el.attrib)
+            # 在您的程式碼中加入這一行
+            description = el.attrib.get('content-description') or el.attrib.get('content-desc')
+            print(f"說明標籤: {description}")
 
       if allspace :
+
+        if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
+            #print("發現蝦皮關閉按鈕，正在點擊...")
+            d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
+            #allspace =False
+            time.sleep(2.0)
+
+        else:
+            print("未發現關閉按鈕")
+
+        ## 判斷說明標籤為 "close product panel" 的元素是否存在
+        #if d(description="close product panel").exists:
+        #    print("發現商品面板關閉按鈕，執行點擊...")
+        #    d(description="close product panel").click()
+        #else:
+        #    print("未發現按鈕，跳過。")
+
         swipe_start = '500 1300'
         swipe_end = '500 500'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置

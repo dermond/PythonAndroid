@@ -36,7 +36,7 @@
     <Compile Include="Newshopee.py" />
     <Compile Include="shopee2.py" />
     <Compile Include="shopeeHTC.py" />
-    <Compile Include="shopee - Copy.py" />
+    <Compile Include="shopee-uiautomator.py" />
     <Compile Include="shopeeAndmomo.py" />
     <Compile Include="shopee.py" />
     <Compile Include="RedBag.py" />
