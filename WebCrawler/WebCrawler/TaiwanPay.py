@@ -526,7 +526,7 @@ if __name__ == '__main__':
       
 
       tap(device, "847 1380")
-      time.sleep(6.0)
+      time.sleep(8.0)
       print("結束-End-2")
       tap(device, "321 2162")
       time.sleep(1.0)
