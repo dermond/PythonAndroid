@@ -13,7 +13,9 @@ import os
 import ddddocr #opencv-python==3.4.16.59
 import subprocess
 from paddleocr import PaddleOCR #paddlepaddle
-
+import cv2
+import uiautomator2 as u2
+import re
 
 ocr = ddddocr.DdddOcr()
 # 建一次 OCR 物件就好，重複呼叫時不用每次都 new
@@ -125,7 +127,18 @@ def pytesseract_image(img):
 
 def paddleocr_image(img_path):
     full_path = os.path.join(os.getcwd(), 'cropped_image.png')
-    results = Pocr.ocr(full_path, cls=True)
+
+    img = cv2.imread(full_path)
+
+    # 加 padding (白邊)
+    img = cv2.copyMakeBorder(
+        img,
+        100, 100, 100, 100,           # top, bottom, left, right
+        cv2.BORDER_CONSTANT,
+        value=[255, 255, 255]     # 白色背景
+    )
+
+    results = Pocr.ocr(img, cls=True)
     # 組合所有辨識到的文字
     text = '\n'.join([ line[1][0] for block in results for line in block ])
     return text
@@ -161,12 +174,52 @@ def switch_to_english():
         except subprocess.CalledProcessError:
             print("Failed to switch input method.")
 
+def click_bounds(d, bounds_str):
+    # 使用正規表達式抓出四個數字 [left, top][right, bottom]
+    nums = re.findall(r'\d+', bounds_str)
+    if len(nums) == 4:
+        left, top, right, bottom = map(int, nums)
+        # 計算中心點
+        center_x = (left + right) // 2
+        center_y = (top + bottom) // 2
+        
+        print(f"🎯 點擊中心點: ({center_x}, {center_y})")
+        d.click(center_x, center_y)
 
+
+def get_text_bounds(device_id, text_to_find, retries=3, delay=1):
+    """
+    連接到裝置後，尋找指定文字，並回傳它的 bounds。
+    如果沒找到，會連續重試指定次數，每次停頓 delay 秒。
+    
+    :param device_id: 裝置ID
+    :param text_to_find: 要查找的文字
+    :param retries: 找不到時重試次數，預設3次
+    :param delay: 每次重試的間隔秒數，預設1秒
+    :return: bounds 字串或 None
+    """
+    d = u2.connect(device_id)
+    
+    for attempt in range(1, retries + 1):
+        el = d.xpath(f'//*[@text="{text_to_find}"]').get()
+        
+        if el:
+            bounds = el.attrib.get('bounds')
+            return bounds
+        else:
+            if attempt < retries:
+                print(f"文字 '{text_to_find}' 未找到，等待 {delay} 秒後重試 ({attempt}/{retries})...")
+                time.sleep(delay)
+            else:
+                print(f"文字 '{text_to_find}' 未找到，已達最大重試次數 ({retries})")
+    
+    return None
 
 if __name__ == '__main__':
 
   deviceid = "46081JEKB10015"
   device, client = connect(deviceid)
+  device_id = device.serial
   point = 0
   #目前按鈕特性 是給 google pixel 8a用
   # 
@@ -191,57 +244,15 @@ if __name__ == '__main__':
  
   #次數
   ForCount = 5
-  
+
+  d = u2.connect(device_id)
+
   for _ in range(ForCount):
  
-      # #滑動
-      #swipe_start = '500 1300'
-      #swipe_end = '500 500'
-      #swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-      #time.sleep(2.0)
 
-      #轉帳
-      #判斷
-      start_point = (574, 1355)  # 起始坐標 (x, y)
-      end_point = (761, 1451)    # 結束坐標 (x, y)
-
-      img = capture_screenshot(device)
-      cropped_img = crop_image(img, start_point, end_point)
-      #resulttext = pytesseract_image(cropped_img)
-      resulttext2 = paddleocr_image(cropped_img)
-
-      if resulttext2.find("轉帐") > -1 :
-
-        tap(device, "684 1270")
-      else:
-          start_point = (574, 1705)  # 起始坐標 (x, y)
-          end_point = (761, 1801)    # 結束坐標 (x, y)
-
-          img = capture_screenshot(device)
-          cropped_img = crop_image(img, start_point, end_point)
-          #resulttext = pytesseract_image(cropped_img)
-          resulttext2 = paddleocr_image(cropped_img)
-          
-          if resulttext2.find("轉帐") > -1 :
-            tap(device, "644 1667")
-          else:
-             
-              start_point = (574, 1450)  # 起始坐標 (x, y)
-              end_point = (761, 1650)    # 結束坐標 (x, y)
-
-              img = capture_screenshot(device)
-              cropped_img = crop_image(img, start_point, end_point)
-              #resulttext = pytesseract_image(cropped_img)
-              resulttext2 = paddleocr_image(cropped_img)
-          
-              if resulttext2.find("轉帐") > -1 :
-                tap(device, "644 1540")
-              else:
-             
-                #tap(device, "644 1172")
-                tap(device, "644 1302")
-      #tap(device, "689 1509")
-      time.sleep(8.0)
+      bounds = get_text_bounds(device_id,"轉帳")
+      click_bounds(d, bounds)
+      time.sleep(2.0)
   
   
       #手機轉帳
@@ -285,7 +296,7 @@ if __name__ == '__main__':
       resulttext = pytesseract_image(cropped_img)
       resulttext2 = paddleocr_image(cropped_img)
 
-      if resulttext2.find("轉帐對象") > -1 or resulttext2.find("转對象") > -1 :
+      if resulttext2.find("轉帐對象") > -1 or resulttext2.find("转對象") > -1 or resulttext2.find("悵對象") > -1 :
           print("依轉帳位置 來決定 按鈕的步驟")
           point = 0
       else:

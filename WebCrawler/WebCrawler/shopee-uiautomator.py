@@ -30,6 +30,7 @@ import threading
 import socket
 import struct
 import uiautomator2 as u2
+import traceback
 
 TotalCount = 0
 device_id = ''
@@ -1007,13 +1008,50 @@ def click_action(d, x, y, action="click", duration=0.1):
     else:
         print(f"🎯 點擊座標: ({x}, {y})")
         d.click(x, y)
+   
+def click_shopee_activity_by_coord(d, target_x=540, target_y=1800):
+    """
+    In cases where 'bounds' is not allowed, we use coordinate-based 
+    interaction combined with a check for a 'clickable' container 
+    at the relevant depth.
+    """
+    print(f"Targeting interaction point: ({target_x}, {target_y})")
+    
+    # 1. Look for the interactive container by ClassName and Clickable status
+    # In Shopee Video, these layers are usually 'android.view.View' 
+    # and are marked as clickable even if they have no text.
+    layers = d(className="android.view.View", clickable=True)
+    
+    found_target = False
+    
+    for layer in layers:
+        # Since we can't check 'bounds' directly in the selector, 
+        # we pull the info to see if our target point (1800) falls inside.
+        info = layer.info
+        top = info['range']['top'] if 'range' in info else info['visibleBounds']['top']
+        bottom = info['range']['bottom'] if 'range' in info else info['visibleBounds']['bottom']
         
+        # Check if our 1800 Y-coordinate is within this layer's vertical span
+        if top <= target_y <= bottom:
+            print(f"Found active layer: {info.get('resourceName', 'Unknown Resource')}")
+            found_target = True
+            break
+            
+    if found_target:
+        print(f"Executing click at ({target_x}, {target_y})")
+        d.click(target_x, target_y)
+        return True
+    else:
+        # Fallback: Forced click if the hierarchy is too complex to parse
+        print("Layer not confirmed, attempting blind click at target coordinates.")
+        d.click(target_x, target_y)
+        return True
 if __name__ == '__main__':
   
   goflag = 0
-
+  deviceid = ""
   #deviceid = "R58N10RXWVF"
-  deviceid = "46081JEKB10015"
+  #deviceid = "46081JEKB10015"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -1049,167 +1087,175 @@ if __name__ == '__main__':
 
   print("正在獲取螢幕物件配置...")
   for i in range(99999999):
-      # 連接手機 (如果只有一台手機，通常不用填 serial
-      print("---Start---------...")
-      time.sleep(1.0)
-      allspace = True
-      d = u2.connect()
-      time.sleep(1.0)
-      cancelflag = False
+      try:
+          # 連接手機 (如果只有一台手機，通常不用填 serial
+          print("---Start---------...")
+          time.sleep(1.0)
+          allspace = True
+          d = u2.connect()
+          time.sleep(1.0)
+          cancelflag = False
 
-      # 獲取當前頁面所有元素
-      # 使用 xpath 抓取所有節點
-      for el in d.xpath('//*').all():
-        # 檢查是否有文字 (使用 .text 屬性)
-        text = el.text
-        if text:
-            # 獲取座標 (attrib 裡面的 bounds)
-            bounds = el.attrib.get('bounds')
-            # 獲取類別
-            classname = el.attrib.get('class')
+          # 獲取當前頁面所有元素
+          # 使用 xpath 抓取所有節點
+          for el in d.xpath('//*').all():
+            # 檢查是否有文字 (使用 .text 屬性)
+            text = el.text
+            if text:
+                # 獲取座標 (attrib 裡面的 bounds)
+                bounds = el.attrib.get('bounds')
+                # 獲取類別
+                classname = el.attrib.get('class')
         
-            print(f"內容: {text}")
-            print(f"位置: {bounds}")
-            print(f"類型: {classname}")
-            print("-" * 30)
+                print(f"內容: {text}")
+                print(f"位置: {bounds}")
+                print(f"類型: {classname}")
+                print("-" * 30)
 
-            if text == "參加":
-                click_bounds(d, bounds)
-                allspace =False
-                time.sleep(2.0)
-                break
-            if text == "關注":
-                click_bounds(d, bounds)
-                allspace =False
-                time.sleep(2.0)
-            if text == "立即簽到":
-                click_bounds(d, bounds)
-                allspace =False
-                time.sleep(2.0)
-            if text == "下一場次":
-                click_bounds(d, bounds)
-                allspace =False
-                time.sleep(2.0)
+                if text == "參加":
+                    click_bounds(d, bounds)
+                    allspace =False
+                    time.sleep(2.0)
+                    break
+                if text == "關注":
+                    click_bounds(d, bounds)
+                    allspace =False
+                    time.sleep(2.0)
+                if text == "立即簽到":
+                    click_bounds(d, bounds)
+                    allspace =False
+                    time.sleep(2.0)
+                if text == "下一場次":
+                    click_bounds(d, bounds)
+                    allspace =False
+                    time.sleep(2.0)
+                    break
+                if text == "簽到":
+                    click_bounds(d, bounds)
+                    allspace =False
+                    time.sleep(2.0)
+                    # 觸發系統「返回鍵」
+                    d.press("back")
+                    time.sleep(2.0)
 
-            if text == "簽到":
-                click_bounds(d, bounds)
-                allspace =False
-                time.sleep(2.0)
-                # 觸發系統「返回鍵」
-                d.press("back")
-                time.sleep(2.0)
-
-            if text == "領取":
-                click_bounds(d, bounds)
-                allspace =False
-                time.sleep(2.0)
-                # 觸發系統「返回鍵」
-                d.press("back")
-                time.sleep(2.0)
-            if text == "觀看":
+                if text == "領取":
+                    click_bounds(d, bounds)
+                    allspace =False
+                    time.sleep(2.0)
+                    # 觸發系統「返回鍵」
+                    d.press("back")
+                    time.sleep(2.0)
+                if text == "觀看":
                
-                allspace =False
-                # 觸發系統「返回鍵」
-                d.press("back")
-                time.sleep(2.0)
+                    allspace =False
+                    # 觸發系統「返回鍵」
+                    d.press("back")
+                    time.sleep(2.0)
 
-            if text == "推薦":
-               time.sleep(2.0)
-            if text == "直播":
-               time.sleep(2.0)
-            if text == "短影音":
-               time.sleep(2.0)
+                if text == "推薦":
+                   time.sleep(2.0)
+                if text == "直播":
+                   time.sleep(2.0)
+                if text == "短影音":
+                   time.sleep(2.0)
 
-            if text == "幸運轉盤":
-                # 截圖並裁剪
-                start_point = ((resolution_width / 2 ) - 150, (resolution_height / 2 ) - 250)  # 起始坐標 (x, y)
-                end_point = ((resolution_width / 2 ) + 150, (resolution_height / 2 ) + 50)    # 結束坐標 (x, y)
+                if text == "幸運轉盤":
+                    # 截圖並裁剪
+                    start_point = ((resolution_width / 2 ) - 150, (resolution_height / 2 ) - 250)  # 起始坐標 (x, y)
+                    end_point = ((resolution_width / 2 ) + 150, (resolution_height / 2 ) + 50)    # 結束坐標 (x, y)
 
-                img = capture_screenshot(device)
-                cropped_img = crop_image(img, start_point, end_point)
-                resulttext = paddleocr_image(cropped_img)  
+                    img = capture_screenshot(device)
+                    cropped_img = crop_image(img, start_point, end_point)
+                    resulttext = paddleocr_image(cropped_img)  
 
-                actionx = (resolution_width / 2 )
-                actiony = (resolution_height / 2 ) -100
-                click_action(d, actionx , actiony)
-                allspace =False
-                time.sleep(2.0)
+                    actionx = (resolution_width / 2 )
+                    actiony = (resolution_height / 2 ) -100
+                    click_action(d, actionx , actiony)
+                    allspace =False
+                    time.sleep(2.0)
 
 
-            #if d(resourceId="com.shopee.tw.dfpluginshopee7:id/main_play_layout").exists:
-            #    #print("發現蝦皮關閉按鈕，正在點擊...")
-            #    d(resourceId="com.shopee.tw.dfpluginshopee7:id/main_play_layout").click()
-            #    #allspace =False
-            #    time.sleep(2.0)
+                #if d(resourceId="com.shopee.tw.dfpluginshopee7:id/main_play_layout").exists:
+                #    #print("發現蝦皮關閉按鈕，正在點擊...")
+                #    d(resourceId="com.shopee.tw.dfpluginshopee7:id/main_play_layout").click()
+                #    #allspace =False
+                #    time.sleep(2.0)
 
-            #else:
-            #    print("未發現關閉按鈕")
+                #else:
+                #    print("未發現關閉按鈕")
 
        
 
-            if text == "瀏覽獲獎結果":
+                if text == "瀏覽獲獎結果":
 
-                index = (resolution_height / 2 ) + 282
-                tap(device, str(resolution_width / 2) + " " + str(index))
+                    index = (resolution_height / 2 ) + 282
+                    tap(device, str(resolution_width / 2) + " " + str(index))
+                    time.sleep(2.0)
+
+                    #滑動
+                    swipe_start = '500 1300'
+                    swipe_end = '500 500'
+                    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                    time.sleep(2.0)
+                    allspace =False
+                if text == "已結束":
+                     #滑動
+                    swipe_start = '500 1300'
+                    swipe_end = '500 500'
+                    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                    time.sleep(2.0)
+                    allspace =False
+                if text.find("前往驗證") > -1 :
+                    cancelflag = True
+                if text == "取消":
+                    if cancelflag :
+                        click_bounds(d, bounds)
+                        allspace =True
+            else:
+                 # 獲取座標 (attrib 裡面的 bounds)
+                bounds = el.attrib.get('bounds')
+                # 獲取類別
+                classname = el.attrib.get('class')
+
+                print(f"內容: {text}")
+                print(f"位置: {bounds}")
+                print(f"類型: {classname}")
+
+                # 嘗試列印出所有屬性看看
+                print(el.attrib)
+                # 在您的程式碼中加入這一行
+                description = el.attrib.get('content-description') or el.attrib.get('content-desc')
+                print(f"說明標籤: {description}")
+
+          if allspace :
+           # click_shopee_activity_by_coord(d)
+            if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
+                #print("發現蝦皮關閉按鈕，正在點擊...")
+                d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
+                #allspace =False
                 time.sleep(2.0)
 
-                #滑動
-                swipe_start = '500 1300'
-                swipe_end = '500 500'
-                swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-                time.sleep(2.0)
-                allspace =False
-            if text == "已結束":
-                 #滑動
-                swipe_start = '500 1300'
-                swipe_end = '500 500'
-                swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-                time.sleep(2.0)
-                allspace =False
-            if text == "前往驗證":
-                cancelflag = True
-            if text == "取消":
-                if cancelflag :
-                    click_bounds(d, bounds)
-                    allspace =True
-        else:
-             # 獲取座標 (attrib 裡面的 bounds)
-            bounds = el.attrib.get('bounds')
-            # 獲取類別
-            classname = el.attrib.get('class')
+            else:
+                print("未發現關閉按鈕")
 
-            print(f"內容: {text}")
-            print(f"位置: {bounds}")
-            print(f"類型: {classname}")
+            ## 判斷說明標籤為 "close product panel" 的元素是否存在
+            #if d(description="close product panel").exists:
+            #    print("發現商品面板關閉按鈕，執行點擊...")
+            #    d(description="close product panel").click()
+            #else:
+            #    print("未發現按鈕，跳過。")
 
-            # 嘗試列印出所有屬性看看
-            print(el.attrib)
-            # 在您的程式碼中加入這一行
-            description = el.attrib.get('content-description') or el.attrib.get('content-desc')
-            print(f"說明標籤: {description}")
-
-      if allspace :
-
-        if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
-            #print("發現蝦皮關閉按鈕，正在點擊...")
-            d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
-            #allspace =False
+            swipe_start = '500 1300'
+            swipe_end = '500 500'
+            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
-
-        else:
-            print("未發現關閉按鈕")
-
-        ## 判斷說明標籤為 "close product panel" 的元素是否存在
-        #if d(description="close product panel").exists:
-        #    print("發現商品面板關閉按鈕，執行點擊...")
-        #    d(description="close product panel").click()
-        #else:
-        #    print("未發現按鈕，跳過。")
-
-        swipe_start = '500 1300'
-        swipe_end = '500 500'
-        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(2.0)
+      except Exception as ex:
+        # 正確寫法 1：直接印出完整錯誤（最常用）
+        traceback.print_exc()
+    
+        # 正確寫法 2：將錯誤轉成字串（存入變數，方便寫入 Log）
+        full_error = traceback.format_exc()
+        print(f"完整錯誤資訊：\n{full_error}")
 
 
 
