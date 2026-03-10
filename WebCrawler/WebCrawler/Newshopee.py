@@ -4,7 +4,7 @@ Created on Sat Mar 27 12:23:27 2021
 
 @author: dermo
 """
-
+import Service.SQLConnect as SQLConnect
 import io
 import os
 import psutil
@@ -34,8 +34,9 @@ import requests
 
 
 LAST_SEND_FILE = Path("last_line_send.txt")
-CHANNEL_ACCESS_TOKEN = "dIpiiZQpDtEcQCPOy/spvHNZoxJcIS8d+3zxdp8RA4qJNxMKXS8Nnhzacpbg+fn9FydYBGXsnseiQIlNG4WCiWTO9FicLwSQK9Pcusc70Ts4k9FURhyJvA3lfsXkkFdu4csYrvKjc2CduB8mB4aN9AdB04t89/1O/w1cDnyilFU="
-TO_USER_ID = "Ucc97d802dea8da01d040b3acff5c9d71"
+
+CHANNEL_ACCESS_TOKEN = ""
+TO_USER_ID = ""
 
 TotalCount = 0
 device_id = ''
@@ -1030,6 +1031,23 @@ def send_line_message(msg: str):
 
 
 if __name__ == '__main__':
+  
+  DBConnect = SQLConnect.DBConnect()
+
+  sql_cmd = "select * from Parameter where ParameterId = N'CHANNEL_ACCESS_TOKEN'"
+  DBConnect.ConnectDB()
+  DLflag = DBConnect.GetDataTable(sql_cmd)
+
+  CHANNEL_ACCESS_TOKEN = DLflag[0][5]
+
+  sql_cmd = "select * from Parameter where ParameterId = N'TO_USER_ID'"
+  DLflag = DBConnect.GetDataTable(sql_cmd)
+
+  TO_USER_ID  = DLflag[0][5]
+
+  DBConnect.close()
+  
+
   
   goflag = 0
 
