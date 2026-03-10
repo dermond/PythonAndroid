@@ -29,7 +29,13 @@ import Service.SettingReader as SettingReader
 import threading
 import socket
 import struct
+from pathlib import Path
+import requests
 
+
+LAST_SEND_FILE = Path("last_line_send.txt")
+CHANNEL_ACCESS_TOKEN = "dIpiiZQpDtEcQCPOy/spvHNZoxJcIS8d+3zxdp8RA4qJNxMKXS8Nnhzacpbg+fn9FydYBGXsnseiQIlNG4WCiWTO9FicLwSQK9Pcusc70Ts4k9FURhyJvA3lfsXkkFdu4csYrvKjc2CduB8mB4aN9AdB04t89/1O/w1cDnyilFU="
+TO_USER_ID = "Ucc97d802dea8da01d040b3acff5c9d71"
 
 TotalCount = 0
 device_id = ''
@@ -987,13 +993,48 @@ def judgment(temp):
         else:
             return "next"
    
+def mark_sent_today():
+    """記錄今天已經發送過"""
+    today = datetime.datetime.now().strftime("%Y-%m-%d")
+    LAST_SEND_FILE.write_text(today, encoding="utf-8")
+
+def already_sent_today():
+    if not LAST_SEND_FILE.exists():
+        return False
+
+    try:
+        last_date = LAST_SEND_FILE.read_text(encoding="utf-8").strip()
+        today = datetime.datetime.now().strftime("%Y-%m-%d")
+        return last_date == today
+    except Exception:
+        return False
+
+def send_line_message(msg: str):
+     url = "https://api.line.me/v2/bot/message/push"
+     headers = {
+         "Content-Type": "application/json",
+         "Authorization": f"Bearer {CHANNEL_ACCESS_TOKEN}",
+     }
+     payload = {
+         "to": TO_USER_ID,
+         "messages": [
+             {"type": "text", "text": msg}
+         ]
+     }
+
+     r = requests.post(url, headers=headers, json=payload, timeout=10)
+     r.raise_for_status()
+     print(f"發送 LINE 訊息: {msg}")
+     # 真正成功送出後才 mark_sent_today()
+
+
 
 if __name__ == '__main__':
   
   goflag = 0
 
-  #deviceid = "46081JEKB10015"
-  deviceid = "de824891"
+  deviceid = "46081JEKB10015"
+  #deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -1231,5 +1272,17 @@ if __name__ == '__main__':
     
         last_date = datetime.date.today()
     except Exception as ex:
-        print(f"有重大錯誤{ex.args[0]}")
+        err_msg = str(ex)
+        print(f"有重大錯誤: {err_msg}")
+
+        if "not found" in err_msg:
+            if not already_sent_today():
+                try:
+                    send_line_message(f"系統錯誤通知：{err_msg}")
+                    mark_sent_today()
+                    time.sleep(3600.0)
+                except Exception as line_ex:
+                    print(f"LINE 發送失敗: {line_ex}")
+            else:
+                print("今天已經發過 LINE 訊息，不再重複發送。")
    
