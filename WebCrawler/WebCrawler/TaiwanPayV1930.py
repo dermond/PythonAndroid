@@ -191,18 +191,20 @@ def get_text_bounds(device_id, text_to_find, retries=3, delay=1):
     d = u2.connect(device_id)
     
     for attempt in range(1, retries + 1):
-        el = d.xpath(f'//*[@text="{text_to_find}"]').get()
+        try:
+            el = d.xpath(f'//*[@text="{text_to_find}"]').get()
         
-        if el:
-            bounds = el.attrib.get('bounds')
-            return bounds
-        else:
-            if attempt < retries:
-                print(f"文字 '{text_to_find}' 未找到，等待 {delay} 秒後重試 ({attempt}/{retries})...")
-                time.sleep(delay)
+            if el:
+                bounds = el.attrib.get('bounds')
+                return bounds
             else:
-                print(f"文字 '{text_to_find}' 未找到，已達最大重試次數 ({retries})")
-    
+                if attempt < retries:
+                    print(f"文字 '{text_to_find}' 未找到，等待 {delay} 秒後重試 ({attempt}/{retries})...")
+                    time.sleep(delay)
+                else:
+                    print(f"文字 '{text_to_find}' 未找到，已達最大重試次數 ({retries})")
+        except :
+           time.sleep(1.0)
     return None
 
 if __name__ == '__main__':
@@ -229,10 +231,10 @@ if __name__ == '__main__':
   #BankPoint = "582 1186" #第一銀行(2)
   #BankPoint = "582 1900" #第一銀行(3)
   #BankPoint = "582 2126" #第一銀行(1)
-  BankPoint = "582 1651" #兆豐
-  #BankPoint = "582 1397" #郵局
+  #BankPoint = "582 1651" #兆豐
+  BankPoint = "582 1397" #郵局
   #次數
-  ForCount = 4
+  ForCount = 5
   
   d = u2.connect(device_id)
 

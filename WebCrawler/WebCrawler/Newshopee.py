@@ -536,22 +536,22 @@ def Nextshow(temp):
         tap(device, "445 780 ")
         time.sleep(2.0)
         
-        start_point = (0, 300)  # 起始坐標 (x, y)
-        end_point = (200, 500)    # 結束坐標 (x, y)
+        start_point = (0, 260)  # 起始坐標 (x, y)
+        end_point = (250, 500)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
         cropped_img = crop_image(img, start_point, end_point)
         resulttext = paddleocr_image(cropped_img)  
         if resulttext.find("下一場次") > -1 and nextsession == 0:
 
-            tap(device, str("175") + " " + str("450"))
+            tap(device, str("125") + " " + str("360"))
             time.sleep(3.0)
             if resolution_height > 2000:
-                tap(device, str("1150") + " " + str("1600"))
+                tap(device, str("860") + " " + str("1200"))
                 # index = (resolution_height / 2)  - 10
                 # tap(device, str(resolution_width - 240) + " " + str(index))
                 time.sleep(5.0)
         
-                tap(device, str("1150") + " " + str("2515"))
+                tap(device, str("860") + " " + str("1900"))
                 time.sleep(5.0)
             else:
                 index = (resolution_height / 2)  - 80
@@ -992,7 +992,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "46081JEKB10015"
+  #deviceid = "46081JEKB10015"
   deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"

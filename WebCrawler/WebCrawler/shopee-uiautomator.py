@@ -1092,7 +1092,7 @@ if __name__ == '__main__':
           print("---Start---------...")
           time.sleep(1.0)
           allspace = True
-          d = u2.connect()
+          d = u2.connect(device_id)
           time.sleep(1.0)
           cancelflag = False
 
