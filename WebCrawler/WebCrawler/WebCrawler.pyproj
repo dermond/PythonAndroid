@@ -5,7 +5,7 @@
     <ProjectGuid>ce00eba1-83f3-48ef-9d32-f2f408089742</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>LineGame.py</StartupFile>
+    <StartupFile>shopee-uiautomator.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -34,6 +34,7 @@
     <Compile Include="momoAndshopee.py" />
     <Compile Include="BitWalk.py" />
     <Compile Include="Newshopee.py" />
+    <Compile Include="shopee-uiautomator-Reset.py" />
     <Compile Include="shopee2.py" />
     <Compile Include="shopeeHTC.py" />
     <Compile Include="shopee-uiautomator.py" />

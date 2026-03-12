@@ -1064,8 +1064,8 @@ if __name__ == '__main__':
     print("沒有輸入任何參數")
   
  
-  adb_init(deviceid)
   device, client = connect(deviceid)
+  adb_init(deviceid)
   device_id = device.serial
   jump = 150
   BaseJump = 0
