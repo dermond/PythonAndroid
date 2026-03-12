@@ -289,7 +289,19 @@ if __name__ == '__main__':
           print("依轉帳位置 來決定 按鈕的步驟")
           point = 0
       else:
-          point = 1
+           #判斷
+          start_point = (160, 456)  # 起始坐標 (x, y)
+          end_point = (403, 582)    # 結束坐標 (x, y)
+
+          img = capture_screenshot(device)
+          cropped_img = crop_image(img, start_point, end_point)
+          resulttext = pytesseract_image(cropped_img)
+          resulttext2 = paddleocr_image(cropped_img)
+          if resulttext2.find("轉帐對象") > -1 or resulttext2.find("转對象") > -1 or resulttext2.find("悵對象") > -1 :
+            print("依轉帳位置 來決定 按鈕的步驟")
+            point = 2
+          else:
+            point = 1
 
        #滑動
       swipe_start = '500 500'
@@ -330,6 +342,8 @@ if __name__ == '__main__':
       #金額
       if (point == 0):
         tap(device, "548 585")
+      elif (point == 2):
+        tap(device, "548 1044")
       else:
         #tap(device, "548 1063")
         tap(device, "232 1192")
@@ -350,6 +364,8 @@ if __name__ == '__main__':
       #選擇卡片
       if (point == 0):
         tap(device, "564 1066")
+      elif (point == 2):
+        tap(device, "564 1177")
       else:
         tap(device, "558 1066")
       
@@ -364,7 +380,11 @@ if __name__ == '__main__':
   
   
       #輸入密碼
-      tap(device, "387 1372")
+      #輸入密碼
+      if (point == 2):
+        tap(device, "387 1422")
+      else:
+        tap(device, "387 1372")
       input_characters(device, "9393695")
   
 
@@ -392,8 +412,12 @@ if __name__ == '__main__':
           time.sleep(1.0)
           
           #圖片驗證
-          start_point = (106, 1487)  # 起始坐標 (x, y)
-          end_point = (506, 1689)    # 結束坐標 (x, y)
+          if (point == 2):
+            start_point = (106, 1600)  # 起始坐標 (x, y)
+            end_point = (506, 1750)    # 結束坐標 (x, y)
+          else:
+            start_point = (106, 1487)  # 起始坐標 (x, y)
+            end_point = (506, 1689)    # 結束坐標 (x, y)
 
           img = capture_screenshot(device)
           cropped_img = crop_image(img, start_point, end_point)
@@ -401,7 +425,10 @@ if __name__ == '__main__':
           if check_error_code(resulttext, "生活"):
             continue
 
-          tap(device, "684 1614")
+          if (point == 2):
+             tap(device, "684 1694")
+          else:
+             tap(device, "684 1614")
           time.sleep(1.0)
           tap(device, "953 1994")
           tap(device, "953 1994")
