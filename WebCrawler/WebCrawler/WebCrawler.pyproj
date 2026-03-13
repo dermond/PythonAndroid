@@ -5,7 +5,7 @@
     <ProjectGuid>ce00eba1-83f3-48ef-9d32-f2f408089742</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>shopee-uiautomator.py</StartupFile>
+    <StartupFile>RedBag.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -41,6 +41,8 @@
     <Compile Include="shopeeAndmomo.py" />
     <Compile Include="shopee.py" />
     <Compile Include="RedBag.py" />
+    <Compile Include="TaiwanPayV1930 - uiautomator.py" />
+    <Compile Include="TaiwanPay - uiautomator.py" />
     <Compile Include="TaiwanPayV1930.py" />
     <Compile Include="Testpytesseract.py" />
     <Compile Include="TaiwanPay.py" />
