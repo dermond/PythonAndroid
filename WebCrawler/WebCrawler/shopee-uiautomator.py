@@ -483,508 +483,6 @@ def ReLoadShopee():
         tap(device, "600 203 ")
         time.sleep(2.0)
 
-def Nextshow(temp):
-    #重啟Shopee
-    ReLoadShopee()
-    #按下 直播
-    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
-        tap(device, "500 203 ")
-        time.sleep(2.0)
-    elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
-        tap(device, "500 203 ")
-        time.sleep(2.0)
-
-    elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
-        tap(device, "725 220 ")
-        time.sleep(2.0)
-    elif resolution_width == 1080 and resolution_height == 2400 and density == 480 : #(1080, 2400)  de824891  :
-        tap(device, "520 170 ")
-        time.sleep(2.0)
-    else:
-        tap(device, "500 203 ")
-        time.sleep(2.0)
-
-
-    start_point = (30, 270)  # 起始坐標 (x, y)
-    end_point = (200, 500)    # 結束坐標 (x, y)
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = paddleocr_image(cropped_img)  
-    if resulttext.find("下一場次") > -1 and nextsession == 0:
-
-        tap(device, str("138") + " " + str("350"))
-        time.sleep(3.0)
-        if resolution_height > 2000:
-            index = (resolution_height / 2)  - 10
-            tap(device, str(resolution_width - 240) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 500
-            tap(device, str(resolution_width - 240) + " " + str(index))
-            time.sleep(5.0)
-        else:
-            index = (resolution_height / 2)  - 80
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 300
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-
-        Key_Return()
-        nextsession = 1
-
-    # 下一個場次
-    start_point = (30, 170)  # 起始坐標 (x, y)
-    end_point = (200, 400)    # 結束坐標 (x, y)
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = paddleocr_image(cropped_img)  
-    if resulttext.find("下一場次") > -1 and nextsession == 0:
-
-        tap(device, str("138") + " " + str("250"))
-        time.sleep(3.0)
-        
-        if resolution_height > 2000:
-            index = (resolution_height / 2)  - 10
-            tap(device, str(resolution_width - 240) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 500
-            tap(device, str(resolution_width - 240) + " " + str(index))
-            time.sleep(5.0)
-        elif resolution_height > 1500:
-            index = (resolution_height / 2)  - 0
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 300
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-        else:
-            index = (resolution_height / 2)  - 80
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-        
-            index = resolution_height  - 300
-            tap(device, str(resolution_width - 140) + " " + str(index))
-            time.sleep(5.0)
-
-        Key_Return()
-        nextsession = 1
-    
-    #往下一筆 短影音
-    swipe_start = '500 1300'
-    swipe_end = '500 100'
-    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-
-def judgment(temp):
-    global jump
-    global resolution_width
-    global resolution_height
-    global dpi
-    global ErrorCount
-    global TotalCount
-    global LimitTotalCount
-    global BaseJump
-    global nextsession
-
-    # 截圖並裁剪 A20 存取手機
-    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
-        start_point = (475, 1350)  # 起始坐標 (x, y)
-        end_point = (594, 1410)    # 結束坐標 (x, y)
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)    
-        if resulttext.find("允許")  > -1 :
-            tap(device, str(534) + " " + str(1380))
-            
-        # 截圖並裁剪 偵測X 去按下
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (250, 1300)  # 起始坐標 (x, y)
-            end_point = (350, 1450)    # 結束坐標 (x, y)
-        else:
-            start_point = (480, 1780)  # 起始坐標 (x, y)
-            end_point = (640, 1900)    # 結束坐標 (x, y)
-
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = ddddocr_image(cropped_img)  
-        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-            index = 1800 
-            tap(device, str(resolution_width / 2) + " " + str(index))
-
-        # 截圖並裁剪 偵測X 去按下
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (250, 1300)  # 起始坐標 (x, y)
-            end_point = (350, 1450)    # 結束坐標 (x, y)
-        else:
-            start_point = (480, 1730)  # 起始坐標 (x, y)
-            end_point = (640, 1850)    # 結束坐標 (x, y)
-
-
-        # 截圖並裁剪
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = ddddocr_image(cropped_img)  
-        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-            index = 1800 
-            tap(device, str(resolution_width / 2) + " " + str(index))
-            
-   
-    elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
-        start_point = (380, 1500)  # 起始坐標 (x, y)
-        end_point = (740, 1650)    # 結束坐標 (x, y)
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)    
-        if resulttext.find("簽到")  > -1 or resulttext.find("立即到")  > -1 or resulttext.find("立即")  > -1:
-            tap(device, str(560) + " " + str(1575 ))        
-    # 截圖並裁剪 HTC手機 無法充電的提示
-    elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
-        start_point = (1050, 1550)  # 起始坐標 (x, y)
-        end_point = (1300, 1700)    # 結束坐標 (x, y)
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)    
-        if resulttext.find("確定")  > -1 :
-            tap(device, str(1175) + " " + str(1625))
-            
-        start_point = (530, 1780)  # 起始坐標 (x, y)
-        end_point = (930, 1980)    # 結束坐標 (x, y)
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)    
-        if resulttext.find("簽到")  > -1 or resulttext.find("立即到")  > -1 or resulttext.find("打開到")  > -1:
-            tap(device, str(734) + " " + str(1880 ))        
-        
-   
-    # 截圖並裁剪 VIVO手機 無法充電的提示
-    elif resolution_width == 1080 and resolution_height == 2400 and density == 480 : #(1080, 2400)  de824891  :
-        start_point = (380, 2080)  # 起始坐標 (x, y)
-        end_point = (750, 2250)    # 結束坐標 (x, y)
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)    
-        if resulttext.find("確定")  > -1 :
-            tap(device, str(565) + " " + str(2165))
-            
-        # 截圖並裁剪 偵測X 去按下
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (250, 1300)  # 起始坐標 (x, y)
-            end_point = (350, 1450)    # 結束坐標 (x, y)
-        else:
-            start_point = (480, 1780)  # 起始坐標 (x, y)
-            end_point = (640, 1900)    # 結束坐標 (x, y)
-
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = ddddocr_image(cropped_img)  
-        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-            index = 1800 
-            tap(device, str(resolution_width / 2) + " " + str(index))
-
-        # 截圖並裁剪 偵測X 去按下
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (250, 1300)  # 起始坐標 (x, y)
-            end_point = (350, 1450)    # 結束坐標 (x, y)
-        else:
-            start_point = (480, 1730)  # 起始坐標 (x, y)
-            end_point = (640, 1850)    # 結束坐標 (x, y)
-
-
-        # 截圖並裁剪
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = ddddocr_image(cropped_img)  
-        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-            index = 1800 
-            tap(device, str(resolution_width / 2) + " " + str(index))
-    else:
-        # 截圖並裁剪 偵測X 去按下
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (250, 1300)  # 起始坐標 (x, y)
-            end_point = (350, 1450)    # 結束坐標 (x, y)
-        else:
-            start_point = (480, 1780)  # 起始坐標 (x, y)
-            end_point = (640, 1900)    # 結束坐標 (x, y)
-
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = ddddocr_image(cropped_img)  
-        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-            index = 1800 
-            tap(device, str(resolution_width / 2) + " " + str(index))
-
-        # 截圖並裁剪 偵測X 去按下
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (250, 1300)  # 起始坐標 (x, y)
-            end_point = (350, 1450)    # 結束坐標 (x, y)
-        else:
-            start_point = (480, 1730)  # 起始坐標 (x, y)
-            end_point = (640, 1850)    # 結束坐標 (x, y)
-
-
-        # 截圖並裁剪
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = ddddocr_image(cropped_img)  
-        #resulttext2 = pytesseract_image_Chitra(cropped_img)  
-        if resulttext.find("x") > -1 or resulttext.find("大") > -1 or resulttext.find("十") > -1:
-            index = 1800 
-            tap(device, str(resolution_width / 2) + " " + str(index))
-            
-   
-
-
-    # start_point = (262, 800)  # 起始坐標 (x, y)
-    # end_point = (880, 1350)    # 結束坐標 (x, y)
-      
-    # # 截圖並裁剪
-    # img = capture_screenshot(device)
-    # cropped_img = crop_image(img, start_point, end_point)
-    # resulttext = paddleocr_image(cropped_img)  
-    # if resulttext.find("紅包雨")  > -1:
-    #     tap(device, str((resolution_width / 2)) + " " + str(calculate_x(resolution_height)))
-    
-    # if resulttext.find("您已觀看達30秒")  > -1:
-    #     tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
-    # elif resulttext.find("第3天")  > -1:
-    #     tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
-    
-
-    #判斷數值
-    if resolution_width == 720 and resolution_height == 1560:
-        start_point = (600+ Leftspace, 100)  # 起始坐標 (x, y)
-        end_point = (700+ Leftspace, 1050)    # 結束坐標 (x, y)
-    else:
-        start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
-        end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
-
-    # 截圖並裁剪
-    img = capture_screenshot(device)
-    cropped_img = crop_image(img, start_point, end_point)
-    resulttext = paddleocr_image(cropped_img)  
-
-    if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
-        turn_on_screen()
-       
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (600+ Leftspace, 100+jump)  # 起始坐標 (x, y)
-            end_point = (700+ Leftspace, 200+jump)    # 結束坐標 (x, y)
-        else:
-            start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
-            end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
-
-        print("比對领取" + " " + str(jump))
-        
-        # 截圖並裁剪
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext2 = paddleocr_image(cropped_img)  
-        
-        if resulttext2.find("領取")  > -1 or resulttext2.find("领取")  > -1 :
-           
-            print("第2次比對")
-            if (jump > 100):
-                BaseJump = 50
-            
-            elif (jump > 200):
-                BaseJump = 100
-            else:
-                BaseJump = 0
-        else:
-            jump = jump + dpi
-                    
-            if jump > 650:
-                return "next"
-            
-            return "wait"
-            
-
-
-        index = 321+jump 
-        if resolution_width == 720 and resolution_height == 1560:
-            index = 165+jump
-            tap(device, str(650) + " " + str(index))
-        else:
-            tap(device, str(resolution_width - 106) + " " + str(index))
-        time.sleep(4.0)
-        if resolution_width == 720 and resolution_height == 1560:
-            index = 935 
-            tap(device, str(365) + " " + str(index))
-        elif (resolution_height < 2400):
-            index = 1360 
-            tap(device, str(542) + " " + str(index))
-        else:
-            index = 1400 + (abs(2380 - resolution_height) * 2)
-            tap(device, str(resolution_width / 2) + " " + str(index))
-         
-            
-
-        time.sleep(4.0)
-            
-        TotalCount = int(TotalCount) + 1
-        SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
-        #判斷 下方位置是否有參加 可以按
-        start_point = (900+ Leftspace, 450+jump)  # 起始坐標 (x, y)
-        end_point = (1150+ Leftspace, 590+jump)    # 結束坐標 (x, y)
-      
-        # 截圖並裁剪
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-
-        # 執行 OCR
-        #resulttext = pytesseract_image(cropped_img)
-        resulttext = paddleocr_image(cropped_img)  
-        
-        try:
-        
-            if resulttext.find("参加") > -1 and resulttext.find("已参加") == -1:
-                #轉盤
-                index = 520+jump
-
-                tap(device, str(resolution_width  - 100) + " " + str(index) )
-                time.sleep(4.0)
-
-                start_point = (262, 800)  # 起始坐標 (x, y)
-                end_point = (880, 1350)    # 結束坐標 (x, y)
-      
-                # 截圖並裁剪
-                img = capture_screenshot(device)
-                cropped_img = crop_image(img, start_point, end_point)
-                resulttext = paddleocr_image(cropped_img) 
-                  
-                if resulttext.find("手機號碼") > -1:
-                    index = (resolution_height / 2 ) + 100
-                    tap(device, str(resolution_width / 4) + " " + str(index))
-                    time.sleep(3.0)
-
-               
-                
-                  
-                index = (resolution_height / 2 ) - 100
-                tap(device, str(resolution_width / 2) + " " + str(index))
-                time.sleep(12.0)
-
-                index = (resolution_height / 2 ) + 100
-                tap(device, str((resolution_width / 2) + 200) + " " + str(index))
-                time.sleep(12.0)
-
-                index = (resolution_height / 2 ) + 282
-                tap(device, str(resolution_width / 2) + " " + str(index))
-                time.sleep(2.0)
-
-        
-        except ValueError:
-       
-            print("轉盤有錯誤")
-
-        now = datetime.now().time()
-        limit_time = time(23, 30)  # 23:30
-
-        # ⛔ 還沒到 23:30
-        if now < limit_time:
-            return "ok"
-
-        
-        #if (device_id == "FA75V1802306"):
-        #    tap(device, str(resolution_width - 106) + " " + str(index))
-        #    time.sleep(3.0)
-        #    index = 1732
-        #    tap(device, "780 "+ str(index))
-        #    time.sleep(3.0)
-        #else:
-        #    tap(device, str(984 + Leftspace) + " " + str(index))
-        #    time.sleep(4.0)
-      
-        #    index = 1473
-        #    tap(device, str(554 + Leftspace) + " " + str(index))
-        #    time.sleep(4.0)
-        return "ok"
-               
-        
-       
-    
-    spilt = resulttext.split('\n')
-    valid, value, time2 = validate_block(spilt)
-    if valid:
-        print("數值：", value)
-        print("時間：", time2)
-        ErrorCount = 0
-        
-        # 將 MM:SS 轉換為「總分鐘」
-        minutes, seconds = map(int, time2.split(":"))
-        wait_minutes = minutes + seconds / 60.0
-        wait_sec = int(wait_minutes * 60)
-        # 計算每分鐘收益
-        value_per_minute = value / wait_minutes
-
-        # 設定門檻值（你可以調整這個值）
-        threshold = 0.02857
-
-        # 顯示資訊
-        print(f"數值：{value}")
-        print(f"時間：{time2}（約 {wait_minutes:.2f} 分鐘）")
-        print(f"每分鐘收益：{value_per_minute:.4f}")
-
-        # 判斷是否執行
-        if value_per_minute >= threshold:
-            print("✅ 值得執行！")
-        else:
-            print("❌ 不值得執行")
-            return "next"
-            
-        if value_per_minute >= threshold:
-            print("每分鐘收益 值得執行")
-            
-            if resolution_width == 720 and resolution_height == 1560:
-                start_point = (600+ Leftspace, 100+jump)  # 起始坐標 (x, y)
-                end_point = (700+ Leftspace, 200+jump)    # 結束坐標 (x, y)
-            else:
-                start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
-                end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
-
-            print("比對领取" + " " + str(jump))
-            # 截圖並裁剪
-            img = capture_screenshot(device)
-            cropped_img = crop_image(img, start_point, end_point)
-            resulttext2 = paddleocr_image(cropped_img)  
-            spilt = resulttext2.split('\n')
-            valid, value, time2 = validate_block(spilt)
-            if valid:
-                print("找到數值或是時間")
-                for _ in range(wait_sec):
-
-                    time.sleep(1)
-                    wait_sec = wait_sec -1
-                    print("還剩下" + str(wait_sec) + "秒")
-
-            else:
-                jump = jump + dpi
-                    
-                if jump > 650:
-                    return "next"
-
-
-            return "wait"
-        else:
-            print("數值小於 0.2")
-
-            return "next"
-    else:
-        print("解析蝦皮和時間錯誤")
-        ErrorCount = ErrorCount + 1
-        if (ErrorCount < 1):
-            return "wait"
-        else:
-            return "next"
-   
 def click_bounds(d, bounds_str):
     # 使用正規表達式抓出四個數字 [left, top][right, bottom]
     nums = re.findall(r'\d+', bounds_str)
@@ -1084,16 +582,33 @@ if __name__ == '__main__':
   if display_info:
     print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
     
+  frame1flag = 0 #偵測轉盤 已結束
+  frame2flag = 0 #下一場 已完成
+  frame3flag = 0
 
+ 
+
+ 
   print("正在獲取螢幕物件配置...")
   for i in range(99999999):
       try:
+          now = datetime.datetime.now().time()
+
+          start_time = datetime.time(1, 00)    # 08:00
+          end_time   = datetime.time(1, 10)   # 11:00
+          # ✅ 只有在 08:00~11:00 之間
+          if start_time <= now <= end_time:
+          #進行
+            frame1flag = 0 #偵測轉盤 已結束
+            frame2flag = 0
+            frame3flag = 0
+
           # 連接手機 (如果只有一台手機，通常不用填 serial
           print("---Start---------...")
-          time.sleep(1.0)
+          #time.sleep(1.0)
           allspace = True
           d = u2.connect(device_id)
-          time.sleep(1.0)
+          #time.sleep(1.0)
           cancelflag = False
 
           # 獲取當前頁面所有元素
@@ -1121,14 +636,17 @@ if __name__ == '__main__':
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
+                    break
                 if text == "立即簽到":
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
+                    break
                 if text == "下一場次":
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
+                    frame2flag = 1
                     break
                 if text == "簽到":
                     click_bounds(d, bounds)
@@ -1137,7 +655,7 @@ if __name__ == '__main__':
                     # 觸發系統「返回鍵」
                     d.press("back")
                     time.sleep(2.0)
-
+                    break
                 if text == "領取":
                     click_bounds(d, bounds)
                     allspace =False
@@ -1145,20 +663,29 @@ if __name__ == '__main__':
                     # 觸發系統「返回鍵」
                     d.press("back")
                     time.sleep(2.0)
+                    break
                 if text == "觀看":
                
                     allspace =False
                     # 觸發系統「返回鍵」
                     d.press("back")
                     time.sleep(2.0)
-
+                    break
+                if text == "已結束":
+                    frame1flag = 1
+                    break
                 if text == "推薦":
                    time.sleep(2.0)
-                if text == "直播":
+                   break
+                if text == "直播" and frame2flag == 1:
+                   click_bounds(d, bounds)
                    time.sleep(2.0)
-                if text == "短影音":
+                   break
+                if text == "短影音" and frame1flag == 1:
+                   click_bounds(d, bounds)
                    time.sleep(2.0)
-
+                   frame1flag = 2
+                   break
                 if text == "幸運轉盤":
                     # 截圖並裁剪
                     start_point = ((resolution_width / 2 ) - 150, (resolution_height / 2 ) - 250)  # 起始坐標 (x, y)
@@ -1173,7 +700,7 @@ if __name__ == '__main__':
                     click_action(d, actionx , actiony)
                     allspace =False
                     time.sleep(2.0)
-
+                    break
 
                 #if d(resourceId="com.shopee.tw.dfpluginshopee7:id/main_play_layout").exists:
                 #    #print("發現蝦皮關閉按鈕，正在點擊...")
@@ -1198,6 +725,7 @@ if __name__ == '__main__':
                     swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
                     time.sleep(2.0)
                     allspace =False
+                    break
                 if text == "已結束":
                      #滑動
                     swipe_start = '500 1300'
@@ -1205,12 +733,15 @@ if __name__ == '__main__':
                     swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
                     time.sleep(2.0)
                     allspace =False
+                    break
                 if text.find("前往驗證") > -1 :
                     cancelflag = True
+                    break
                 if text == "取消":
                     if cancelflag :
                         click_bounds(d, bounds)
                         allspace =True
+                    break
             else:
                  # 獲取座標 (attrib 裡面的 bounds)
                 bounds = el.attrib.get('bounds')
