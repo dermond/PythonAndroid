@@ -23,6 +23,7 @@ class DBConnect():
             self.dbcon=None
 
     def ConnectDB(self, DBName=None, max_retries=5, retry_interval=5, timeout=10):
+       import time
        if DBName is not None:
            self.database = DBName
     

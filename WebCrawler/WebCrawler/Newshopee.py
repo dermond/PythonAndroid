@@ -899,7 +899,9 @@ def judgment(temp):
 
         # ⛔ 還沒到 23:30
         if now < limit_time:
-            return "ok"
+            
+            return "next"
+            #return "ok"
 
         
         #if (device_id == "FA75V1802306"):
@@ -915,7 +917,8 @@ def judgment(temp):
         #    index = 1473
         #    tap(device, str(554 + Leftspace) + " " + str(index))
         #    time.sleep(4.0)
-        return "ok"
+        return "next"
+        #return "ok"
                
         
        
@@ -1051,7 +1054,7 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "46081JEKB10015"
+  deviceid = "FA75V1802306"
   #deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"

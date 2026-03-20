@@ -240,6 +240,18 @@ def click_action(d, x, y, action="click", duration=0.1):
         print(f"🎯 點擊座標: ({x}, {y})")
         d.click(x, y)
    
+def find_element_by_text(device_id, target_text):
+    d = u2.connect(device_id)
+
+    for el in d.xpath('//*').all():
+        text = el.text
+        bounds = el.attrib.get('bounds')
+        if str(text).find(target_text) > -1:
+            print("中了")
+        if text and target_text in text:
+            return el   # 找到就回傳元件
+
+    return None  # 沒找到
 
 if __name__ == '__main__':
 
@@ -269,7 +281,7 @@ if __name__ == '__main__':
   BankPoint = "582 1485" #郵局
  
   #次數
-  ForCount = 2
+  ForCount = 5
 
   d = u2.connect(device_id)
 
@@ -384,6 +396,12 @@ if __name__ == '__main__':
                     break
                 if text.strip() == "卡片密碼(非實體卡密碼), 請輸入6-12位數字" and step == 6:
                     click_bounds(d, bounds)
+                    time.sleep(1.0)
+                    ele = find_element_by_text(device_id,"不用了，謝謝")     
+                    if ele is not None :
+                        bounds = ele.attrib.get('bounds')
+                        click_bounds(d, bounds)
+                        time.sleep(1.0)
                     input_characters(device, "9393695")
                     time.sleep(1.0)
                     step = 7
