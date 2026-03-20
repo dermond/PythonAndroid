@@ -54,6 +54,10 @@ BASE_WIDTH  = 1080
 BASE_HEIGHT = 2400
 BASE_DPI = 420
 
+# Shopee 的包名與主 Activity
+package_name = "com.shopee.tw"
+activity_name = "com.shopee.app.ui.home.HomeActivity_"
+
 def check_garbage_objects():
     gc.collect()  # 手動觸發垃圾回收
     uncollected = gc.garbage
@@ -221,6 +225,42 @@ def adb_init(device_id):
     ])
     time.sleep(1)
     subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"])
+
+    subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"], check=False)
+
+    subprocess.run(["adb", "-s", device_id, "shell", "wm", "density", "reset"], check=False)
+
+    subprocess.run(["adb", "-s", device_id, "shell", "wm", "overscan", "reset"], check=False)
+
+   # 1. 重置螢幕尺寸與密度 (這兩項在 Android 11+ 依然有效)
+    subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"], check=False)
+    subprocess.run(["adb", "-s", device_id, "shell", "wm", "density", "reset"], check=False)
+
+    # 2. 清除沉浸模式 (Immersive Mode) 設定
+    subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "global", "policy_control", "null"], check=False)
+    subprocess.run(["adb", "-s", device_id, "shell", "settings", "delete", "global", "policy_control"], check=False)
+
+    # 3. 重置導航模式 (針對 Android 11+ 的核心重置)
+    # 這裡我們先嘗試「啟用」三鍵導航模式 (最傳統的導航列)
+    print("正在恢復三鍵導航模式...")
+    subprocess.run(["adb", "-s", device_id, "shell", "cmd", "overlay", "enable", "com.android.internal.systemui.navbar.threebutton"], check=False)
+    
+    # 如果你想重置回手勢導航，可以改用下面這行：
+    # subprocess.run(["adb", "-s", device_id, "shell", "cmd", "overlay", "enable", "com.android.internal.systemui.navbar.gestural"], check=False)
+
+    time.sleep(1)
+
+    subprocess.run(["adb","-s",device_id,"shell","settings","put","secure","navigation_mode","0"])
+    subprocess.run(["adb","-s",device_id,"shell","pkill","com.android.systemui"])
+    time.sleep(1)
+
+    # 4. 強制重啟 SystemUI 讓設定生效
+    print("重啟 SystemUI...")
+    subprocess.run(["adb", "-s", device_id, "shell", "pkill", "com.android.systemui"], check=False)
+
+    print("重置完成！")
+    time.sleep(2)
+
 
 def capture_screenshot(device):
     try:
@@ -451,37 +491,6 @@ def calculate_x2(y):
     #2560,1846
     return round(1.5875 * y - 2218)
 
-def ReLoadShopee():
-    # 關閉 Shopee
-    device.shell(f"am force-stop {package_name}")
-    print("Shopee 已停止")
-    time.sleep(4.0)
-    # 啟動 Shopee
-    start_command = f"am start -n {package_name}/{activity_name}"
-    output = device.shell(start_command)
-    print(f"Shopee 已啟動，輸出：\n{output}")
-    time.sleep(6.0)
-        
-    tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
-    #tap(device, "545 2180 ")
-    time.sleep(4.0)
-    
-    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
-        tap(device, "600 203 ")
-        time.sleep(2.0)
-    elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
-        tap(device, "600 203 ")
-        time.sleep(2.0)
-
-    elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
-        tap(device, "825 220 ")
-        time.sleep(2.0)
-    elif resolution_width == 1080 and resolution_height == 2400 and density == 480 : #(1080, 2400)  de824891  :
-        tap(device, "620 170 ")
-        time.sleep(2.0)
-    else:
-        tap(device, "600 203 ")
-        time.sleep(2.0)
 
 def click_bounds(d, bounds_str):
     # 使用正規表達式抓出四個數字 [left, top][right, bottom]
@@ -506,7 +515,67 @@ def click_action(d, x, y, action="click", duration=0.1):
     else:
         print(f"🎯 點擊座標: ({x}, {y})")
         d.click(x, y)
-   
+
+def count_text_elements(device_id, text_to_find, retries=3, delay=1):
+    """
+    計算畫面上符合指定文字的元素數量
+    
+    :param device_id: 裝置ID
+    :param text_to_find: 要查找的文字
+    :param retries: 找不到時重試次數
+    :param delay: 每次重試間隔秒數
+    :return: 數量 (int)
+    """
+    d = u2.connect(device_id)
+    
+    try:
+        for attempt in range(1, retries + 1):
+            elements = d.xpath(f'//*[@text="{text_to_find}"]').all()
+            count = len(elements)
+
+            if count > 0:
+                return count
+            else:
+                if attempt < retries:
+                    print(f"文字 '{text_to_find}' 未找到，等待 {delay} 秒後重試 ({attempt}/{retries})...")
+                    time.sleep(delay)
+                else:
+                    print(f"文字 '{text_to_find}' 未找到，已達最大重試次數 ({retries})")
+                    return 0
+
+    except Exception as ex:
+        return 0
+
+def get_text_bounds(device_id, text_to_find, retries=3, delay=1):
+    """
+    連接到裝置後，尋找指定文字，並回傳它的 bounds。
+    如果沒找到，會連續重試指定次數，每次停頓 delay 秒。
+    
+    :param device_id: 裝置ID
+    :param text_to_find: 要查找的文字
+    :param retries: 找不到時重試次數，預設3次
+    :param delay: 每次重試的間隔秒數，預設1秒
+    :return: bounds 字串或 None
+    """
+    d = u2.connect(device_id)
+    try:
+        for attempt in range(1, retries + 1):
+            el = d.xpath(f'//*[@text="{text_to_find}"]').get()
+        
+            if el:
+                bounds = el.attrib.get('bounds')
+                return bounds
+            else:
+                if attempt < retries:
+                    print(f"文字 '{text_to_find}' 未找到，等待 {delay} 秒後重試 ({attempt}/{retries})...")
+                    time.sleep(delay)
+                else:
+                    print(f"文字 '{text_to_find}' 未找到，已達最大重試次數 ({retries})")
+    except Exception as ex:
+        return None
+    return None
+
+ 
 def click_shopee_activity_by_coord(d, target_x=540, target_y=1800):
     """
     In cases where 'bounds' is not allowed, we use coordinate-based 
@@ -544,6 +613,27 @@ def click_shopee_activity_by_coord(d, target_x=540, target_y=1800):
         print("Layer not confirmed, attempting blind click at target coordinates.")
         d.click(target_x, target_y)
         return True
+
+def ReLoadShopee():
+    # 關閉 Shopee
+    device.shell(f"am force-stop {package_name}")
+    print("Shopee 已停止")
+    time.sleep(4.0)
+    # 啟動 Shopee
+    start_command = f"am start -n {package_name}/{activity_name}"
+    output = device.shell(start_command)
+    print(f"Shopee 已啟動，輸出：\n{output}")
+    time.sleep(6.0)
+   
+def Key_Return():
+    try:
+        subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "4"], check=True)
+  
+        print("Key_Return")
+    except Exception as e:
+        print(f"Key_Return 錯誤")
+
+
 if __name__ == '__main__':
   
   goflag = 0
@@ -565,11 +655,13 @@ if __name__ == '__main__':
   device, client = connect(deviceid)
   adb_init(deviceid)
   device_id = device.serial
+
+  ReLoadShopee()
   jump = 150
   BaseJump = 0
   Leftspace = 0
   dpi = 10
-
+  
   #解析度（wm size）：(1080, 2400) 螢幕密度（wm density）：480 dpi de824891
   #解析度（wm size）：(1080, 2400) 螢幕密度（wm density）：420 dpi 46081JEKB10015
   #解析度（wm size）：(1440, 2560) 螢幕密度（wm density）：640 dpi FA75V1802306
@@ -632,6 +724,12 @@ if __name__ == '__main__':
                     allspace =False
                     time.sleep(2.0)
                     break
+                if text == "打開簽到":
+                    click_bounds(d, bounds)
+                    allspace =False
+                    time.sleep(2.0)
+                    break
+
                 if text == "關注":
                     click_bounds(d, bounds)
                     allspace =False
@@ -646,7 +744,8 @@ if __name__ == '__main__':
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
-                    frame2flag = 1
+                    if frame2flag == 0:
+                        frame2flag = 1
                     break
                 if text == "簽到":
                     click_bounds(d, bounds)
@@ -671,21 +770,22 @@ if __name__ == '__main__':
                     d.press("back")
                     time.sleep(2.0)
                     break
-                if text == "已結束":
-                    frame1flag = 1
-                    break
-                if text == "推薦":
+ 
+                if text == "推薦" and frame1flag == 0:
+                   click_bounds(d, bounds)
                    time.sleep(2.0)
-                   break
+                   frame1flag = 1
+                   
                 if text == "直播" and frame2flag == 1:
                    click_bounds(d, bounds)
                    time.sleep(2.0)
-                   break
-                if text == "短影音" and frame1flag == 1:
+                   frame2flag = 2
+                   Key_Return()
+                if text == "短影音" and frame1flag == 2:
                    click_bounds(d, bounds)
                    time.sleep(2.0)
-                   frame1flag = 2
-                   break
+                   frame1flag = 3
+                   
                 if text == "幸運轉盤":
                     # 截圖並裁剪
                     start_point = ((resolution_width / 2 ) - 150, (resolution_height / 2 ) - 250)  # 起始坐標 (x, y)
@@ -727,13 +827,21 @@ if __name__ == '__main__':
                     allspace =False
                     break
                 if text == "已結束":
-                     #滑動
-                    swipe_start = '500 1300'
-                    swipe_end = '500 500'
-                    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-                    time.sleep(2.0)
-                    allspace =False
-                    break
+                    count = count_text_elements(device_id , "已結束")
+                    if (count >= 2):
+                        frame1flag = 2
+
+                    count = count_text_elements(device_id , "參加")
+                    if (count > 0):
+                        print("有參加")
+                    else:
+                         #滑動
+                        swipe_start = '500 1300'
+                        swipe_end = '500 500'
+                        swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                        time.sleep(2.0)
+                        allspace =False
+                        break
                 if text.find("前往驗證") > -1 :
                     cancelflag = True
                     break
