@@ -666,11 +666,11 @@ def find_element_by_text(device_id, target_text):
 if __name__ == '__main__':
   
   goflag = 0
-  #deviceid = ""
+  deviceid = ""
   #deviceid = "R58N10RXWVF"
   #deviceid = "46081JEKB10015"
   #deviceid = "de824891"
-  deviceid = "FA75V1802306"
+  #deviceid = "FA75V1802306"
   
   if len(sys.argv) > 1:
         print("你輸入的參數如下：")
@@ -919,7 +919,7 @@ if __name__ == '__main__':
                 #         break
                 if text.find("前往驗證") > -1 :
                     cancelflag = True
-                    break
+                    #break
                 if text == "取消":
                     if cancelflag :
                         click_bounds(d, bounds)
@@ -927,19 +927,19 @@ if __name__ == '__main__':
                     break
             else:
                 # 獲取座標 (attrib 裡面的 bounds)
-                bounds = el.attrib.get('bounds')
+                 bounds = el.attrib.get('bounds')
                 # # 獲取類別
                 # classname = el.attrib.get('class')
 
-                # print(f"內容: {text}")
-                # print(f"位置: {bounds}")
-                # print(f"類型: {classname}")
+                 print(f"內容: {text}")
+                 print(f"位置: {bounds}")
+                 print(f"類型: {classname}")
 
-                # # 嘗試列印出所有屬性看看
-                # print(el.attrib)
-                # # 在您的程式碼中加入這一行
-                # description = el.attrib.get('content-description') or el.attrib.get('content-desc')
-                # print(f"說明標籤: {description}")
+                 # 嘗試列印出所有屬性看看
+                 print(el.attrib)
+                 # 在您的程式碼中加入這一行
+                 description = el.attrib.get('content-description') or el.attrib.get('content-desc')
+                 print(f"說明標籤: {description}")
 
           if allspace :
            # click_shopee_activity_by_coord(d)
