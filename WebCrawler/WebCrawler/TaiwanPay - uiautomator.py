@@ -342,13 +342,21 @@ if __name__ == '__main__':
                         center_y = (top + bottom) // 2
 
                     dropdown_position = str(center_x) + ' ' + str(center_y)  # 下拉清單的位置
-                    option_position = str(center_x) + ' ' + str(center_y - 200)    # 選擇的選項的位置
+                    option_position = str(center_x) + ' ' + str(center_y + 100)    # 選擇的選項的位置
                     select_from_dropdown(device, dropdown_position,text_to_input, option_position)
 
                     time.sleep(1.0)
                     step = 3
                     break
                 if text.strip() == "門號, 請確認輸入的帳號內容" and step == 3:
+                    click_bounds(d, bounds)
+                    time.sleep(1.0)
+                    input_characters(device, PhoneNumber)
+                    time.sleep(1.0)
+                    step = 4
+                    Key_Return()
+                    break
+                if text.strip() == "門號, 門號須已在銀行設定轉帳入帳功能" and step == 3:
                     click_bounds(d, bounds)
                     time.sleep(1.0)
                     input_characters(device, PhoneNumber)

@@ -16,6 +16,7 @@ import cv2
 import numpy as np
 from paddleocr import PaddleOCR #paddlepaddle
 import sys
+import re
 
 ocr = ddddocr.DdddOcr()
 Pocr = PaddleOCR(use_angle_cls=False, lang='ch')  # lang='ch' 支援
@@ -48,6 +49,52 @@ def connect(serial: str):
     else:
         sys.exit()
     return fallback_device, client
+
+def get_screen_info_from_device(device):
+   
+    """
+   
+    傳入已連接的 ADB device 實體，回傳解析度與密度。
+    回傳值：
+      - resolution: (width, height)
+      - density: dpi
+      - display_info: 從 dumpsys display 中解析出的 width, height, densityDpi
+    """
+    global resolution_width
+    global resolution_height
+    
+    # 取得解析度
+    wm_size_output = device.shell("wm size")
+    match_size = re.search(r'(Override|Physical) size:\s*(\d+)x(\d+)', wm_size_output)
+    resolution = (int(match_size.group(2)), int(match_size.group(3))) if match_size else None
+    resolution_width = int(match_size.group(2))
+    resolution_height = int(match_size.group(3))
+    # 取得密度
+    wm_density_output = device.shell("wm density")
+    match_density = re.search(r'(Override|Physical) density:\s*(\d+)', wm_density_output)
+    density = int(match_density.group(2)) if match_density else None
+
+    # 從 dumpsys display 擷取更多資訊
+    dumpsys_display = device.shell("dumpsys display")
+    match_display_info = re.search(
+        r'DisplayDeviceInfo\{.*?width=(\d+), height=(\d+).*?densityDpi=(\d+)',
+        dumpsys_display,
+        re.DOTALL
+    )
+    if match_display_info:
+        display_width = int(match_display_info.group(1))
+        display_height = int(match_display_info.group(2))
+        display_density_dpi = int(match_display_info.group(3))
+        display_info = {
+            "width": display_width,
+            "height": display_height,
+            "densityDpi": display_density_dpi
+        }
+    else:
+        display_info = None
+
+    return resolution, density, display_info
+
 
 def tap(device, position):
     device.shell(f'input tap {position}')
@@ -225,17 +272,27 @@ def solve_sudoku():
 
     # --- 座標設定 ---
     # 棋盤起始與結束座標
-    start_x, start_y = 95, 600
-    end_x, end_y = 990, 1480
+    if device_id == "R58N10RXWVF":
+        start_x, start_y = 60, 380
+        end_x, end_y = 655, 970
+    else:
+        start_x, start_y = 95, 600
+        end_x, end_y = 990, 1480
     
     # 計算間距 (95到990分8個間隔, 600到1480分8個間隔)
     step_x = (end_x - start_x) / 8
     step_y = (end_y - start_y) / 8
     
     # 下方數字列座標 (1~9)
-    num_start_x = 80
-    num_y = 2107
-    num_step_x = (1007 - 80) / 8
+    if device_id == "R58N10RXWVF":
+        num_start_x = 55
+        num_y = 1355
+        num_step_x = (663 - 55) / 8
+    else:
+        num_start_x = 80
+        num_y = 2107
+        num_step_x = (1007 - 80) / 8
+    
 
     print("開始自動填入數獨...")
 
@@ -253,20 +310,31 @@ def solve_sudoku():
             print(f"略過 [{row},{col}] val={val}（不在1~9）")
             continue
 
-        start_point = (810, 458)  # 起始坐標 (x, y)
-        end_point = (1046, 528)    # 結束坐標 (x, y)
+        # 下方數字列座標 (1~9)
+        if device_id == "R58N10RXWVF":
+            start_point = (539, 286)  # 起始坐標 (x, y)
+            end_point = (678, 332)    # 結束坐標 (x, y)
+        else:
+            start_point = (810, 458)  # 起始坐標 (x, y)
+            end_point = (1046, 528)    # 結束坐標 (x, y)
+        
         img = capture_screenshot(device)
         cropped_img = crop_image(img, start_point, end_point)
         resulttext = paddleocr_image(cropped_img)  
         # if (resulttext.find("游戳教享")  == -1 and resulttext.find("游戏教学")  == -1 ):
         #     continue
 
-        while (resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1):
-
+        while (resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1 and resulttext.find("游教學") == -1):
+            
             time.sleep(0.5)  # 每0.5秒檢查一次
             # 這裡要重新取得 resulttext !!
-            start_point = (810, 458)  # 起始坐標 (x, y)
-            end_point = (1046, 528)    # 結束坐標 (x, y)
+            if device_id == "R58N10RXWVF":
+                start_point = (539, 286)  # 起始坐標 (x, y)
+                end_point = (678, 332)    # 結束坐標 (x, y)
+            else:
+                start_point = (810, 458)  # 起始坐標 (x, y)
+                end_point = (1046, 528)    # 結束坐標 (x, y)
+        
             img = capture_screenshot(device)
             cropped_img = crop_image(img, start_point, end_point)
             resulttext = paddleocr_image(cropped_img)  
@@ -291,23 +359,35 @@ def solve_sudoku():
 
 if __name__ == '__main__':
 
-  deviceid = "46081JEKB10015"
+  #deviceid = ""
+  deviceid = "R58N10RXWVF"
+  #deviceid = "46081JEKB10015"
+  #deviceid = "de824891"
+  #deviceid = "FA75V1802306"
   device, client = connect(deviceid)
-
+  device_id = device.serial
   #目前按鈕特性 是給 google pixel 8a用
   # 
+  resolution, density, display_info = get_screen_info_from_device(device)
+
+  print(f"解析度（wm size）：{resolution}")
+  print(f"螢幕密度（wm density）：{density} dpi")
+  if display_info:
+    print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
+    
+
 
   # 數獨解答資料 (僅填入空白格)
   solution_data = [
-  [1,1,4],[1,2,3],[1,3,6],[1,4,5],[1,5,1],[1,6,9],[1,7,8],[1,8,7],[1,9,2],
-  [2,1,9],[2,2,1],[2,3,7],[2,4,4],[2,5,2],[2,6,8],[2,7,3],[2,8,6],[2,9,5],
-  [3,1,8],[3,2,5],[3,3,2],[3,4,3],[3,5,7],[3,6,6],[3,7,1],[3,8,4],[3,9,9],
-  [4,1,1],[4,2,2],[4,3,8],[4,4,9],[4,5,6],[4,6,5],[4,7,7],[4,8,3],[4,9,4],
-  [5,1,5],[5,2,6],[5,3,4],[5,4,7],[5,5,3],[5,6,1],[5,7,2],[5,8,9],[5,9,8],
-  [6,1,7],[6,2,9],[6,3,3],[6,4,2],[6,5,8],[6,6,4],[6,7,6],[6,8,5],[6,9,1],
-  [7,1,3],[7,2,8],[7,3,9],[7,4,1],[7,5,5],[7,6,7],[7,7,4],[7,8,2],[7,9,6],
-  [8,1,6],[8,2,7],[8,3,5],[8,4,8],[8,5,4],[8,6,2],[8,7,9],[8,8,1],[8,9,3],
-  [9,1,2],[9,2,4],[9,3,1],[9,4,6],[9,5,9],[9,6,3],[9,7,5],[9,8,8],[9,9,7]
+  [1,1,8],[1,2,5],[1,3,1],[1,6,6],[1,7,3],[1,8,9],
+  [2,3,4],[2,4,8],[2,5,3],[2,8,2],[2,9,5],
+  [3,2,2],[3,4,4],[3,5,5],[3,6,9],[3,8,1],[3,9,8],
+  [4,2,1],[4,5,2],[4,9,9],
+  [5,1,9],[5,2,3],[5,3,7],[5,4,6],[5,5,1],[5,6,4],[5,8,8],
+  [6,1,2],[6,2,4],[6,3,8],[6,4,5],[6,5,9],[6,7,1],[6,8,3],
+  [7,1,3],[7,2,8],[7,3,5],[7,4,7],[7,5,4],[7,9,1],
+  [8,3,2],[8,5,6],[8,6,5],[8,8,4],
+  [9,1,4],[9,2,6],[9,4,1],[9,5,8],[9,6,3],[9,7,2],[9,8,5]
 ]
   
   solve_sudoku()
