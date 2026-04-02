@@ -1120,7 +1120,7 @@ if __name__ == '__main__':
     print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
     
 
- 
+  adb_init(device_id)
 
 
   #if (resolution_width == 1440):
