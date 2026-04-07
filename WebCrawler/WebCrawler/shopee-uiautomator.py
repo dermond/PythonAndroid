@@ -216,50 +216,49 @@ def adb_init(device_id):
     subprocess.run(["adb", "-s", device_id, "shell", "killall", "surfaceflinger"])
     time.sleep(2)
 
-    #subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "26"])  # 電源鍵
-    #time.sleep(1)
-    #subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "3"])   # Home
-    subprocess.run([
-        "adb", "-s", device_id, 
-        "shell", "wm", "size", f"{resolution_width}x{resolution_height}"
-    ])
-    time.sleep(1)
-    subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"])
+   #  subprocess.run([
+   #      "adb", "-s", device_id, 
+   #      "shell", "wm", "size", f"{resolution_width}x{resolution_height}"
+   #  ])
+   #  time.sleep(1)
+   #  subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"])
 
-    subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"], check=False)
+   #  subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"], check=False)
 
-    subprocess.run(["adb", "-s", device_id, "shell", "wm", "density", "reset"], check=False)
+   #  subprocess.run(["adb", "-s", device_id, "shell", "wm", "density", "reset"], check=False)
 
-    subprocess.run(["adb", "-s", device_id, "shell", "wm", "overscan", "reset"], check=False)
+   #  subprocess.run(["adb", "-s", device_id, "shell", "wm", "overscan", "reset"], check=False)
 
-   # 1. 重置螢幕尺寸與密度 (這兩項在 Android 11+ 依然有效)
-    subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"], check=False)
-    subprocess.run(["adb", "-s", device_id, "shell", "wm", "density", "reset"], check=False)
+   # # 1. 重置螢幕尺寸與密度 (這兩項在 Android 11+ 依然有效)
+   #  subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"], check=False)
+   #  subprocess.run(["adb", "-s", device_id, "shell", "wm", "density", "reset"], check=False)
 
-    # 2. 清除沉浸模式 (Immersive Mode) 設定
-    subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "global", "policy_control", "null"], check=False)
-    subprocess.run(["adb", "-s", device_id, "shell", "settings", "delete", "global", "policy_control"], check=False)
+   #  # 2. 清除沉浸模式 (Immersive Mode) 設定
+   #  subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "global", "policy_control", "null"], check=False)
+   #  subprocess.run(["adb", "-s", device_id, "shell", "settings", "delete", "global", "policy_control"], check=False)
 
-    # 3. 重置導航模式 (針對 Android 11+ 的核心重置)
-    # 這裡我們先嘗試「啟用」三鍵導航模式 (最傳統的導航列)
-    print("正在恢復三鍵導航模式...")
-    subprocess.run(["adb", "-s", device_id, "shell", "cmd", "overlay", "enable", "com.android.internal.systemui.navbar.threebutton"], check=False)
+   #  # 3. 重置導航模式 (針對 Android 11+ 的核心重置)
+   #  # 這裡我們先嘗試「啟用」三鍵導航模式 (最傳統的導航列)
+   #  print("正在恢復三鍵導航模式...")
+   #  subprocess.run(["adb", "-s", device_id, "shell", "cmd", "overlay", "enable", "com.android.internal.systemui.navbar.threebutton"], check=False)
     
-    # 如果你想重置回手勢導航，可以改用下面這行：
-    # subprocess.run(["adb", "-s", device_id, "shell", "cmd", "overlay", "enable", "com.android.internal.systemui.navbar.gestural"], check=False)
+   #  # 如果你想重置回手勢導航，可以改用下面這行：
+   #  # subprocess.run(["adb", "-s", device_id, "shell", "cmd", "overlay", "enable", "com.android.internal.systemui.navbar.gestural"], check=False)
 
-    time.sleep(1)
+   #  time.sleep(1)
 
-    subprocess.run(["adb","-s",device_id,"shell","settings","put","secure","navigation_mode","0"])
-    subprocess.run(["adb","-s",device_id,"shell","pkill","com.android.systemui"])
-    time.sleep(1)
+   #  subprocess.run(["adb","-s",device_id,"shell","settings","put","secure","navigation_mode","0"])
+   #  subprocess.run(["adb","-s",device_id,"shell","pkill","com.android.systemui"])
+   #  time.sleep(1)
 
-    # 4. 強制重啟 SystemUI 讓設定生效
-    print("重啟 SystemUI...")
-    subprocess.run(["adb", "-s", device_id, "shell", "pkill", "com.android.systemui"], check=False)
+   #  # 4. 強制重啟 SystemUI 讓設定生效
+   #  print("重啟 SystemUI...")
+   #  subprocess.run(["adb", "-s", device_id, "shell", "pkill", "com.android.systemui"], check=False)
 
-    print("重置完成！")
-    time.sleep(2)
+   #  print("重置完成！")
+   #  time.sleep(2)
+    
+    
 
 
 def capture_screenshot(device):
@@ -664,6 +663,56 @@ def find_element_by_text(device_id, target_text):
 
     return None  # 沒找到
 
+def find_imageview_by_bounds(d, target_bounds, width_tolerance=10, height_tolerance=10):
+    """
+    在 uiautomator2 裡找出 className = android.widget.ImageView 且 bounds 接近 target 的元素
+    
+    參數:
+        d: uiautomator2 device 連線物件
+        target_bounds: [left, top, right, bottom]
+        width_tolerance: 寬度容差
+        height_tolerance: 高度容差
+    
+    回傳:
+        最接近的元素 UiObject 或 None
+    """
+    target_class = "android.widget.ImageView"
+
+    def parse_bounds(b):
+        # 將 bounds 字串轉成 [x1, y1, x2, y2]
+        b = b.replace('[','').replace(']',' ').split()
+        x1, y1 = map(int, b[0].split(','))
+        x2, y2 = map(int, b[1].split(','))
+        return [x1, y1, x2, y2]
+
+    target_width = target_bounds[2] - target_bounds[0]
+    target_height = target_bounds[3] - target_bounds[1]
+
+    candidates = []
+
+    for el in d.xpath(f'//*[@package="com.shopee.tw"]').all():
+        b_str = el.attrib.get("bounds")
+        if not b_str:
+            continue
+        b = parse_bounds(b_str)
+        width = b[2] - b[0]
+        height = b[3] - b[1]
+
+        # 比對寬高
+        if abs(width - target_width) <= width_tolerance and abs(height - target_height) <= height_tolerance:
+            # 計算與 target 差距（越小越好）
+            diff = abs(b[0]-target_bounds[0]) + abs(b[1]-target_bounds[1]) \
+                   + abs(b[2]-target_bounds[2]) + abs(b[3]-target_bounds[3])
+            candidates.append((diff, el))
+
+    if not candidates:
+        return None
+
+    # 選擇最接近的元素
+    candidates.sort(key=lambda x: x[0])
+    return candidates[0][1]
+
+
 def All_Close():
     global d
     if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
@@ -672,13 +721,26 @@ def All_Close():
     if d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").exists:
         #print("發現蝦皮關閉按鈕，正在點擊...")
         d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
+    if d(resourceId="com.shopee.tw.dfpluginshopee7:id/fl_content").exists:
+        print("fl_content")
+        Key_Return()
+        
 
+    target_bounds = [493, 1743, 587, 1837]
+    el = find_imageview_by_bounds(d, target_bounds, width_tolerance=0, height_tolerance=0)
+    if el:
+        print("找到元素:", el.attrib)
+        # 點擊
+        el.click()
+    else:
+        print("找不到符合條件的元素")
+              
 if __name__ == '__main__':
   
   goflag = 0
   deviceid = ""
   #deviceid = "R58N10RXWVF"
-  #deviceid = "46081JEKB10015"
+  deviceid = "46081JEKB10015"
   #deviceid = "de824891"
   #deviceid = "FA75V1802306"
   
@@ -762,8 +824,6 @@ if __name__ == '__main__':
               adb_init(deviceid)
 
 
-
-          TotalCount = 90
           
           start_time = datetime.time(1, 00)   
           end_time   = datetime.time(1, 10)  
@@ -776,10 +836,7 @@ if __name__ == '__main__':
           if int(TotalCount) > int(LimitTotalCount):
             print(f"TotalCount 大於"+str(LimitTotalCount)+f"次：\n{str(TotalCount)}")
             
-            if (Step == 30):
-                Step = 50
-
-            #continue
+            continue
 
           # 連接手機 (如果只有一台手機，通常不用填 serial
           print("---Start---------...")
@@ -845,7 +902,8 @@ if __name__ == '__main__':
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
-                    Step = 20
+                    #Step = 20
+                    Step = 50
                     break
                 if text == "簽到":
                     click_bounds(d, bounds)
@@ -862,6 +920,10 @@ if __name__ == '__main__':
                     # 觸發系統「返回鍵」
                     d.press("back")
                     time.sleep(2.0)
+                    el = d.xpath('//*[@text="短影音"]').get()
+                    bounds = el.attrib.get('bounds')
+
+                    click_bounds(d, bounds)
                     break
                 if text == "領取" and Step == 30:
                     nums = re.findall(r'\d+', bounds)
@@ -895,8 +957,13 @@ if __name__ == '__main__':
                
                     allspace =False
                     # 觸發系統「返回鍵」
-                    d.press("back")
+                    Key_Return()
                     time.sleep(2.0)
+                    Key_Return()
+                    el = d.xpath('//*[@text="短影音"]').get()
+                    bounds = el.attrib.get('bounds')
+                    click_bounds(d, bounds)
+                    
                     break
  
                 #if text == "推薦":
@@ -939,9 +1006,10 @@ if __name__ == '__main__':
                    allspace =False
                    d.press("back")
                    time.sleep(2.0)
+                   Step = 53
                    #tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
-                if text == "剩餘機會 : " and Step == 52:
+                if text == "剩餘機會 : " and (Step == 52 or Step == 53):
                    nums = re.findall(r'\d+', bounds)
                    if len(nums) == 4:
                        left, top, right, bottom = map(int, nums)
@@ -952,7 +1020,7 @@ if __name__ == '__main__':
                    option_position = str(center_x) + ' ' + str(center_y - 100)    # 選擇的選項的位置
                    tap(device, option_position) 
                    time.sleep(2.0)
-                   
+                   Step = 54
                    allspace =False
                    #tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
@@ -1004,6 +1072,18 @@ if __name__ == '__main__':
                 if text.find("前往驗證") > -1 :
                     cancelflag = True
                     #break
+                if text.find("成功獲得") > -1 or text.find("下單 +1") > -1 or text.find("免費機會") > -1:
+                    Key_Return()
+                    time.sleep(2.0)
+                    Step = 20
+                    cancelflag = True
+                                       
+                    el = d.xpath('//*[@text="直播短影音"]').get()
+                    bounds = el.attrib.get('bounds')
+                    click_bounds(d, bounds)
+                    time.sleep(2.0)
+                    break
+                
                 if text == "取消":
                     if cancelflag :
                         click_bounds(d, bounds)

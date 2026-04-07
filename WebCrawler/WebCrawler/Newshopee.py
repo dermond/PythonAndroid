@@ -31,7 +31,8 @@ import socket
 import struct
 from pathlib import Path
 import requests
-
+import uiautomator2 as u2
+import random
 
 LAST_SEND_FILE = Path("last_line_send.txt")
 
@@ -457,6 +458,33 @@ def calculate_x2(y):
     #2560,1846
     return round(1.5875 * y - 2218)
 
+def find_element_by_text(device_id, target_text):
+    d = u2.connect(device_id)
+
+    for el in d.xpath('//*').all():
+        text = el.text
+        bounds = el.attrib.get('bounds')
+        if str(text).find(target_text) > -1:
+            print("中了")
+        if text and target_text in text:
+            return el   # 找到就回傳元件
+
+    return None  # 沒找到
+
+def click_bounds(d, bounds_str):
+    # 使用正規表達式抓出四個數字 [left, top][right, bottom]
+    nums = re.findall(r'\d+', bounds_str)
+    if len(nums) == 4:
+        left, top, right, bottom = map(int, nums)
+        # 計算中心點
+        center_x = (left + right) // 2
+        center_y = (top + bottom) // 2
+        
+        print(f"🎯 點擊中心點: ({center_x}, {center_y})")
+        d.click(center_x, center_y)
+
+
+
 def ReLoadShopee():
     # 關閉 Shopee
     device.shell(f"am force-stop {package_name}")
@@ -597,7 +625,7 @@ def judgment(temp):
     global LimitTotalCount
     global BaseJump
     global nextsession
-
+    global d
     # 截圖並裁剪 A20 存取手機
     if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
         start_point = (475, 1350)  # 起始坐標 (x, y)
@@ -748,8 +776,14 @@ def judgment(temp):
             index = 1800 
             tap(device, str(resolution_width / 2) + " " + str(index))
             
-   
-
+    
+    if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
+        #print("發現蝦皮關閉按鈕，正在點擊...")
+        d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
+        #allspace =False
+    if d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").exists:
+        #print("發現蝦皮關閉按鈕，正在點擊...")
+        d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
 
     # start_point = (262, 800)  # 起始坐標 (x, y)
     # end_point = (880, 1350)    # 結束坐標 (x, y)
@@ -783,59 +817,45 @@ def judgment(temp):
     if resulttext.find("領取")  > -1 or resulttext.find("领取")  > -1 :
         turn_on_screen()
        
-        if resolution_width == 720 and resolution_height == 1560:
-            start_point = (600+ Leftspace, 100+jump)  # 起始坐標 (x, y)
-            end_point = (700+ Leftspace, 200+jump)    # 結束坐標 (x, y)
-        else:
-            start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
-            end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
+        ele = find_element_by_text(device_id,"領取")     
+        if ele is not None :
+            bounds = ele.attrib.get('bounds')
+            nums = re.findall(r'\d+', bounds)
+            if len(nums) == 4:
+                left, top, right, bottom = map(int, nums)
+                # 計算中心點
+                center_x = (left + right) // 2
+                center_y = (top + bottom) // 2
 
-        print("比對领取" + " " + str(jump))
-        
-        # 截圖並裁剪
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext2 = paddleocr_image(cropped_img)  
-        
-        if resulttext2.find("領取")  > -1 or resulttext2.find("领取")  > -1 :
-           
-            print("第2次比對")
-            if (jump > 100):
-                BaseJump = 50
-            
-            elif (jump > 200):
-                BaseJump = 100
-            else:
-                BaseJump = 0
-        else:
-            jump = jump + dpi
+                option_position = str(center_x) + ' ' + str(center_y - 50)    # 選擇的選項的位置
+                time.sleep(random.uniform(1, 10))
+                tap(device, option_position) 
+                time.sleep(2.0) 
+                # d = u2.connect(device_id)
+                # for el in d.xpath('//*').all():
+                #     # 檢查是否有文字 (使用 .text 屬性)
+                #     text = el.text
+                #     rid = el.attrib.get('resource-id')
+                #     print(f"resource-id: {rid}")
+                   
+                if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
+                    #print("發現蝦皮關閉按鈕，正在點擊...")
+                    d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
+                    #allspace =False
+                if d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").exists:
+                    #print("發現蝦皮關閉按鈕，正在點擊...")
+                    d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
                     
-            if jump > 650:
-                return "next"
-            
-            return "wait"
-            
-
-
-        index = 321+jump 
-        if resolution_width == 720 and resolution_height == 1560:
-            index = 165+jump
-            tap(device, str(650) + " " + str(index))
-        else:
-            tap(device, str(resolution_width - 106) + " " + str(index))
-        time.sleep(4.0)
-        if resolution_width == 720 and resolution_height == 1560:
-            index = 935 
-            tap(device, str(365) + " " + str(index))
-        elif (resolution_height < 2400):
-            index = 1360 
-            tap(device, str(542) + " " + str(index))
-        else:
-            index = 1400 + (abs(2380 - resolution_height) * 2)
-            tap(device, str(resolution_width / 2) + " " + str(index))
-         
-            
-
+                if resolution_width == 720 and resolution_height == 1560:
+                    index = 935 
+                    tap(device, str(365) + " " + str(index))
+                elif (resolution_height < 2400):
+                    index = 1360 
+                    tap(device, str(542) + " " + str(index))
+                else:
+                    index = 1400 + (abs(2380 - resolution_height) * 2)
+                    tap(device, str(resolution_width / 2) + " " + str(index))
+                    
         time.sleep(4.0)
             
         TotalCount = int(TotalCount) + 1
@@ -958,6 +978,9 @@ def judgment(temp):
             if resolution_width == 720 and resolution_height == 1560:
                 start_point = (600+ Leftspace, 100+jump)  # 起始坐標 (x, y)
                 end_point = (700+ Leftspace, 200+jump)    # 結束坐標 (x, y)
+            elif resolution_width == 1080 and resolution_height == 2400 and density == 480:
+                start_point = (800+ Leftspace, 200+jump)  # 起始坐標 (x, y)
+                end_point = (1050+ Leftspace, 450+jump)    # 結束坐標 (x, y)
             else:
                 start_point = (800+ Leftspace, 280+jump)  # 起始坐標 (x, y)
                 end_point = (1050+ Leftspace, 420+jump)    # 結束坐標 (x, y)
@@ -1054,8 +1077,8 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  deviceid = "FA75V1802306"
-  #deviceid = "de824891"
+  #deviceid = "FA75V1802306"
+  deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -1088,7 +1111,7 @@ if __name__ == '__main__':
   if display_info:
     print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
     
-
+  d = u2.connect(device_id)
   
   if (resolution_width == 1440):
       Leftspace = 340
@@ -1185,13 +1208,13 @@ if __name__ == '__main__':
 
         # 定義每天的禁止執行時間區段（start_time, end_time）
         restricted_times = {
-            0: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期一
-            1: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期二
-            2: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期三
-            3: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期四
-            4: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期五
-            5: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期六
-            6: (datetime.time(1, 0), datetime.time(13, 0)),   # 星期日
+            0: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期一
+            1: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期二
+            2: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期三
+            3: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期四
+            4: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期五
+            5: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期六
+            6: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期日
         }
 
         start, end = restricted_times[weekday]
@@ -1262,6 +1285,16 @@ if __name__ == '__main__':
                 jump = 150 + BaseJump
             Shopeecount = Shopeecount + 1
             ErrorCount = 0
+            
+            if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
+                #print("發現蝦皮關閉按鈕，正在點擊...")
+                d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
+                #allspace =False
+            if d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").exists:
+                #print("發現蝦皮關閉按鈕，正在點擊...")
+                d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
+                    
+
         elif result == "ok":
             if okflag == 1 :
                  # 關閉 Shopee
