@@ -255,12 +255,19 @@ def adb_tap(device,x, y):
     """發送 ADB 點擊指令"""
     device.shell(f"input tap {x} {y}")
 
-def solve_sudoku():
+def solution_data_fun(cell):
     global start_row
     global start_col
-   
+    global start_x
+    global start_y
+    global step_x
+    global step_y
+    global num_start_x
+    global num_y
+    global num_step_x
 
-
+    row, col, val = cell
+        
     def should_fill(row, col):
         # 依 row/col 排序判斷是否已到起始格
         if row > start_row:
@@ -270,7 +277,72 @@ def solve_sudoku():
         # row == start_row
         return col >= start_col
 
-    # --- 座標設定 ---
+    # 只從指定起點開始做
+    if not should_fill(row, col):
+        return
+
+    # 基本防呆
+    if not (1 <= val <= 9):
+        print(f"略過 [{row},{col}] val={val}（不在1~9）")
+        return
+
+    # 下方數字列座標 (1~9)
+    if device_id == "R58N10RXWVF":
+        start_point = (539, 286)  # 起始坐標 (x, y)
+        end_point = (678, 332)    # 結束坐標 (x, y)
+    else:
+        start_point = (810, 458)  # 起始坐標 (x, y)
+        end_point = (1046, 528)    # 結束坐標 (x, y)
+        
+    img = capture_screenshot(device)
+    cropped_img = crop_image(img, start_point, end_point)
+    resulttext = paddleocr_image(cropped_img)  
+    # if (resulttext.find("游戳教享")  == -1 and resulttext.find("游戏教学")  == -1 ):
+    #     continue
+
+    while (resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1 and resulttext.find("游教學") == -1and resulttext.find("游戴教學") == -1):
+           
+        time.sleep(0.5)  # 每0.5秒檢查一次
+        # 這裡要重新取得 resulttext !!
+        if device_id == "R58N10RXWVF":
+            start_point = (539, 286)  # 起始坐標 (x, y)
+            end_point = (678, 332)    # 結束坐標 (x, y)
+        else:
+            start_point = (810, 458)  # 起始坐標 (x, y)
+            end_point = (1046, 528)    # 結束坐標 (x, y)
+        
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+        resulttext = paddleocr_image(cropped_img)  
+
+    # 等到條件成立後才會往下跑
+    print("條件成立，繼續執行")
+    # 1. 計算該格子的畫面座標
+    target_x = int(start_x + (col - 1) * step_x)
+    target_y = int(start_y + (row - 1) * step_y)
+        
+    # 2. 計算下方對應數字的座標
+    val_x = int(num_start_x + (val - 1) * num_step_x)
+        
+    # 3. 執行點擊：先點位置，再點數字
+    print(f"填寫 [{row}, {col}] 為 {val} -> 座標({target_x}, {target_y})")
+    adb_tap(device,target_x, target_y)
+    time.sleep(0.5) # 稍微延遲避免手機反應不及
+    adb_tap(device,val_x, num_y)
+    time.sleep(3.5)
+
+def solve_sudoku():
+    global start_row
+    global start_col
+    global start_x
+    global start_y
+    global step_x
+    global step_y
+    global num_start_x
+    global num_y
+    global num_step_x
+
+     # --- 座標設定 ---
     # 棋盤起始與結束座標
     if device_id == "R58N10RXWVF":
         start_x, start_y = 60, 380
@@ -293,74 +365,27 @@ def solve_sudoku():
         num_y = 2107
         num_step_x = (1007 - 80) / 8
     
+   
 
     print("開始自動填入數獨...")
 
     for cell in solution_data:
-        row, col, val = cell
-        
-       
-            
-        # 只從指定起點開始做
-        if not should_fill(row, col):
-            continue
-
-        # 基本防呆
-        if not (1 <= val <= 9):
-            print(f"略過 [{row},{col}] val={val}（不在1~9）")
-            continue
-
-        # 下方數字列座標 (1~9)
-        if device_id == "R58N10RXWVF":
-            start_point = (539, 286)  # 起始坐標 (x, y)
-            end_point = (678, 332)    # 結束坐標 (x, y)
-        else:
-            start_point = (810, 458)  # 起始坐標 (x, y)
-            end_point = (1046, 528)    # 結束坐標 (x, y)
-        
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)  
-        # if (resulttext.find("游戳教享")  == -1 and resulttext.find("游戏教学")  == -1 ):
-        #     continue
-
-        while (resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1 and resulttext.find("游教學") == -1and resulttext.find("游戴教學") == -1):
-           
-            time.sleep(0.5)  # 每0.5秒檢查一次
-            # 這裡要重新取得 resulttext !!
-            if device_id == "R58N10RXWVF":
-                start_point = (539, 286)  # 起始坐標 (x, y)
-                end_point = (678, 332)    # 結束坐標 (x, y)
-            else:
-                start_point = (810, 458)  # 起始坐標 (x, y)
-                end_point = (1046, 528)    # 結束坐標 (x, y)
-        
-            img = capture_screenshot(device)
-            cropped_img = crop_image(img, start_point, end_point)
-            resulttext = paddleocr_image(cropped_img)  
-
-        # 等到條件成立後才會往下跑
-        print("條件成立，繼續執行")
-        # 1. 計算該格子的畫面座標
-        target_x = int(start_x + (col - 1) * step_x)
-        target_y = int(start_y + (row - 1) * step_y)
-        
-        # 2. 計算下方對應數字的座標
-        val_x = int(num_start_x + (val - 1) * num_step_x)
-        
-        # 3. 執行點擊：先點位置，再點數字
-        print(f"填寫 [{row}, {col}] 為 {val} -> 座標({target_x}, {target_y})")
-        adb_tap(device,target_x, target_y)
-        time.sleep(0.5) # 稍微延遲避免手機反應不及
-        adb_tap(device,val_x, num_y)
-        time.sleep(3.5)
+        try:
+            solution_data_fun(cell)
+        except Exception as e:
+            try:
+                device, client = connect(deviceid)
+                solution_data_fun(cell)
+            except Exception as e:
+                device, client = connect(deviceid)
+                solution_data_fun(cell)
 
     print("填寫完成！")
 
 if __name__ == '__main__':
 
-  #deviceid = ""
-  deviceid = "R58N10RXWVF"
+  deviceid = ""
+  #deviceid = "R58N10RXWVF"
   #deviceid = "46081JEKB10015"
   #deviceid = "de824891"
   #deviceid = "FA75V1802306"
@@ -376,20 +401,27 @@ if __name__ == '__main__':
     print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
     
 
-  start_row=6
+  start_row=1
   start_col=1
+  start_x = 0
+  start_y = 0
+  step_x = 0
+  step_y = 0
+  num_start_x =0
+  num_y=0
+  num_step_x=0
 
   # 數獨解答資料 (僅填入空白格)
   solution_data = [
-  [1,2,6],[1,3,4],[1,4,9],[1,5,8],[1,6,7],[1,8,3],
-  [2,1,3],[2,2,8],[2,3,7],[2,4,5],[2,5,2],[2,8,9],[2,9,4],
-  [3,1,5],[3,2,2],[3,4,1],[3,6,3],[3,7,6],
-  [4,1,8],[4,3,1],[4,4,3],[4,5,6],[4,6,2],[4,7,7],
-  [5,1,6],[5,6,1],[5,7,8],[5,9,2],
-  [6,1,4],[6,2,7],[6,3,2],[6,4,8],[6,5,5],[6,6,9],[6,7,3],[6,8,1],
-  [7,1,7],[7,3,5],[7,4,2],[7,5,3],[7,6,8],[7,7,9],[7,8,6],
-  [8,3,8],
-  [9,2,1],[9,3,6],[9,4,7],[9,5,9],[9,6,4],[9,8,8],[9,9,3]
+  [1, 1, 9], [1, 2, 4], [1, 3, 5], [1, 4, 3], [1, 5, 7], [1, 6, 1], [1, 7, 6], [1, 9, 8],
+  [2, 2, 1], [2, 3, 6], [2, 4, 2], [2, 5, 5], [2, 6, 9], [2, 7, 4], [2, 8, 3], [2, 9, 7],
+  [3, 1, 2], [3, 2, 3], [3, 4, 6], [3, 5, 4], [3, 6, 8], [3, 8, 9],
+  [4, 1, 3], [4, 3, 1], [4, 5, 9], [4, 7, 8], [4, 8, 7],
+  [5, 1, 7], [5, 2, 8], [5, 3, 4], [5, 5, 2], [5, 7, 3], [5, 8, 5], [5, 9, 9],
+  [6, 1, 5], [6, 2, 2], [6, 4, 8], [6, 5, 3], [6, 6, 7], [6, 7, 1], [6, 8, 6], [6, 9, 4],
+  [7, 1, 1], [7, 2, 7], [7, 3, 2], [7, 4, 5], [7, 6, 3], [7, 7, 9], [7, 8, 4],
+  [8, 2, 5], [8, 5, 6], [8, 6, 2], [8, 8, 1], [8, 9, 3],
+  [9, 1, 6], [9, 2, 9], [9, 4, 7], [9, 5, 1], [9, 6, 4], [9, 7, 2], [9, 8, 8]
 ]
   
   solve_sudoku()

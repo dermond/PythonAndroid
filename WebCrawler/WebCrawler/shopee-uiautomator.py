@@ -740,7 +740,7 @@ if __name__ == '__main__':
   goflag = 0
   deviceid = ""
   #deviceid = "R58N10RXWVF"
-  deviceid = "46081JEKB10015"
+  #deviceid = "46081JEKB10015"
   #deviceid = "de824891"
   #deviceid = "FA75V1802306"
   
@@ -902,8 +902,7 @@ if __name__ == '__main__':
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
-                    #Step = 20
-                    Step = 50
+                    
                     break
                 if text == "簽到":
                     click_bounds(d, bounds)
@@ -924,6 +923,8 @@ if __name__ == '__main__':
                     bounds = el.attrib.get('bounds')
 
                     click_bounds(d, bounds)
+
+                    
                     break
                 if text == "領取" and Step == 30:
                     nums = re.findall(r'\d+', bounds)
@@ -953,63 +954,77 @@ if __name__ == '__main__':
                     TotalCount = int(TotalCount) + 1
                     SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
                 
-                if text == "觀看":
+                if text == "觀看"and Step != 10: 
                
                     allspace =False
                     # 觸發系統「返回鍵」
                     Key_Return()
                     time.sleep(2.0)
+                    
+                    break
+                if text == "觀看" and Step == 10:
+               
+                    allspace =False
+                    # 觸發系統「返回鍵」
                     Key_Return()
+                    time.sleep(2.0)
+                    
                     el = d.xpath('//*[@text="短影音"]').get()
                     bounds = el.attrib.get('bounds')
                     click_bounds(d, bounds)
-                    
+                    Step = 51
                     break
- 
                 #if text == "推薦":
                    #click_bounds(d, bounds)
                    #time.sleep(2.0)
                    #frame1flag = 1
                    
                 if text == "直播" and Step == 20:
+                   allspace =False
                    click_bounds(d, bounds)
                    time.sleep(2.0)
                    Step = 30
                    tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
                    #Key_Return()
-                if text == "短影音" and Step == 1:
+                if text == "短影音" and (Step == 1 or Step == 51):
+                   allspace =False
                    click_bounds(d, bounds)
                    time.sleep(2.0)
-                   Step = 10
+                   if (Step == 1):
+                       Step = 10
+                       
+                   if (Step == 51):
+                       Step = 52
                    tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
-                if text == "我的" and Step == 50:
+                if text == "我的" and Step == 52:
+                   allspace =False
                    click_bounds(d, bounds)
                    time.sleep(2.0)
-                   Step = 51
+                   Step = 53
                    allspace =False
                    #tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
-                if text == "我的蝦幣" and Step == 51:
+                if text == "我的蝦幣" and Step == 53:
                    click_bounds(d, bounds)
                    time.sleep(2.0)
-                   Step = 52
+                   Step = 54
                    allspace =False
                    #tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
             
-                if text == "簽到並開啟寶箱" and Step == 52:
+                if text == "簽到並開啟寶箱" and Step == 54:
                    click_bounds(d, bounds)
                    time.sleep(2.0)
                    
                    allspace =False
                    d.press("back")
                    time.sleep(2.0)
-                   Step = 53
+                   Step = 55
                    #tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
-                if text == "剩餘機會 : " and (Step == 52 or Step == 53):
+                if text == "剩餘機會 : " and (Step == 54 or Step == 55):
                    nums = re.findall(r'\d+', bounds)
                    if len(nums) == 4:
                        left, top, right, bottom = map(int, nums)
@@ -1020,7 +1035,7 @@ if __name__ == '__main__':
                    option_position = str(center_x) + ' ' + str(center_y - 100)    # 選擇的選項的位置
                    tap(device, option_position) 
                    time.sleep(2.0)
-                   Step = 54
+                   Step = 56
                    allspace =False
                    #tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
