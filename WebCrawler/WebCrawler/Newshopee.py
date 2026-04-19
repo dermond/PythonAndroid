@@ -888,12 +888,13 @@ def judgment(temp):
         resulttext = paddleocr_image(cropped_img)  
         
         try:
-        
-            if resulttext.find("参加") > -1 and resulttext.find("已参加") == -1:
-                #轉盤
-                index = 520+jump
-
-                tap(device, str(resolution_width  - 100) + " " + str(index) )
+            ele = find_element_by_text(device_id,"参加")     
+            if ele is not None :
+                
+                bounds = ele.attrib.get('bounds')
+            
+                time.sleep(random.uniform(1, 10))
+                click_bounds(d, bounds)
                 time.sleep(4.0)
 
                 start_point = (262, 800)  # 起始坐標 (x, y)
@@ -928,14 +929,14 @@ def judgment(temp):
         except ValueError:
        
             print("轉盤有錯誤")
-
-        now = datetime.now().time()
-        limit_time = time(23, 30)  # 23:30
-
-        # ⛔ 還沒到 23:30
-        if now < limit_time:
             
-            return "next"
+        # now = datetime.datetime.now().time()
+        # limit_time = time(23, 30)  # 23:30
+
+        # # ⛔ 還沒到 23:30
+        # if now < limit_time:
+            
+        return "next"
             #return "ok"
 
         
