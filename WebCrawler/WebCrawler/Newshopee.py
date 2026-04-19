@@ -463,6 +463,7 @@ def find_element_by_text(device_id, target_text):
 
     for el in d.xpath('//*').all():
         text = el.text
+        print("text:"+ str(text))
         bounds = el.attrib.get('bounds')
         if str(text).find(target_text) > -1:
             print("中了")
@@ -516,9 +517,20 @@ def ReLoadShopee():
     else:
         tap(device, "600 203 ")
         time.sleep(2.0)
-
+        
+def get_bounds_by_text(d, text, timeout=1):
+    try:
+        el = d.xpath(f'//*[@text="{text}"]').get(timeout=timeout)
+        if not el:
+            return None
+        return el.attrib.get('bounds')
+    except:
+        return None
+    
 def Nextshow(temp):
     global nextsession
+    global d
+    
     #重啟Shopee
     ReLoadShopee()
     #按下 直播
@@ -531,39 +543,54 @@ def Nextshow(temp):
 
     elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
         tap(device, "585 220 ")
-        time.sleep(2.0)
+        time.sleep(4.0)
         
         tap(device, "585 820 ")
         time.sleep(2.0)
         
-        start_point = (50, 300)  # 起始坐標 (x, y)
-        end_point = (300, 600)    # 結束坐標 (x, y)
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)  
-        if resulttext.find("下一場次") > -1 and nextsession == 0:
+       
+        bounds = get_bounds_by_text(d, "下一場次")
+        if bounds:
+            click_bounds(d, bounds)
+        time.sleep(2.0)    
+        bounds = get_bounds_by_text(d, "簽到")
+        if bounds:
+            click_bounds(d, bounds)
+        time.sleep(2.0)    
+        bounds = get_bounds_by_text(d, "領取")
+        if bounds:
+            click_bounds(d, bounds)
+      
 
-            tap(device, str("175") + " " + str("450"))
-            time.sleep(3.0)
-            if resolution_height > 2000:
-                tap(device, str("1150") + " " + str("1600"))
-                # index = (resolution_height / 2)  - 10
-                # tap(device, str(resolution_width - 240) + " " + str(index))
-                time.sleep(5.0)
-        
-                tap(device, str("1150") + " " + str("2515"))
-                time.sleep(5.0)
-            else:
-                index = (resolution_height / 2)  - 80
-                tap(device, str(resolution_width - 140) + " " + str(index))
-                time.sleep(5.0)
-        
-                index = resolution_height  - 300
-                tap(device, str(resolution_width - 140) + " " + str(index))
-                time.sleep(5.0)
 
-            Key_Return()
-            nextsession = 1
+        # start_point = (50, 300)  # 起始坐標 (x, y)
+        # end_point = (300, 600)    # 結束坐標 (x, y)
+        # img = capture_screenshot(device)
+        # cropped_img = crop_image(img, start_point, end_point)
+        # resulttext = paddleocr_image(cropped_img)  
+        # if resulttext.find("下一場次") > -1 and nextsession == 0:
+
+        #     tap(device, str("175") + " " + str("450"))
+        #     time.sleep(3.0)
+        #     if resolution_height > 2000:
+        #         tap(device, str("1150") + " " + str("1600"))
+        #         # index = (resolution_height / 2)  - 10
+        #         # tap(device, str(resolution_width - 240) + " " + str(index))
+        #         time.sleep(5.0)
+        
+        #         tap(device, str("1150") + " " + str("2515"))
+        #         time.sleep(5.0)
+        #     else:
+        #         index = (resolution_height / 2)  - 80
+        #         tap(device, str(resolution_width - 140) + " " + str(index))
+        #         time.sleep(5.0)
+        
+        #         index = resolution_height  - 300
+        #         tap(device, str(resolution_width - 140) + " " + str(index))
+        #         time.sleep(5.0)
+
+        Key_Return()
+        nextsession = 1
     elif resolution_width == 1080 and resolution_height == 2400 and density == 480 : #(1080, 2400)  de824891  :
         tap(device, "445 195 ")
         time.sleep(2.0)
@@ -803,10 +830,10 @@ def judgment(temp):
 
     #判斷數值
     if resolution_width == 720 and resolution_height == 1560:
-        start_point = (600+ Leftspace, 100)  # 起始坐標 (x, y)
+        start_point = (400+ Leftspace, 100)  # 起始坐標 (x, y)
         end_point = (700+ Leftspace, 1050)    # 結束坐標 (x, y)
     else:
-        start_point = (900+ Leftspace, 300)  # 起始坐標 (x, y)
+        start_point = (700+ Leftspace, 300)  # 起始坐標 (x, y)
         end_point = (1050+ Leftspace, 1350)    # 結束坐標 (x, y)
 
     # 截圖並裁剪
@@ -820,41 +847,29 @@ def judgment(temp):
         ele = find_element_by_text(device_id,"領取")     
         if ele is not None :
             bounds = ele.attrib.get('bounds')
-            nums = re.findall(r'\d+', bounds)
-            if len(nums) == 4:
-                left, top, right, bottom = map(int, nums)
-                # 計算中心點
-                center_x = (left + right) // 2
-                center_y = (top + bottom) // 2
-
-                option_position = str(center_x) + ' ' + str(center_y - 50)    # 選擇的選項的位置
-                time.sleep(random.uniform(1, 10))
-                tap(device, option_position) 
-                time.sleep(2.0) 
-                # d = u2.connect(device_id)
-                # for el in d.xpath('//*').all():
-                #     # 檢查是否有文字 (使用 .text 屬性)
-                #     text = el.text
-                #     rid = el.attrib.get('resource-id')
-                #     print(f"resource-id: {rid}")
+            
+            time.sleep(random.uniform(1, 10))
+            click_bounds(d, bounds)
+            time.sleep(2.0) 
+                
                    
-                if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
-                    #print("發現蝦皮關閉按鈕，正在點擊...")
-                    d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
-                    #allspace =False
-                if d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").exists:
-                    #print("發現蝦皮關閉按鈕，正在點擊...")
-                    d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
+            if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
+                #print("發現蝦皮關閉按鈕，正在點擊...")
+                d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
+                #allspace =False
+            if d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").exists:
+                #print("發現蝦皮關閉按鈕，正在點擊...")
+                d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
                     
-                if resolution_width == 720 and resolution_height == 1560:
-                    index = 935 
-                    tap(device, str(365) + " " + str(index))
-                elif (resolution_height < 2400):
-                    index = 1360 
-                    tap(device, str(542) + " " + str(index))
-                else:
-                    index = 1400 + (abs(2380 - resolution_height) * 2)
-                    tap(device, str(resolution_width / 2) + " " + str(index))
+            if resolution_width == 720 and resolution_height == 1560:
+                index = 935 
+                tap(device, str(365) + " " + str(index))
+            elif (resolution_height < 2400):
+                index = 1360 
+                tap(device, str(542) + " " + str(index))
+            else:
+                index = 1400 + (abs(2380 - resolution_height) * 2)
+                tap(device, str(resolution_width / 2) + " " + str(index))
                     
         time.sleep(4.0)
             
@@ -1077,8 +1092,8 @@ if __name__ == '__main__':
   
   goflag = 0
 
-  #deviceid = "FA75V1802306"
-  deviceid = "de824891"
+  deviceid = "FA75V1802306"
+  #deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
