@@ -898,6 +898,11 @@ if __name__ == '__main__':
                     allspace =False
                     time.sleep(2.0)
                     break
+                if text == "簽到獲得獎勵":
+                    click_bounds(d, bounds)
+                    allspace =False
+                    time.sleep(2.0)
+                    break
                 if text == "下一場次" and Step == 10:
                     click_bounds(d, bounds)
                     allspace =False
