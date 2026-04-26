@@ -17,6 +17,7 @@ import numpy as np
 from paddleocr import PaddleOCR #paddlepaddle
 import sys
 import re
+import uiautomator2 as u2
 
 ocr = ddddocr.DdddOcr()
 Pocr = PaddleOCR(use_angle_cls=False, lang='ch')  # lang='ch' 支援
@@ -211,6 +212,27 @@ def pytesseract_image(img):
 
    return result.strip()  # 去除前後空白字元
 
+def pytesseract_image_chi(img):
+    try:
+        # 影像預處理
+        img = img.convert("L")  # 灰階
+        enhancer = ImageEnhance.Contrast(img)
+        img = enhancer.enhance(2)
+
+        # OCR（繁體中文）
+        custom_config = r'--psm 6'
+        result = pytesseract.image_to_string(
+            img,
+            lang='chi_tra',   # ⭐ 繁體中文
+            config=custom_config
+        )
+
+    except Exception as e:
+        print(f"發生錯誤: {e}")
+        result = ""
+
+    return result.strip()
+
 def paddleocr_image(img_path):
     if img_path == None:
         return "" 
@@ -255,6 +277,35 @@ def adb_tap(device,x, y):
     """發送 ADB 點擊指令"""
     device.shell(f"input tap {x} {y}")
 
+def count_text_elements(device_id, text_to_find, retries=3, delay=1):
+    """
+    計算畫面上符合指定文字的元素數量
+    
+    :param device_id: 裝置ID
+    :param text_to_find: 要查找的文字
+    :param retries: 找不到時重試次數
+    :param delay: 每次重試間隔秒數
+    :return: 數量 (int)
+    """
+    d = u2.connect(device_id)
+    
+    try:
+        for attempt in range(1, retries + 1):
+            elements = d.xpath(f'//*[@text="{text_to_find}"]').all()
+            count = len(elements)
+
+            if count > 0:
+                return count
+            else:
+                if attempt < retries:
+                    print(f"文字 '{text_to_find}' 未找到，等待 {delay} 秒後重試 ({attempt}/{retries})...")
+                    time.sleep(delay)
+                else:
+                    print(f"文字 '{text_to_find}' 未找到，已達最大重試次數 ({retries})")
+                    return 0
+
+    except Exception as ex:
+        return 0
 def solution_data_fun(cell):
     global start_row
     global start_col
@@ -296,11 +347,21 @@ def solution_data_fun(cell):
         
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
-    resulttext = paddleocr_image(cropped_img)  
-    # if (resulttext.find("游戳教享")  == -1 and resulttext.find("游戏教学")  == -1 ):
-    #     continue
+    resulttext = pytesseract_image_chi(cropped_img) 
+    ##resulttext = paddleocr_image(cropped_img)  
+    ### if (resulttext.find("游戳教享")  == -1 and resulttext.find("游戏教学")  == -1 ):
+    ###     continue
+    ##d = u2.connect(device_id)
+    ##for el in d.xpath('//*').all():
+    ##    text = el.text
+    ##    print("text" + str(text))
+    ##    classname = el.attrib.get('class')
 
-    while (resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1 and resulttext.find("游教學") == -1and resulttext.find("游戴教學") == -1):
+    ##    print(f"內容: {text}")
+    ##    print(f"類型: {classname}")
+    ##count_text_elements(device_id,"遊戲教學")
+     
+    while (resulttext.find("遊 戲 教 學") == -1 and resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1 and resulttext.find("游教學") == -1and resulttext.find("游戴教學") == -1):
            
         time.sleep(0.5)  # 每0.5秒檢查一次
         # 這裡要重新取得 resulttext !!
@@ -329,7 +390,7 @@ def solution_data_fun(cell):
     adb_tap(device,target_x, target_y)
     time.sleep(0.5) # 稍微延遲避免手機反應不及
     adb_tap(device,val_x, num_y)
-    time.sleep(3.5)
+    time.sleep(4.5)
 
 def solve_sudoku():
     global start_row
@@ -400,6 +461,7 @@ if __name__ == '__main__':
   if display_info:
     print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
     
+  #d = u2.connect(device_id)
 
   start_row=1
   start_col=1
@@ -413,17 +475,17 @@ if __name__ == '__main__':
 
   # 數獨解答資料 (僅填入空白格)
   solution_data = [
-  [1, 1, 9], [1, 2, 4], [1, 3, 5], [1, 4, 3], [1, 5, 7], [1, 6, 1], [1, 7, 6], [1, 9, 8],
-  [2, 2, 1], [2, 3, 6], [2, 4, 2], [2, 5, 5], [2, 6, 9], [2, 7, 4], [2, 8, 3], [2, 9, 7],
-  [3, 1, 2], [3, 2, 3], [3, 4, 6], [3, 5, 4], [3, 6, 8], [3, 8, 9],
-  [4, 1, 3], [4, 3, 1], [4, 5, 9], [4, 7, 8], [4, 8, 7],
-  [5, 1, 7], [5, 2, 8], [5, 3, 4], [5, 5, 2], [5, 7, 3], [5, 8, 5], [5, 9, 9],
-  [6, 1, 5], [6, 2, 2], [6, 4, 8], [6, 5, 3], [6, 6, 7], [6, 7, 1], [6, 8, 6], [6, 9, 4],
-  [7, 1, 1], [7, 2, 7], [7, 3, 2], [7, 4, 5], [7, 6, 3], [7, 7, 9], [7, 8, 4],
-  [8, 2, 5], [8, 5, 6], [8, 6, 2], [8, 8, 1], [8, 9, 3],
-  [9, 1, 6], [9, 2, 9], [9, 4, 7], [9, 5, 1], [9, 6, 4], [9, 7, 2], [9, 8, 8]
+  [1,1,8],[1,3,6],[1,4,5],[1,5,4],[1,6,3],[1,8,7],
+  [2,2,3],[2,3,2],[2,4,8],[2,5,7],[2,6,1],[2,7,9],[2,8,6],[2,9,4],
+  [3,1,7],[3,2,4],[3,3,1],[3,4,9],[3,5,2],[3,6,6],[3,8,5],[3,9,8],
+  [4,1,2],[4,2,5],[4,6,9],[4,7,8],[4,8,3],[4,9,1],
+  [5,1,4],[5,3,9],[5,4,3],[5,5,1],[5,7,5],[5,8,2],
+  [6,3,3],[6,4,2],[6,5,5],[6,6,8],[6,7,7],[6,8,4],
+  [7,2,7],[7,4,1],[7,5,8],[7,8,9],
+  [8,1,1],[8,2,6],[8,3,5],[8,5,9],[8,6,4],[8,7,2],
+  [9,3,8],[9,4,6],[9,5,3],[9,6,5],[9,7,4],[9,8,1]
 ]
-  
+
   solve_sudoku()
 
 

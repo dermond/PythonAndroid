@@ -851,9 +851,15 @@ if __name__ == '__main__':
           #Step == 20 直播
           #Step == 10 下一場次
           #Step == 30 領取
-
-
-
+          
+          if i % 100 == 0 and i != 0:
+            print(f"現在跑到第 {i} 次，做一次處理")
+            if Step == 30:
+               ReLoadShopee()
+               Step = 20
+            else:
+               ReLoadShopee()
+               Step = 0
           # 獲取當前頁面所有元素
           # 使用 xpath 抓取所有節點
           for el in d.xpath('//*').all():
@@ -902,6 +908,13 @@ if __name__ == '__main__':
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
+                    break
+                if text.find("完成簽到，即可獲得") > -1:
+                    click_bounds(d, bounds)
+                    allspace =False
+                    time.sleep(2.0)
+                    ReLoadShopee()
+
                     break
                 if text == "下一場次" and Step == 10:
                     click_bounds(d, bounds)
