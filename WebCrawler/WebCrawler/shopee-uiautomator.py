@@ -908,6 +908,7 @@ if __name__ == '__main__':
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
+                    ReLoadShopee()
                     break
                 if text.find("完成簽到，即可獲得") > -1:
                     click_bounds(d, bounds)
@@ -953,24 +954,39 @@ if __name__ == '__main__':
                         center_y = (top + bottom) // 2
 
                     option_position = str(center_x) + ' ' + str(center_y - 50)    # 選擇的選項的位置
-                    tap(device, option_position) 
-                    time.sleep(2.0)
+                    
                     d = u2.connect(device_id)
-                    for el in d.xpath('//*').all():
-                        # 檢查是否有文字 (使用 .text 屬性)
-                        text = el.text
-                        if text:
-                            # 獲取座標 (attrib 裡面的 bounds)
-                            bounds = el.attrib.get('bounds')
-                            # 獲取類別
-                            classname = el.attrib.get('class')
+                    screen_width = d.info.get('displayWidth') 
         
-                            print(f"內容: {text}")
-                            print(f"位置: {bounds}")
-                            print(f"類型: {classname}")
-                    All_Close()
-                    TotalCount = int(TotalCount) + 1
-                    SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
+                    # 2. 動態計算右側 1/3 的門檻
+                    right_threshold = (screen_width / 3) * 2
+
+                    # 3. 判斷中心點是否大於門檻
+                    if center_x >= right_threshold:
+                        tap(device, option_position) 
+                        time.sleep(2.0)
+
+                        print(f"螢幕寬度: {screen_width}, 門檻: {right_threshold}")
+                        print(f"符合條件：按鈕在右側 (x={center_x})")
+            
+                        option_position = str(center_x) + ' ' + str(center_y - 50)
+                        tap(device, option_position) 
+                        time.sleep(2.0)
+            
+                        # 後續邏輯保持不變
+                        for el in d.xpath('//*').all():
+                            text_val = el.text
+                            if text_val:
+                                print(f"內容: {text_val} | 位置: {el.attrib.get('bounds')}")
+            
+                        All_Close()
+                        TotalCount = int(TotalCount) + 1
+                        SettingReader.setSetting("base", deviceid + "TotalCount", str(TotalCount))
+                    else:
+                        print(f"跳過：按鈕 x={center_x} 不在右側區域 (門檻 {right_threshold})")
+
+                   
+                    #SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
                 
                 if text == "觀看"and Step != 10: 
                
