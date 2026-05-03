@@ -632,6 +632,7 @@ def click_shopee_activity_by_coord(d, target_x=540, target_y=1800):
         return True
 
 def ReLoadShopee():
+    global d
     # 關閉 Shopee
     device.shell(f"am force-stop {package_name}")
     print("Shopee 已停止")
@@ -641,6 +642,13 @@ def ReLoadShopee():
     output = device.shell(start_command)
     print(f"Shopee 已啟動，輸出：\n{output}")
     time.sleep(6.0)
+    
+    el = d.xpath('//*[@text="直播短影音"]').get()
+    bounds = el.attrib.get('bounds')
+    click_bounds(d, bounds)
+    time.sleep(2.0)
+    
+
    
 def Key_Return():
     try:
@@ -740,7 +748,7 @@ if __name__ == '__main__':
   goflag = 0
   deviceid = ""
   #deviceid = "R58N10RXWVF"
-  #deviceid = "46081JEKB10015"
+  deviceid = "46081JEKB10015"
   #deviceid = "de824891"
   #deviceid = "FA75V1802306"
   
@@ -756,6 +764,8 @@ if __name__ == '__main__':
   device, client = connect(deviceid)
   adb_init(deviceid)
   device_id = device.serial
+
+  d = u2.connect(device_id)
 
   ReLoadShopee()
   jump = 150
@@ -908,14 +918,15 @@ if __name__ == '__main__':
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
-                    ReLoadShopee()
+                    d.press("back")
+                    time.sleep(2.0)
                     break
                 if text.find("完成簽到，即可獲得") > -1:
                     click_bounds(d, bounds)
                     allspace =False
                     time.sleep(2.0)
                     ReLoadShopee()
-
+-
                     break
                 if text == "下一場次" and Step == 10:
                     click_bounds(d, bounds)
@@ -930,6 +941,13 @@ if __name__ == '__main__':
                     # 觸發系統「返回鍵」
                     d.press("back")
                     time.sleep(2.0)
+                    break
+                if text == "立刻購買":
+                    nums = re.findall(r'\d+', bounds)
+                    if len(nums) == 4:
+                        left, top, right, bottom = map(int, nums)
+                        
+
                     break
                 if text == "領取" and Step != 30:
                     click_bounds(d, bounds)
@@ -952,7 +970,8 @@ if __name__ == '__main__':
                         # 計算中心點
                         center_x = (left + right) // 2
                         center_y = (top + bottom) // 2
-
+                    if center_y > (resolution_height / 2) :
+                        continue
                     option_position = str(center_x) + ' ' + str(center_y - 50)    # 選擇的選項的位置
                     
                     d = u2.connect(device_id)
@@ -1036,29 +1055,87 @@ if __name__ == '__main__':
                    allspace =False
                    click_bounds(d, bounds)
                    time.sleep(2.0)
-                   Step = 53
+                   #Step = 53
                    allspace =False
                    #tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
-                if text == "我的蝦幣" and Step == 53:
+                if text == "我的蝦幣" :
+
                    click_bounds(d, bounds)
-                   time.sleep(2.0)
-                   Step = 54
+                   nums = re.findall(r'\d+', bounds)
+                   if len(nums) == 4:
+                        left, top, right, bottom = map(int, nums)
+                            
+                   if top < 500:
+                       continue
+                   time.sleep(5.0)
+                   #Step = 54
                    allspace =False
                    #tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
+
+                   actionx = (resolution_width / 2 )
+                   actiony = (resolution_height / 2 ) + 100
+                   click_action(d, actionx , actiony)
+                   time.sleep(10.0)
+                  
+      
+                   if resolution_height <= 1560:
+                       actionx = (resolution_width / 2 )
+                       actiony = (resolution_height  )  - 300
+                       click_action(d, actionx , actiony)
+                       time.sleep(5.0)
+
+                       actionx = (resolution_width / 2 )
+                       actiony = (resolution_height / 2 ) 
+                       click_action(d, actionx , actiony)
+                       time.sleep(5.0)
+                   else:
+                       #滑動
+                       swipe_start = '500 1500'
+                       swipe_end = '500 500'
+                       swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                       time.sleep(2.0)
+                   
+                       # actionx = (resolution_width / 2 )
+                       # actiony = (resolution_height / 3 ) 
+                       # click_action(d, actionx , actiony)
+                       # time.sleep(2.0)
+                      
+                       el = d.xpath('//*[@text="領取"]').get()
+                       bounds = el.attrib.get('bounds')
+                       nums = re.findall(r'\d+', bounds)
+                       if len(nums) == 4:
+                            left, top, right, bottom = map(int, nums)
+                            # 計算中心點
+                            center_x = (left + right) // 2
+                            center_y = (top + bottom) // 2
+                       
+                            option_position = str(center_x) + ' ' + str(center_y + 300)    # 選擇的選項的位置                   
+                            tap(device, option_position) 
+                            time.sleep(2.0)
+                            
+                       actionx = (resolution_width / 2 )
+                       actiony = (resolution_height / 2 ) 
+                       click_action(d, actionx , actiony)
+                       time.sleep(5.0)
+                   
+                   Key_Return()
+                   time.sleep(2.0)
+                   Key_Return()
+                   
                    break
             
-                if text == "簽到並開啟寶箱" and Step == 54:
+                if text == "簽到並開啟寶箱" :
                    click_bounds(d, bounds)
                    time.sleep(2.0)
                    
                    allspace =False
                    d.press("back")
                    time.sleep(2.0)
-                   Step = 55
+                   #Step = 55
                    #tap(device, str((resolution_width / 2)) + " " + str((resolution_height / 2) -200 ))
                    break
-                if text == "剩餘機會 : " and (Step == 54 or Step == 55):
+                if text == "剩餘機會 : " and (Step == 52 or Step == 55):
                    nums = re.findall(r'\d+', bounds)
                    if len(nums) == 4:
                        left, top, right, bottom = map(int, nums)

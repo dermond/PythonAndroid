@@ -150,6 +150,19 @@ def input_characters(device, characters):
 def input_keyevent(device, keycode):
     device.shell(f'input keyevent {keycode}')
     
+def click_action(d, x, y, action="click", duration=0.1):
+    """
+    action: "click" (點擊), "long_click" (長按)
+    duration: 按壓時間
+    """
+    if action == "long_click":
+        print(f"⏳ 長按座標: ({x}, {y})")
+        d.long_click(x, y, duration)
+    else:
+        print(f"🎯 點擊座標: ({x}, {y})")
+        d.click(x, y)
+
+
 def swipe_to_position(device, start, end, duration=500):
     device.shell(f'input swipe {start} {end} {duration}')
     time.sleep(1)  # 等待滑动完成
@@ -632,15 +645,108 @@ def Nextshow(temp):
 
 
     
-
-   
-    
     for i in range(10):
         #往下一筆 短影音
         swipe_start = '500 1300'
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(8.0)
+    
+    el = d.xpath('//*[@text="短影音"]').get()
+    bounds = el.attrib.get('bounds')
+    click_bounds(d, bounds)
+    time.sleep(5.0)
+    
+    #簽到
+    bounds = get_bounds_by_text(d, "我的")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+       
+
+        bound2 = get_bounds_by_text(d, "我的蝦幣")
+        if bound2:
+            click_bounds(d, bound2)
+            time.sleep(4.0)
+            
+            actionx = (resolution_width / 2 )
+            actiony = (resolution_height / 2 ) + 100
+            click_action(d, actionx , actiony)
+            time.sleep(5.0)
+
+            Key_Return()
+            time.sleep(5.0)
+
+    #轉盤
+    bounds = get_bounds_by_text(d, "我的")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+                
+
+        bound2 = get_bounds_by_text(d, "我的蝦幣")
+        if bound2:
+            click_bounds(d, bound2)
+            time.sleep(4.0)
+          
+                    
+      
+            actionx = (resolution_width / 2 )
+            actiony = (resolution_height / 3 ) * 2
+            click_action(d, actionx , actiony)
+            time.sleep(5.0)
+
+            #滑動
+            swipe_start = '500 1500'
+            swipe_end = '500 500'
+            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+            time.sleep(5.0)
+                    
+            actionx = (resolution_width / 2 )
+            actiony = (resolution_height / 2 ) +100
+            click_action(d, actionx , actiony)
+            time.sleep(5.0)
+                    
+            actionx = (resolution_width / 2 )
+            actiony = (resolution_height / 3 ) * 2
+            click_action(d, actionx , actiony)
+            time.sleep(5.0)
+                   
+            Key_Return()
+            time.sleep(5.0)
+            # Key_Return()
+            # time.sleep(5.0)
+            # Key_Return()
+
+    #寶箱
+    bounds = get_bounds_by_text(d, "我的")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+                
+
+        bound2 = get_bounds_by_text(d, "我的蝦幣")
+        if bound2:
+            click_bounds(d, bound2)
+            time.sleep(4.0)  
+            
+            #滑動
+            swipe_start = '500 1500'
+            swipe_end = '500 500'
+            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+            time.sleep(5.0)
+            
+            actionx = (resolution_width / 2 )
+            actiony = (resolution_height  ) - 400
+            click_action(d, actionx , actiony)
+            time.sleep(5.0)
+            
+            Key_Return()
+            time.sleep(5.0)
+            
+            Key_Return()
+            time.sleep(5.0)
+            
 
 def judgment(temp):
     global jump
@@ -876,16 +982,16 @@ def judgment(temp):
         TotalCount = int(TotalCount) + 1
         SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
         #判斷 下方位置是否有參加 可以按
-        start_point = (900+ Leftspace, 450+jump)  # 起始坐標 (x, y)
-        end_point = (1150+ Leftspace, 590+jump)    # 結束坐標 (x, y)
+        # start_point = (900+ Leftspace, 450+jump)  # 起始坐標 (x, y)
+        # end_point = (1150+ Leftspace, 590+jump)    # 結束坐標 (x, y)
       
-        # 截圖並裁剪
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
+        # # 截圖並裁剪
+        # img = capture_screenshot(device)
+        # cropped_img = crop_image(img, start_point, end_point)
 
-        # 執行 OCR
-        #resulttext = pytesseract_image(cropped_img)
-        resulttext = paddleocr_image(cropped_img)  
+        # # 執行 OCR
+        # #resulttext = pytesseract_image(cropped_img)
+        # resulttext = paddleocr_image(cropped_img)  
         
         try:
             ele = find_element_by_text(device_id,"参加")     
