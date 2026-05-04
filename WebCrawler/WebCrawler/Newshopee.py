@@ -1065,7 +1065,7 @@ def judgment(temp):
         
        
     
-    spilt = resulttext.split('\n')
+    spilt = resulttext.replace('③','').replace('S','').replace('S ','').split('\n')
     valid, value, time2 = validate_block(spilt)
     if valid:
         print("數值：", value)
@@ -1111,8 +1111,8 @@ def judgment(temp):
             # 截圖並裁剪
             img = capture_screenshot(device)
             cropped_img = crop_image(img, start_point, end_point)
-            resulttext2 = paddleocr_image(cropped_img)  
-            spilt = resulttext2.split('\n')
+            resulttext2 = paddleocr_image(cropped_img) 
+            spilt = resulttext2.replace('③','').replace('S','').replace('S ','').split('\n')
             valid, value, time2 = validate_block(spilt)
             if valid:
                 print("找到數值或是時間")

@@ -361,8 +361,8 @@ def solution_data_fun(cell):
     ##    print(f"類型: {classname}")
     ##count_text_elements(device_id,"遊戲教學")
      
-    while (resulttext.find("遊 戲 教 學") == -1 and resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1 and resulttext.find("游教學") == -1and resulttext.find("游戴教學") == -1):
-           
+    while (resulttext.find("遊 戲 教 學") == -1 and resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1 and resulttext.find("游教學") == -1 and resulttext.find("游戴教學") == -1 and resulttext.find("游戳教學") == -1 ):
+          
         time.sleep(0.5)  # 每0.5秒檢查一次
         # 這裡要重新取得 resulttext !!
         if device_id == "R58N10RXWVF":
