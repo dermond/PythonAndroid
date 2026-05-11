@@ -633,6 +633,8 @@ def click_shopee_activity_by_coord(d, target_x=540, target_y=1800):
 
 def ReLoadShopee():
     global d
+    global device_id
+    
     # 關閉 Shopee
     device.shell(f"am force-stop {package_name}")
     print("Shopee 已停止")
@@ -643,13 +645,19 @@ def ReLoadShopee():
     print(f"Shopee 已啟動，輸出：\n{output}")
     time.sleep(6.0)
     
-    el = d.xpath('//*[@text="直播短影音"]').get()
-    bounds = el.attrib.get('bounds')
-    click_bounds(d, bounds)
-    time.sleep(2.0)
-    
-
-   
+    el = get_text_bounds(device_id,"直播短影音")
+    if el is None:
+        d.press("back")
+        time.sleep(2.0)
+        el = get_text_bounds(device_id,"直播短影音")
+        bounds = el
+        click_bounds(d, bounds)
+        time.sleep(2.0)
+    else:
+        bounds = el
+        click_bounds(d, bounds)
+        time.sleep(2.0)
+        
 def Key_Return():
     try:
         subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "4"], check=True)
@@ -926,7 +934,7 @@ if __name__ == '__main__':
                     allspace =False
                     time.sleep(2.0)
                     ReLoadShopee()
--
+
                     break
                 if text == "下一場次" and Step == 10:
                     click_bounds(d, bounds)

@@ -306,6 +306,13 @@ def count_text_elements(device_id, text_to_find, retries=3, delay=1):
 
     except Exception as ex:
         return 0
+def Key_Return():
+    try:
+        subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "4"], check=True)
+  
+        print("Key_Return")
+    except Exception as e:
+        print(f"Key_Return 錯誤")
 def solution_data_fun(cell):
     global start_row
     global start_col
@@ -362,8 +369,9 @@ def solution_data_fun(cell):
     ##count_text_elements(device_id,"遊戲教學")
      
     while (resulttext.find("遊 戲 教 學") == -1 and resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1 and resulttext.find("游教學") == -1 and resulttext.find("游戴教學") == -1 and resulttext.find("游戳教學") == -1 ):
-          
-        time.sleep(0.5)  # 每0.5秒檢查一次
+        Key_Return()
+        time.sleep(5.5)  # 每5.5秒檢查一次
+       
         # 這裡要重新取得 resulttext !!
         if device_id == "R58N10RXWVF":
             start_point = (539, 286)  # 起始坐標 (x, y)
@@ -390,7 +398,7 @@ def solution_data_fun(cell):
     adb_tap(device,target_x, target_y)
     time.sleep(0.5) # 稍微延遲避免手機反應不及
     adb_tap(device,val_x, num_y)
-    time.sleep(4.5)
+    time.sleep(5.5)
 
 def solve_sudoku():
     global start_row
@@ -475,15 +483,15 @@ if __name__ == '__main__':
 
   # 數獨解答資料 (僅填入空白格)
   solution_data = [
-  [1,1,1],[1,2,9],[1,3,4],[1,4,5],[1,5,2],[1,7,8],
-  [2,2,6],[2,4,7],[2,5,3],[2,6,1],[2,7,9],[2,8,4],[2,9,5],
-  [3,1,3],[3,3,7],[3,4,9],[3,5,8],[3,6,4],[3,7,1],[3,8,2],
-  [4,1,5],[4,2,3],[4,4,4],[4,5,1],[4,6,2],[4,7,7],[4,8,9],
-  [5,1,8],[5,3,9],[5,4,6],[5,5,7],[5,6,3],[5,8,5],[5,9,2],
-  [6,1,4],[6,2,7],[6,3,2],[6,4,8],[6,5,5],[6,6,9],[6,7,6],[6,8,3],[6,9,1],
-  [7,1,6],[7,2,2],[7,3,1],[7,4,3],[7,5,9],[7,8,8],[7,9,4],
-  [8,3,5],[8,5,6],[8,6,8],[8,7,3],[8,9,9],
-  [9,1,9],[9,2,8],[9,4,1],[9,6,5],[9,8,6],[9,9,7]
+  [1,1,6],[1,2,8],[1,4,3],[1,5,9],[1,6,1],[1,7,4],[1,8,2],[1,9,7],
+  [2,1,9],[2,5,7],[2,6,4],[2,7,8],
+  [3,1,1],[3,3,7],[3,4,8],[3,5,2],[3,7,5],
+  [4,1,7],[4,4,1],[4,5,6],[4,9,5],
+  [5,1,2],[5,2,9],[5,3,8],[5,4,4],[5,5,5],[5,8,3],[5,9,1],
+  [6,1,5],[6,2,1],[6,3,6],[6,5,3],[6,9,4],
+  [7,3,2],[7,4,9],[7,5,1],[7,6,5],[7,9,8],
+  [8,1,8],[8,3,1],[8,4,7],[8,5,4],[8,6,2],[8,7,3],[8,8,6],
+  [9,1,4],[9,3,9],[9,6,3],[9,7,1],[9,8,5],[9,9,2]
 ]
 
   solve_sudoku()
