@@ -1065,7 +1065,7 @@ def judgment(temp):
         
        
     
-    spilt = resulttext.replace('③','').replace('S','').replace('S ','').split('\n')
+    spilt = resulttext.replace('③','').replace('S ','').replace('S','').replace('? ','').replace('?','').split('\n')
     valid, value, time2 = validate_block(spilt)
     if valid:
         print("數值：", value)
@@ -1098,7 +1098,7 @@ def judgment(temp):
             print("每分鐘收益 值得執行")
             
             if resolution_width == 720 and resolution_height == 1560:
-                start_point = (600+ Leftspace, 100+jump)  # 起始坐標 (x, y)
+                start_point = (500+ Leftspace, 100+jump)  # 起始坐標 (x, y)
                 end_point = (700+ Leftspace, 200+jump)    # 結束坐標 (x, y)
             elif resolution_width == 1080 and resolution_height == 2400 and density == 480:
                 start_point = (800+ Leftspace, 200+jump)  # 起始坐標 (x, y)
@@ -1112,7 +1112,7 @@ def judgment(temp):
             img = capture_screenshot(device)
             cropped_img = crop_image(img, start_point, end_point)
             resulttext2 = paddleocr_image(cropped_img) 
-            spilt = resulttext2.replace('③','').replace('S','').replace('S ','').split('\n')
+            spilt = resulttext2.replace('③','').replace('S ','').replace('S','').replace('? ','').replace('?','').split('\n')
             valid, value, time2 = validate_block(spilt)
             if valid:
                 print("找到數值或是時間")
@@ -1198,8 +1198,8 @@ if __name__ == '__main__':
 
   
   goflag = 0
-
-  deviceid = "FA75V1802306"
+  deviceid = "R58N10RXWVF"
+  #deviceid = "FA75V1802306"
   #deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
