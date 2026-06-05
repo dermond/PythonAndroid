@@ -514,9 +514,15 @@ def ReLoadShopee():
     #tap(device, "545 2180 ")
     time.sleep(4.0)
     
-    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
-        tap(device, "600 203 ")
-        time.sleep(2.0)
+    if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
+        #tap(device, "600 203 ")
+        #time.sleep(2.0)
+        el = d.xpath('//*[@text="直播短影音"]').get()
+        bounds = el.attrib.get('bounds')
+        click_bounds(d, bounds)
+        time.sleep(5.0)
+
+
     elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
         tap(device, "600 203 ")
         time.sleep(2.0)
@@ -546,10 +552,36 @@ def Nextshow(temp):
     
     #重啟Shopee
     ReLoadShopee()
+
+    el = d.xpath('//*[@text="短影音"]').get()
+    bounds = el.attrib.get('bounds')
+    click_bounds(d, bounds)
+    time.sleep(5.0)
+
     #按下 直播
-    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
+    if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
+        time.sleep(10.0)
         tap(device, "500 203 ")
         time.sleep(2.0)
+
+        bounds = get_bounds_by_text(d, "下一場次")
+        if bounds:
+            click_bounds(d, bounds)
+        time.sleep(2.0)    
+        bounds = get_bounds_by_text(d, "簽到")
+        if bounds:
+            click_bounds(d, bounds)
+        time.sleep(2.0)    
+        bounds = get_bounds_by_text(d, "領取")
+        if bounds:
+            click_bounds(d, bounds)
+      
+
+
+        Key_Return()
+        time.sleep(2.0)   
+        nextsession = 1
+        
     elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
         tap(device, "500 203 ")
         time.sleep(2.0)
@@ -575,32 +607,6 @@ def Nextshow(temp):
             click_bounds(d, bounds)
       
 
-
-        # start_point = (50, 300)  # 起始坐標 (x, y)
-        # end_point = (300, 600)    # 結束坐標 (x, y)
-        # img = capture_screenshot(device)
-        # cropped_img = crop_image(img, start_point, end_point)
-        # resulttext = paddleocr_image(cropped_img)  
-        # if resulttext.find("下一場次") > -1 and nextsession == 0:
-
-        #     tap(device, str("175") + " " + str("450"))
-        #     time.sleep(3.0)
-        #     if resolution_height > 2000:
-        #         tap(device, str("1150") + " " + str("1600"))
-        #         # index = (resolution_height / 2)  - 10
-        #         # tap(device, str(resolution_width - 240) + " " + str(index))
-        #         time.sleep(5.0)
-        
-        #         tap(device, str("1150") + " " + str("2515"))
-        #         time.sleep(5.0)
-        #     else:
-        #         index = (resolution_height / 2)  - 80
-        #         tap(device, str(resolution_width - 140) + " " + str(index))
-        #         time.sleep(5.0)
-        
-        #         index = resolution_height  - 300
-        #         tap(device, str(resolution_width - 140) + " " + str(index))
-        #         time.sleep(5.0)
 
         Key_Return()
         nextsession = 1
@@ -643,20 +649,32 @@ def Nextshow(temp):
         tap(device, "500 203 ")
         time.sleep(2.0)
 
+    el = d.xpath('//*[@text="直播短影音"]').get()
+    bounds = el.attrib.get('bounds')
+    click_bounds(d, bounds)
+    time.sleep(5.0)
 
+    el = d.xpath('//*[@text="短影音"]').get()
+    bounds = el.attrib.get('bounds')
+    click_bounds(d, bounds)
+    time.sleep(5.0)
     
-    for i in range(10):
+    if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
+        rangemax = 30
+    elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
+        rangemax = 10
+    for i in range(rangemax):
         #往下一筆 短影音
         swipe_start = '500 1300'
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(8.0)
     
-    el = d.xpath('//*[@text="短影音"]').get()
-    bounds = el.attrib.get('bounds')
-    click_bounds(d, bounds)
-    time.sleep(5.0)
-    
+    time.sleep(2.0)
+    actionx = (resolution_width / 2 )
+    actiony = (resolution_height / 2 )
+    click_action(d, actionx , actiony)
+    time.sleep(2.0)
     #簽到
     bounds = get_bounds_by_text(d, "我的")
     if bounds:
@@ -669,9 +687,19 @@ def Nextshow(temp):
             click_bounds(d, bound2)
             time.sleep(4.0)
             
-            actionx = (resolution_width / 2 )
-            actiony = (resolution_height / 2 ) + 100
-            click_action(d, actionx , actiony)
+            #actionx = (resolution_width / 2 )
+            #actiony = (resolution_height / 2 ) + 100
+            #click_action(d, actionx , actiony)
+            #time.sleep(5.0)
+            try:
+                el = d.xpath('//*[starts-with(@text, "完成簽到")]').get()
+                if el:
+                    bounds = el.attrib.get('bounds')
+                    click_bounds(d, bounds)
+            except Exception as e:
+                print(f"[自動化警報] 觸發異常處理: {e}")
+
+            Key_Return()
             time.sleep(5.0)
 
             Key_Return()
@@ -690,27 +718,54 @@ def Nextshow(temp):
             time.sleep(4.0)
           
                     
-      
-            actionx = (resolution_width / 2 )
-            actiony = (resolution_height / 3 ) * 2
-            click_action(d, actionx , actiony)
-            time.sleep(5.0)
+            if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
+                actionx = (resolution_width / 2 )
+                actiony = (resolution_height / 3 ) * 2 - 100
+                click_action(d, actionx , actiony)
+                time.sleep(5.0)
 
-            #滑動
-            swipe_start = '500 1500'
-            swipe_end = '500 500'
-            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-            time.sleep(5.0)
+                #滑動
+                swipe_start = '500 1500'
+                swipe_end = '500 500'
+                swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                time.sleep(5.0)
                     
-            actionx = (resolution_width / 2 )
-            actiony = (resolution_height / 2 ) +100
-            click_action(d, actionx , actiony)
-            time.sleep(5.0)
+                actionx = 217
+                actiony = 594
+                click_action(d, actionx , actiony)
+                time.sleep(5.0)
                     
-            actionx = (resolution_width / 2 )
-            actiony = (resolution_height / 3 ) * 2
-            click_action(d, actionx , actiony)
-            time.sleep(5.0)
+                actionx = 356
+                actiony = 860
+                click_action(d, actionx , actiony)
+                time.sleep(5.0)
+
+                Key_Return()
+                time.sleep(5.0)
+
+                Key_Return()
+                time.sleep(5.0)
+
+            elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
+                actionx = (resolution_width / 2 )
+                actiony = (resolution_height / 3 ) * 2
+                click_action(d, actionx , actiony)
+                time.sleep(5.0)
+                #滑動
+                swipe_start = '500 1500'
+                swipe_end = '500 500'
+                swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                time.sleep(5.0)
+                    
+                actionx = (resolution_width / 2 )
+                actiony = (resolution_height / 2 ) +100
+                click_action(d, actionx , actiony)
+                time.sleep(5.0)
+                    
+                actionx = (resolution_width / 2 )
+                actiony = (resolution_height / 3 ) * 2
+                click_action(d, actionx , actiony)
+                time.sleep(5.0)
                    
             Key_Return()
             time.sleep(5.0)
@@ -731,15 +786,29 @@ def Nextshow(temp):
             time.sleep(4.0)  
             
             #滑動
+            swipe_start = '500 500'
+            swipe_end = '500 1500'
+            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+            time.sleep(5.0)
+
+            #滑動
             swipe_start = '500 1500'
             swipe_end = '500 500'
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(5.0)
             
-            actionx = (resolution_width / 2 )
-            actiony = (resolution_height  ) - 400
-            click_action(d, actionx , actiony)
-            time.sleep(5.0)
+            if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
+                actionx = 357
+                actiony = 209
+                click_action(d, actionx , actiony)
+                time.sleep(5.0)
+
+
+            elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
+                actionx = (resolution_width / 2 )
+                actiony = (resolution_height  ) - 400
+                click_action(d, actionx , actiony)
+                time.sleep(5.0)
             
             Key_Return()
             time.sleep(5.0)
@@ -760,7 +829,7 @@ def judgment(temp):
     global nextsession
     global d
     # 截圖並裁剪 A20 存取手機
-    if resolution_width == 1080 and resolution_height == 2280 and density == 420:#deviceid == "R58N10RXWVF":
+    if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
         start_point = (475, 1350)  # 起始坐標 (x, y)
         end_point = (594, 1410)    # 結束坐標 (x, y)
         img = capture_screenshot(device)
@@ -803,7 +872,10 @@ def judgment(temp):
             index = 1800 
             tap(device, str(resolution_width / 2) + " " + str(index))
             
-   
+        tap(device, str(344) + " " + str(1070))
+
+        tap(device, str(375) + " " + str(975))
+
     elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
         start_point = (380, 1500)  # 起始坐標 (x, y)
         end_point = (740, 1650)    # 結束坐標 (x, y)
@@ -918,20 +990,8 @@ def judgment(temp):
         #print("發現蝦皮關閉按鈕，正在點擊...")
         d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
 
-    # start_point = (262, 800)  # 起始坐標 (x, y)
-    # end_point = (880, 1350)    # 結束坐標 (x, y)
-      
-    # # 截圖並裁剪
-    # img = capture_screenshot(device)
-    # cropped_img = crop_image(img, start_point, end_point)
-    # resulttext = paddleocr_image(cropped_img)  
-    # if resulttext.find("紅包雨")  > -1:
-    #     tap(device, str((resolution_width / 2)) + " " + str(calculate_x(resolution_height)))
     
-    # if resulttext.find("您已觀看達30秒")  > -1:
-    #     tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
-    # elif resulttext.find("第3天")  > -1:
-    #     tap(device, str((resolution_width / 2)) + " " + str(calculate_x2(resolution_height)))
+
     
 
     #判斷數值
@@ -981,17 +1041,7 @@ def judgment(temp):
             
         TotalCount = int(TotalCount) + 1
         SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
-        #判斷 下方位置是否有參加 可以按
-        # start_point = (900+ Leftspace, 450+jump)  # 起始坐標 (x, y)
-        # end_point = (1150+ Leftspace, 590+jump)    # 結束坐標 (x, y)
-      
-        # # 截圖並裁剪
-        # img = capture_screenshot(device)
-        # cropped_img = crop_image(img, start_point, end_point)
-
-        # # 執行 OCR
-        # #resulttext = pytesseract_image(cropped_img)
-        # resulttext = paddleocr_image(cropped_img)  
+        
         
         try:
             ele = find_element_by_text(device_id,"参加")     
@@ -1036,12 +1086,22 @@ def judgment(temp):
        
             print("轉盤有錯誤")
             
-        # now = datetime.datetime.now().time()
-        # limit_time = time(23, 30)  # 23:30
+        #下一場次
+        bounds = get_bounds_by_text(d, "下一場次")
+        if bounds:
+            click_bounds(d, bounds)
+            time.sleep(2.0) 
+            bounds = get_bounds_by_text(d, "簽到")
+            if bounds:
+                click_bounds(d, bounds)
+                time.sleep(2.0)    
+            bounds = get_bounds_by_text(d, "領取")
+            if bounds:
+                click_bounds(d, bounds)
+            Key_Return()
 
-        # # ⛔ 還沒到 23:30
-        # if now < limit_time:
-            
+
+        
         return "next"
             #return "ok"
 
@@ -1269,6 +1329,15 @@ if __name__ == '__main__':
   yesterday = today - datetime.timedelta(days=1)
   
   (xpoint,ypoint) =convert_xy_with_dpi(130,430);
+
+  ReLoadShopee()
+  Shopeecount = 0
+
+  el = d.xpath('//*[@text="直播"]').get()
+  bounds = el.attrib.get('bounds')
+  click_bounds(d, bounds)
+  time.sleep(5.0)
+
   for i in range(99999999):
     try:
 
@@ -1315,9 +1384,13 @@ if __name__ == '__main__':
             # tap(device, "322 1263 ")
             # time.sleep(1.0)
             Shopeecount = 0
+            el = d.xpath('//*[@text="直播"]').get()
+            bounds = el.attrib.get('bounds')
+            click_bounds(d, bounds)
+            time.sleep(5.0)
         
         start_time = datetime.time(8, 0)    # 08:00
-        end_time   = datetime.time(12, 00)   # 11:00
+        end_time   = datetime.time(13, 00)   # 11:00
         # ✅ 只有在 08:00~11:00 之間
         if start_time <= now <= end_time:
             #進行
