@@ -365,25 +365,55 @@ def Key_Return():
         
   
 def log(message):
-    with open("log.txt", "a", encoding="utf-8") as f:
-        f.write(message + "\n")
-       
-def validate_block(block):
-    float_value = None
-    time_value = None
+    # 取得當前時間，並格式化為 年-月-日 時:分:秒
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
-    for item in block:
-        # 嘗試匹配 0~5 的浮點數（最多 5.000...，不超過5）
-        if re.fullmatch(r'0*(?:[0-4](?:\.\d+)?|5(?:\.0*)?)', item):
-            float_value = float(item)
+    # 將時間與原本的訊息結合
+    log_entry = f"[{current_time}] {message}\n"
+    
+    with open("log.txt", "a", encoding="utf-8") as f:
+        f.write(log_entry)
+       
+def validate_block(elements):
+    # 在迴圈外準備好變數
+    target_float = None
+    target_time = None
+    found_keyword = False  # 狀態開關：是否已經看到「直播間蝦幣」
 
-        # 嘗試匹配時間格式（mm:ss 或 hh:mm）
-        if re.fullmatch(r'\d{1,2}:\d{2}', item):
-            time_value = item
+    for el in elements:
+        text = el.text
+        # print("text:" + str(text))  # 如果除錯需要，可以把這行註解打開
+        
+        # 確保 text 不是 None 且不是全空白
+        if text is None:
+            continue
+        clean_text = str(text).strip()
+        if not clean_text:
+            continue
 
-    # 同時具備浮點數 + 時間 才視為有效
-    if float_value is not None and time_value is not None:
-        return True, float_value, time_value
+        # 1. 【先找到 直播間蝦幣】
+        if not found_keyword:
+            if "直播間蝦幣" in clean_text:
+                found_keyword = True  # 看到關鍵字了，打開開關！
+            continue # 換下一個元素繼續
+
+        # 2. 【再找到 數值 和 分鐘:秒數】 (只有開關打開時才會執行這裡)
+        if found_keyword:
+            # 嘗試抓取 0~5 的數值 (如果還沒抓過的話)
+            if target_float is None and re.fullmatch(r'0*(?:[0-4](?:\.\d+)?|5(?:\.0*)?)', clean_text):
+                target_float = float(clean_text)
+                
+            # 嘗試抓取 分鐘:秒數 (如果還沒抓過的話)
+            elif target_time is None and re.fullmatch(r'\d{1,2}:\d{2}', clean_text):
+                target_time = clean_text
+
+            # 如果兩者都已經順利找到了，就可以提早跳出迴圈，不用繼續往下找了
+            if target_float is not None and target_time is not None:
+                break
+
+    # 3. 【套用原本的傳回值格式】
+    if target_float is not None and target_time is not None:
+        return True, target_float, target_time
     else:
         return False, None, None
 
@@ -872,10 +902,10 @@ def judgment(temp):
             index = 1800 
             tap(device, str(resolution_width / 2) + " " + str(index))
             
-        tap(device, str(344) + " " + str(1070))
+        #tap(device, str(344) + " " + str(1070))
 
-        tap(device, str(375) + " " + str(975))
-
+        #tap(device, str(375) + " " + str(975))
+        #Key_Return()
     elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
         start_point = (380, 1500)  # 起始坐標 (x, y)
         end_point = (740, 1650)    # 結束坐標 (x, y)
@@ -991,8 +1021,9 @@ def judgment(temp):
         d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
 
     
-
-    
+    ele = find_element_by_text(device_id,"關注主播參加活動")     
+    if ele is not None :
+        Key_Return()
 
     #判斷數值
     if resolution_width == 720 and resolution_height == 1560:
@@ -1012,37 +1043,43 @@ def judgment(temp):
        
         ele = find_element_by_text(device_id,"領取")     
         if ele is not None :
-            bounds = ele.attrib.get('bounds')
             
-            time.sleep(random.uniform(1, 10))
-            click_bounds(d, bounds)
-            time.sleep(2.0) 
+            time.sleep(3.0)            
+
+            ele = find_element_by_text(device_id,"領取")     
+            if ele is not None :
+                bounds = ele.attrib.get('bounds')
+            
+                time.sleep(random.uniform(1, 10))
+                click_bounds(d, bounds)
+                time.sleep(2.0) 
                 
                    
-            if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
-                #print("發現蝦皮關閉按鈕，正在點擊...")
-                d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
-                #allspace =False
-            if d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").exists:
-                #print("發現蝦皮關閉按鈕，正在點擊...")
-                d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
+                if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
+                    #print("發現蝦皮關閉按鈕，正在點擊...")
+                    d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
+                    #allspace =False
+                if d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").exists:
+                    #print("發現蝦皮關閉按鈕，正在點擊...")
+                    d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
                     
-            if resolution_width == 720 and resolution_height == 1560:
-                index = 935 
-                tap(device, str(365) + " " + str(index))
-            elif (resolution_height < 2400):
-                index = 1360 
-                tap(device, str(542) + " " + str(index))
-            else:
-                index = 1400 + (abs(2380 - resolution_height) * 2)
-                tap(device, str(resolution_width / 2) + " " + str(index))
+                if resolution_width == 720 and resolution_height == 1560:
+                    index = 935 
+                    tap(device, str(365) + " " + str(index))
+                elif (resolution_height < 2400):
+                    index = 1360 
+                    tap(device, str(542) + " " + str(index))
+                else:
+                    index = 1400 + (abs(2380 - resolution_height) * 2)
+                    tap(device, str(resolution_width / 2) + " " + str(index))
                     
-        time.sleep(4.0)
+                time.sleep(4.0)
             
-        TotalCount = int(TotalCount) + 1
-        SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
-        
-        
+                TotalCount = int(TotalCount) + 1
+                SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
+                log("領取一筆")
+            else:
+                return "wait"
         try:
             ele = find_element_by_text(device_id,"参加")     
             if ele is not None :
@@ -1124,9 +1161,8 @@ def judgment(temp):
                
         
        
-    
-    spilt = resulttext.replace('③','').replace('S ','').replace('S','').replace('? ','').replace('?','').split('\n')
-    valid, value, time2 = validate_block(spilt)
+    elements = d.xpath('//*').all()
+    valid, value, time2 = validate_block(elements)
     if valid:
         print("數值：", value)
         print("時間：", time2)
@@ -1169,12 +1205,9 @@ def judgment(temp):
 
             print("比對领取" + " " + str(jump))
             # 截圖並裁剪
-            img = capture_screenshot(device)
-            cropped_img = crop_image(img, start_point, end_point)
-            resulttext2 = paddleocr_image(cropped_img) 
-            spilt = resulttext2.replace('③','').replace('S ','').replace('S','').replace('? ','').replace('?','').split('\n')
-            valid, value, time2 = validate_block(spilt)
-            if valid:
+            elements = d.xpath('//*').all()
+            valid, value, time2 = validate_block(elements)
+            if valid :
                 print("找到數值或是時間")
                 for _ in range(wait_sec):
 
@@ -1197,7 +1230,7 @@ def judgment(temp):
     else:
         print("解析蝦皮和時間錯誤")
         ErrorCount = ErrorCount + 1
-        if (ErrorCount < 1):
+        if (ErrorCount < 3):
             return "wait"
         else:
             return "next"
