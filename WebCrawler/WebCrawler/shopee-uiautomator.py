@@ -1212,10 +1212,10 @@ if __name__ == '__main__':
                     Step = 20
                     cancelflag = True
                                        
-                    el = d.xpath('//*[@text="直播短影音"]').get()
-                    bounds = el.attrib.get('bounds')
-                    click_bounds(d, bounds)
-                    time.sleep(2.0)
+                    bounds = get_bounds_by_text(d, "直播短影音")
+                    if bounds:
+                        click_bounds(d, bounds)
+                        time.sleep(4.0)
                     break
                 
                 if text == "取消":

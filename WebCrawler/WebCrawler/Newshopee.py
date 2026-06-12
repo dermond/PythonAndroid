@@ -506,12 +506,13 @@ def find_element_by_text(device_id, target_text):
 
     for el in d.xpath('//*').all():
         text = el.text
-        print("text:"+ str(text))
-        bounds = el.attrib.get('bounds')
-        if str(text).find(target_text) > -1:
-            print("中了")
-        if text and target_text in text:
-            return el   # 找到就回傳元件
+        if str(text) != "":
+            print("text:"+ str(text))
+            bounds = el.attrib.get('bounds')
+            if str(text).find(target_text) > -1:
+                print("中了")
+            if text and target_text in text:
+                return el   # 找到就回傳元件
 
     return None  # 沒找到
 
@@ -547,10 +548,10 @@ def ReLoadShopee():
     if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
         #tap(device, "600 203 ")
         #time.sleep(2.0)
-        el = d.xpath('//*[@text="直播短影音"]').get()
-        bounds = el.attrib.get('bounds')
-        click_bounds(d, bounds)
-        time.sleep(5.0)
+        bounds = get_bounds_by_text(d, "直播短影音")
+        if bounds:
+            click_bounds(d, bounds)
+            time.sleep(4.0)
 
 
     elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
@@ -583,15 +584,17 @@ def Nextshow(temp):
     #重啟Shopee
     ReLoadShopee()
 
-    el = d.xpath('//*[@text="短影音"]').get()
-    bounds = el.attrib.get('bounds')
-    click_bounds(d, bounds)
-    time.sleep(5.0)
+    bound2 = get_bounds_by_text(d, "短影音")
+    if bound2:
+        click_bounds(d, bound2)
+        time.sleep(4.0)
+
+  
 
     #按下 直播
     if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
-        time.sleep(10.0)
-        tap(device, "500 203 ")
+        time.sleep(5.0)
+        tap(device, "500 603 ")
         time.sleep(2.0)
 
         bounds = get_bounds_by_text(d, "下一場次")
@@ -679,16 +682,22 @@ def Nextshow(temp):
         tap(device, "500 203 ")
         time.sleep(2.0)
 
-    el = d.xpath('//*[@text="直播短影音"]').get()
-    bounds = el.attrib.get('bounds')
-    click_bounds(d, bounds)
-    time.sleep(5.0)
+   
+    bounds = get_bounds_by_text(d, "直播短影音")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+   
+    bounds = get_bounds_by_text(d, "短影音")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
 
-    el = d.xpath('//*[@text="短影音"]').get()
-    bounds = el.attrib.get('bounds')
-    click_bounds(d, bounds)
-    time.sleep(5.0)
-    
+    bounds = get_bounds_by_text(d, "立即簽到")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+
     if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
         rangemax = 30
     elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
@@ -698,7 +707,13 @@ def Nextshow(temp):
         swipe_start = '500 1300'
         swipe_end = '500 100'
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-        time.sleep(8.0)
+        time.sleep(6.0)
+
+        bounds = get_bounds_by_text(d, "立即簽到")
+        if bounds:
+            click_bounds(d, bounds)
+            time.sleep(2.0)
+
     
     time.sleep(2.0)
     actionx = (resolution_width / 2 )
@@ -722,10 +737,10 @@ def Nextshow(temp):
             #click_action(d, actionx , actiony)
             #time.sleep(5.0)
             try:
-                el = d.xpath('//*[starts-with(@text, "完成簽到")]').get()
-                if el:
-                    bounds = el.attrib.get('bounds')
-                    click_bounds(d, bounds)
+                bound2 = get_bounds_by_text(d, "完成簽到")
+                if bound2:
+                    click_bounds(d, bound2)
+                    time.sleep(4.0)
             except Exception as e:
                 print(f"[自動化警報] 觸發異常處理: {e}")
 
@@ -906,6 +921,12 @@ def judgment(temp):
 
         #tap(device, str(375) + " " + str(975))
         #Key_Return()
+
+        bounds = get_bounds_by_text(d, "0.69")
+        if bounds:
+            click_bounds(d, bounds)
+        time.sleep(2.0)    
+
     elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
         start_point = (380, 1500)  # 起始坐標 (x, y)
         end_point = (740, 1650)    # 結束坐標 (x, y)
@@ -1366,10 +1387,11 @@ if __name__ == '__main__':
   ReLoadShopee()
   Shopeecount = 0
 
-  el = d.xpath('//*[@text="直播"]').get()
-  bounds = el.attrib.get('bounds')
-  click_bounds(d, bounds)
-  time.sleep(5.0)
+  bounds = get_bounds_by_text(d, "直播")
+  if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+
 
   for i in range(99999999):
     try:
@@ -1417,10 +1439,12 @@ if __name__ == '__main__':
             # tap(device, "322 1263 ")
             # time.sleep(1.0)
             Shopeecount = 0
-            el = d.xpath('//*[@text="直播"]').get()
-            bounds = el.attrib.get('bounds')
-            click_bounds(d, bounds)
-            time.sleep(5.0)
+            bound2 = get_bounds_by_text(d, "直播")
+            if bound2:
+                click_bounds(d, bound2)
+                time.sleep(4.0)
+
+            
         
         start_time = datetime.time(8, 0)    # 08:00
         end_time   = datetime.time(13, 00)   # 11:00
