@@ -922,10 +922,7 @@ def judgment(temp):
         #tap(device, str(375) + " " + str(975))
         #Key_Return()
 
-        bounds = get_bounds_by_text(d, "0.69")
-        if bounds:
-            click_bounds(d, bounds)
-        time.sleep(2.0)    
+        
 
     elif resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
         start_point = (380, 1500)  # 起始坐標 (x, y)
@@ -1046,6 +1043,69 @@ def judgment(temp):
     if ele is not None :
         Key_Return()
 
+    ele = find_element_by_text(device_id,"未獲得寵粉紅包雨獎勵")     
+    if ele is not None :
+        Key_Return()
+    
+    bounds = get_bounds_by_text(d, "明天再來")
+    if bounds:
+        nums = re.findall(r'\d+', bounds)
+        if len(nums) == 4:
+            left, top, right, bottom = map(int, nums)
+            # 計算中心點
+            center_x = (left + right) // 2
+            center_y = (top + bottom) // 2
+                     
+            option_position = str(center_x) + ' ' + str(center_y - 50)
+            tap(device, option_position) 
+                
+    time.sleep(2.0)    
+    
+    # try:
+    #     ele = find_element_by_text(device_id,"參加")     
+    #     if ele is not None :
+                
+    #         bounds = ele.attrib.get('bounds')
+            
+    #         time.sleep(random.uniform(1, 10))
+    #         click_bounds(d, bounds)
+    #         time.sleep(4.0)
+
+    #         start_point = (262, 800)  # 起始坐標 (x, y)
+    #         end_point = (880, 1350)    # 結束坐標 (x, y)
+      
+    #         # 截圖並裁剪
+    #         img = capture_screenshot(device)
+    #         cropped_img = crop_image(img, start_point, end_point)
+    #         resulttext = paddleocr_image(cropped_img) 
+                  
+    #         if resulttext.find("手機號碼") > -1:
+    #             index = (resolution_height / 2 ) + 100
+    #             tap(device, str(resolution_width / 4) + " " + str(index))
+    #             time.sleep(3.0)
+
+               
+                
+                  
+    #         index = (resolution_height / 2 ) - 100
+    #         tap(device, str(resolution_width / 2) + " " + str(index))
+    #         time.sleep(12.0)
+
+    #         index = (resolution_height / 2 ) + 100
+    #         tap(device, str((resolution_width / 2) + 200) + " " + str(index))
+    #         time.sleep(12.0)
+
+    #         index = (resolution_height / 2 ) + 282
+    #         tap(device, str(resolution_width / 2) + " " + str(index))
+    #         time.sleep(2.0)
+
+        
+    # except ValueError:
+       
+    #     print("轉盤有錯誤")
+            
+        
+        
     #判斷數值
     if resolution_width == 720 and resolution_height == 1560:
         start_point = (400+ Leftspace, 100)  # 起始坐標 (x, y)
@@ -1349,6 +1409,9 @@ if __name__ == '__main__':
     
   d = u2.connect(device_id)
   
+  for el in d.xpath('//*').all():
+    text = el.text
+    print(text)
   if (resolution_width == 1440):
       Leftspace = 340
   if (density >= 640):
