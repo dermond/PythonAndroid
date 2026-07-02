@@ -576,6 +576,16 @@ def get_bounds_by_text(d, text, timeout=1):
         return el.attrib.get('bounds')
     except:
         return None
+
+def get_bounds_by_textcontains(d, text, timeout=1):
+    try:
+        # 使用 contains(@text, "你的文字") 來達到部分匹配的效果
+        el = d.xpath(f'//*[contains(@text, "{text}")]').get(timeout=timeout)
+        if not el:
+            return None
+        return el.attrib.get('bounds')
+    except:
+        return None
     
 def Nextshow(temp):
     global nextsession
@@ -737,7 +747,7 @@ def Nextshow(temp):
             #click_action(d, actionx , actiony)
             #time.sleep(5.0)
             try:
-                bound2 = get_bounds_by_text(d, "完成簽到")
+                bound2 = get_bounds_by_textcontains(d, "完成簽到")
                 if bound2:
                     click_bounds(d, bound2)
                     time.sleep(4.0)
@@ -802,8 +812,18 @@ def Nextshow(temp):
                 swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
                 time.sleep(5.0)
                     
-                actionx = (resolution_width / 2 )
-                actiony = (resolution_height / 2 ) +100
+                swipe_start = '500 1500'
+                swipe_end = '500 500'
+                swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                time.sleep(5.0)
+                
+                swipe_start = '500 1500'
+                swipe_end = '500 500'
+                swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                time.sleep(5.0)
+
+                actionx = 480
+                actiony = 1930
                 click_action(d, actionx , actiony)
                 time.sleep(5.0)
                     
@@ -850,8 +870,8 @@ def Nextshow(temp):
 
 
             elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
-                actionx = (resolution_width / 2 )
-                actiony = (resolution_height  ) - 400
+                actionx = 730
+                actiony = 2055
                 click_action(d, actionx , actiony)
                 time.sleep(5.0)
             
@@ -1047,6 +1067,10 @@ def judgment(temp):
     if ele is not None :
         Key_Return()
     
+    bounds = get_bounds_by_text(d, "驗證")
+    if bounds:
+        Key_Return()
+       
     bounds = get_bounds_by_text(d, "明天再來")
     if bounds:
         nums = re.findall(r'\d+', bounds)
@@ -1372,8 +1396,8 @@ if __name__ == '__main__':
 
   
   goflag = 0
-  deviceid = "R58N10RXWVF"
-  #deviceid = "FA75V1802306"
+  #deviceid = "R58N10RXWVF"
+  deviceid = "FA75V1802306"
   #deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
