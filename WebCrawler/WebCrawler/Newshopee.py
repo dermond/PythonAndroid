@@ -1071,6 +1071,16 @@ def judgment(temp):
     if bounds:
         Key_Return()
        
+    ele = find_element_by_text(device_id,"允許存取手機資料嗎？")     
+    if ele is not None :
+        ele2 = find_element_by_text(device_id,"允許")     
+        if ele2 is not None :
+            bounds = ele.attrib.get('bounds')
+            click_bounds(d, bounds)
+ 
+ 
+
+
     bounds = get_bounds_by_text(d, "明天再來")
     if bounds:
         nums = re.findall(r'\d+', bounds)
@@ -1673,7 +1683,7 @@ if __name__ == '__main__':
                 try:
                     send_line_message(f"系統錯誤通知：{err_msg}")
                     mark_sent_today()
-                    time.sleep(3600.0)
+                    time.sleep(360.0)
                 except Exception as line_ex:
                     print(f"LINE 發送失敗: {line_ex}")
             else:
