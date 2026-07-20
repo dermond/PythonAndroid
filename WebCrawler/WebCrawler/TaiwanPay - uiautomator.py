@@ -265,20 +265,20 @@ if __name__ == '__main__':
   #收款帳號
 
   #text_to_input = '008'  # 輸入的文字 #華南銀行
-  #text_to_input = '700'  # 輸入的文字 #郵局
-  text_to_input = '007'  # 輸入的文字 #第一銀行
+  text_to_input = '700'  # 輸入的文字 #郵局
+  #text_to_input = '007'  # 輸入的文字 #第一銀行
   #text_to_input = '004'  # 輸入的文字 #台灣銀行
   #text_to_input = '017'  # 輸入的文字 #兆豐
 
-  #PhoneNumber = "0926865002"
-  PhoneNumber = "0972461422"
+  PhoneNumber = "0926865002"
+  #PhoneNumber = "0972461422"
   
   #匯款帳號
   #BankPoint = "582 1191" #台灣銀行
   #BankPoint = "582 1937" #第一銀行(1)
-  #BankPoint = "582 1729" #第一銀行(2)
+  BankPoint = "582 1729" #第一銀行(2)
   #BankPoint = "582 2151" #華南
-  BankPoint = "582 1485" #郵局
+  #BankPoint = "582 1485" #郵局
  
   #次數
   ForCount = 5
@@ -357,6 +357,14 @@ if __name__ == '__main__':
                     Key_Return()
                     break
                 if text.strip() == "門號, 門號須已在銀行設定轉帳入帳功能" and step == 3:
+                    click_bounds(d, bounds)
+                    time.sleep(1.0)
+                    input_characters(device, PhoneNumber)
+                    time.sleep(1.0)
+                    step = 4
+                    Key_Return()
+                    break
+                if text.strip() == '門號, 格式不正確，請重新輸入' and step == 3:
                     click_bounds(d, bounds)
                     time.sleep(1.0)
                     input_characters(device, PhoneNumber)
