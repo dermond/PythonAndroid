@@ -159,7 +159,13 @@ def paddleocr_image(img_path):
     text = '\n'.join([ line[1][0] for block in results for line in block ])
     return text
 
-
+def Key_Return():
+    try:
+        subprocess.run(["adb", "-s", device_id, "shell", "input", "keyevent", "4"], check=True)
+  
+        print("Key_Return")
+    except Exception as e:
+        print(f"Key_Return 錯誤")
 if __name__ == '__main__':
 
   deviceid = "46081JEKB10015"
@@ -184,7 +190,7 @@ if __name__ == '__main__':
       tap(device, "950 1410")
       time.sleep(1.0)
 
-      start_point = (875, 776)  # 起始坐標 (x, y)
+      start_point = (875, 676)  # 起始坐標 (x, y)
       end_point = (1040, 875)    # 結束坐標 (x, y)
 
       img = capture_screenshot(device)
@@ -193,6 +199,7 @@ if __name__ == '__main__':
       if resulttext.find("TWD 5") > -1 or resulttext.find("TWD 2") > -1:
         tap(device, "42 220 ")
         time.sleep(1.0)
+        #Key_Return()
         continue 
 
       start_point = (144, 1094)  # 起始坐標 (x, y)
