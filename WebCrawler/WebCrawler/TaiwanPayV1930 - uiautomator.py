@@ -263,12 +263,12 @@ if __name__ == '__main__':
   #目前按鈕特性 是給 google pixel 8a用
   # 
 
-     #收款帳號
+  #收款帳號
 
-  #text_to_input = '008'  # 輸入的文字 #華南銀行
+  text_to_input = '008'  # 輸入的文字 #華南銀行
   #text_to_input = '700'  # 輸入的文字 #郵局
   #text_to_input = '007'  # 輸入的文字 #第一銀行
-  text_to_input = '004'  # 輸入的文字 #台灣銀行
+  #text_to_input = '004'  # 輸入的文字 #台灣銀行
   #text_to_input = '017'  # 輸入的文字 #兆豐
 
   PhoneNumber = "0926865002"
@@ -276,14 +276,14 @@ if __name__ == '__main__':
   
   #匯款帳號
   #BankPoint = "582 1186" #郵局
-  BankPoint = "582 1397" #第一銀行(1)
+  #BankPoint = "582 1397" #第一銀行(1)
   #BankPoint = "582 1651" #第一銀行(2) 
   #BankPoint = "582 1900" #第一銀行(3)
-  #BankPoint = "582 2126" #兆豐
+  BankPoint = "582 2126" #兆豐
  
  
   #次數
-  ForCount = 5
+  ForCount = 4
 
   d = u2.connect(device_id)
 
@@ -374,7 +374,14 @@ if __name__ == '__main__':
                     step = 4
                     Key_Return()
                     break
-                
+                if text.strip() == '收款帳號, 請確認輸入的帳號內容' and step == 3:
+                    #滑動
+                    swipe_start = '500 100'
+                    swipe_end = '500 0'
+                    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                    time.sleep(1.0)
+                    a = '出問題了'
+                    step = 1
                 if text.strip() == "金額" and step == 4:
                     click_bounds(d, bounds)
                     time.sleep(1.0)
