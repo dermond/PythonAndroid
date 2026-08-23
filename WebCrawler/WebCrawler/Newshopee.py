@@ -54,7 +54,7 @@ ErrorCount = 0
 nextsession = 0
 last_date = datetime.date.today()
 okflag = 0
-
+nextflag = 0
 
 # 基準解析度（你定點位用的那台）
 BASE_WIDTH  = 1080
@@ -363,7 +363,31 @@ def Key_Return():
     except Exception as e:
         print(f"Key_Return 錯誤")
         
-  
+def clear_phone_memory():
+    print("正在連線手機並獲取 App 列表...")
+    try:
+        # 1. 獲取所有第三方應用的包名
+        result = subprocess.run(
+            ['adb', "-s", device_id, 'shell', 'pm', 'list', 'packages', '-3'], 
+            capture_output=True, text=True, check=True
+        )
+        
+        packages = result.stdout.strip().split('\n')
+        
+        # 2. 逐一強制停止
+        for pkg in packages:
+            if pkg:
+                # 移除 "package:" 前綴
+                pkg_name = pkg.replace("package:", "").strip()
+                print(f"正在關閉: {pkg_name}")
+                subprocess.run(['adb',"-s", device_id, 'shell', 'am', 'force-stop', pkg_name])
+                
+        print("✨ 背景記憶體清理完成！")
+        
+    except subprocess.CalledProcessError:
+        print("❌ 失敗：請檢查手機是否連線、ADB 是否設定正確、或是否開啟 USB 偵錯。")
+
+ 
 def log(message):
     # 取得當前時間，並格式化為 年-月-日 時:分:秒
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -502,7 +526,7 @@ def calculate_x2(y):
     return round(1.5875 * y - 2218)
 
 def find_element_by_text(device_id, target_text):
-    d = u2.connect(device_id)
+    #d = u2.connect(device_id)
 
     for el in d.xpath('//*').all():
         text = el.text
@@ -535,6 +559,8 @@ def ReLoadShopee():
     device.shell(f"am force-stop {package_name}")
     print("Shopee 已停止")
     time.sleep(4.0)
+
+    clear_phone_memory()
     # 啟動 Shopee
     start_command = f"am start -n {package_name}/{activity_name}"
     output = device.shell(start_command)
@@ -1067,9 +1093,10 @@ def judgment(temp):
     if ele is not None :
         Key_Return()
     
-    bounds = get_bounds_by_text(d, "驗證")
-    if bounds:
-        Key_Return()
+    #bounds = get_bounds_by_text(d, "驗證")
+    #if bounds:
+       #Key_Return()
+       
        
     ele = find_element_by_text(device_id,"允許存取手機資料嗎？")     
     if ele is not None :
@@ -1193,6 +1220,7 @@ def judgment(temp):
                 TotalCount = int(TotalCount) + 1
                 SettingReader.setSetting("base",deviceid + "TotalCount", str(TotalCount) )
                 log("領取一筆")
+
             else:
                 return "wait"
         try:
@@ -1385,7 +1413,6 @@ def send_line_message(msg: str):
      # 真正成功送出後才 mark_sent_today()
 
 
-
 if __name__ == '__main__':
   
   DBConnect = SQLConnect.DBConnect()
@@ -1406,8 +1433,8 @@ if __name__ == '__main__':
 
   
   goflag = 0
-  #deviceid = "R58N10RXWVF"
-  deviceid = "FA75V1802306"
+  deviceid = "R58N10RXWVF"
+  #deviceid = "FA75V1802306"
   #deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
@@ -1624,10 +1651,28 @@ if __name__ == '__main__':
         elif result == "next":
             okflag = 0
             print("下一筆")
+            if nextflag > 5:
+                nextflag = 0
+                bounds = get_bounds_by_text(d, "直播短影音")
+                if bounds:
+                    click_bounds(d, bounds)
+                    time.sleep(4.0)
+            
+                bounds = get_bounds_by_text(d, "直播")
+                if bounds:
+                    click_bounds(d, bounds)
+                    time.sleep(4.0)
+                    
+                    swipe_start = '500 1300'
+                    swipe_end = '500 100'
+                    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
+                    time.sleep(6.0)
+            
             swipe_start = '500 1300'
             swipe_end = '500 100'
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(6.0)
+            
             if (resolution_height > 2000):
                 jump = 200 + BaseJump
             else:
@@ -1643,7 +1688,7 @@ if __name__ == '__main__':
                 #print("發現蝦皮關閉按鈕，正在點擊...")
                 d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
                     
-
+            nextflag = nextflag + 1
         elif result == "ok":
             if okflag == 1 :
                  # 關閉 Shopee
@@ -1669,6 +1714,7 @@ if __name__ == '__main__':
             ErrorCount = 0
             turn_on_screen()
             okflag = 1
+            nextflag = 0
             continue
     
         print("重複")

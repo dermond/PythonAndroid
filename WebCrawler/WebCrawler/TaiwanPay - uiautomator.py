@@ -281,7 +281,7 @@ if __name__ == '__main__':
   BankPoint = "582 1485" #郵局
  
   #次數
-  ForCount = 5
+  ForCount = 2
 
   d = u2.connect(device_id)
 
@@ -299,8 +299,8 @@ if __name__ == '__main__':
           print("---Start---------...")
           time.sleep(1.0)
           allspace = True
-          d = u2.connect(device_id)
-          time.sleep(1.0)
+          #d = u2.connect(device_id)
+          #time.sleep(1.0)
 
 
           for el in d.xpath('//*').all():

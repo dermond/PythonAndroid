@@ -59,12 +59,15 @@ D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\P
 Vivo
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py de824891
 
-HTC
+HTC 藍色
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py FA75V1802306
 
-A20
+A20 橘色
 D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\Newshopee.py R58N10RXWVF
 
+1901861179700
+310670218863
 
 
+D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\env\Scripts\python.exe D:\GitHub\PythonAndroid\WebCrawler\WebCrawler\shopee-uiautomator.py 46081JEKB10015
 

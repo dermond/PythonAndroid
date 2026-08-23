@@ -265,14 +265,14 @@ if __name__ == '__main__':
 
   #收款帳號
 
-  text_to_input = '008'  # 輸入的文字 #華南銀行
+  #text_to_input = '008'  # 輸入的文字 #華南銀行
   #text_to_input = '700'  # 輸入的文字 #郵局
-  #text_to_input = '007'  # 輸入的文字 #第一銀行
+  text_to_input = '007'  # 輸入的文字 #第一銀行
   #text_to_input = '004'  # 輸入的文字 #台灣銀行
   #text_to_input = '017'  # 輸入的文字 #兆豐
 
-  PhoneNumber = "0926865002"
-  #PhoneNumber = "0972461422"
+  #PhoneNumber = "0926865002"
+  PhoneNumber = "0972461422"
   
   #匯款帳號
   #BankPoint = "582 1186" #郵局
@@ -283,7 +283,7 @@ if __name__ == '__main__':
  
  
   #次數
-  ForCount = 4
+  ForCount = 5
 
   d = u2.connect(device_id)
 
@@ -301,8 +301,8 @@ if __name__ == '__main__':
           print("---Start---------...")
           time.sleep(1.0)
           allspace = True
-          d = u2.connect(device_id)
-          time.sleep(1.0)
+          #d = u2.connect(device_id)
+          #time.sleep(1.0)
 
 
           for el in d.xpath('//*').all():

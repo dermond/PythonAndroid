@@ -196,7 +196,7 @@ if __name__ == '__main__':
       img = capture_screenshot(device)
       cropped_img = crop_image(img, start_point, end_point)
       resulttext = pytesseract_image(cropped_img)
-      if resulttext.find("TWD 5") > -1 or resulttext.find("TWD 2") > -1:
+      if resulttext.find("TWD 5") > -1 or resulttext.find("TWD 2") > -1 or resulttext.find("TWD 8") > -1:
         tap(device, "42 220 ")
         time.sleep(1.0)
         #Key_Return()
