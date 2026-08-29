@@ -543,7 +543,7 @@ def count_text_elements(device_id, text_to_find, retries=3, delay=1):
     :param delay: 每次重試間隔秒數
     :return: 數量 (int)
     """
-    d = u2.connect(device_id)
+    #d = u2.connect(device_id)
     
     try:
         for attempt in range(1, retries + 1):
@@ -574,7 +574,7 @@ def get_text_bounds(device_id, text_to_find, retries=3, delay=1):
     :param delay: 每次重試的間隔秒數，預設1秒
     :return: bounds 字串或 None
     """
-    d = u2.connect(device_id)
+   # d = u2.connect(device_id)
     try:
         for attempt in range(1, retries + 1):
             el = d.xpath(f'//*[@text="{text_to_find}"]').get()
@@ -667,7 +667,7 @@ def Key_Return():
         print(f"Key_Return 錯誤")
 
 def find_element_by_text(device_id, target_text):
-    d = u2.connect(device_id)
+    #d = u2.connect(device_id)
 
     for el in d.xpath('//*').all():
         text = el.text
@@ -751,6 +751,15 @@ def All_Close():
     else:
         print("找不到符合條件的元素")
               
+def get_bounds_by_text(d, text, timeout=1):
+    try:
+        el = d.xpath(f'//*[@text="{text}"]').get(timeout=timeout)
+        if not el:
+            return None
+        return el.attrib.get('bounds')
+    except:
+        return None
+
 if __name__ == '__main__':
   
   goflag = 0
@@ -860,7 +869,7 @@ if __name__ == '__main__':
           print("---Start---------...")
           #time.sleep(1.0)
           allspace = True
-          d = u2.connect(device_id)
+          #d = u2.connect(device_id)
           #time.sleep(1.0)
           cancelflag = False
           
@@ -982,7 +991,7 @@ if __name__ == '__main__':
                         continue
                     option_position = str(center_x) + ' ' + str(center_y - 50)    # 選擇的選項的位置
                     
-                    d = u2.connect(device_id)
+                    #d = u2.connect(device_id)
                     screen_width = d.info.get('displayWidth') 
         
                     # 2. 動態計算右側 1/3 的門檻
@@ -1118,7 +1127,14 @@ if __name__ == '__main__':
                             center_x = (left + right) // 2
                             center_y = (top + bottom) // 2
                        
-                            option_position = str(center_x) + ' ' + str(center_y + 300)    # 選擇的選項的位置                   
+                            #option_position = str(center_x) + ' ' + str(center_y + 300)    # 選擇的選項的位置                   
+
+                            if resolution_width == 1080 and resolution_height == 2400 and density == 420  : #deviceid == "46081JEKB10015"
+                                option_position = str(center_x - 323) + ' ' + str(center_y + 800)    # 選擇的選項的位置     
+                                
+                            else:
+                                option_position = str(center_x - 323) + ' ' + str(center_y + 800)    # 選擇的選項的位置     
+                                
                             tap(device, option_position) 
                             time.sleep(2.0)
                             
@@ -1171,7 +1187,7 @@ if __name__ == '__main__':
                     actiony = (resolution_height / 2 ) -100
                     click_action(d, actionx , actiony)
                     allspace =False
-                    time.sleep(2.0)
+                    time.sleep(8.0)
                     d.press("back")
                     break
                 if text == "正在計算中...":
