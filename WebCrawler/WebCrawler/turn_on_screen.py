@@ -33,7 +33,6 @@ from pathlib import Path
 import requests
 import uiautomator2 as u2
 import random
-import json
 
 LAST_SEND_FILE = Path("last_line_send.txt")
 
@@ -350,7 +349,7 @@ def turn_on_screen():
         subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
         # 將亮度設置為最低，接近關閉背光
-        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "1"], check=True)
+        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "90"], check=True)
 
   
         print("螢幕已開啟")
@@ -1431,39 +1430,21 @@ def judgment(temp):
         else:
             return "next"
    
-def _load_records() -> dict:
-    """讀取所有事件的發送記錄"""
+def mark_sent_today():
+    """記錄今天已經發送過"""
+    today = datetime.datetime.now().strftime("%Y-%m-%d")
+    LAST_SEND_FILE.write_text(today, encoding="utf-8")
+
+def already_sent_today():
     if not LAST_SEND_FILE.exists():
-        return {}
+        return False
+
     try:
-        content = LAST_SEND_FILE.read_text(encoding="utf-8").strip()
-        return json.loads(content) if content else {}
+        last_date = LAST_SEND_FILE.read_text(encoding="utf-8").strip()
+        today = datetime.datetime.now().strftime("%Y-%m-%d")
+        return last_date == today
     except Exception:
-        return {}
-
-def _save_records(records: dict):
-    """將記錄寫入檔案"""
-    try:
-        LAST_SEND_FILE.write_text(
-            json.dumps(records, ensure_ascii=False, indent=2),
-            encoding="utf-8"
-        )
-    except Exception as e:
-        print(f"寫入發送記錄失敗: {e}")
-
-def already_sent_today(event_key: str) -> bool:
-    """檢查指定事件今天是否已經發送過"""
-    records = _load_records()
-    last_date = records.get(event_key)
-    today = datetime.datetime.now().strftime("%Y-%m-%d")
-    return last_date == today
-
-def mark_sent_today(event_key: str):
-    """記錄指定事件今天已發送"""
-    records = _load_records()
-    today = datetime.datetime.now().strftime("%Y-%m-%d")
-    records[event_key] = today
-    _save_records(records)
+        return False
 
 def send_line_message(msg: str):
      url = "https://api.line.me/v2/bot/message/push"
@@ -1483,55 +1464,6 @@ def send_line_message(msg: str):
      print(f"發送 LINE 訊息: {msg}")
      # 真正成功送出後才 mark_sent_today()
 
-def get_android_battery_level():
-    """透過 ADB 取得 Android 手機目前電量 (0-100)，失敗時拋出例外"""
-    try:
-        # 執行 ADB dumpsys battery 指令
-        result = subprocess.run(
-            ["adb", "-s", device_id , "shell", "dumpsys", "battery"],
-           
-            capture_output=True,
-            text=True,
-            check=True
-        )
-        # 解析輸出中的 level 欄位 (例如: "  level: 85")
-        match = re.search(r"level:\s*(\d+)", result.stdout)
-        if match:
-            return int(match.group(1))
-        raise RuntimeError("無法從 ADB 輸出解析電量資訊")
-    except Exception as e:
-        raise RuntimeError(f"ADB 取得電量失敗: {e}")
-
-def check_battery_and_notify():
-    try:
-        battery_level = get_android_battery_level()
-        print(f"目前手機電量: {battery_level}%")
-
-        # 當電量小於 90% 時觸發通知
-        if battery_level < 90:
-            if not already_sent_today("low_battery"):
-                try:
-                    send_line_message(f"⚠️ 手機電量過低通知：{device_id}目前電量僅剩 {battery_level}%，請盡速充電。")
-                    mark_sent_today("low_battery")
-                    #time.sleep(360.0)
-                except Exception as line_ex:
-                    print(f"LINE 發送失敗: {line_ex}")
-            else:
-                print("今天已經發過電量警告，不再重複發送。")
-
-    except Exception as ex:
-        err_msg = str(ex)
-        print(f"檢測過程發生錯誤: {err_msg}")
-        
-        # 設備未連接或找不到指令時的處理
-        if "not found" in err_msg or "device" in err_msg:
-            if not already_sent_today("connection_error"):
-                try:
-                    send_line_message(f"系統錯誤通知：{device_id} 無法連線至手機 - {err_msg}")
-                    mark_sent_today("connection_error")
-                    #time.sleep(360.0)
-                except Exception as line_ex:
-                    print(f"LINE 發送失敗: {line_ex}")
 
 if __name__ == '__main__':
   
@@ -1590,268 +1522,5 @@ if __name__ == '__main__':
     
   d = u2.connect(device_id)
   
-  for el in d.xpath('//*').all():
-    text = el.text
-    print(text)
-  if (resolution_width == 1440):
-      Leftspace = 340
-  if (density >= 640):
-      dpi = 20
-
-  if (resolution_height > 2000 and density == 640):
-       jump = 300
-
-  if (resolution_height > 2000 and density == 480):
-       jump = 200
-  # #錯誤視窗判斷
-  # Shopee 的包名與主 Activity
-  package_name = "com.shopee.tw"
-  activity_name = "com.shopee.app.ui.home.HomeActivity_"
-  
-  Shopeecount = 0
-  ErrorCount = 0
-  
-  LimitTotalCount = SettingReader.getSetting("base",deviceid + "LimitTotalCount")
-  if LimitTotalCount == '':
-      LimitTotalCount = 80
-      SettingReader.setSetting("base",deviceid + "LimitTotalCount", LimitTotalCount )
-
-  TotalCount = SettingReader.getSetting("base",deviceid + "TotalCount")
-  if TotalCount == '':
-      TotalCount = 0
-      SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
-  TotalCount = int(TotalCount)
-  
-
-  today = datetime.date.today()
-  yesterday = today - datetime.timedelta(days=1)
-  
-  (xpoint,ypoint) =convert_xy_with_dpi(130,430);
-
-  ReLoadShopee()
-  Shopeecount = 0
-
-  bounds = get_bounds_by_text(d, "直播")
-  if bounds:
-        click_bounds(d, bounds)
-        time.sleep(4.0)
-
-
-  for i in range(99999999):
-    try:
-
-        check_battery_and_notify();
-        current_date = str(datetime.date.today())
-        getdate = SettingReader.getSetting("base",deviceid + "date")
-    
-        TotalCount = SettingReader.getSetting("base",deviceid + "TotalCount")
-    
-        # 如果是空字串，給預設值 0
-        if TotalCount == "" or TotalCount is None:
-            TotalCount = 0
-            SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
-    
-        if getdate != current_date:
-            TotalCount = 0
-            SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
-            SettingReader.setSetting("base",deviceid + "date", current_date )
-            adb_init(deviceid)
-        
-        now = datetime.datetime.now().time()
-
-        start_time = datetime.time(5, 0)    # 05:00
-        end_time   = datetime.time(5, 30)   # 05:30
-
-        # ✅ 只有在 05:00~05:30 之間
-        if start_time <= now <= end_time:
-            TotalCount = 0
-            SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
-            SettingReader.setSetting("base",deviceid + "date", current_date )
-            adb_init(deviceid)
-
-        check_garbage_objects()
-        print_memory_usage()
-        turn_off_screen()
-        if Shopeecount > 10:  # 如果 i 是 10 的倍數
-            print(f"第 {i} 次操作：重啟 Shopee App")
-        
-           
-            ReLoadShopee()
-            # tap(device, "740 190 ")
-            # time.sleep(3.0)
-        
-            # tap(device, "322 1263 ")
-            # time.sleep(1.0)
-            Shopeecount = 0
-            bound2 = get_bounds_by_text(d, "直播")
-            if bound2:
-                click_bounds(d, bound2)
-                time.sleep(4.0)
-
-            
-        
-        start_time = datetime.time(8, 0)    # 08:00
-        end_time   = datetime.time(13, 00)   # 11:00
-        # ✅ 只有在 08:00~11:00 之間
-        if start_time <= now <= end_time:
-            #進行
-            Nextshow(0)
-
-
-        now = datetime.datetime.now()
-        now_time = now.time()
-        weekday = now.weekday()  # 0 = 星期一, 6 = 星期日
-
-        # 定義每天的禁止執行時間區段（start_time, end_time）
-        restricted_times = {
-            0: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期一
-            1: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期二
-            2: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期三
-            3: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期四
-            4: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期五
-            5: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期六
-            6: (datetime.time(1, 0), datetime.time(14, 0)),   # 星期日
-        }
-
-        start, end = restricted_times[weekday]
-
-        # 判斷是否在禁止區段內（處理跨午夜的情況）
-        in_restricted = False
-        if start < end:
-            # 時間區段沒有跨午夜
-            in_restricted = start <= now_time < end
-        else:
-            # 時間區段跨午夜，例如 23:00 ~ 10:00
-            in_restricted = now_time >= start or now_time < end
-
-        if in_restricted:
-            print(f"現在時間 {now_time} 在禁止區段 ({start}~{end})，跳過執行，時間：{now}")
-            time.sleep(10.0)
-        
-            #滑動
-            swipe_start = '500 1300'
-            swipe_end = '500 500'
-            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-            time.sleep(2.0)
-
-            if goflag == 0 :
-                device.shell(f"am force-stop {package_name}")
-                print("Shopee 已停止")
-                time.sleep(2.0)
-            
-            goflag = 1
-            nextsession = 0
-            continue
-
-        if goflag == 1 :
-            # 啟動 Shopee
-            start_command = f"am start -n {package_name}/{activity_name}"
-            output = device.shell(start_command)
-            print(f"Shopee 已啟動，輸出：\n{output}")
-            time.sleep(4.0)
-        
-            tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 200))
-            #tap(device, "545 2180 ")
-            time.sleep(2.0)
-        goflag = 0
-
-        # 如果不在禁止區段，就執行你的主程式
-        print(f"現在時間 {now_time} 可以執行，時間：{now}")
-    
-        print(f"TotalCount：\n{str(TotalCount)}")
-        if int(TotalCount) > int(LimitTotalCount):
-            print(f"TotalCount 大於"+str(LimitTotalCount)+f"次：\n{str(TotalCount)}")
-            time.sleep(100.0)
-            continue
-
-        result = judgment(0)
-        if result == "wait":
-            okflag = 0
-            print("等待 不用處理")
-        elif result == "next":
-            okflag = 0
-            print("下一筆")
-            if nextflag > 5:
-                nextflag = 0
-                bounds = get_bounds_by_text(d, "直播短影音")
-                if bounds:
-                    click_bounds(d, bounds)
-                    time.sleep(4.0)
-            
-                bounds = get_bounds_by_text(d, "直播")
-                if bounds:
-                    click_bounds(d, bounds)
-                    time.sleep(4.0)
-                    
-                    swipe_start = '500 1300'
-                    swipe_end = '500 100'
-                    swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-                    time.sleep(6.0)
-            
-            swipe_start = '500 1300'
-            swipe_end = '500 100'
-            swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
-            time.sleep(6.0)
-            
-            if (resolution_height > 2000):
-                jump = 200 + BaseJump
-            else:
-                jump = 150 + BaseJump
-            Shopeecount = Shopeecount + 1
-            ErrorCount = 0
-            
-            if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
-                #print("發現蝦皮關閉按鈕，正在點擊...")
-                d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
-                #allspace =False
-            if d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").exists:
-                #print("發現蝦皮關閉按鈕，正在點擊...")
-                d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
-                    
-            nextflag = nextflag + 1
-        elif result == "ok":
-            if okflag == 1 :
-                 # 關閉 Shopee
-                device.shell(f"am force-stop {package_name}")
-                print("Shopee 已停止")
-                time.sleep(4.0)
-                # 啟動 Shopee
-                start_command = f"am start -n {package_name}/{activity_name}"
-                output = device.shell(start_command)
-                print(f"Shopee 已啟動，輸出：\n{output}")
-                time.sleep(6.0)
-        
-                tap(device, str((resolution_width / 2) + 50) + " " + str((resolution_height) - 150))
-                #tap(device, "545 2180 ")
-                time.sleep(4.0)
-                okflag = 0
-                continue
-            Shopeecount = 0
-            if (resolution_height > 2000):
-                jump = 200 + BaseJump
-            else:
-                jump = 150 + BaseJump
-            ErrorCount = 0
-            turn_on_screen()
-            okflag = 1
-            nextflag = 0
-            continue
-    
-        print("重複")
-    
-        last_date = datetime.date.today()
-    except Exception as ex:
-        err_msg = str(ex)
-        print(f"有重大錯誤: {err_msg}")
-
-        if "not found" in err_msg:
-            if not already_sent_today():
-                try:
-                    send_line_message(f"{device_id} 系統錯誤通知：{err_msg}")
-                    mark_sent_today()
-                    time.sleep(360.0)
-                except Exception as line_ex:
-                    print(f"LINE 發送失敗: {line_ex}")
-            else:
-                print("今天已經發過 LINE 訊息，不再重複發送。")
-   
+  turn_on_screen()
+  #turn_off_screen()
