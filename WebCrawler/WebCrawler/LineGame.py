@@ -22,6 +22,20 @@ import uiautomator2 as u2
 ocr = ddddocr.DdddOcr()
 Pocr = PaddleOCR(use_angle_cls=False, lang='ch')  # lang='ch' 支援
 
+ # 依據實際取出的 10 個點位 (比例, 目標 RGB)
+SAMPLE_POINTS = [
+    (0.10, (164, 200, 255)),
+    (0.19, (72, 162, 255)),
+    (0.28, (222, 239, 255)),
+    (0.37, (255, 255, 255)),
+    (0.46, (246, 250, 255)),
+    (0.54, (245, 250, 255)),
+    (0.63, (78, 161, 255)),
+    (0.72, (255, 255, 255)),
+    (0.81, (72, 162, 255)),
+    (0.90, (209, 209, 209)),
+]
+
 def connect(serial: str):
     client = AdbClient(host='127.0.0.1', port=5037)
 
@@ -153,17 +167,17 @@ def capture_screenshot(device):
 
 
     # 轉換為灰階
-    gray_img = img.convert("L")
+    #gray_img = img.convert("L")
 
      # 保存到当前工作目录
-    gray_img.save(os.path.join(os.getcwd(), 'full_screen.png'))
+    img.save(os.path.join(os.getcwd(), 'full_screen.png'))
 
     
     
     subprocess.run(["adb", "exec-out", "screencap", "-p", ">", "screen.png"], shell=True)
 
 
-    return gray_img
+    return img
 
 def crop_image(img, start_point, end_point):
     try:
@@ -313,6 +327,46 @@ def Key_Return():
         print("Key_Return")
     except Exception as e:
         print(f"Key_Return 錯誤")
+
+def extract_diagonal_sample_points(image_path, num_points=10):
+    """
+    載入原色圖，從左上到右下對角線取 10 個點的相對比例與 RGB 數值
+    """
+    img = image_path#Image.open(image_path).convert("RGB")
+    w, h = img.size
+    
+    samples = []
+    # 避免取在最外圍黑邊/邊框，在 10% ~ 90% 區間均勻取點
+    for i in range(num_points):
+        ratio = 0.10 + (0.80 * i / (num_points - 1))
+        x = int(w * ratio)
+        y = int(h * ratio)
+        rgb = img.getpixel((x, y))
+        samples.append({
+            "ratio": round(ratio, 4),
+            "rgb": rgb
+        })
+        print(f"點位 {i+1:2d} -> 相對比例: {ratio:.2f}, 像素坐標: ({x:3d}, {y:3d}), RGB: {rgb}")
+        
+    return samples
+
+def is_original_button_colors(cropped_img, tolerance=40, min_match_count=7):
+    """檢查裁剪後的圖片是否符合原色 (10 點中至少中 7 點)"""
+    w, h = cropped_img.size
+    matched_count = 0
+
+    for ratio, target_rgb in SAMPLE_POINTS:
+        x = min(int(w * ratio), w - 1)
+        y = min(int(h * ratio), h - 1)
+        actual_pixel = cropped_img.getpixel((x, y))
+        actual_rgb = actual_pixel[:3]  # 忽略 Alpha 通道，只取 RGB
+
+        diff = max(abs(a - t) for a, t in zip(actual_rgb, target_rgb))
+        if diff <= tolerance:
+            matched_count += 1
+
+    return matched_count >= min_match_count
+
 def solution_data_fun(cell):
     global start_row
     global start_col
@@ -355,57 +409,45 @@ def solution_data_fun(cell):
     img = capture_screenshot(device)
     cropped_img = crop_image(img, start_point, end_point)
     resulttext = pytesseract_image_chi(cropped_img) 
-    ##resulttext = paddleocr_image(cropped_img)  
-    ### if (resulttext.find("游戳教享")  == -1 and resulttext.find("游戏教学")  == -1 ):
-    ###     continue
-    ##d = u2.connect(device_id)
-    ##for el in d.xpath('//*').all():
-    ##    text = el.text
-    ##    print("text" + str(text))
-    ##    classname = el.attrib.get('class')
 
-    ##    print(f"內容: {text}")
-    ##    print(f"類型: {classname}")
-    ##count_text_elements(device_id,"遊戲教學")
-     
-    #while (resulttext.find("遊 戲 教 學") == -1 and resulttext.find("游戳教享") == -1 and resulttext.find("游戏教学") == -1 and resulttext.find("游教學") == -1 and resulttext.find("游戴教學") == -1 and resulttext.find("游戳教學") == -1 ):
+    #extract_diagonal_sample_points(cropped_img)
+   
+
     keywords = ["遊 戲 教 學", "游戳教享", "游戏教学", "游教學", "游戴教學", "游戳教學"]
 
     loop_count = 0  # 初始化計數器
 
-    while not any(keyword in resulttext for keyword in keywords):
+    while True:
+        # 1. 截圖並裁剪
+        img = capture_screenshot(device)
+        cropped_img = crop_image(img, start_point, end_point)
+
+        # 2. 判斷是否為無遮罩原色
+        if is_original_button_colors(cropped_img):
+            # 原色正確才做 OCR，節省運算時間
+            resulttext = paddleocr_image(cropped_img)
+            print(f"原色相符，OCR 辨識結果: {resulttext}")
+
+            # 3. 雙重條件滿足：顏色是原色 且 文字匹配成功
+            if any(keyword in resulttext for keyword in keywords):
+                print("✅ 成功辨識原色『遊戲教學』按鈕，退出等待。")
+                break
+        else:
+            print("⏳ 畫面仍有遮罩或非目標畫面，繼續等待...")
+
+        # --- 以下為尚未到達目標畫面時的操作 ---
         Key_Return()
         loop_count += 1
 
         # 每跑 5 次點擊一次中間位置
         if loop_count >= 5:
-            target_x = (resolution_width / 2 )
-            target_y = (resolution_height / 2 ) 
+            target_x = resolution_width / 2
+            target_y = resolution_height / 2
             adb_tap(device, target_x, target_y)
-            time.sleep(0.5)  # 稍微延遲避免手機反應不及
-            loop_count = 0   # 重置計數器
+            time.sleep(0.5)
+            loop_count = 0
 
-        time.sleep(5.5)  # 每5.5秒檢查一次
-       
-        # 這裡要重新取得 resulttext !!
-    
-        # 重新取得螢幕座標並 OCR
-        if device_id == "R58N10RXWVF":
-            start_point = (539, 286)  # 起始坐標 (x, y)
-            end_point = (678, 332)    # 結束坐標 (x, y)
-            start_point = (539, 286)
-            end_point = (678, 332)
-        else:
-            start_point = (810, 458)  # 起始坐標 (x, y)
-            end_point = (1046, 528)    # 結束坐標 (x, y)
-        
-            start_point = (810, 458)
-            end_point = (1046, 528)
-    
-        img = capture_screenshot(device)
-        cropped_img = crop_image(img, start_point, end_point)
-        resulttext = paddleocr_image(cropped_img)  
-        #resulttext = paddleocr_image(cropped_img)
+        time.sleep(3.5)  # 間隔重試
 
     # 等到條件成立後才會往下跑
     print("條件成立，繼續執行")
@@ -421,7 +463,7 @@ def solution_data_fun(cell):
     adb_tap(device,target_x, target_y)
     time.sleep(0.5) # 稍微延遲避免手機反應不及
     adb_tap(device,val_x, num_y)
-    time.sleep(5.5)
+    time.sleep(0.5)
 
 def solve_sudoku():
     global start_row
@@ -505,7 +547,7 @@ if __name__ == '__main__':
   num_step_x=0
 
   # 數獨解答資料 (僅填入空白格)
-  solution_data = [[1,1,9],[1,3,3],[1,4,8],[1,7,6],[1,8,2],[1,9,7],[2,1,4],[2,4,6],[2,8,5],[3,1,6],[3,2,7],[3,3,2],[3,4,3],[3,6,9],[3,7,8],[3,8,4],[3,9,1],[4,1,1],[4,2,8],[4,3,9],[4,4,7],[4,5,4],[4,6,5],[4,7,2],[5,1,2],[5,2,3],[5,5,6],[5,6,8],[5,7,7],[5,8,9],[5,9,4],[6,1,7],[6,3,4],[6,5,2],[6,7,5],[6,8,1],[6,9,8],[7,1,5],[7,2,4],[7,4,2],[7,8,8],[8,1,8],[8,3,7],[8,4,4],[8,5,9],[8,7,1],[8,8,3],[9,1,3],[9,4,5],[9,7,4],[9,9,2]]
+  solution_data = [[1,1,9],[1,2,1],[1,3,6],[1,6,5],[1,8,2],[2,1,4],[2,2,5],[2,6,2],[2,7,6],[2,9,3],[3,1,8],[3,3,3],[3,4,6],[3,5,1],[3,7,5],[3,9,4],[4,1,1],[4,4,5],[4,5,8],[4,7,3],[4,9,2],[5,1,7],[5,4,2],[5,7,1],[5,8,8],[6,1,5],[6,2,8],[6,3,2],[6,4,3],[6,5,7],[6,6,1],[6,7,4],[6,8,6],[7,1,6],[7,3,5],[7,4,7],[7,5,2],[7,6,8],[7,8,3],[8,2,9],[8,3,8],[8,6,6],[8,8,4],[8,9,7],[9,1,2],[9,2,7],[9,5,4],[9,6,3],[9,7,8],[9,8,5],[9,9,6]]
 
 
 

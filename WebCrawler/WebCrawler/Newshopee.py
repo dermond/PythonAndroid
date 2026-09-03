@@ -363,7 +363,18 @@ def Key_Return():
         print("Key_Return")
     except Exception as e:
         print(f"Key_Return 錯誤")
-        
+
+# 定義不需清理的白名單（填入 App Package Name）
+# 特別注意：uiautomator 相關服務若被強制關閉，自動化腳本可能會中斷
+WHITELIST = {
+    "com.github.uiautomator",
+    "com.github.uiautomator.test",
+    "com.shopee.tw",          # 範例：不想關閉的 App
+    "com.gombosdev.ampere",   # 範例：電量監控工具
+    "fastcharger.smartcharging.batterysaver.batterydoctor",
+
+}
+
 def clear_phone_memory():
     print("正在連線手機並獲取 App 列表...")
     try:
@@ -375,19 +386,25 @@ def clear_phone_memory():
         
         packages = result.stdout.strip().split('\n')
         
-        # 2. 逐一強制停止
+        # 2. 逐一比對並強制停止
         for pkg in packages:
-            if pkg:
-                # 移除 "package:" 前綴
-                pkg_name = pkg.replace("package:", "").strip()
-                print(f"正在關閉: {pkg_name}")
-                subprocess.run(['adb',"-s", device_id, 'shell', 'am', 'force-stop', pkg_name])
+            if not pkg:
+                continue
+                
+            pkg_name = pkg.replace("package:", "").strip()
+            
+            # 檢查是否在白名單中
+            if pkg_name in WHITELIST:
+                print(f"⏩ 跳過白名單: {pkg_name}")
+                continue
+
+            print(f"正在關閉: {pkg_name}")
+            subprocess.run(['adb', "-s", device_id, 'shell', 'am', 'force-stop', pkg_name])
                 
         print("✨ 背景記憶體清理完成！")
         
     except subprocess.CalledProcessError:
         print("❌ 失敗：請檢查手機是否連線、ADB 是否設定正確、或是否開啟 USB 偵錯。")
-
  
 def log(message):
     # 取得當前時間，並格式化為 年-月-日 時:分:秒
