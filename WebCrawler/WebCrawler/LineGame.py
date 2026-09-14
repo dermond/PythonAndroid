@@ -436,6 +436,8 @@ def solution_data_fun(cell):
             print("⏳ 畫面仍有遮罩或非目標畫面，繼續等待...")
 
         # --- 以下為尚未到達目標畫面時的操作 ---
+        find_element_by_text(device_id,"確認")
+        
         Key_Return()
         loop_count += 1
 
@@ -444,9 +446,13 @@ def solution_data_fun(cell):
             target_x = resolution_width / 2
             target_y = resolution_height / 2
             adb_tap(device, target_x, target_y)
+            
+            time.sleep(0.5)
+            Key_Return()
+            time.sleep(0.5)
+            adb_tap(device,115, 205)
             time.sleep(0.5)
             loop_count = 0
-
         time.sleep(3.5)  # 間隔重試
 
     # 等到條件成立後才會往下跑
@@ -465,6 +471,18 @@ def solution_data_fun(cell):
     adb_tap(device,val_x, num_y)
     time.sleep(0.5)
 
+def find_element_by_text(device_id, target_text):
+    d = u2.connect(device_id)
+
+    for el in d.xpath('//*').all():
+        text = el.text
+        bounds = el.attrib.get('bounds')
+        if str(text).find(target_text) > -1:
+            print("中了")
+        if text and target_text in text:
+            return el   # 找到就回傳元件
+
+    return None  # 沒找到
 def solve_sudoku():
     global start_row
     global start_col
@@ -520,8 +538,8 @@ if __name__ == '__main__':
 
   deviceid = ""
   #deviceid = "R58N10RXWVF"
-  deviceid = "46081JEKB10015"
-  #deviceid = "de824891"
+  #deviceid = "46081JEKB10015"
+  deviceid = "de824891"
   #deviceid = "FA75V1802306"
   device, client = connect(deviceid)
   device_id = device.serial
@@ -547,8 +565,8 @@ if __name__ == '__main__':
   num_step_x=0
 
   # 數獨解答資料 (僅填入空白格)
-  solution_data = [[1,1,9],[1,2,1],[1,3,6],[1,6,5],[1,8,2],[2,1,4],[2,2,5],[2,6,2],[2,7,6],[2,9,3],[3,1,8],[3,3,3],[3,4,6],[3,5,1],[3,7,5],[3,9,4],[4,1,1],[4,4,5],[4,5,8],[4,7,3],[4,9,2],[5,1,7],[5,4,2],[5,7,1],[5,8,8],[6,1,5],[6,2,8],[6,3,2],[6,4,3],[6,5,7],[6,6,1],[6,7,4],[6,8,6],[7,1,6],[7,3,5],[7,4,7],[7,5,2],[7,6,8],[7,8,3],[8,2,9],[8,3,8],[8,6,6],[8,8,4],[8,9,7],[9,1,2],[9,2,7],[9,5,4],[9,6,3],[9,7,8],[9,8,5],[9,9,6]]
-
+  solution_data = [[1,2,6],[1,3,5],[1,4,1],[1,6,3],[1,7,7],[1,8,2],[1,9,4],[2,1,4],[2,2,9],[2,3,2],[2,5,5],[2,6,7],[2,7,1],[2,9,8],[3,1,7],[3,2,1],[3,3,3],[3,4,8],[3,5,4],[3,7,6],[3,8,5],[3,9,9],[4,2,2],[4,3,1],[4,4,7],[4,7,3],[4,8,4],[4,9,6],[5,1,6],[5,3,7],[5,4,3],[5,5,1],[5,7,8],[5,8,9],[6,1,3],[6,2,8],[6,3,4],[6,4,2],[6,5,6],[6,6,9],[6,7,5],[6,9,7],[7,1,5],[7,2,3],[7,3,6],[7,4,4],[7,8,7],[7,9,1],[8,1,1],[8,2,4],[8,3,9],[8,5,7],[8,6,6],[8,7,2],[8,8,8],[8,9,3],[9,1,2],[9,3,8],[9,4,9],[9,5,3],[9,9,5]]
+  
 
 
   solve_sudoku()

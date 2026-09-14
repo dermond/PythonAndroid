@@ -759,14 +759,52 @@ def get_bounds_by_text(d, text, timeout=1):
         return el.attrib.get('bounds')
     except:
         return None
+def count_target_values(elements):
+    """
+    計算畫面上數值在 0.01 ~ 5.0 之間的元素個數
+    :param elements: d.xpath('//*').all() 抓到的元素列表
+    :return: (count, values_list) 符合的數量與數值列表
+    """
+    valid_values = []
+    
+    for item in elements:
+        # 排除系統狀態列相關元件
+        resource_id = ""
+        if hasattr(item, "attrib"):
+            resource_id = item.attrib.get("resource-id", "")
+        elif hasattr(item, "info"):
+            resource_id = item.info.get("resourceName", "")
+
+        if "com.android.systemui" in resource_id:
+            continue
+
+        text = item.text
+        if not text:
+            continue
+        
+        text = text.strip()
+
+        # 匹配整數或浮點數字串 (例如 0.01, 0.45, 1, 3.5, 5 等)
+        if re.fullmatch(r'^\d+(\.\d+)?$', text):
+            try:
+                val = float(text)
+                # 判定範圍在 0.01 ~ 5.0 之間
+                if 0.01 <= val <= 5.0:
+                    valid_values.append(val)
+            except ValueError:
+                continue
+
+    count = len(valid_values)
+    print(f"📊 範圍 0.01~5.0 內的數值共 {count} 個：{valid_values}")
+    return count, valid_values
 
 if __name__ == '__main__':
   
   goflag = 0
   deviceid = ""
   #deviceid = "R58N10RXWVF"
-  deviceid = "46081JEKB10015"
-  #deviceid = "de824891"
+  #deviceid = "46081JEKB10015"
+  deviceid = "de824891"
   #deviceid = "FA75V1802306"
   
   if len(sys.argv) > 1:
@@ -887,6 +925,19 @@ if __name__ == '__main__':
             else:
                ReLoadShopee()
                Step = 0
+               
+
+          # 取得目前畫面上所有元素
+          elements = d.xpath('//*').all()
+
+          # 計算數量
+          count, values = count_target_values(elements)
+
+          if count > 0:
+              print(f"找到 {count} 個符合條件的數值")
+          else:
+              print("沒有找到 0.01~5 之間的數值")
+    
           # 獲取當前頁面所有元素
           # 使用 xpath 抓取所有節點
           for el in d.xpath('//*').all():
@@ -989,8 +1040,9 @@ if __name__ == '__main__':
                         center_y = (top + bottom) // 2
                     if center_y > (resolution_height / 2) :
                         continue
-                    option_position = str(center_x) + ' ' + str(center_y - 50)    # 選擇的選項的位置
-                    
+                    option_position = str(center_x) + ' ' + str(center_y)    # 選擇的選項的位置
+                    #option_position = str(center_x) + ' ' + str(center_y - 30)    # 選擇的選項的位置
+                    tap(device, option_position) 
                     #d = u2.connect(device_id)
                     screen_width = d.info.get('displayWidth') 
         
@@ -1272,6 +1324,10 @@ if __name__ == '__main__':
             #    d(description="close product panel").click()
             #else:
             #    print("未發現按鈕，跳過。")
+            bounds = get_bounds_by_text(d, "領取")
+            if bounds:
+                click_bounds(d, bounds)
+                time.sleep(4.0)
 
             swipe_start = '500 1300'
             swipe_end = '500 500'

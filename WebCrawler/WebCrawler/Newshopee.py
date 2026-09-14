@@ -331,12 +331,20 @@ def turn_off_screen():
     try:
         subprocess.run(["adb", "-s", device_id, "root"], check=True)
         
-        # 禁用自動亮度調整
-        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+        if deviceid == "R58N10RXWVF":
         
-        # 將亮度設置為最低，接近關閉背光
-        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "1"], check=True)
-
+            # 禁用自動亮度調整
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+    
+            # 將亮度設置為最低，接近關閉背光
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "80"], check=True)
+        else:
+            # 禁用自動亮度調整
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+    
+            # 將亮度設置為最低，接近關閉背光
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "5"], check=True)
+  
 
         print("螢幕已關閉")
     except Exception as e:
@@ -346,12 +354,19 @@ def turn_on_screen():
     try:
         subprocess.run(["adb", "-s", device_id, "root"], check=True)
         
-        # 禁用自動亮度調整
-        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+        if deviceid == "R58N10RXWVF":
+        
+            # 禁用自動亮度調整
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
-        # 將亮度設置為最低，接近關閉背光
-        subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "1"], check=True)
-
+            # 將亮度設置為最低，接近關閉背光
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "80"], check=True)
+        else:
+            # 禁用自動亮度調整
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+    
+            # 將亮度設置為最低，接近關閉背光
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "5"], check=True)
   
         print("螢幕已開啟")
     except Exception as e:
@@ -1570,9 +1585,9 @@ if __name__ == '__main__':
 
   
   goflag = 0
-  #deviceid = "R58N10RXWVF"
+  deviceid = "R58N10RXWVF"
   #deviceid = "FA75V1802306"
-  deviceid = "de824891"
+  #deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -1675,6 +1690,20 @@ if __name__ == '__main__':
             adb_init(deviceid)
         
         now = datetime.datetime.now().time()
+
+        start_time = datetime.time(23, 57)    # 05:00
+        end_time   = datetime.time(23, 59)   # 05:30
+
+        if start_time <= now <= end_time:
+            if not already_sent_today("NowTotalCount "):
+                try:
+                    send_line_message(f"TotalCount：{device_id}目前 今天處理了 {TotalCount} 筆資料。")
+                    mark_sent_today("NowTotalCount")
+                    #time.sleep(360.0)
+                except Exception as line_ex:
+                    print(f"LINE 發送失敗: {line_ex}")
+            else:
+                print("今天已經發過資料處理，不再重複發送。")
 
         start_time = datetime.time(5, 0)    # 05:00
         end_time   = datetime.time(5, 30)   # 05:30
@@ -1862,7 +1891,7 @@ if __name__ == '__main__':
         print(f"有重大錯誤: {err_msg}")
 
         if "not found" in err_msg:
-            if not already_sent_today():
+            if not already_sent_today(f"{device_id} 系統錯誤通知：{err_msg}"):
                 try:
                     send_line_message(f"{device_id} 系統錯誤通知：{err_msg}")
                     mark_sent_today()
