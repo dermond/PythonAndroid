@@ -1207,7 +1207,73 @@ def judgment(temp):
                 
     time.sleep(2.0)    
     
-    # try:
+    try:
+
+        ele = find_element_by_text(device_id,"參加")     
+        if ele is not None :
+            text = ele.text
+            bounds = ele.attrib.get('bounds')
+            click_bounds(d, bounds)
+            time.sleep(2.0)
+
+            #nums = re.findall(r'\d+', bounds)
+            #if len(nums) == 4:
+            #    left, top, right, bottom = map(int, nums)
+            #    # 計算中心點
+            #    center_x = (left + right) // 2
+            #    center_y = (top + bottom) // 2
+            
+            #    option_position = str(center_x) + ' ' + str(center_y -50) 
+            #    tap(device, option_position) 
+
+            ele2 = find_element_by_text(device_id,"幸運轉盤")     
+            if ele2 is not None :
+
+                time.sleep(2.0)
+                ele3 = find_element_by_text(device_id,"關注")     
+                if ele3 is not None :
+                    text = ele3.text
+                    bounds = ele3.attrib.get('bounds')
+                    click_bounds(d, bounds)
+                    time.sleep(2.0)
+                
+
+               # 截圖並裁剪
+                start_point = ((resolution_width / 2 ) - 150, (resolution_height / 2 ) - 250)  # 起始坐標 (x, y)
+                end_point = ((resolution_width / 2 ) + 150, (resolution_height / 2 ) + 50)    # 結束坐標 (x, y)
+
+                img = capture_screenshot(device)
+                cropped_img = crop_image(img, start_point, end_point)
+                resulttext = paddleocr_image(cropped_img)  
+
+                actionx = (resolution_width / 2 )
+                actiony = (resolution_height / 2 ) -100
+                click_action(d, actionx , actiony)
+              
+                ele3 = find_element_by_text(device_id,"關注")     
+                if ele3 is not None :
+                    text = ele3.text
+                    bounds = ele3.attrib.get('bounds')
+                    click_bounds(d, bounds)
+                    time.sleep(2.0)
+
+                time.sleep(8.0)
+               
+            ele2 = find_element_by_text(device_id,"關注主播")     
+            if ele2 is not None :
+                text = ele2.text
+                bounds = ele2.attrib.get('bounds')
+                click_bounds(d, bounds)
+                time.sleep(2.0)
+
+            actionx = resolution_width / 2
+            actiony = (resolution_height / 2) - 100
+
+            for _ in range(5):
+                click_action(d, actionx, actiony)
+
+            d.press("back")
+
     #     ele = find_element_by_text(device_id,"參加")     
     #     if ele is not None :
                 
@@ -1246,12 +1312,22 @@ def judgment(temp):
     #         time.sleep(2.0)
 
         
-    # except ValueError:
+    except ValueError:
        
-    #     print("轉盤有錯誤")
+         print("轉盤有錯誤")
             
-        
-        
+    try:
+        ele = find_element_by_text(device_id,"未獲得寵粉紅包雨獎勵")     
+        if ele is not None :
+            #text = el.text
+            #bounds = el.attrib.get('bounds')
+            #click_bounds(d, bounds)
+            d.press("back")
+            time.sleep(1.0)
+    except ValueError:
+       
+         print("搶紅包")
+
     #判斷數值
     if resolution_width == 720 and resolution_height == 1560:
         start_point = (400+ Leftspace, 100)  # 起始坐標 (x, y)
@@ -1734,7 +1810,9 @@ if __name__ == '__main__':
                 click_bounds(d, bound2)
                 time.sleep(4.0)
 
-            
+                actionx = resolution_width / 2
+                actiony = (resolution_height / 2) - 100
+                click_action(d, actionx, actiony)
         
         start_time = datetime.time(8, 0)    # 08:00
         end_time   = datetime.time(13, 00)   # 11:00
