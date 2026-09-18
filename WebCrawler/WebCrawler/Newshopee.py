@@ -1891,13 +1891,16 @@ if __name__ == '__main__':
         print(f"有重大錯誤: {err_msg}")
 
         if "not found" in err_msg:
-            if not already_sent_today(f"{device_id} 系統錯誤通知：{err_msg}"):
+            # 1. Define a unique event key so it tracks this specific error type
+            event_key = f"{device_id}_not_found_error"
+    
+            # 2. Pass the event_key into both functions
+            if not already_sent_today(event_key):
                 try:
                     send_line_message(f"{device_id} 系統錯誤通知：{err_msg}")
-                    mark_sent_today()
+                    mark_sent_today(event_key)  # Make sure to pass it here too if required
                     time.sleep(360.0)
                 except Exception as line_ex:
                     print(f"LINE 發送失敗: {line_ex}")
             else:
                 print("今天已經發過 LINE 訊息，不再重複發送。")
-   
