@@ -573,6 +573,22 @@ def find_element_by_text(device_id, target_text):
 
     return None  # 沒找到
 
+def find_element_by_text2(device_id, target_text):
+    # 確保連線到指定的裝置
+    d = u2.connect(device_id)
+
+    for el in d.xpath('//*').all():
+        text = el.text
+        if text:  # 確保 text 不是 None 或空字串
+            text_str = str(text).strip() # 去除前後空白（視情況需要，可保留或刪除）
+            
+            # 改用完整比對 (==)
+            if text_str == target_text:
+                print(f"找到完全符合的文字: {text_str}")
+                return el   # 找到就回傳元件
+
+    return None  # 沒找到
+
 def click_bounds(d, bounds_str):
     # 使用正規表達式抓出四個數字 [left, top][right, bottom]
     nums = re.findall(r'\d+', bounds_str)
@@ -1250,7 +1266,7 @@ def judgment(temp):
                 actiony = (resolution_height / 2 ) -100
                 click_action(d, actionx , actiony)
               
-                ele3 = find_element_by_text(device_id,"關注")     
+                ele3 = find_element_by_text2(device_id,"關注")     
                 if ele3 is not None :
                     text = ele3.text
                     bounds = ele3.attrib.get('bounds')
@@ -1259,7 +1275,7 @@ def judgment(temp):
 
                 time.sleep(8.0)
                
-            ele2 = find_element_by_text(device_id,"關注主播")     
+            ele2 = find_element_by_text2(device_id,"關注")     
             if ele2 is not None :
                 text = ele2.text
                 bounds = ele2.attrib.get('bounds')
@@ -1271,6 +1287,14 @@ def judgment(temp):
 
             for _ in range(5):
                 click_action(d, actionx, actiony)
+
+            time.sleep(4.0)
+            ele2 = find_element_by_text2(device_id,"OK")     
+            if ele2 is not None :
+                text = ele2.text
+                bounds = ele2.attrib.get('bounds')
+                click_bounds(d, bounds)
+                time.sleep(2.0)
 
             d.press("back")
 
@@ -1534,7 +1558,8 @@ def judgment(temp):
     else:
         print("解析蝦皮和時間錯誤")
         ErrorCount = ErrorCount + 1
-        if (ErrorCount < 3):
+        if (ErrorCount < 2):
+            
             return "wait"
         else:
             return "next"
@@ -1781,7 +1806,7 @@ if __name__ == '__main__':
             else:
                 print("今天已經發過資料處理，不再重複發送。")
 
-        start_time = datetime.time(5, 0)    # 05:00
+        start_time = datetime.time(5, 20)    # 05:00
         end_time   = datetime.time(5, 30)   # 05:30
 
         # ✅ 只有在 05:00~05:30 之間
@@ -1815,7 +1840,7 @@ if __name__ == '__main__':
                 click_action(d, actionx, actiony)
         
         start_time = datetime.time(8, 0)    # 08:00
-        end_time   = datetime.time(13, 00)   # 11:00
+        end_time   = datetime.time(13, 50)   # 11:00
         # ✅ 只有在 08:00~11:00 之間
         if start_time <= now <= end_time:
             #進行
