@@ -357,7 +357,7 @@ def turn_on_screen():
         if deviceid == "R58N10RXWVF":
         
             # 禁用自動亮度調整
-            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+            #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
             # 將亮度設置為最低，接近關閉背光
             subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "80"], check=True)
