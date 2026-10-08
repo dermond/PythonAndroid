@@ -337,7 +337,7 @@ def turn_off_screen():
             subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
             # 將亮度設置為最低，接近關閉背光
-            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "80"], check=True)
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "50"], check=True)
         else:
             # 禁用自動亮度調整
             subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
@@ -360,7 +360,7 @@ def turn_on_screen():
             #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
             # 將亮度設置為最低，接近關閉背光
-            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "80"], check=True)
+            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "50"], check=True)
         else:
             # 禁用自動亮度調整
             subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
@@ -1773,7 +1773,7 @@ if __name__ == '__main__':
   for i in range(99999999):
     try:
 
-        check_battery_and_notify();
+        #check_battery_and_notify();
         current_date = str(datetime.date.today())
         getdate = SettingReader.getSetting("base",deviceid + "date")
     
