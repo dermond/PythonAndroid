@@ -332,7 +332,7 @@ def turn_off_screen():
         subprocess.run(["adb", "-s", device_id, "root"], check=True)
         
         if deviceid == "R58N10RXWVF":
-        
+            print("R58N10RXWVF 不動作")
             # 禁用自動亮度調整
             #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
@@ -355,7 +355,7 @@ def turn_on_screen():
         subprocess.run(["adb", "-s", device_id, "root"], check=True)
         
         if deviceid == "R58N10RXWVF":
-        
+            print("R58N10RXWVF 不動作")
             # 禁用自動亮度調整
             #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
