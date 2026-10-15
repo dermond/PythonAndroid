@@ -301,7 +301,7 @@ def count_text_elements(device_id, text_to_find, retries=3, delay=1):
     :param delay: 每次重試間隔秒數
     :return: 數量 (int)
     """
-    d = u2.connect(device_id)
+    global d
     
     try:
         for attempt in range(1, retries + 1):
@@ -377,7 +377,7 @@ def solution_data_fun(cell):
     global num_start_x
     global num_y
     global num_step_x
-
+    global d
     row, col, val = cell
         
     def should_fill(row, col):
@@ -436,10 +436,42 @@ def solution_data_fun(cell):
             print("⏳ 畫面仍有遮罩或非目標畫面，繼續等待...")
 
         # --- 以下為尚未到達目標畫面時的操作 ---
-        find_element_by_text(device_id,"確認")
+        #find_element_by_text(device_id,"確認")
         
         Key_Return()
+
+        # 優先尋找插頁廣告專屬的關閉按鈕
+        if d(description="Interstitial close button").exists:
+            print("找到插頁廣告 X 按鈕，執行關閉！")
+            d(description="Interstitial close button").click()
+
+        # 如果找不到，試試看另一個普通的 Close 按鈕
+        elif d(description="Close").exists:
+            print("找到一般 X 按鈕，執行關閉！")
+            d(description="Close").click()
+
+        else:
+            print("目前畫面中沒有看到關閉按鈕")
+
         loop_count += 1
+
+        # 假設你使用的是 lxml 或類似的解析套件
+        # 必須使用 .all() 來取得所有符合的元素
+        for el in d.xpath('//*').all():
+            # 1. 取得文字並過濾空白
+            text = el.text.strip() if el.text else ""
+    
+            # 2. 取得這個 UI 節點的「所有屬性」(會回傳一個字典)
+            # 裡面通常會包含 'class', 'resource-id', 'content-desc', 'package', 'bounds' 等重要資訊
+            all_attribs = el.attrib 
+    
+            # 如果想過濾掉完全沒有內容的空節點，可以取消下面這兩行的註解
+            # if not text and not all_attribs:
+            #     continue
+
+            print(f"📝 顯示文字: {text}")
+            print(f"⚙️ 所有屬性: {all_attribs}")
+            print("-" * 50)
 
         # 每跑 5 次點擊一次中間位置
         if loop_count >= 5:
@@ -495,7 +527,7 @@ def solve_sudoku():
     global num_start_x
     global num_y
     global num_step_x
-
+    global d
      # --- 座標設定 ---
     # 棋盤起始與結束座標
     if device_id == "R58N10RXWVF":
@@ -540,8 +572,8 @@ if __name__ == '__main__':
 
   deviceid = ""
   #deviceid = "R58N10RXWVF"
-  #deviceid = "46081JEKB10015"
-  deviceid = "de824891"
+  deviceid = "46081JEKB10015"
+  #deviceid = "de824891"
   #deviceid = "FA75V1802306"
   device, client = connect(deviceid)
   device_id = device.serial
@@ -554,7 +586,7 @@ if __name__ == '__main__':
   if display_info:
     print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
     
-  #d = u2.connect(device_id)
+  d = u2.connect(device_id)
 
   start_row=1
   start_col=1
@@ -568,34 +600,21 @@ if __name__ == '__main__':
 
   # 數獨解答資料 (僅填入空白格)
   solution_data = [
-  [1, 1, 6], [1, 2, 1], [1, 4, 8], [1, 6, 3], [1, 8, 7], [1, 9, 5],
-  [2, 1, 2], [2, 2, 8], [2, 4, 9], [2, 5, 7], [2, 6, 4], [2, 7, 1], [2, 8, 3],
-  [3, 1, 9], [3, 3, 7], [3, 4, 6], [3, 5, 5], [3, 6, 1], [3, 7, 8], [3, 8, 2],
-  [4, 2, 6], [4, 3, 8], [4, 4, 3], [4, 5, 4], [4, 6, 2], [4, 7, 7], [4, 8, 5], [4, 9, 9],
-  [5, 1, 4], [5, 2, 9], [5, 3, 2], [5, 7, 3], [5, 8, 6], [5, 9, 1],
-  [6, 1, 5], [6, 3, 3], [6, 4, 1], [6, 5, 9], [6, 7, 4], [6, 8, 8], [6, 9, 2],
-  [7, 1, 7], [7, 2, 5], [7, 3, 1], [7, 4, 2], [7, 7, 6], [7, 8, 4], [7, 9, 8],
-  [8, 1, 3], [8, 2, 4], [8, 3, 6], [8, 5, 1], [8, 7, 2], [8, 8, 9],
-  [9, 1, 8], [9, 3, 9], [9, 4, 4], [9, 5, 6], [9, 6, 7], [9, 7, 5], [9, 9, 3]
+  [1, 1, 7], [1, 2, 6], [1, 4, 5], [1, 5, 9], [1, 6, 3], [1, 7, 8], [1, 8, 1], [1, 9, 4],
+  [2, 1, 3], [2, 2, 4], [2, 3, 9], [2, 4, 8], [2, 5, 1], [2, 7, 2], [2, 8, 7], [2, 9, 5],
+  [3, 1, 5], [3, 3, 1], [3, 4, 4], [3, 6, 7], [3, 7, 3], [3, 9, 6],
+  [4, 2, 2], [4, 3, 4], [4, 4, 6], [4, 5, 5], [4, 6, 1], [4, 7, 7], [4, 9, 9],
+  [5, 3, 5], [5, 4, 9], [5, 8, 8], [5, 9, 2],
+  [6, 3, 6], [6, 4, 3], [6, 5, 8], [6, 6, 2], [6, 7, 4], [6, 8, 5], [6, 9, 1],
+  [7, 1, 2], [7, 2, 5], [7, 3, 3], [7, 4, 1], [7, 5, 4], [7, 6, 8], [7, 7, 9], [7, 8, 6],
+  [8, 1, 4], [8, 2, 1], [8, 3, 8], [8, 4, 7], [8, 5, 6], [8, 6, 9], [8, 7, 5],
+  [9, 2, 9], [9, 3, 7], [9, 4, 2], [9, 5, 3], [9, 8, 4], [9, 9, 8]
 ]
 
 
 
 
+
+
   solve_sudoku()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

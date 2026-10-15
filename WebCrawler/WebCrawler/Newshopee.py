@@ -778,7 +778,48 @@ def Nextshow(temp):
         click_bounds(d, bounds)
         time.sleep(4.0)
 
+    tap(device, "500 603 ")
+    time.sleep(2.0)
+
+    #for el in d.xpath('//*').all():
+    #   text = el.text
+    #   print(text)
+
+    bounds = get_bounds_by_text(d, "點擊領取獎勵！")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+
+        bounds = get_bounds_by_text(d, "簽到")
+        if bounds:
+            click_bounds(d, bounds)
+            time.sleep(4.0)
+
+    bounds = get_bounds_by_text(d, "觀看 1分鐘 獲得")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+        bounds = get_bounds_by_text(d, "簽到")
+        if bounds:
+            click_bounds(d, bounds)
+            time.sleep(4.0)
+
+        bounds = get_bounds_by_text(d, "觀看")
+        if bounds:
+            click_bounds(d, bounds)
+            time.sleep(4.0)
+
+    bounds = get_bounds_by_text(d, "簽到")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+
     bounds = get_bounds_by_text(d, "立即簽到")
+    if bounds:
+        click_bounds(d, bounds)
+        time.sleep(4.0)
+
+    bounds = get_bounds_by_text(d, "立即觀看")
     if bounds:
         click_bounds(d, bounds)
         time.sleep(4.0)
@@ -786,9 +827,9 @@ def Nextshow(temp):
     if resolution_width == 720 and resolution_height == 1560 and density == 280:#deviceid == "R58N10RXWVF":
         rangemax = 30
     elif resolution_width == 1440 and resolution_height == 2560 and density == 640: #deviceid == "FA75V1802306": (1440, 2560)
-        rangemax = 10
+        rangemax = 30
     else:
-        rangemax = 10
+        rangemax = 30
     for i in range(rangemax):
         #往下一筆 短影音
         swipe_start = '500 1300'
