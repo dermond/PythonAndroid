@@ -412,7 +412,7 @@ def validate_block(block):
         text = text.strip()
 
         # 浮點數 0 ~ 5
-        if float_value is None and re.fullmatch(r'0*(?:[0-4](?:\.\d+)?|5(?:\.0*)?)', text):
+        if float_value is None and re.fullmatch(r'[0-4]\.\d+|5\.0+', text):
             float_value = float(text)
 
         # 時間格式 mm:ss 或 hh:mm
@@ -803,8 +803,8 @@ if __name__ == '__main__':
   goflag = 0
   deviceid = ""
   #deviceid = "R58N10RXWVF"
-  #deviceid = "46081JEKB10015"
-  deviceid = "de824891"
+  deviceid = "46081JEKB10015"
+  #deviceid = "de824891"
   #deviceid = "FA75V1802306"
   
   if len(sys.argv) > 1:
@@ -841,6 +841,7 @@ if __name__ == '__main__':
     print(f"從 dumpsys display：{display_info['width']}x{display_info['height']}, {display_info['densityDpi']} dpi")
     
   Step = 0
+  Step = 20
 
   LimitTotalCount = SettingReader.getSetting("base",deviceid + "LimitTotalCount")
   if LimitTotalCount == '':
@@ -917,6 +918,8 @@ if __name__ == '__main__':
           #Step == 10 下一場次
           #Step == 30 領取
           
+
+
           if i % 100 == 0 and i != 0:
             print(f"現在跑到第 {i} 次，做一次處理")
             if Step == 30:
@@ -964,7 +967,14 @@ if __name__ == '__main__':
                 if text == "參加":
                     click_bounds(d, bounds)
                     allspace =False
-                    time.sleep(2.0)
+                    time.sleep(4.0)
+
+                    actionx = resolution_width / 2
+                    actiony = (resolution_height / 2) - 100
+
+                    for _ in range(5):
+                        click_action(d, actionx, actiony)
+
                     break
                 if text == "打開簽到":
                     click_bounds(d, bounds)
@@ -1017,6 +1027,13 @@ if __name__ == '__main__':
                         
 
                     break
+                #if text == "直播" and Step == 29:
+                #    el = d.xpath('//*[@text="直播"]').get()
+                #    bounds = el.attrib.get('bounds')
+
+                #    click_bounds(d, bounds)
+                #    Step = 30
+                #    break
                 if text == "領取" and Step != 30:
                     click_bounds(d, bounds)
                     allspace =False
@@ -1031,6 +1048,7 @@ if __name__ == '__main__':
 
                     
                     break
+
                 if text == "領取" and Step == 30:
                     nums = re.findall(r'\d+', bounds)
                     if len(nums) == 4:
@@ -1314,10 +1332,34 @@ if __name__ == '__main__':
             if Step == 30:
               valid, value, time2 = validate_block(d.xpath('//*').all())
               if valid:
-                print("找到數值或是時間")
-                continue  
+                 # 將 MM:SS 轉換為「總分鐘」
+                minutes, seconds = map(int, time2.split(":"))
+                wait_minutes = minutes + seconds / 60.0
+                wait_sec = int(wait_minutes * 60)
+                # 計算每分鐘收益
+                value_per_minute = value / wait_minutes
+
+                # 設定門檻值（你可以調整這個值）
+                threshold = 0.02857
+
+                if value_per_minute >= threshold:
+                    print("找到數值或是時間")
+                    print("✅ 值得執行！")
+
+
+                    actionx = resolution_width / 2
+                    actiony = (resolution_height / 2) - 100
+                    click_action(d, actionx, actiony)
+
+                    continue  
+                else:
+                    print("沒有找到數值或是時間")
+                    print("❌ 不值得執行")
+
               else:
-                print("沒有找到數值或是時間")
+                  actionx = resolution_width / 2
+                  actiony = (resolution_height / 2) - 100
+                  click_action(d, actionx, actiony)
             ## 判斷說明標籤為 "close product panel" 的元素是否存在
             #if d(description="close product panel").exists:
             #    print("發現商品面板關閉按鈕，執行點擊...")
