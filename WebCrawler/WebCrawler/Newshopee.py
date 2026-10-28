@@ -243,6 +243,8 @@ def adb_init(device_id):
     time.sleep(1)
     subprocess.run(["adb", "-s", device_id, "shell", "wm", "size", "reset"])
 
+    subprocess.run(["adb", "-s", device_id, "root"], check=True)
+
 def capture_screenshot(device):
     try:
         result = device.screencap()
@@ -329,21 +331,21 @@ def check_error_code(text, error_code):
 
 def turn_off_screen():
     try:
-        subprocess.run(["adb", "-s", device_id, "root"], check=True)
+        #subprocess.run(["adb", "-s", device_id, "root"], check=True)
         
-        if deviceid == "R58N10RXWVF":
-            print("R58N10RXWVF 不動作")
-            # 禁用自動亮度調整
-            #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+        # if deviceid == "R58N10RXWVF":
+        #     print("R58N10RXWVF 不動作")
+        #     # 禁用自動亮度調整
+        #     #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
-            # 將亮度設置為最低，接近關閉背光
-            #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "50"], check=True)
-        else:
-            # 禁用自動亮度調整
-            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+        #     # 將亮度設置為最低，接近關閉背光
+        #     #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "50"], check=True)
+        # else:
+        #     # 禁用自動亮度調整
+        #     subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
-            # 將亮度設置為最低，接近關閉背光
-            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "5"], check=True)
+        #     # 將亮度設置為最低，接近關閉背光
+        #     subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "5"], check=True)
   
 
         print("螢幕已關閉")
@@ -352,21 +354,21 @@ def turn_off_screen():
    
 def turn_on_screen():
     try:
-        subprocess.run(["adb", "-s", device_id, "root"], check=True)
+        #subprocess.run(["adb", "-s", device_id, "root"], check=True)
         
-        if deviceid == "R58N10RXWVF":
-            print("R58N10RXWVF 不動作")
-            # 禁用自動亮度調整
-            #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+        # if deviceid == "R58N10RXWVF":
+        #     print("R58N10RXWVF 不動作")
+        #     # 禁用自動亮度調整
+        #     #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
-            # 將亮度設置為最低，接近關閉背光
-            #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "50"], check=True)
-        else:
-            # 禁用自動亮度調整
-            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
+        #     # 將亮度設置為最低，接近關閉背光
+        #     #subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "50"], check=True)
+        # else:
+        #     # 禁用自動亮度調整
+        #     subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness_mode", "0"], check=True)
     
-            # 將亮度設置為最低，接近關閉背光
-            subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "5"], check=True)
+        #     # 將亮度設置為最低，接近關閉背光
+        #     subprocess.run(["adb", "-s", device_id, "shell", "settings", "put", "system", "screen_brightness", "5"], check=True)
   
         print("螢幕已開啟")
     except Exception as e:
@@ -609,7 +611,7 @@ def ReLoadShopee():
     print("Shopee 已停止")
     time.sleep(4.0)
 
-    clear_phone_memory()
+    #clear_phone_memory()
     # 啟動 Shopee
     start_command = f"am start -n {package_name}/{activity_name}"
     output = device.shell(start_command)
@@ -837,6 +839,11 @@ def Nextshow(temp):
         swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
         time.sleep(6.0)
 
+        bounds = get_bounds_by_text(d, "簽到")
+        if bounds:
+            click_bounds(d, bounds)
+            time.sleep(4.0)
+        
         bounds = get_bounds_by_text(d, "立即簽到")
         if bounds:
             click_bounds(d, bounds)
@@ -1226,7 +1233,19 @@ def judgment(temp):
         #print("發現蝦皮關閉按鈕，正在點擊...")
         d(resourceId="com.shopee.tw.dfpluginshopee7:id/img_close").click()
 
-    
+    # 優先尋找插頁廣告專屬的關閉按鈕
+    if d(description="Interstitial close button").exists:
+        print("找到插頁廣告 X 按鈕，執行關閉！")
+        d(description="Interstitial close button").click()
+
+    # 如果找不到，試試看另一個普通的 Close 按鈕
+    elif d(description="Close").exists:
+        print("找到一般 X 按鈕，執行關閉！")
+        d(description="Close").click()
+
+    else:
+        print("目前畫面中沒有看到關閉按鈕")
+            
     ele = find_element_by_text(device_id,"關注主播參加活動")     
     if ele is not None :
         Key_Return()
@@ -1727,9 +1746,9 @@ if __name__ == '__main__':
 
   
   goflag = 0
-  deviceid = "R58N10RXWVF"
+  #deviceid = "R58N10RXWVF"
   #deviceid = "FA75V1802306"
-  #deviceid = "de824891"
+  deviceid = "de824891"
   #deviceid = "46081JEKB10015"
   #deviceid = "CTLGAD3852600256"
   
@@ -1857,8 +1876,8 @@ if __name__ == '__main__':
             SettingReader.setSetting("base",deviceid + "date", current_date )
             adb_init(deviceid)
 
-        check_garbage_objects()
-        print_memory_usage()
+        #check_garbage_objects()
+        #print_memory_usage()
         turn_off_screen()
         if Shopeecount > 10:  # 如果 i 是 10 的倍數
             print(f"第 {i} 次操作：重啟 Shopee App")

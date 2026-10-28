@@ -731,6 +731,20 @@ def find_imageview_by_bounds(d, target_bounds, width_tolerance=10, height_tolera
 
 def All_Close():
     global d
+    # 優先尋找插頁廣告專屬的關閉按鈕
+    if d(description="Interstitial close button").exists:
+        print("找到插頁廣告 X 按鈕，執行關閉！")
+        d(description="Interstitial close button").click()
+
+    # 如果找不到，試試看另一個普通的 Close 按鈕
+    elif d(description="Close").exists:
+        print("找到一般 X 按鈕，執行關閉！")
+        d(description="Close").click()
+
+    else:
+        print("目前畫面中沒有看到關閉按鈕")
+
+
     if d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").exists:
         #print("發現蝦皮關閉按鈕，正在點擊...")
         d(resourceId="com.shopee.tw.dfpluginshopee7:id/ic_close").click()
@@ -952,10 +966,10 @@ if __name__ == '__main__':
                 # 獲取類別
                 classname = el.attrib.get('class')
         
-                print(f"內容: {text}")
-                print(f"位置: {bounds}")
-                print(f"類型: {classname}")
-                print("-" * 30)
+                # print(f"內容: {text}")
+                # print(f"位置: {bounds}")
+                # print(f"類型: {classname}")
+                # print("-" * 30)
 
                 if text == "直播短影音" and Step == 0:
                     click_bounds(d, bounds)
@@ -1315,15 +1329,15 @@ if __name__ == '__main__':
                 # # 獲取類別
                  classname = el.attrib.get('class')
 
-                 print(f"內容: {text}")
-                 print(f"位置: {bounds}")
-                 print(f"類型: {classname}")
+                 # print(f"內容: {text}")
+                 # print(f"位置: {bounds}")
+                 # print(f"類型: {classname}")
 
                  # 嘗試列印出所有屬性看看
-                 print(el.attrib)
+                 #print(el.attrib)
                  # 在您的程式碼中加入這一行
                  description = el.attrib.get('content-description') or el.attrib.get('content-desc')
-                 print(f"說明標籤: {description}")
+                 #print(f"說明標籤: {description}")
 
           if allspace :
            # click_shopee_activity_by_coord(d)
@@ -1370,11 +1384,14 @@ if __name__ == '__main__':
             if bounds:
                 click_bounds(d, bounds)
                 time.sleep(4.0)
-
+                TotalCount = int(TotalCount) + 1
+                SettingReader.setSetting("base",deviceid + "TotalCount", TotalCount )
             swipe_start = '500 1300'
             swipe_end = '500 500'
             swipe_to_position(device, swipe_start, swipe_end)  # 确保屏幕滚动到固定位置
             time.sleep(2.0)
+            
+            print("目前完成:" + str(TotalCount))
       except Exception as ex:
         # 正確寫法 1：直接印出完整錯誤（最常用）
         traceback.print_exc()
